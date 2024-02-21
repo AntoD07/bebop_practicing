@@ -10,20 +10,29 @@ from scripts.practice_cells import (
 
 names, all_cells = get_all_cells()
 
-st.title("Test")
-chord = st.selectbox("Select chord to practice", ["Maj7"])
-starting_cells, ending_cells = load_cells(chord)
-notes = list(set(list(starting_cells.keys()) + list(ending_cells.keys())))
-available_notes = st.multiselect(
-    "Select possible notes picked for training", notes, default=notes
-)
+st.title("Bebop practice app")
+c1, c2 = st.columns((0.7, 0.4))
+with c1:
+    chord = st.selectbox("Select chord to practice", ["Maj7"])
+    starting_cells, ending_cells = load_cells(chord)
+    notes = list(set(list(starting_cells.keys()) + list(ending_cells.keys())))
+    available_notes = st.multiselect(
+        "Select possible notes picked for training", notes, default=notes
+    )
+with c2:
+    name = st.selectbox("Refresh memory on any cell", all_cells.keys())
+    st.write(all_cells[name])
 
 if st.button("Randomize again"):
     st.session_state.starting_note = random.choice(list(starting_cells.keys()))
     st.session_state.ending_note = random.choice(list(ending_cells.keys()))
 
-starting_note = st.session_state.get("starting_note", 1)
-ending_note = st.session_state.get("ending_note", 5)
+starting_note = st.session_state.get(
+    "starting_note", random.choice(list(starting_cells.keys()))
+)
+ending_note = st.session_state.get(
+    "ending_note", random.choice(list(starting_cells.keys()))
+)
 
 if st.checkbox("Display notes for help", value=True):
     display_notes = True
@@ -38,19 +47,20 @@ ex_1_names = st.multiselect(
     "Cells ending on {}".format(starting_note), options=all_cells
 )
 ex_1_cells = names_to_notes(all_cells, ex_1_names)
-if st.button("Submit answer"):
-    st.write(ex_1_cells)
+if st.button("Verify answer 1"):
     correct_names = ending_cells[starting_note]
     correct_cells = {name: all_cells[name] for name in correct_names}
     extras, missing = validate_results(ex_1_cells, correct_cells)
     if (len(extras) > 0) or (len(missing) > 0):
         if len(extras) > 0:
-            st.write("{} are not part of the correct answer !!".format(extras))
+            st.error("{} are not part of the correct answer !!".format(extras))
         if len(missing) > 0:
-            st.write("{} are missing !!".format(missing))
-    else:
-        st.write("Correct !!!")
+            st.error("{} are missing !!".format(len(missing)))
 
+    else:
+        st.success("Correct !!!", icon="✅")
+    with st.expander("see solutions 1 "):
+        st.write(correct_cells)
 
 # Exercise 2
 st.write("## Exercise 2 : Cells starting on {}".format(starting_note))
@@ -58,20 +68,19 @@ ex_2_names = st.multiselect(
     "Cells starting on {}".format(starting_note), options=all_cells
 )
 ex_2_cells = names_to_notes(all_cells, ex_2_names)
-if st.button("Submit answer 2"):
-    st.write(ex_2_cells)
+if st.button("Verify answer 2"):
     correct_names = starting_cells[starting_note]
     correct_cells = {name: all_cells[name] for name in correct_names}
     extras, missing = validate_results(ex_2_cells, correct_cells)
     if (len(extras) > 0) or (len(missing) > 0):
         if len(extras) > 0:
-            st.write("{} are not part of the correct answer !!".format(extras))
+            st.error("{} are not part of the correct answer !!".format(extras))
         if len(missing) > 0:
-            st.write("{} are missing !!".format(missing))
-
+            st.error("{} are missing !!".format(len(missing)))
     else:
-        st.write("Correct !!!")
-
+        st.success("Correct !!!", icon="✅")
+    with st.expander("see solutions 2 "):
+        st.write(correct_cells)
 
 st.write(
     "## Exercise 3 : Randomized path = {} --> {}".format(
@@ -80,8 +89,7 @@ st.write(
 )
 ex_3_names = st.multiselect("Cells", options=all_cells)
 ex_3_cells = names_to_notes(all_cells, ex_3_names)
-if st.button("Submit answer 3"):
-    st.write(ex_3_cells)
+if st.button("Verify answer 3"):
     correct_cells = {
         name: all_cells[name]
         for name in all_cells.keys()
@@ -91,11 +99,14 @@ if st.button("Submit answer 3"):
     extras, missing = validate_results(ex_3_cells, correct_cells)
     if (len(extras) > 0) or (len(missing) > 0):
         if len(extras) > 0:
-            st.write("{} are not part of the correct answer !!".format(extras))
+            st.error("{} are not part of the correct answer !!".format(extras))
         if len(missing) > 0:
-            st.write("{} are missing !!".format(missing))
+            st.error("{} are missing !!".format(len(missing)))
+
     else:
-        st.write("Correct !!!")
+        st.success("Correct !!!", icon="✅")
+    with st.expander("see solutions 3 "):
+        st.write(correct_cells)
 
 # Simple interaction
 if st.button("Click me"):

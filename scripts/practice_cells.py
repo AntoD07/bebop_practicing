@@ -10,7 +10,7 @@ from scripts.cells.major7 import (
 def get_all_cells(include_bonus=False):
     all_cell_names = []
     all_cells = {}
-    for dic in [maj_essential_starting_cells, maj_essential_starting_cells]:
+    for dic in [maj_essential_starting_cells, maj_essential_ending_cells]:
         # iterate over all starting/ending points
         for v in dic.values():
             all_cell_names += list(v.keys())
