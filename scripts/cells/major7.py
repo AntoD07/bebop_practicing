@@ -18,7 +18,6 @@ maj_essential_ending_cells = {
     },
     7: {
         "Descending Maj Scale from 5th": ["5", "4", "3", "9", "7"],
-        "Maj9 Arpeggio ending on 7th": ["3", "5", "7", "9", "7"],
         "Ideal Maj 7 Arpeggio": ["7", "1", "3", "5", "7"],
         "Major Honeysuckle": ["9", "1", "3", "5", "7"],
         "Reverse Coltrane": ["5", "3", "2", "1", "7"],
@@ -57,6 +56,7 @@ maj_essential_starting_cells = {
         "Descending Maj Scale from 3rd": ["3", "9", "1", "7", "9"],
         "Stan Getz Major Enclosure": ["3", "b7", "7", "9", "1"],
         "Elevator Up, Stairs Down from 3rd": ["3", "5", "7", "6", "5"],
+        "Lyrical enclosure": ["3", "9", "b7", "7", "9"],
     },
     5: {
         "Descending Maj Scale from 5th": ["5", "4", "3", "9", "7"],
