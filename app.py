@@ -24,6 +24,7 @@ if st.sidebar.button("Randomize again"):
 
 
 if st.button("Randomize again "):
+    st.session_state.name = random.choice(list(all_cells.keys()))
     st.session_state.starting_note = random.choice(list(starting_cells.keys()))
     st.session_state.ending_note = random.choice(list(ending_cells.keys()))
 
