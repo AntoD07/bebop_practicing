@@ -13,15 +13,9 @@ from scripts.practice_cells import (
 
 st.title("Bebop practice app")
 
-chord = st.sidebar.selectbox("Select chord to practice", ["Maj7", "7sus4"])
+chord = st.selectbox("Select chord to practice", ["Maj7", "7sus4"], index=1)
 starting_cells, ending_cells = load_cells(chord)
 names, all_cells = get_all_cells(starting_cells, ending_cells)
-
-if st.sidebar.button("Randomize again"):
-    st.session_state.name = random.choice(list(all_cells.keys()))
-    st.session_state.starting_note = random.choice(list(starting_cells.keys()))
-    st.session_state.ending_note = random.choice(list(ending_cells.keys()))
-
 
 if st.button("Randomize again "):
     st.session_state.name = random.choice(list(all_cells.keys()))
