@@ -45,6 +45,7 @@ dominant_essential_starting_cells = {
         "Sonny Stitt Enclosure of II Root": ["#11", "6", "#5", "#11", "5"],
         "Circle of 5th Approach": ["#11", "6", "5", "4", "3"],
         "Diminished-to-Dominant": ["#11", "6", "5", "3", "1"],
+        # "Mccoy Enclosure": ["#11", "6", "5", "2", "1"],
     },
     6: {
         "Hidden Ideal maj7 Arpeggio to 13th": ["6", "7", "9", "4", "6"],
@@ -63,6 +64,7 @@ dominant_essential_ending_cells = {
         "Reverse Minor Coltrane": ["9", "7", "6", "5", "1"],
         "Descending Dominant Scale from 5th": ["5", "4", "3", "2", "1"],
         "Diminished-to-Dominant": ["#11", "6", "5", "3", "1"],
+        # "Mccoy enclosure": ["#11", "6", "5", "2", "1"],
     },
     3: {
         "Descending Dominant Scale from 7th ending on 3rd": ["7", "6", "5", "4", "3"],

@@ -107,3 +107,36 @@ def find_combinations_on_pivot(pivot, starting_cells, ending_cells):
             combinations.append((ending_cell, starting_cell))
 
     return combinations
+
+
+def characterize_cells(cells):
+    mixolydian_notes = ["1", "3", "5", "7"]
+    dorian_notes = [
+        "9",
+        "4",
+        "6",
+        "1",
+        "5",
+        "7",
+    ]  # Including 1, 5, and 7 for more nuanced assessment
+
+    cell_scores = {}
+
+    for cell_name, notes in cells.items():
+        mixolydian_score = 0
+        dorian_score = 0
+
+        # Check the notes on strong beats (index 0, 2, and 4)
+        for index in [0, 2, 4]:
+            if index < len(notes):  # Ensure the index is within bounds
+                if notes[index] in mixolydian_notes:
+                    mixolydian_score += 1
+                if notes[index] in dorian_notes:
+                    dorian_score += 1
+
+        cell_scores[cell_name] = {
+            "Mixolydian": mixolydian_score,
+            "Dorian": dorian_score,
+        }
+
+    return cell_scores
