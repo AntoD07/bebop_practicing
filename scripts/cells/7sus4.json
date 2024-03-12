@@ -1,0 +1,292 @@
+{
+    "essential": {
+        "Ascending II Scale": [
+            "5",
+            "6",
+            "7",
+            "1",
+            "9"
+        ],
+        "Ascending II-Minor 7th Arpeggio (ending on 3rd)": [
+            "5",
+            "7",
+            "9",
+            "4",
+            "3"
+        ],
+        "Ascending II-Minor 7th Arpeggio (ending on 6th)": [
+            "5",
+            "7",
+            "9",
+            "4",
+            "6"
+        ],
+        "Ascending Scale from 7th": [
+            "7",
+            "1",
+            "9",
+            "3",
+            "4"
+        ],
+        "Cannonball Adderley Approach": [
+            "5",
+            "4",
+            "3",
+            "4",
+            "9"
+        ],
+        "Chromatic Passing Tone Enclosure of II 3rd": [
+            "6",
+            "7",
+            "1",
+            "maj7",
+            "7"
+        ],
+        "Circle of 5th Approach": [
+            "#11",
+            "6",
+            "5",
+            "4",
+            "3"
+        ],
+        "Coltrane Pattern from 7th (ending on #11)": [
+            "7",
+            "1",
+            "9",
+            "4",
+            "#11"
+        ],
+        "Coltrane Pattern from 7th (ending on 3rd)": [
+            "7",
+            "1",
+            "9",
+            "4",
+            "3"
+        ],
+        "Coltrane Pattern from root": [
+            "1",
+            "9",
+            "3",
+            "5",
+            "7"
+        ],
+        "Descending Bebop scale from root": [
+            "1",
+            "maj7",
+            "7",
+            "6",
+            "5"
+        ],
+        "Descending Dominant Scale from 3rd": [
+            "3",
+            "9",
+            "1",
+            "7",
+            "6"
+        ],
+        "Descending Dominant Scale from 5th": [
+            "5",
+            "4",
+            "3",
+            "2",
+            "1"
+        ],
+        "Descending Dominant Scale from 7th ending on #11": [
+            "7",
+            "6",
+            "5",
+            "4",
+            "#11"
+        ],
+        "Descending Dominant Scale from 7th ending on 3rd": [
+            "7",
+            "6",
+            "5",
+            "4",
+            "3"
+        ],
+        "Descending II Arpeggio from II-5th": [
+            "9",
+            "7",
+            "5",
+            "4",
+            "3"
+        ],
+        "Descending II Scale": [
+            "9",
+            "1",
+            "7",
+            "6",
+            "5"
+        ],
+        "Descending Minor 7th arpeggio from 4th": [
+            "4",
+            "9",
+            "7",
+            "5",
+            "3"
+        ],
+        "Descending Mintor 7th arpeggio from 4th": [
+            "4",
+            "9",
+            "7",
+            "5",
+            "3"
+        ],
+        "Dexter Gordon": [
+            "3",
+            "4",
+            "9",
+            "7",
+            "6"
+        ],
+        "Diatonic Enclosure of 3rd": [
+            "5",
+            "9",
+            "4",
+            "9",
+            "3"
+        ],
+        "Diatonic Enclosure to #11": [
+            "5",
+            "9",
+            "4",
+            "9",
+            "#11"
+        ],
+        "Diminished-to-Dominant": [
+            "#11",
+            "6",
+            "5",
+            "3",
+            "1"
+        ],
+        "Dominant 9th Arpeggio": [
+            "3",
+            "5",
+            "7",
+            "9",
+            "1"
+        ],
+        "Dominant Bebop Scale from 3rd": [
+            "3",
+            "9",
+            "1",
+            "maj7",
+            "7"
+        ],
+        "Dominant Turn": [
+            "6",
+            "5",
+            "#11",
+            "5",
+            "1"
+        ],
+        "Freddie Hubbard": [
+            "9",
+            "4",
+            "3",
+            "9",
+            "1"
+        ],
+        "George Coleman minor 7": [
+            "6",
+            "5",
+            "9",
+            "4",
+            "3"
+        ],
+        "Hank Mobley": [
+            "7",
+            "2",
+            "6",
+            "5",
+            "1"
+        ],
+        "Hidden Ideal maj7 Arpeggio to 13th": [
+            "6",
+            "7",
+            "9",
+            "4",
+            "6"
+        ],
+        "Jimmy Heath": [
+            "1",
+            "maj7",
+            "7",
+            "9",
+            "4"
+        ],
+        "Johnny Griffin Enclosure (Mccoy)": [
+            "9",
+            "4",
+            "#11",
+            "6",
+            "5"
+        ],
+        "Lee Morgan Dominant": [
+            "1",
+            "maj7",
+            "7",
+            "9",
+            "6"
+        ],
+        "Minor Honeysuckle Rose": [
+            "1",
+            "7",
+            "9",
+            "4",
+            "6"
+        ],
+        "Passing Tone Enclosure": [
+            "9",
+            "4",
+            "9",
+            "#9",
+            "3"
+        ],
+        "Perfect Chromatic Enclosure of 5th": [
+            "4",
+            "#11",
+            "6",
+            "#5",
+            "5"
+        ],
+        "Reverse Coltrane Pattern": [
+            "4",
+            "9",
+            "1",
+            "7",
+            "6"
+        ],
+        "Reverse Minor Coltrane": [
+            "9",
+            "7",
+            "6",
+            "5",
+            "1"
+        ],
+        "Sonny Stitt Enclosure of II Root": [
+            "#11",
+            "6",
+            "#5",
+            "#11",
+            "5"
+        ],
+        "Stan Getz enclosure of II 3rd": [
+            "9",
+            "#5",
+            "6",
+            "1",
+            "7"
+        ],
+        "Stan Getz enclosure of II Root": [
+            "7",
+            "4",
+            "#11",
+            "6",
+            "5"
+        ]
+    },
+    "bonus": {}
+}

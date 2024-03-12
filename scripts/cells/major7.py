@@ -40,7 +40,7 @@ maj_bonus_starting_cells = {
     1: {
         "Perfect Chromatic Enclosure": ["b7", "7", "9", "b9", "1"],
         "Sonny Stitt Major Enclosure": ["7", "9", "b9", "7", "1"],
-        "#15 Enclosure": ["10", "9", "b9", "7", "1"],
+        "#15 Enclosure": ["3", "9", "b9", "7", "1"],
     },
 }
 
@@ -81,3 +81,20 @@ maj_essential_starting_cells = {
         "Major Bebop Scale from 6th": ["6", "#5", "5", "4", "3"],
     },
 }
+
+
+def main():
+
+    import sys
+
+    sys.path.append("../.")
+    import json
+    from scripts.practice_cells import get_all_cells
+
+    all_cells = get_all_cells(maj_essential_starting_cells, maj_essential_ending_cells)
+    print(all_cells)
+    return None
+
+
+if __name__ == "__main__":
+    main()

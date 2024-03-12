@@ -1,0 +1,24 @@
+Cell Name,Start Note,End Note,Notes,Modes,Mode scores,Sample Count
+Ascending II Scale,5,9,"['5', '6', '7', '1', '9']","['7sus4', 'Dorian', 'Locrian']","{'Myxolidian': 0.4, 'Dorian': 1.2, 'Locrian': 0.8}",0
+Ascending II-Minor 7th Arpeggio (ending on 3rd),5,3,"['5', '7', '9', '4', '3']","['7sus4', 'Myxolidian', 'Dorian', 'Locrian']","{'Myxolidian': 0.6666666666666666, 'Dorian': 0.8, 'Locrian': 1.0666666666666667}",0
+Ascending II-Minor 7th Arpeggio (ending on 6th),5,6,"['5', '7', '9', '4', '6']","['7sus4', 'Dorian', 'Locrian']","{'Myxolidian': 0.26666666666666666, 'Dorian': 0.8, 'Locrian': 0.5333333333333333}",0
+Ascending Scale from 7th,7,4,"['7', '1', '9', '3', '4']","['7sus4', 'Dorian']","{'Myxolidian': 0.13333333333333333, 'Dorian': 0.6666666666666666, 'Locrian': 0.4}",2
+Cannonball Adderley Approach,5,9,"['5', '4', '3', '4', '9']","['7sus4', 'Myxolidian', 'Dorian', 'Locrian']","{'Myxolidian': 0.6666666666666666, 'Dorian': 0.8, 'Locrian': 1.0666666666666667}",1
+Circle of 5th Approach,#11,3,"['#11', '6', '5', '4', '3']","['7sus4', 'Myxolidian', 'Dorian', 'Locrian']","{'Myxolidian': 0.6666666666666666, 'Dorian': 0.5333333333333333, 'Locrian': 0.9333333333333333}",3
+Coltrane Pattern from 7th (ending on #11),7,#11,"['7', '1', '9', '4', '#11']","['7sus4', 'Dorian']","{'Myxolidian': 0.13333333333333333, 'Dorian': 0.6666666666666666, 'Locrian': 0.4}",0
+Coltrane Pattern from 7th (ending on 3rd),7,3,"['7', '1', '9', '4', '3']","['7sus4', 'Myxolidian', 'Dorian', 'Locrian']","{'Myxolidian': 0.5333333333333333, 'Dorian': 0.6666666666666666, 'Locrian': 0.9333333333333333}",0
+Descending Bebop scale from root,1,5,"['1', 'maj7', '7', '6', '5']","['7sus4', 'Myxolidian', 'Dorian', 'Locrian']","{'Myxolidian': 0.9333333333333333, 'Dorian': 0.9333333333333333, 'Locrian': 0.6666666666666666}",1
+Descending Dominant Scale from 5th,5,1,"['5', '4', '3', '2', '1']","['7sus4', 'Myxolidian', 'Dorian', 'Locrian']","{'Myxolidian': 1.2, 'Dorian': 0.5333333333333333, 'Locrian': 0.9333333333333333}",1
+Descending Dominant Scale from 7th ending on #11,7,#11,"['7', '6', '5', '4', '#11']","['7sus4', 'Dorian', 'Locrian']","{'Myxolidian': 0.4, 'Dorian': 0.9333333333333333, 'Locrian': 0.6666666666666666}",2
+Descending Dominant Scale from 7th ending on 3rd,7,3,"['7', '6', '5', '4', '3']","['7sus4', 'Myxolidian', 'Dorian', 'Locrian']","{'Myxolidian': 0.8, 'Dorian': 0.9333333333333333, 'Locrian': 1.2}",4
+Descending II Arpeggio from II-5th,9,3,"['9', '7', '5', '4', '3']","['7sus4', 'Myxolidian', 'Dorian', 'Locrian']","{'Myxolidian': 0.6666666666666666, 'Dorian': 0.8, 'Locrian': 1.0666666666666667}",0
+Descending II Scale,9,5,"['9', '1', '7', '6', '5']","['7sus4', 'Dorian', 'Locrian']","{'Myxolidian': 0.4, 'Dorian': 1.2, 'Locrian': 0.8}",0
+Diatonic Enclosure of 3rd,5,3,"['5', '9', '4', '9', '3']","['7sus4', 'Myxolidian', 'Dorian', 'Locrian']","{'Myxolidian': 0.6666666666666666, 'Dorian': 0.5333333333333333, 'Locrian': 0.9333333333333333}",0
+Diatonic Enclosure to #11,5,#11,"['5', '9', '4', '9', '#11']","['7sus4', 'Dorian']","{'Myxolidian': 0.26666666666666666, 'Dorian': 0.5333333333333333, 'Locrian': 0.4}",1
+Diminished-to-Dominant,#11,1,"['#11', '6', '5', '3', '1']","['7sus4', 'Myxolidian', 'Dorian']","{'Myxolidian': 0.8, 'Dorian': 0.5333333333333333, 'Locrian': 0.4}",1
+Johnny Griffin Enclosure (Mccoy),9,5,"['9', '4', '#11', '6', '5']","['7sus4', 'Dorian', 'Locrian']","{'Myxolidian': 0.26666666666666666, 'Dorian': 0.8, 'Locrian': 0.5333333333333333}",0
+Passing Tone Enclosure,9,3,"['9', '4', '9', '#9', '3']","['7sus4', 'Dorian', 'Locrian']","{'Myxolidian': 0.4, 'Dorian': 0.5333333333333333, 'Locrian': 0.8}",0
+Perfect Chromatic Enclosure of 5th,4,5,"['4', '#11', '6', '#5', '5']","['7sus4', 'Dorian']","{'Myxolidian': 0.26666666666666666, 'Dorian': 0.5333333333333333, 'Locrian': 0.4}",1
+Sonny Stitt Enclosure of II Root,#11,5,"['#11', '6', '#5', '#11', '5']","['7sus4', 'Dorian']","{'Myxolidian': 0.26666666666666666, 'Dorian': 0.5333333333333333, 'Locrian': 0.4}",1
+Stan Getz enclosure of II 3rd,9,7,"['9', '#5', '6', '1', '7']","['7sus4', 'Dorian']","{'Myxolidian': 0.13333333333333333, 'Dorian': 0.6666666666666666, 'Locrian': 0.4}",1
+Stan Getz enclosure of II Root,7,5,"['7', '4', '#11', '6', '5']","['7sus4', 'Dorian', 'Locrian']","{'Myxolidian': 0.4, 'Dorian': 0.9333333333333333, 'Locrian': 0.6666666666666666}",1

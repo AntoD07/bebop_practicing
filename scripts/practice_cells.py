@@ -1,18 +1,9 @@
 import streamlit as st
-from scripts.cells.major7 import (
-    maj_essential_starting_cells,
-    maj_essential_ending_cells,
-)
-from scripts.cells.sus4 import (
-    dominant_essential_starting_cells,
-    dominant_essential_ending_cells,
-)
-
-import random
-
+import json
+from scripts.cells.modes import compute_scores, filter_cells_by_mode
 
 # All available cells
-@st.cache_data
+""" @st.cache_data
 def get_all_cells(start_cells, ending_cells):
     all_cell_names = []
     all_cells = {}
@@ -23,10 +14,10 @@ def get_all_cells(start_cells, ending_cells):
             # iterate over all cells starting from (ending at) a given note
             for key in v.keys():
                 all_cells[key] = v[key]
-    return list(set(all_cells)), all_cells
+    return list(set(all_cells)), all_cells """
 
 
-def load_cells(chord, include_bonus=False):
+""" def load_cells(chord, include_bonus=False):
     if chord == "Maj7":
         starting_cells = maj_essential_starting_cells
         ending_cells = maj_essential_ending_cells
@@ -45,6 +36,47 @@ def load_cells(chord, include_bonus=False):
     st.session_state.ending_note = random.choice(list(ending_cells.keys()))
 
     return starting_cells, ending_cells
+ """
+
+
+@st.cache_data
+def create_starting_ending_cells(cells):
+    starting_cells = {}
+    ending_cells = {}
+
+    for cell_name, notes in cells.items():
+        start_note = notes[0]
+        end_note = notes[-1]
+
+        # Add to starting_cells
+        if start_note not in starting_cells:
+            starting_cells[start_note] = {}
+        starting_cells[start_note][cell_name] = notes
+
+        # Add to ending_cells
+        if end_note not in ending_cells:
+            ending_cells[end_note] = {}
+        ending_cells[end_note][cell_name] = notes
+    return starting_cells, ending_cells
+
+
+def get_all_cells(chord, include_bonus=False):
+    if chord == "Maj7":
+        file = "scripts/cells/maj7.json"
+    elif chord in ["7sus4", "Dorian", "Myxolidian", "Locrian"]:
+        file = "scripts/cells/7sus4.json"
+    else:
+        raise ValueError("Unkown chord type")
+
+    with open(file) as f:
+        dic = json.load(f)
+    unordered_cells = dic["essential"]
+    if include_bonus:
+        unordered_cells.update(dic["bonus"])
+    cells = {key: value for key, value in sorted(unordered_cells.items())}
+    if chord in ["Dorian", "Myxolidian", "Locrian"]:
+        cells = filter_cells_by_mode(cells, chord)
+    return cells
 
 
 @st.cache_data
@@ -107,36 +139,3 @@ def find_combinations_on_pivot(pivot, starting_cells, ending_cells):
             combinations.append((ending_cell, starting_cell))
 
     return combinations
-
-
-def characterize_cells(cells):
-    mixolydian_notes = ["1", "3", "5", "7"]
-    dorian_notes = [
-        "9",
-        "4",
-        "6",
-        "1",
-        "5",
-        "7",
-    ]  # Including 1, 5, and 7 for more nuanced assessment
-
-    cell_scores = {}
-
-    for cell_name, notes in cells.items():
-        mixolydian_score = 0
-        dorian_score = 0
-
-        # Check the notes on strong beats (index 0, 2, and 4)
-        for index in [0, 2, 4]:
-            if index < len(notes):  # Ensure the index is within bounds
-                if notes[index] in mixolydian_notes:
-                    mixolydian_score += 1
-                if notes[index] in dorian_notes:
-                    dorian_score += 1
-
-        cell_scores[cell_name] = {
-            "Mixolydian": mixolydian_score,
-            "Dorian": dorian_score,
-        }
-
-    return cell_scores

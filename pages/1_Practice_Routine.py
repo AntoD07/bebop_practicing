@@ -2,25 +2,20 @@ import streamlit as st
 import datetime
 import time
 
-from scripts.cells.major7 import (
-    maj_essential_starting_cells,
-    maj_essential_ending_cells,
-)
-from scripts.cells.sus4 import (
-    dominant_essential_starting_cells,
-    dominant_essential_ending_cells,
-)
 from scripts.routine import (
-    update_focus_progress,
     randomize_key,
     randomize_position,
     save_practice_session,
 )
 from scripts.practice_cells import (
-    load_cells,
     get_all_cells,
+    create_starting_ending_cells,
     find_combinations_on_pivot,
     join_notes,
+)
+from scripts.cells.melodic_lines import (
+    fetch_and_update_data_base,
+    sample_melodic_line_with_connecting_note,
 )
 
 
@@ -41,32 +36,40 @@ st.title("Bebop Practice Routine")
 c1, c2 = st.columns((0.5, 0.5))
 # Display the key for today's practice
 key = randomize_key()
-c1.subheader(f"Today's Key: :blue[{key}]", divider="red")
+c1.subheader(f"Today's Key: :blue[{key}]")
 # Display today's position of practice
-position = randomize_position([2])
-c2.subheader(f"Today's Position: :blue[{position}]", divider="red")
+position = randomize_position([1, 2, 3, 4, 5])
+c2.subheader(f"Today's Position: :blue[{position}]")
 
-chord = st.sidebar.selectbox("What you want to practice today : ", ["Maj7", "7sus4"])
-starting_cells, ending_cells = load_cells(chord)
-all_cells = get_all_cells(starting_cells, ending_cells)
+st.session_state.chord = st.sidebar.selectbox(
+    "What you want to practice today : ",
+    ["Maj7", "7sus4", "Dorian", "Myxolidian", "Locrian"],
+    index=1,
+)
+all_cells = get_all_cells(st.session_state.chord, True)
+df_cells = fetch_and_update_data_base(
+    "{}_sampling.csv".format(st.session_state.chord),
+    all_cells,
+    majchord=st.session_state.chord == "Maj7",
+)
+names = list(all_cells.keys())
+starting_cells, ending_cells = create_starting_ending_cells(all_cells)
 
 st.session_state.tone = c1.selectbox(
     "Select a note ",
     list(starting_cells.keys()),
     index=list(starting_cells.keys()).index(
-        st.session_state.get(
-            "starting_note", random.choice(list(starting_cells.keys()))
-        )
+        st.session_state.get("tone", random.choice(list(starting_cells.keys())))
     ),
 )
 combinations = find_combinations_on_pivot(
     st.session_state.tone, starting_cells, ending_cells
 )
+st.subheader("", divider="red")
 st.subheader(
     "Session 1 - Practicing cells around chord tone :blue[{}] - All :red[{}] combinaisons".format(
         st.session_state.tone, len(combinations)
     ),
-    divider="red",
 )
 with st.expander("Show Cells"):
     c1, c2 = st.columns((0.5, 0.5))
@@ -89,14 +92,13 @@ st.session_state.tempo = st.number_input(
 
 # Total duration for practicing all combinations
 total_duration_minutes = st.sidebar.number_input(
-    "Part 1 Duration : ", min_value=1, max_value=30, value=10
+    "Part 1 Duration : ", min_value=1, max_value=30, value=15
 )
-
 # Calculate display time per combination
 if combinations:
     time_per_combination = total_duration_minutes / len(combinations)
     st.write(
-        f"Each combination will be displayed for :green[{time_per_combination:.2f}] minutes. Press 'Next Combination' to rotate through the combinations."
+        f"Each combination will be displayed for :green[{int(time_per_combination*60)}] seconds. Press 'Next Combination' to rotate through the combinations."
     )
 else:
     st.write("No combinations available for the selected pivot note.")
@@ -133,7 +135,7 @@ if st.button("Start exercise 1", type="primary"):
             c2.markdown(f"##### {current_combination[1]}")
             ph = c3.empty()
             N = int(time_per_combination * 60)
-            for secs in range(N, 0, -1):
+            for secs in range(N, -1, -1):
                 mm, ss = secs // 60, secs % 60
                 ph.metric(
                     f"{i+1}/{len(combinations)}",
@@ -163,7 +165,7 @@ with st.expander("Saving Part 1 results"):
     if st.button("Save to database"):
         session_details = {
             "Date": datetime.date.today().strftime("%Y-%m-%d"),
-            "ChordType": chord,
+            "ChordType": st.session_state.chord,
             "PivotNote": st.session_state.tone,
             "Tempo": st.session_state.tempo,
             "Grade": grade,
@@ -172,3 +174,25 @@ with st.expander("Saving Part 1 results"):
         save_practice_session(session_details)
 
         st.success("Practice session saved successfully!")
+
+st.subheader("", divider="red")
+st.subheader(
+    "Session 2 - Practicing longer lines involving chord tone :blue[{}]".format(
+        st.session_state.tone
+    ),
+)
+st.session_state.line_length = st.number_input(
+    "Select line length generated randomly", min_value=2, max_value=50, value=4
+)
+if st.button("Generate melodic line", type="primary"):
+    melodic_line, df_cells = sample_melodic_line_with_connecting_note(
+        df_cells,
+        st.session_state.chord,
+        st.session_state.line_length,
+        st.session_state.tone,
+    )
+    c1, c2 = st.columns((0.5, 0.5))
+    for n in melodic_line:
+        c1.write(f"##### {n}")
+        c2.write(join_notes(all_cells[n]))
+    df_cells.to_csv("{}_sampling.csv".format(st.session_state.chord), index=False)
