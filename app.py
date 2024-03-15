@@ -12,15 +12,18 @@ from scripts.practice_cells import (
 
 
 st.title("Bebop practice app")
-
-chord = st.selectbox(
+previous_chord = st.session_state.get("chord")
+st.session_state.chord = st.selectbox(
     "Select chord to practice",
     ["Maj7", "7sus4", "Dorian", "Myxolidian", "Locrian"],
     index=1,
 )
-all_cells = get_all_cells(chord, True)
+all_cells = get_all_cells(st.session_state.chord, True)
 names = list(all_cells.keys())
 starting_cells, ending_cells = create_starting_ending_cells(all_cells)
+
+if st.session_state.chord != previous_chord:
+    st.session_state.name = random.choice(list(all_cells.keys()))
 
 if st.button("Randomize again "):
     st.session_state.name = random.choice(list(all_cells.keys()))
