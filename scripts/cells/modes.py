@@ -13,7 +13,7 @@ def compute_scores(cells, majchord=False):
     for cell_name, notes in cells.items():
         score = {}
         if majchord:
-            score["Modes"] = "Maj7"
+            score["Modes"] = ["Maj7"]
         else:
             myxolidian_score = 0
             dorian_score = 0

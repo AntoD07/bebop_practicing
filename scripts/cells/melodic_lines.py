@@ -81,17 +81,15 @@ def sample_melodic_line_with_connecting_note(
     """
     # Filter cells by mode
     filtered_df = df[df["Modes"].str.contains(mode)].copy()
-
     # Initialize the melodic line
     melodic_line = []
-
     # Try to find a starting cell that includes the required connecting note
     starting_candidates = filtered_df[
-        (filtered_df["Start Note"] == required_connecting_note)
-        | (filtered_df["End Note"] == required_connecting_note)
+        (filtered_df["Start Note"].astype(str) == required_connecting_note)
+        | (filtered_df["End Note"].astype(str) == required_connecting_note)
     ]
     if starting_candidates.empty:
-        return "No cells found with the required connecting note."
+        st.warning("No cells found with the required connecting note.")
     current_cell = starting_candidates.sample(
         weights=(1 / (starting_candidates["Sample Count"] + 1)), n=1
     ).iloc[0]
@@ -104,7 +102,9 @@ def sample_melodic_line_with_connecting_note(
 
     # Sample additional cells that connect to each other
     for _ in range(1, num_cells):
-        next_cells = filtered_df[filtered_df["Start Note"] == current_cell["End Note"]]
+        next_cells = filtered_df[
+            filtered_df["Start Note"].astype(str) == str(current_cell["End Note"])
+        ]
         if next_cells.empty:
             st.write("Unable to find connecting cells to continue the melodic line.")
         else:

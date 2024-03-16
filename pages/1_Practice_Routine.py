@@ -41,19 +41,23 @@ c1.subheader(f"Today's Key: :blue[{key}]")
 position = randomize_position([1, 2, 3, 4, 5])
 c2.subheader(f"Today's Position: :blue[{position}]")
 
-st.session_state.chord = st.sidebar.selectbox(
-    "What you want to practice today : ",
+previous_chord = st.session_state.get("chord")
+st.session_state.chord = st.selectbox(
+    "Select chord to practice",
     ["Maj7", "7sus4", "Dorian", "Myxolidian", "Locrian"],
     index=1,
 )
 all_cells = get_all_cells(st.session_state.chord, True)
+names = list(all_cells.keys())
+starting_cells, ending_cells = create_starting_ending_cells(all_cells)
+
+if st.session_state.chord != previous_chord:
+    st.session_state.name = random.choice(list(all_cells.keys()))
 df_cells = fetch_and_update_data_base(
     "{}_sampling.csv".format(st.session_state.chord),
     all_cells,
     majchord=st.session_state.chord == "Maj7",
 )
-names = list(all_cells.keys())
-starting_cells, ending_cells = create_starting_ending_cells(all_cells)
 
 st.session_state.tone = c1.selectbox(
     "Select a note ",
@@ -118,6 +122,7 @@ def next_combination():
 
 # Display the current combination
 if st.button("Start exercise 1", type="primary"):
+    st.session_state.current_combination_index = 0
     for i, _ in enumerate(combinations):
         # Inject JavaScript for auto-scrolling
         js = """
