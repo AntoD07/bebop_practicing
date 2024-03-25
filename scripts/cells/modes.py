@@ -3,7 +3,7 @@ import streamlit as st
 # Weights
 
 myxolidian_weights = {"1": 4, "3": 3, "5": 2, "7": 1}
-dorian_weights = {"5": 4, "7": 3, "9": 2, "11": 1}
+dorian_weights = {"5": 4, "7": 3, "9": 2, "11": 1, "6": 2, "3": 2}
 locrian_weights = {"3": 4, "5": 3, "7": 2, "9": 1}
 
 
@@ -25,9 +25,11 @@ def compute_scores(cells, majchord=False):
                 myxolidian_score += myxolidian_weights.get(note, 0)
                 dorian_score += dorian_weights.get(note, 0)
                 locrian_score += locrian_weights.get(note, 0)
-            score["Myxolidian"] = myxolidian_score / 7.5
-            score["Dorian"] = dorian_score / 7.5
-            score["Locrian"] = locrian_score / 7.5
+            # Average score per cell = average score per note * 3
+            score["Myxolidian"] = round(myxolidian_score / 7.5, 1)
+            score["Dorian"] = round(dorian_score / 7, 1)
+            score["Locrian"] = round(locrian_score / 7.5, 1)
+            score = dict(sorted(score.items(), key=lambda item: item[1], reverse=True))
             # Determine the mode based on higher score
             modes = ["7sus4"]
             for mode, _score in score.items():

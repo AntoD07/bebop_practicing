@@ -24,6 +24,8 @@ starting_cells, ending_cells = create_starting_ending_cells(all_cells)
 
 if st.session_state.chord != previous_chord:
     st.session_state.name = random.choice(list(all_cells.keys()))
+    st.session_state.starting_note = random.choice(list(starting_cells.keys()))
+
 
 if st.button("Randomize again "):
     st.session_state.name = random.choice(list(all_cells.keys()))

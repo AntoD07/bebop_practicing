@@ -101,6 +101,6 @@ def save_practice_session(details, file_path="practice_sessions.csv"):
 
     # Try to append to the file if it exists, otherwise create a new file
     try:
-        df.to_csv(file_path, mode="a", index=False)
+        df.to_csv(file_path, mode="a", index=False, header=False)
     except FileNotFoundError:
         df.to_csv(file_path, mode="w", header=True, index=False)

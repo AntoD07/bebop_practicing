@@ -81,6 +81,8 @@ def find_combinations_on_pivot(pivot, starting_cells, ending_cells):
     - combinations: A list of tuples, each containing two cell names representing a valid combination.
     """
     combinations = []
+    start_names = []
+    end_names = []
 
     # Find cells that end on the pivot note
     ending_cells_for_pivot = []
@@ -89,6 +91,7 @@ def find_combinations_on_pivot(pivot, starting_cells, ending_cells):
             ending_cells_for_pivot.append(
                 "{} \n {}".format(cell_name, join_notes(notes))
             )
+            end_names.append(cell_name)
 
     # Find cells that start on the pivot note
     starting_cells_for_pivot = []
@@ -97,10 +100,15 @@ def find_combinations_on_pivot(pivot, starting_cells, ending_cells):
             starting_cells_for_pivot.append(
                 "{} \n {}".format(cell_name, join_notes(notes))
             )
+            start_names.append(cell_name)
 
     # Create combinations of ending and starting cells on the pivot note
     for ending_cell in ending_cells_for_pivot:
         for starting_cell in starting_cells_for_pivot:
             combinations.append((ending_cell, starting_cell))
+    names = []
+    for name1 in end_names:
+        for name2 in end_names:
+            names.append((name1, name2))
 
-    return combinations
+    return combinations, names
