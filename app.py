@@ -86,6 +86,8 @@ if st.button("Verify answer 2"):
             st.error("{} are missing !!".format(len(missing)))
     else:
         st.success("Correct !!!", icon="✅")
+        for name, cell in correct_cells.items():
+            st.write("**" + name + "** ------ " + join_notes(cell))
     with st.expander("see solutions 2 "):
         for name, cell in correct_cells.items():
             st.write("**" + name + "** ------ " + join_notes(cell))
@@ -108,6 +110,8 @@ if st.button("Verify answer 1"):
 
     else:
         st.success("Correct !!!", icon="✅")
+        for name, cell in correct_cells.items():
+            st.write("**" + name + "** ------ " + join_notes(cell))
     with st.expander("see solutions 1 "):
         for name, cell in correct_cells.items():
             st.write("**" + name + "** ------ " + join_notes(cell))
@@ -151,6 +155,8 @@ if st.button("Verify answer 3"):
 
     else:
         st.success("Correct !!!", icon="✅")
+        for name, cell in correct_cells.items():
+            st.write("**" + name + "** ------ " + join_notes(cell))
     with st.expander("see solutions 3 "):
         for name, cell in correct_cells.items():
             st.write("**" + name + "** ------ " + join_notes(cell))

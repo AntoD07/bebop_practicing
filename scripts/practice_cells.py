@@ -1,7 +1,6 @@
 import streamlit as st
-import random
 import json
-from scripts.cells.modes import compute_scores, filter_cells_by_mode
+from scripts.cells.modes import filter_cells_by_mode
 
 
 @st.cache_data
@@ -108,7 +107,7 @@ def find_combinations_on_pivot(pivot, starting_cells, ending_cells):
             combinations.append((ending_cell, starting_cell))
     names = []
     for name1 in end_names:
-        for name2 in end_names:
+        for name2 in start_names:
             names.append((name1, name2))
 
     return combinations, names

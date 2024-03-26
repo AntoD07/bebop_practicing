@@ -3,8 +3,7 @@ import datetime
 import time
 
 from scripts.routine import (
-    randomize_key,
-    randomize_position,
+    get_or_update_practice_details,
     save_practice_session,
 )
 from scripts.practice_cells import (
@@ -22,24 +21,15 @@ from scripts.database import fetch_and_update_data_base
 import random
 
 st.set_page_config(layout="wide")
-st.markdown(
-    """
-<script>
-window.scrollTo(0,document.body.scrollHeight);
-</script>
-""",
-    unsafe_allow_html=True,
-)
 # Example of setting up the practice routine
 st.title("Bebop Practice Routine")
 
+key, position = get_or_update_practice_details()
+
+# Use key and position in your Streamlit application
 c1, c2 = st.columns((0.5, 0.5))
-# Display the key for today's practice
-key = randomize_key()
 c1.subheader(f"Today's Key: :blue[{key}]")
-# Display today's position of practice
-position = randomize_position()
-c2.subheader(f"Today's Position: :blue[{position}]")
+c2.subheader(f"Today's Position (for guitar): :blue[{position}]")
 
 previous_chord = st.session_state.get("chord")
 st.session_state.chord = c1.selectbox(
@@ -144,6 +134,7 @@ if st.button("Start exercise 1", type="primary"):
                 st.session_state.current_combination_index
             ]
             current_name = names[st.session_state.current_combination_index]
+
             c1.markdown(f"##### {current_combination[0]}")
             if st.session_state.chord == "7sus4":
                 c1.caption(str(df_cells.loc[current_name[0], "Mode scores"]))
@@ -164,12 +155,7 @@ if st.button("Start exercise 1", type="primary"):
 
         except IndexError:
             st.success("Completed all combinaisons")
-            st.session_state.current_combination_index = 0
-
-
-# Button to manually rotate to the next combination
-if st.button("Next Combination"):
-    next_combination()
+            # st.session_state.current_combination_index = 0
 
 if st.sidebar.button("Randomize again "):
     st.session_state.starting_note = random.choice(list(starting_cells.keys()))
@@ -209,9 +195,10 @@ if st.button("Generate melodic line", type="primary"):
         st.session_state.line_length,
         st.session_state.tone,
     )
-    c1, c2 = st.columns((0.5, 0.5))
     for n in st.session_state.melodic_line:
+        c1, c2 = st.columns((0.5, 0.5))
         c1.write(f"##### {n}")
+        c1.caption(df_cells.set_index("Cell Name").loc[n, "Mode scores"])
         c2.write(join_notes(all_cells[n]))
     df_cells.to_csv("{}_sampling.csv".format(st.session_state.chord), index=False)
 

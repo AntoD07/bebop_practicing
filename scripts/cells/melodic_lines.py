@@ -18,8 +18,8 @@ def sample_melodic_line_with_connecting_note(
     - A list of cell names representing the sampled melodic line, or a message if the criteria cannot be met.
     """
     # Filter cells by mode
+    df = df.reset_index()
     filtered_df = df[df["Modes"].apply(lambda x: mode in x)].copy()
-    # Initialize the melodic line
     melodic_line = []
     # Try to find a starting cell that includes the required connecting note
     starting_candidates = filtered_df[

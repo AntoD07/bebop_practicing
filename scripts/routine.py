@@ -41,50 +41,57 @@ def update_focus_progress(total_practice_time=60, change_focus_time=30):
     return focus, progress
 
 
-# Key Randomization for Daily Practice
-def randomize_key():
+import json
+import datetime
+import random
+
+
+def get_or_update_practice_details():
     """
-    Randomize the key for daily practice. This function should be called once daily.
+    Fetches or updates the practice details (key and position) from/to a JSON file.
 
     Returns:
-    - key: The randomized key for the day's practice.
+    - A tuple containing the key and position for today's practice.
     """
-    keys = [
-        "C",
-        "G",
-        "D",
-        "A",
-        "E",
-        "B",
-        "F#",
-        "C#",
-        "F",
-        "Bb",
-        "Eb",
-        "Ab",
-        "Db",
-        "Gb",
-        "Cb",
-    ]
-    today = datetime.date.today()
-    if st.session_state.get("last_practice_date") != today:
-        st.session_state["key"] = random.choice(keys)
-        st.session_state["last_practice_date"] = today
-    return st.session_state["key"]
+    filename = "practice_details.json"
+    today = datetime.date.today().isoformat()
 
+    try:
+        with open(filename, "r") as file:
+            practice_details = json.load(file)
+    except FileNotFoundError:
+        practice_details = {}
 
-# Posiition Randomization for Daily Practice
-def randomize_position(positions=list(range(1, 6))):
-    """
-    Randomize the key for daily practice. This function should be called once daily.
+    # If details for today are not present or the file doesn't exist, update them.
+    if practice_details.get("date") != today:
+        keys = [
+            "C",
+            "G",
+            "D",
+            "A",
+            "E",
+            "B",
+            "F#",
+            "C#",
+            "F",
+            "Bb",
+            "Eb",
+            "Ab",
+            "Db",
+            "Gb",
+            "Cb",
+        ]
+        positions = list(range(1, 6))
+        practice_details = {
+            "date": today,
+            "key": random.choice(keys),
+            "position": random.choice(positions),
+        }
 
-    Returns:
-    - key: The randomized key for the day's practice.
-    """
-    today = datetime.date.today()
-    if not st.session_state.get("position"):
-        st.session_state["position"] = random.choice(positions)
-    return st.session_state["position"]
+        with open(filename, "w") as file:
+            json.dump(practice_details, file)
+
+    return practice_details["key"], practice_details["position"]
 
 
 # Function to append practice session details to a CSV file
