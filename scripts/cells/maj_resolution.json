@@ -1,0 +1,33 @@
+{
+    "essential": {
+        "Late #9/b9 approach": [
+            "1",
+            "7",
+            "#9",
+            "b9",
+            "1=5"
+        ],
+        "Lee Morgan Dominant": [
+            "1",
+            "maj7",
+            "7",
+            "9",
+            "6=3"
+        ],
+        "Hidden Augmented Triad": [
+            "1",
+            "#5",
+            "3",
+            "1",
+            "5=9"
+        ],
+        "Hidden min-Maj7th Chord": [
+            "1",
+            "#5",
+            "3",
+            "b9",
+            "5=9"
+        ]
+    },
+    "bonus": {}
+}

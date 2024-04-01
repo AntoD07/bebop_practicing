@@ -119,20 +119,6 @@
             "6",
             "5"
         ],
-        "Descending Minor 7th arpeggio from 4th": [
-            "4",
-            "9",
-            "7",
-            "5",
-            "3"
-        ],
-        "Descending Mintor 7th arpeggio from 4th": [
-            "4",
-            "9",
-            "7",
-            "5",
-            "3"
-        ],
         "Dexter Gordon": [
             "3",
             "4",
@@ -210,13 +196,6 @@
             "4",
             "6"
         ],
-        "Jimmy Heath": [
-            "1",
-            "maj7",
-            "7",
-            "9",
-            "4"
-        ],
         "Johnny Griffin Enclosure (Mccoy)": [
             "9",
             "4",
@@ -231,6 +210,7 @@
             "9",
             "6"
         ],
+        "Melodic Minor Scale Approach" : ["3", "5", "6","7", "5"],
         "Minor Honeysuckle Rose": [
             "1",
             "7",
@@ -279,6 +259,13 @@
             "#5",
             "#11",
             "5"
+        ],
+        "Sonny Rollins": [
+            "6",
+            "7",
+            "4",
+            "5",
+            "6"
         ],
         "Stan Getz enclosure of II 3rd": [
             "9",

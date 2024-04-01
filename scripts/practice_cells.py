@@ -25,13 +25,14 @@ def create_starting_ending_cells(cells):
 
 
 def get_all_cells(chord, include_bonus=False):
-    if chord == "Maj7":
+    if chord == "MajorResolutions":
+        file = "scripts/cells/maj_resolution.json"
+    elif chord == "Maj7":
         file = "scripts/cells/maj7.json"
     elif chord in ["7sus4", "Dorian", "Myxolidian", "Locrian"]:
         file = "scripts/cells/7sus4.json"
     else:
         raise ValueError("Unkown chord type")
-
     with open(file) as f:
         dic = json.load(f)
     unordered_cells = dic["essential"]
@@ -40,7 +41,16 @@ def get_all_cells(chord, include_bonus=False):
     cells = {key: value for key, value in sorted(unordered_cells.items())}
     if chord in ["Dorian", "Myxolidian", "Locrian"]:
         cells = filter_cells_by_mode(cells, chord)
-    return cells
+    starting_cells, ending_cells = create_starting_ending_cells(cells)
+    if chord == "MajorResolutions":
+        with open("scripts/cells/7sus4.json") as f:
+            dic = json.load(f)
+        unordered_cells = dic["essential"]
+        if include_bonus:
+            unordered_cells.update(dic["bonus"])
+        sus_cells = {key: value for key, value in sorted(unordered_cells.items())}
+        _, ending_cells = create_starting_ending_cells(sus_cells)
+    return cells, starting_cells, ending_cells
 
 
 @st.cache_data

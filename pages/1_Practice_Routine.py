@@ -34,12 +34,11 @@ c2.subheader(f"Today's Position (for guitar): :blue[{position}]")
 previous_chord = st.session_state.get("chord")
 st.session_state.chord = c1.selectbox(
     "Select chord to practice",
-    ["Maj7", "7sus4", "Dorian", "Myxolidian", "Locrian"],
+    ["Maj7", "7sus4", "Dorian", "Myxolidian", "Locrian", "MajorResolutions"],
     index=1,
 )
-all_cells = get_all_cells(st.session_state.chord, True)
+all_cells, starting_cells, ending_cells = get_all_cells(st.session_state.chord, True)
 names = list(all_cells.keys())
-starting_cells, ending_cells = create_starting_ending_cells(all_cells)
 
 if st.session_state.chord != previous_chord:
     st.write(starting_cells.keys())
@@ -187,6 +186,11 @@ st.subheader(
 st.session_state.line_length = st.number_input(
     "Select line length generated randomly", min_value=2, max_value=50, value=4
 )
+st.session_state.kept_notes = st.multiselect(
+    "Select pivot notes for constructing the line",
+    list(starting_cells.keys()),
+    default=list(starting_cells.keys()),
+)
 if st.button("Generate melodic line", type="primary"):
     st.session_state.tmp = True
     st.session_state.melodic_line, df_cells = sample_melodic_line_with_connecting_note(
@@ -194,6 +198,7 @@ if st.button("Generate melodic line", type="primary"):
         st.session_state.chord,
         st.session_state.line_length,
         st.session_state.tone,
+        st.session_state.kept_notes,
     )
     for n in st.session_state.melodic_line:
         c1, c2 = st.columns((0.5, 0.5))

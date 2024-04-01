@@ -1,0 +1,5 @@
+Cell Name,Start Note,End Note,Notes,Modes,Mode scores,Sample Count
+Hidden Augmented Triad,1,5=9,"['1', '#5', '3', '1', '5=9']","['7sus4', 'Myxolidian']","{'Myxolidian': 0.9, 'Locrian': 0.5, 'Dorian': 0.3}",0
+Hidden min-Maj7th Chord,1,5=9,"['1', '#5', '3', 'b9', '5=9']","['7sus4', 'Myxolidian']","{'Myxolidian': 0.9, 'Locrian': 0.5, 'Dorian': 0.3}",0
+Late #9/b9 approach,1,1=5,"['1', '7', '#9', 'b9', '1=5']",['7sus4'],"{'Myxolidian': 0.5, 'Dorian': 0.0, 'Locrian': 0.0}",0
+Lee Morgan Dominant,1,6=3,"['1', 'maj7', '7', '9', '6=3']","['7sus4', 'Myxolidian']","{'Myxolidian': 0.7, 'Dorian': 0.4, 'Locrian': 0.3}",0
