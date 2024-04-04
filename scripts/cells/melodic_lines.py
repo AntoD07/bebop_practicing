@@ -19,7 +19,10 @@ def sample_melodic_line_with_connecting_note(
     """
     # Filter cells by mode
     df = df.reset_index()
-    filtered_df = df[(df['Start Note'].isin(notes_to_be_present)) | (df['End Note'].isin(notes_to_be_present))]
+    filtered_df = df[
+        (df["Start Note"].isin(notes_to_be_present))
+        | (df["End Note"].isin(notes_to_be_present))
+    ]
     filtered_df = filtered_df[filtered_df["Modes"].apply(lambda x: mode in x)].copy()
     melodic_line = []
     # Try to find a starting cell that includes the required connecting note

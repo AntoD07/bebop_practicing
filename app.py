@@ -18,9 +18,8 @@ st.session_state.chord = st.selectbox(
     ["Maj7", "7sus4", "Dorian", "Myxolidian", "Locrian"],
     index=1,
 )
-all_cells = get_all_cells(st.session_state.chord, True)
+all_cells, starting_cells, ending_cells = get_all_cells(st.session_state.chord, True)
 names = list(all_cells.keys())
-starting_cells, ending_cells = create_starting_ending_cells(all_cells)
 
 if st.session_state.chord != previous_chord:
     st.session_state.name = random.choice(list(all_cells.keys()))
