@@ -8,12 +8,12 @@ from scripts.routine import (
 )
 from scripts.practice_cells import (
     get_all_cells,
-    create_starting_ending_cells,
     find_combinations_on_pivot,
     join_notes,
 )
 from scripts.cells.melodic_lines import (
     sample_melodic_line_with_connecting_note,
+    sample_melodic_line_backward_for_251,
 )
 from scripts.database import fetch_and_update_data_base
 
@@ -79,6 +79,18 @@ with st.expander("Show Cells"):
         c2.write(join_notes(notes))
         if st.session_state.chord == "7sus4":
             c2.caption(str(df_cells.loc[n, "Mode scores"]))
+
+with st.expander("Show Combinations"):
+    for i, combi in enumerate(combinations):
+        # Inject JavaScript for auto-scrolling
+        c1, c2 = st.columns((0.5, 0.5))
+        current_name = names[i]
+        c1.markdown(f"##### {combi[0]}")
+        if st.session_state.chord == "7sus4":
+            c1.caption(str(df_cells.loc[current_name[0], "Mode scores"]))
+        c2.markdown(f"##### {combi[1]}")
+        if st.session_state.chord == "7sus4":
+            c2.caption(str(df_cells.loc[current_name[1], "Mode scores"]))
 
 
 st.session_state.tempo = st.number_input(
@@ -193,18 +205,33 @@ st.session_state.kept_notes = st.multiselect(
 )
 if st.button("Generate melodic line", type="primary"):
     st.session_state.tmp = True
-    st.session_state.melodic_line, df_cells = sample_melodic_line_with_connecting_note(
-        df_cells,
-        st.session_state.chord,
-        st.session_state.line_length,
-        st.session_state.tone,
-        st.session_state.kept_notes,
-    )
+    if st.session_state.chord in ["Maj7", "7sus4", "Dorian", "Myxolidian", "Locrian"]:
+        st.session_state.melodic_line, df_cells = (
+            sample_melodic_line_with_connecting_note(
+                df_cells,
+                st.session_state.chord,
+                st.session_state.line_length,
+                st.session_state.tone,
+                st.session_state.kept_notes,
+            )
+        )
+    else:
+        st.session_state.melodic_line, df_cells = sample_melodic_line_backward_for_251(
+            df_cells,
+            st.session_state.chord,
+            st.session_state.line_length,
+            st.session_state.tone,
+        )
     for n in st.session_state.melodic_line:
         c1, c2 = st.columns((0.5, 0.5))
         c1.write(f"##### {n}")
-        c1.caption(df_cells.set_index("Cell Name").loc[n, "Mode scores"])
-        c2.write(join_notes(all_cells[n]))
+        if n in all_cells.keys():
+            # c1.caption(df_cells.set_index("Cell Name").loc[n, "Mode scores"])
+            c2.write(join_notes(all_cells[n]))
+        else:
+            dom_cells, _, _ = get_all_cells("7sus4", True)
+            c2.write(join_notes(dom_cells[n]))
+
     df_cells.to_csv("{}_sampling.csv".format(st.session_state.chord), index=False)
 
     grade = st.number_input("How good is it?", min_value=1, max_value=5, value=5)

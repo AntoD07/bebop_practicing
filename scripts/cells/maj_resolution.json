@@ -1,5 +1,7 @@
 {
     "essential": {
+        "Dominant Scale from 3rd" : ["3","9","1","7","6=3"],
+        "Dominant b9 Arpeggio from 3rd" : ["3","5","7","b9","1=5"],
         "Late #9/b9 approach": [
             "1",
             "7",
@@ -14,6 +16,7 @@
             "9",
             "6=3"
         ],
+        "Full Altered Hank Mobley" : ["3","#5","#9","b9","1=5"],
         "Hidden Augmented Triad": [
             "1",
             "#5",
@@ -27,7 +30,8 @@
             "3",
             "b9",
             "5=9"
-        ]
+        ], 
+        "Octave displaced Dominant b9 from 3rd": ["3", "b9", "1", "7", "6=3"]
     },
     "bonus": {}
 }
