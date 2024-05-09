@@ -175,6 +175,13 @@
             "9",
             "1"
         ],
+        "Farao": [
+            "#11",
+            "9",
+            "4",
+            "9",
+            "3"
+        ],
         "George Coleman minor 7": [
             "6",
             "5",
@@ -182,35 +189,34 @@
             "4",
             "3"
         ],
-        "Hank Mobley": [
+        "Hank Mobley (Mccoy)": [
             "7",
-            "2",
+            "9",
             "6",
             "5",
             "1"
         ],
-        "Hidden Ideal maj7 Arpeggio to 13th": [
+        "Hidden Ideal maj7 Arpeggio to 13th (Mccoy)": [
             "6",
             "7",
             "9",
             "4",
             "6"
         ],
-        "Johnny Griffin Enclosure (Mccoy)": [
+        "Johnny Griffin Enclosure of 5th (Mccoy)": [
             "9",
             "4",
             "#11",
             "6",
             "5"
         ],
-        "Lee Morgan Dominant": [
+        "Lee Morgan Dominant (Mccoy)": [
             "1",
             "maj7",
             "7",
             "9",
             "6"
         ],
-        "Melodic Minor Scale Approach" : ["3", "5", "6","7", "5"],
         "Minor Honeysuckle Rose": [
             "1",
             "7",
@@ -274,12 +280,33 @@
             "1",
             "7"
         ],
-        "Stan Getz enclosure of II Root": [
+        "Stan Getz enclosure of II Root starting from 7th": [
             "7",
             "4",
             "#11",
             "6",
             "5"
+        ],
+        "Stan Getz enclosure of II Root starting from 6th (Mccoy)": [
+            "6",
+            "#11",
+            "5",
+            "6",
+            "5"
+        ],
+        "Dominant #5 Scale from 6th (Mccoy)": [
+            "6",
+            "#5",
+            "5",
+            "4",
+            "3"
+        ],
+        "Dominant arperggio to 13th (Mccoy)": [
+            "3",
+            "5",
+            "7",
+            "1",
+            "6"
         ]
     },
     "bonus": {}

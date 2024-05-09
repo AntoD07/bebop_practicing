@@ -1,0 +1,44 @@
+{
+    "Locrian from 3rd": [
+        "5",
+        "4",
+        "3",
+        "9",
+        "#8"
+    ],
+    "Locrian Arpeggio from 3rd": [
+        "3",
+        "5",
+        "7",
+        "9",
+        "#8"
+    ],
+    "Reverse Locrian Arpeggio from 7th": [
+        "9",
+        "7",
+        "5",
+        "3",
+        "#8"
+    ],
+    "Reverse Locrian Arpeggio from 5th": [
+        "7",
+        "5",
+        "3",
+        "9",
+        "#8"
+    ],
+    "Locrian Diatonic Enclosure": [
+        "5",
+        "7",
+        "9",
+        "8",
+        "#8"
+    ],
+    "Dominant 3rd descending enclosure (Mccoy)": [
+        "6",
+        "4",
+        "3",
+        "9",
+        "#8"
+    ]
+}

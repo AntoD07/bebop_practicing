@@ -2,19 +2,16 @@ import streamlit as st
 import datetime
 import time
 
-from scripts.routine import (
+from scripts.utils import (
     get_or_update_practice_details,
-    save_practice_session,
+    join_notes,
 )
 from scripts.practice_cells import (
     get_all_cells,
     find_combinations_on_pivot,
     join_notes,
 )
-from scripts.cells.melodic_lines import (
-    sample_melodic_line_with_connecting_note,
-    sample_melodic_line_backward_for_251,
-)
+
 from scripts.database import fetch_and_update_data_base
 
 
@@ -22,59 +19,95 @@ import random
 
 st.set_page_config(layout="wide")
 # Example of setting up the practice routine
-st.title("Bebop Practice Routine")
+st.title("Practicing Bebop Cell combinations")
 
-key, position = get_or_update_practice_details()
+st.session_state.key, st.session_state.position = get_or_update_practice_details()
+st.session_state.include_bonus = st.sidebar.checkbox(
+    "Whether to include bonus cells", value=st.session_state.get("include_bonus", False)
+)
 
 # Use key and position in your Streamlit application
 c1, c2 = st.columns((0.5, 0.5))
-c1.subheader(f"Today's Key: :blue[{key}]")
-c2.subheader(f"Today's Position (for guitar): :blue[{position}]")
+c1.subheader(f"Today's Key: :blue[{st.session_state.key}]")
+c2.subheader(f"Today's Position (for guitar): :blue[{st.session_state.position}]")
 
 previous_chord = st.session_state.get("chord")
 st.session_state.chord = c1.selectbox(
     "Select chord to practice",
     ["Maj7", "7sus4", "Dorian", "Myxolidian", "Locrian", "MajorResolutions"],
-    index=1,
+    index=[
+        "Maj7",
+        "7sus4",
+        "Dorian",
+        "Myxolidian",
+        "Locrian",
+        "MajorResolutions",
+    ].index(st.session_state.get("chord", "7sus4")),
 )
-all_cells, starting_cells, ending_cells = get_all_cells(st.session_state.chord, True)
+all_cells, _, _ = get_all_cells(st.session_state.chord, st.session_state.include_bonus)
 names = list(all_cells.keys())
-
-if st.session_state.chord != previous_chord:
-    st.write(starting_cells.keys())
-    st.session_state.name = random.choice(list(all_cells.keys()))
-    st.session_state.tone = random.choice(list(starting_cells.keys()))
 
 df_cells = fetch_and_update_data_base(
     "{}_sampling.csv".format(st.session_state.chord),
     all_cells,
     majchord=st.session_state.chord == "Maj7",
 )
+st.session_state.permute = c2.checkbox(
+    "Whether to change to translate the intervals for other modes", value=False
+)
+st.session_state.mode_filter = c2.checkbox(
+    "Whether to filter cells with high mode score", value=False
+)
+
+if st.session_state.mode_filter and (
+    st.session_state.chord in ["Dorian", "Locrian", "Myxolidian"]
+):
+    df_cells = df_cells[df_cells["Modes"].apply(lambda x: st.session_state.chord in x)]
+if st.session_state.permute and (st.session_state.chord in ["Dorian", "Locrian"]):
+    df_cells = translate_sus4_to_other_mode(df_cells, st.session_state.chord)
+if st.session_state.chord in ["Locrian"]:
+    st.session_state.loc_2_dom = c2.checkbox(
+        "Translate Locrian to Dominant", value=True
+    )
+    if st.session_state.loc_2_dom:
+        df_cells = translate_loc_to_dominant(df_cells)
+
+if st.session_state.chord != previous_chord:
+    st.session_state.name = random.choice(list(df_cells.index))
+    st.session_state.tone = random.choice(list(df_cells["Start Note"].unique()))
+
 
 st.session_state.tone = c1.selectbox(
     "Select a note ",
-    list(starting_cells.keys()),
-    index=list(starting_cells.keys()).index(
-        st.session_state.get("tone", random.choice(list(starting_cells.keys())))
+    list(df_cells["Start Note"].unique()),
+    index=list(df_cells["Start Note"].unique()).index(
+        st.session_state.get(
+            "tone", random.choice(list(df_cells["Start Note"].unique()))
+        )
     ),
 )
-combinations, names = find_combinations_on_pivot(
-    st.session_state.tone, starting_cells, ending_cells
-)
+starting_cells = df_cells.loc[df_cells["Start Note"] == st.session_state.tone]
+ending_cells = df_cells.loc[df_cells["End Note"] == st.session_state.tone]
+
+combinations, names = find_combinations_on_pivot(st.session_state.tone, df_cells)
 st.subheader("", divider="red")
 st.subheader(
-    "Session 1 - Practicing cells around chord tone :blue[{}] - All :red[{}] combinaisons".format(
+    "Practicing cells around chord tone :blue[{}] - All :red[{}] combinaisons".format(
         st.session_state.tone, len(combinations)
     ),
 )
 with st.expander("Show Cells"):
     c1, c2 = st.columns((0.5, 0.5))
-    for n, notes in ending_cells[st.session_state.tone].items():
+    for i, cell in ending_cells.reset_index().iterrows():
+        n = cell["Cell Name"]
+        notes = cell["Notes"]
         c1.write(f"##### {n}")
         c1.write(join_notes(notes))
         if st.session_state.chord == "7sus4":
             c1.caption(str(df_cells.loc[n, "Mode scores"]))
-    for n, notes in starting_cells[st.session_state.tone].items():
+    for i, cell in starting_cells.reset_index().iterrows():
+        n = cell["Cell Name"]
+        notes = cell["Notes"]
         c2.write(f"##### {n}")
         c2.write(join_notes(notes))
         if st.session_state.chord == "7sus4":
@@ -169,83 +202,5 @@ if st.button("Start exercise 1", type="primary"):
             # st.session_state.current_combination_index = 0
 
 if st.sidebar.button("Randomize again "):
-    st.session_state.starting_note = random.choice(list(starting_cells.keys()))
-    st.session_state.ending_note = random.choice(list(ending_cells.keys()))
-
-
-with st.expander("Saving Part 1 results"):
-    grade = st.number_input("How easy was it ?", min_value=1, max_value=5, value=5)
-    # Prepare the session details
-    if st.button("Save to database"):
-        session_details = {
-            "Date": datetime.date.today().strftime("%Y-%m-%d"),
-            "ChordType": st.session_state.chord,
-            "PivotNote": st.session_state.tone,
-            "Tempo": st.session_state.tempo,
-            "Grade": grade,
-        }
-        # Save the session details to CSV
-        save_practice_session(session_details)
-
-        st.success("Practice session saved successfully!")
-
-st.subheader("", divider="red")
-st.subheader(
-    "Session 2 - Practicing longer lines involving chord tone :blue[{}]".format(
-        st.session_state.tone
-    ),
-)
-st.session_state.line_length = st.number_input(
-    "Select line length generated randomly", min_value=2, max_value=50, value=4
-)
-st.session_state.kept_notes = st.multiselect(
-    "Select pivot notes for constructing the line",
-    list(starting_cells.keys()),
-    default=list(starting_cells.keys()),
-)
-if st.button("Generate melodic line", type="primary"):
-    st.session_state.tmp = True
-    if st.session_state.chord in ["Maj7", "7sus4", "Dorian", "Myxolidian", "Locrian"]:
-        st.session_state.melodic_line, df_cells = (
-            sample_melodic_line_with_connecting_note(
-                df_cells,
-                st.session_state.chord,
-                st.session_state.line_length,
-                st.session_state.tone,
-                st.session_state.kept_notes,
-            )
-        )
-    else:
-        st.session_state.melodic_line, df_cells = sample_melodic_line_backward_for_251(
-            df_cells,
-            st.session_state.chord,
-            st.session_state.line_length,
-            st.session_state.tone,
-        )
-    for n in st.session_state.melodic_line:
-        c1, c2 = st.columns((0.5, 0.5))
-        c1.write(f"##### {n}")
-        if n in all_cells.keys():
-            # c1.caption(df_cells.set_index("Cell Name").loc[n, "Mode scores"])
-            c2.write(join_notes(all_cells[n]))
-        else:
-            dom_cells, _, _ = get_all_cells("7sus4", True)
-            c2.write(join_notes(dom_cells[n]))
-
-    df_cells.to_csv("{}_sampling.csv".format(st.session_state.chord), index=False)
-
-    grade = st.number_input("How good is it?", min_value=1, max_value=5, value=5)
-if st.session_state.get("tmp"):
-    # Prepare the session details
-    if st.button("Save line"):
-        session_details = {
-            "Date": datetime.date.today().strftime("%Y-%m-%d"),
-            "ChordType": st.session_state.chord,
-            "PivotNote": st.session_state.tone,
-            "Line": st.session_state.melodic_line,
-            "Grade": grade,
-        }
-        # Save the session details to CSV
-        save_practice_session(session_details, "melodic_lines.csv")
-
-        st.success("Line saved successfully!")
+    st.session_state.starting_note = random.choice(df_cells["Start Note"].unique())
+    st.session_state.ending_note = random.choice(df_cells["End Note"].unique())

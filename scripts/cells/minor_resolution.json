@@ -1,0 +1,166 @@
+{
+    "essential": {
+        "Bill Evans enclosure (from #9)": [
+            "#9",
+            "b9",
+            "b6",
+            "7",
+            "1"
+        ],
+        "Bill Evans Ascending enclosure (from b13)": [
+            "b6",
+            "7",
+            "#9",
+            "b9",
+            "1"
+        ],
+        "Bill Evans variation (from #9)": [
+            "#9",
+            "b9",
+            "b6",
+            "3",
+            "1"
+        ],
+        "Dominant b9 scale from 3rd": [
+            "3",
+            "b9",
+            "1",
+            "7",
+            "b6"
+        ],
+        "Early b9/#9 Approach (start b9)": [
+            "b9",
+            "#9",
+            "1",
+            "7",
+            "b6"
+        ],
+        "Hidden Augmented Triad": [
+            "1",
+            "b6",
+            "3",
+            "1",
+            "5"
+        ],
+        "Hidden Augmented Triad pivot at 5th": [
+            "5",
+            "b6",
+            "3",
+            "1",
+            "5"
+        ],
+        "Hidden Augmented Triad pivot at 7th": [
+            "7",
+            "b6",
+            "3",
+            "1",
+            "5"
+        ],
+        "Hidden Fully Altered reverse Minor Coltrane (from b13)": [
+            "b6",
+            "3",
+            "#9",
+            "b9",
+            "1"
+        ],
+        "Hidden Half Diminished Chord (from b13)": [
+            "b6",
+            "3",
+            "b9",
+            "7",
+            "1"
+        ],
+        "Hidden Minor triad pivot at 5th": [
+            "5",
+            "b6",
+            "3",
+            "b9",
+            "1"
+        ],
+        "Hidden Minor triad pivot at 7th": [
+            "7",
+            "b6",
+            "3",
+            "b9",
+            "1"
+        ],
+        "Hidden min-maj7 Chord": [
+            "1",
+            "b6",
+            "3",
+            "b9",
+            "1"
+        ],
+        "Stan Getz Enclosure of min-3rd": [
+            "1",
+            "#11",
+            "5",
+            "6",
+            "b6"
+        ],
+        "Dominant Diminished Enclosure of min-3rd": [
+            "1",
+            "7",
+            "6",
+            "5",
+            "b6"
+        ],
+        "Super Locrian scale (from #9)": [
+            "#9",
+            "b9",
+            "1",
+            "7",
+            "b6"
+        ],
+        "Octave Displaced Dominant b9 scale": [
+            "3",
+            "b9",
+            "1",
+            "7",
+            "b6"
+        ],
+        "Dominant b9 Arpeggio from 3rd": [
+            "3",
+            "5",
+            "7",
+            "b9",
+            "1"
+        ],
+        "Dominant Enclosure from 3rd": [
+            "3",
+            "b9",
+            "7",
+            "maj7",
+            "1"
+        ],
+        "Octave Displaced Dominant Enclosure": [
+            "3",
+            "b9",
+            "7",
+            "maj7",
+            "1"
+        ],
+        "Fully Altered Hank Mobley": [
+            "3",
+            "b6",
+            "#9",
+            "b9",
+            "1"
+        ],
+        "#9th Enclosure": [
+            "3",
+            "9",
+            "#9",
+            "b9",
+            "1"
+        ],
+        "Arpeggio to chromatic Arpeggio": [
+            "3",
+            "5",
+            "7",
+            "6",
+            "b6"
+        ]
+    },
+    "bonus": {}
+}

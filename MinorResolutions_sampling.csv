@@ -1,0 +1,24 @@
+Cell Name,Start Note,End Note,Notes,Modes,Mode scores,Sample Count
+#9th Enclosure,3,1,"['3', '9', '#9', 'b9', '1']","['7sus4', 'Myxolidian', 'Locrian']","{'Myxolidian': 0.9, 'Locrian': 0.8, 'Dorian': 0.1}",0
+Arpeggio to chromatic Arpeggio,3,b6,"['3', '5', '7', '6', 'b6']","['7sus4', 'Locrian']","{'Locrian': 1.2, 'Myxolidian': 0.5, 'Dorian': 0.5}",0
+Bill Evans Ascending enclosure (from b13),b6,1,"['b6', '7', '#9', 'b9', '1']",['7sus4'],"{'Myxolidian': 0.5, 'Dorian': 0.0, 'Locrian': 0.0}",0
+Bill Evans enclosure (from #9),#9,1,"['#9', 'b9', 'b6', '7', '1']",['7sus4'],"{'Myxolidian': 0.5, 'Dorian': 0.0, 'Locrian': 0.0}",0
+Bill Evans variation (from #9),#9,1,"['#9', 'b9', 'b6', '3', '1']",['7sus4'],"{'Myxolidian': 0.5, 'Dorian': 0.0, 'Locrian': 0.0}",0
+Dominant Diminished Enclosure of min-3rd,1,b6,"['1', '7', '6', '5', 'b6']",['7sus4'],"{'Myxolidian': 0.5, 'Dorian': 0.1, 'Locrian': 0.0}",0
+Dominant Enclosure from 3rd,3,1,"['3', 'b9', '7', 'maj7', '1']","['7sus4', 'Locrian', 'Myxolidian']","{'Locrian': 1.2, 'Myxolidian': 1.1, 'Dorian': 0.5}",0
+Dominant b9 Arpeggio from 3rd,3,1,"['3', '5', '7', 'b9', '1']","['7sus4', 'Locrian', 'Myxolidian']","{'Locrian': 1.2, 'Myxolidian': 1.1, 'Dorian': 0.5}",0
+Dominant b9 scale from 3rd,3,b6,"['3', 'b9', '1', '7', 'b6']","['7sus4', 'Myxolidian', 'Locrian']","{'Myxolidian': 0.9, 'Locrian': 0.8, 'Dorian': 0.1}",0
+Early b9/#9 Approach (start b9),b9,b6,"['b9', '#9', '1', '7', 'b6']",['7sus4'],"{'Myxolidian': 0.5, 'Dorian': 0.0, 'Locrian': 0.0}",0
+Fully Altered Hank Mobley,3,1,"['3', 'b6', '#9', 'b9', '1']","['7sus4', 'Myxolidian', 'Locrian']","{'Myxolidian': 0.9, 'Locrian': 0.8, 'Dorian': 0.1}",0
+Hidden Augmented Triad,1,5,"['1', 'b6', '3', '1', '5']","['7sus4', 'Locrian', 'Myxolidian', 'Dorian']","{'Locrian': 1.4, 'Myxolidian': 1.2, 'Dorian': 0.6}",0
+Hidden Augmented Triad pivot at 5th,5,5,"['5', 'b6', '3', '1', '5']","['7sus4', 'Locrian', 'Dorian', 'Myxolidian']","{'Locrian': 2.0, 'Dorian': 1.1, 'Myxolidian': 0.9}",0
+Hidden Augmented Triad pivot at 7th,7,5,"['7', 'b6', '3', '1', '5']","['7sus4', 'Locrian', 'Dorian', 'Myxolidian']","{'Locrian': 1.8, 'Dorian': 1.0, 'Myxolidian': 0.8}",0
+Hidden Fully Altered reverse Minor Coltrane (from b13),b6,1,"['b6', '3', '#9', 'b9', '1']",['7sus4'],"{'Myxolidian': 0.5, 'Dorian': 0.0, 'Locrian': 0.0}",0
+Hidden Half Diminished Chord (from b13),b6,1,"['b6', '3', 'b9', '7', '1']",['7sus4'],"{'Myxolidian': 0.5, 'Dorian': 0.0, 'Locrian': 0.0}",0
+Hidden Minor triad pivot at 5th,5,1,"['5', 'b6', '3', 'b9', '1']","['7sus4', 'Locrian', 'Myxolidian', 'Dorian']","{'Locrian': 1.4, 'Myxolidian': 1.2, 'Dorian': 0.6}",0
+Hidden Minor triad pivot at 7th,7,1,"['7', 'b6', '3', 'b9', '1']","['7sus4', 'Locrian', 'Myxolidian']","{'Locrian': 1.2, 'Myxolidian': 1.1, 'Dorian': 0.5}",0
+Hidden min-maj7 Chord,1,1,"['1', 'b6', '3', 'b9', '1']","['7sus4', 'Myxolidian', 'Locrian']","{'Myxolidian': 1.5, 'Locrian': 0.8, 'Dorian': 0.1}",0
+Octave Displaced Dominant Enclosure,3,1,"['3', 'b9', '7', 'maj7', '1']","['7sus4', 'Locrian', 'Myxolidian']","{'Locrian': 1.2, 'Myxolidian': 1.1, 'Dorian': 0.5}",0
+Octave Displaced Dominant b9 scale,3,b6,"['3', 'b9', '1', '7', 'b6']","['7sus4', 'Myxolidian', 'Locrian']","{'Myxolidian': 0.9, 'Locrian': 0.8, 'Dorian': 0.1}",0
+Stan Getz Enclosure of min-3rd,1,b6,"['1', '#11', '5', '6', 'b6']","['7sus4', 'Myxolidian', 'Locrian']","{'Myxolidian': 0.8, 'Locrian': 0.6, 'Dorian': 0.5}",0
+Super Locrian scale (from #9),#9,b6,"['#9', 'b9', '1', '7', 'b6']",['7sus4'],"{'Myxolidian': 0.5, 'Dorian': 0.0, 'Locrian': 0.0}",0

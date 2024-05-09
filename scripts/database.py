@@ -1,6 +1,6 @@
-import pandas as pd
-from scripts.cells.modes import compute_scores
 import streamlit as st
+import pandas as pd
+from scripts.modes.mode_scores import compute_scores
 
 
 def create_data_base(cells, file_name, **kwargs):
@@ -42,6 +42,9 @@ def fetch_and_update_data_base(file_name, cells, **kwargs):
     mode_scores = compute_scores(cells, **kwargs)
     try:
         df_cells = pd.read_csv(file_name)
+        for name in df_cells["Cell Name"].unique():
+            if name not in cells.keys():
+                st.warning("Removing {} from database".format(name))
         rows = []
         for cell_name, notes in cells.items():
             if cell_name in df_cells["Cell Name"].unique():
@@ -50,7 +53,7 @@ def fetch_and_update_data_base(file_name, cells, **kwargs):
                 ].values[0]
             else:
                 count = 0
-                st.success("Adding {} to {} database".format(cell_name, file_name))
+                # st.success("Adding {} to {} database".format(cell_name, file_name))
             row = {
                 "Cell Name": cell_name,
                 "Start Note": notes[0],
