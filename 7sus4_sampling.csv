@@ -1,45 +1,45 @@
 Cell Name,Start Note,End Note,Notes,Modes,Mode scores,Sample Count
-Ascending II Scale,5,9,"['5', '6', '7', '1', '9']","['7sus4', 'Locrian', 'Dorian']","{'Locrian': 1.2, 'Dorian': 1.1, 'Myxolidian': 0.4}",8
-Ascending II-Minor 7th Arpeggio (ending on 3rd),5,3,"['5', '7', '9', '4', '3']","['7sus4', 'Locrian', 'Dorian', 'Myxolidian']","{'Locrian': 1.6, 'Dorian': 0.9, 'Myxolidian': 0.7}",8
-Ascending II-Minor 7th Arpeggio (ending on 6th),5,6,"['5', '7', '9', '4', '6']","['7sus4', 'Dorian', 'Locrian']","{'Dorian': 0.9, 'Locrian': 0.8, 'Myxolidian': 0.3}",5
-Ascending Scale from 7th,7,4,"['7', '1', '9', '3', '4']","['7sus4', 'Dorian', 'Locrian']","{'Dorian': 0.6, 'Locrian': 0.6, 'Myxolidian': 0.1}",3
-Cannonball Adderley Approach,5,9,"['5', '4', '3', '4', '9']","['7sus4', 'Locrian', 'Dorian', 'Myxolidian']","{'Locrian': 1.6, 'Dorian': 0.9, 'Myxolidian': 0.7}",7
-Chromatic Passing Tone Enclosure of II 3rd,6,7,"['6', '7', '1', 'maj7', '7']","['7sus4', 'Myxolidian']","{'Myxolidian': 0.7, 'Dorian': 0.5, 'Locrian': 0.4}",12
-Circle of 5th Approach,#11,3,"['#11', '6', '5', '4', '3']","['7sus4', 'Locrian', 'Myxolidian', 'Dorian']","{'Locrian': 1.4, 'Myxolidian': 0.7, 'Dorian': 0.6}",6
-Coltrane Pattern from 7th (ending on #11),7,#11,"['7', '1', '9', '4', '#11']","['7sus4', 'Dorian', 'Locrian']","{'Dorian': 0.6, 'Locrian': 0.6, 'Myxolidian': 0.1}",5
-Coltrane Pattern from 7th (ending on 3rd),7,3,"['7', '1', '9', '4', '3']","['7sus4', 'Locrian', 'Dorian']","{'Locrian': 1.4, 'Dorian': 0.8, 'Myxolidian': 0.5}",2
-Coltrane Pattern from root,1,7,"['1', '9', '3', '5', '7']","['7sus4', 'Locrian', 'Myxolidian']","{'Locrian': 1.2, 'Myxolidian': 1.1, 'Dorian': 0.5}",9
-Descending Bebop scale from root,1,5,"['1', 'maj7', '7', '6', '5']","['7sus4', 'Locrian', 'Myxolidian', 'Dorian']","{'Locrian': 1.0, 'Myxolidian': 0.9, 'Dorian': 0.9}",11
-Descending Dominant Scale from 3rd,3,6,"['3', '9', '1', '7', '6']","['7sus4', 'Myxolidian', 'Locrian']","{'Myxolidian': 0.9, 'Locrian': 0.8, 'Dorian': 0.2}",11
-Descending Dominant Scale from 5th,5,1,"['5', '4', '3', '2', '1']","['7sus4', 'Locrian', 'Myxolidian', 'Dorian']","{'Locrian': 1.4, 'Myxolidian': 1.2, 'Dorian': 0.6}",7
-Descending Dominant Scale from 7th ending on #11,7,#11,"['7', '6', '5', '4', '#11']","['7sus4', 'Locrian', 'Dorian']","{'Locrian': 1.0, 'Dorian': 0.9, 'Myxolidian': 0.4}",3
-Descending Dominant Scale from 7th ending on 3rd,7,3,"['7', '6', '5', '4', '3']","['7sus4', 'Locrian', 'Dorian', 'Myxolidian']","{'Locrian': 1.8, 'Dorian': 1.0, 'Myxolidian': 0.8}",2
-Descending II Arpeggio from II-5th,9,3,"['9', '7', '5', '4', '3']","['7sus4', 'Locrian', 'Dorian', 'Myxolidian']","{'Locrian': 1.6, 'Dorian': 0.9, 'Myxolidian': 0.7}",4
-Descending II Scale,9,5,"['9', '1', '7', '6', '5']","['7sus4', 'Locrian', 'Dorian']","{'Locrian': 1.2, 'Dorian': 1.1, 'Myxolidian': 0.4}",6
-Dexter Gordon,3,6,"['3', '4', '9', '7', '6']","['7sus4', 'Locrian']","{'Locrian': 1.0, 'Dorian': 0.5, 'Myxolidian': 0.4}",15
-Diatonic Enclosure of 3rd,5,3,"['5', '9', '4', '9', '3']","['7sus4', 'Locrian', 'Myxolidian', 'Dorian']","{'Locrian': 1.4, 'Myxolidian': 0.7, 'Dorian': 0.6}",8
-Diatonic Enclosure to #11,5,#11,"['5', '9', '4', '9', '#11']","['7sus4', 'Locrian']","{'Locrian': 0.6, 'Dorian': 0.5, 'Myxolidian': 0.3}",6
-Diminished-to-Dominant,#11,1,"['#11', '6', '5', '3', '1']","['7sus4', 'Myxolidian', 'Locrian']","{'Myxolidian': 0.8, 'Locrian': 0.6, 'Dorian': 0.5}",4
-Dominant #5 Scale from 6th (Mccoy),6,3,"['6', '#5', '5', '4', '3']","['7sus4', 'Locrian', 'Dorian', 'Myxolidian']","{'Locrian': 1.4, 'Dorian': 0.8, 'Myxolidian': 0.7}",0
-Dominant 9th Arpeggio,3,1,"['3', '5', '7', '9', '1']","['7sus4', 'Locrian', 'Myxolidian']","{'Locrian': 1.2, 'Myxolidian': 1.1, 'Dorian': 0.5}",10
-Dominant Bebop Scale from 3rd,3,7,"['3', '9', '1', 'maj7', '7']","['7sus4', 'Locrian', 'Myxolidian']","{'Locrian': 1.2, 'Myxolidian': 1.1, 'Dorian': 0.5}",8
+Ascending II Scale,5,9,"['5', '6', '7', '1', '9']","['7sus4', 'Dorian', 'Locrian']","{'Dorian': 1.1, 'Locrian': 0.8, 'Myxolidian': 0.4}",8
+Ascending II-Minor 7th Arpeggio (ending on 3rd),5,3,"['5', '7', '9', '4', '3']","['7sus4', 'Locrian', 'Dorian', 'Myxolidian']","{'Locrian': 1.1, 'Dorian': 0.9, 'Myxolidian': 0.7}",8
+Ascending II-Minor 7th Arpeggio (ending on 6th),5,6,"['5', '7', '9', '4', '6']","['7sus4', 'Dorian']","{'Dorian': 0.9, 'Locrian': 0.5, 'Myxolidian': 0.3}",5
+Ascending Scale from 7th,7,4,"['7', '1', '9', '3', '4']","['7sus4', 'Dorian']","{'Dorian': 0.6, 'Locrian': 0.4, 'Myxolidian': 0.1}",3
+Cannonball Adderley Approach,5,9,"['5', '4', '3', '4', '9']","['7sus4', 'Locrian', 'Dorian', 'Myxolidian']","{'Locrian': 1.1, 'Dorian': 0.9, 'Myxolidian': 0.7}",7
+Chromatic Passing Tone Enclosure of II 3rd,6,7,"['6', '7', '1', 'maj7', '7']","['7sus4', 'Myxolidian']","{'Myxolidian': 0.7, 'Dorian': 0.5, 'Locrian': 0.3}",12
+Circle of 5th Approach,#11,3,"['#11', '6', '5', '4', '3']","['7sus4', 'Locrian', 'Myxolidian', 'Dorian']","{'Locrian': 0.9, 'Myxolidian': 0.7, 'Dorian': 0.6}",6
+Coltrane Pattern from 7th (ending on #11),7,#11,"['7', '1', '9', '4', '#11']","['7sus4', 'Dorian']","{'Dorian': 0.6, 'Locrian': 0.4, 'Myxolidian': 0.1}",5
+Coltrane Pattern from 7th (ending on 3rd),7,3,"['7', '1', '9', '4', '3']","['7sus4', 'Locrian', 'Dorian']","{'Locrian': 0.9, 'Dorian': 0.8, 'Myxolidian': 0.5}",2
+Coltrane Pattern from root,1,7,"['1', '9', '3', '5', '7']","['7sus4', 'Myxolidian', 'Locrian']","{'Myxolidian': 1.1, 'Locrian': 0.8, 'Dorian': 0.5}",9
+Descending Bebop scale from root,1,5,"['1', 'maj7', '7', '6', '5']","['7sus4', 'Myxolidian', 'Dorian', 'Locrian']","{'Myxolidian': 0.9, 'Dorian': 0.9, 'Locrian': 0.7}",11
+Descending Dominant Scale from 3rd,3,6,"['3', '9', '1', '7', '6']","['7sus4', 'Myxolidian']","{'Myxolidian': 0.9, 'Locrian': 0.5, 'Dorian': 0.2}",11
+Descending Dominant Scale from 5th,5,1,"['5', '4', '3', '2', '1']","['7sus4', 'Myxolidian', 'Locrian', 'Dorian']","{'Myxolidian': 1.2, 'Locrian': 0.9, 'Dorian': 0.6}",7
+Descending Dominant Scale from 7th ending on #11,7,#11,"['7', '6', '5', '4', '#11']","['7sus4', 'Dorian', 'Locrian']","{'Dorian': 0.9, 'Locrian': 0.7, 'Myxolidian': 0.4}",3
+Descending Dominant Scale from 7th ending on 3rd,7,3,"['7', '6', '5', '4', '3']","['7sus4', 'Locrian', 'Dorian', 'Myxolidian']","{'Locrian': 1.2, 'Dorian': 1.0, 'Myxolidian': 0.8}",2
+Descending II Arpeggio from II-5th,9,3,"['9', '7', '5', '4', '3']","['7sus4', 'Locrian', 'Dorian', 'Myxolidian']","{'Locrian': 1.1, 'Dorian': 0.9, 'Myxolidian': 0.7}",4
+Descending II Scale,9,5,"['9', '1', '7', '6', '5']","['7sus4', 'Dorian', 'Locrian']","{'Dorian': 1.1, 'Locrian': 0.8, 'Myxolidian': 0.4}",6
+Dexter Gordon,3,6,"['3', '4', '9', '7', '6']","['7sus4', 'Locrian']","{'Locrian': 0.7, 'Dorian': 0.5, 'Myxolidian': 0.4}",15
+Diatonic Enclosure of 3rd,5,3,"['5', '9', '4', '9', '3']","['7sus4', 'Locrian', 'Myxolidian', 'Dorian']","{'Locrian': 0.9, 'Myxolidian': 0.7, 'Dorian': 0.6}",8
+Diatonic Enclosure to #11,5,#11,"['5', '9', '4', '9', '#11']",['7sus4'],"{'Dorian': 0.5, 'Locrian': 0.4, 'Myxolidian': 0.3}",6
+Diminished-to-Dominant,#11,1,"['#11', '6', '5', '3', '1']","['7sus4', 'Myxolidian']","{'Myxolidian': 0.8, 'Dorian': 0.5, 'Locrian': 0.4}",4
+Dominant #5 Scale from 6th (Mccoy),6,3,"['6', '#5', '5', '4', '3']","['7sus4', 'Locrian', 'Dorian', 'Myxolidian']","{'Locrian': 0.9, 'Dorian': 0.8, 'Myxolidian': 0.7}",0
+Dominant 9th Arpeggio,3,1,"['3', '5', '7', '9', '1']","['7sus4', 'Myxolidian', 'Locrian']","{'Myxolidian': 1.1, 'Locrian': 0.8, 'Dorian': 0.5}",10
+Dominant Bebop Scale from 3rd,3,7,"['3', '9', '1', 'maj7', '7']","['7sus4', 'Myxolidian', 'Locrian']","{'Myxolidian': 1.1, 'Locrian': 0.8, 'Dorian': 0.5}",8
 Dominant Turn,6,1,"['6', '5', '#11', '5', '1']",['7sus4'],"{'Myxolidian': 0.5, 'Dorian': 0.1, 'Locrian': 0.0}",12
-Dominant arperggio to 13th (Mccoy),3,6,"['3', '5', '7', '1', '6']","['7sus4', 'Locrian', 'Dorian']","{'Locrian': 1.2, 'Dorian': 0.6, 'Myxolidian': 0.5}",0
-Farao,#11,3,"['#11', '9', '4', '9', '3']","['7sus4', 'Locrian']","{'Locrian': 0.8, 'Myxolidian': 0.4, 'Dorian': 0.1}",0
-Freddie Hubbard,9,1,"['9', '4', '3', '9', '1']","['7sus4', 'Locrian', 'Myxolidian']","{'Locrian': 1.0, 'Myxolidian': 0.9, 'Dorian': 0.4}",6
-George Coleman minor 7,6,3,"['6', '5', '9', '4', '3']","['7sus4', 'Locrian']","{'Locrian': 1.0, 'Dorian': 0.5, 'Myxolidian': 0.4}",11
-Hank Mobley (Mccoy),7,1,"['7', '9', '6', '5', '1']","['7sus4', 'Myxolidian']","{'Myxolidian': 0.7, 'Dorian': 0.5, 'Locrian': 0.4}",0
-Hidden Ideal maj7 Arpeggio to 13th (Mccoy),6,6,"['6', '7', '9', '4', '6']",['7sus4'],"{'Dorian': 0.5, 'Locrian': 0.2, 'Myxolidian': 0.0}",0
-Johnny Griffin Enclosure of 5th (Mccoy),9,5,"['9', '4', '#11', '6', '5']","['7sus4', 'Dorian', 'Locrian']","{'Dorian': 0.8, 'Locrian': 0.8, 'Myxolidian': 0.3}",1
-Lee Morgan Dominant (Mccoy),1,6,"['1', 'maj7', '7', '9', '6']","['7sus4', 'Myxolidian']","{'Myxolidian': 0.7, 'Dorian': 0.5, 'Locrian': 0.4}",0
-Minor Honeysuckle Rose,1,6,"['1', '7', '9', '4', '6']",['7sus4'],"{'Myxolidian': 0.5, 'Dorian': 0.4, 'Locrian': 0.2}",13
-Passing Tone Enclosure,9,3,"['9', '4', '9', '#9', '3']","['7sus4', 'Locrian', 'Dorian']","{'Locrian': 1.2, 'Dorian': 0.6, 'Myxolidian': 0.4}",6
-Perfect Chromatic Enclosure of 5th,4,5,"['4', '#11', '6', '#5', '5']","['7sus4', 'Dorian', 'Locrian']","{'Dorian': 0.6, 'Locrian': 0.6, 'Myxolidian': 0.3}",2
+Dominant arperggio to 13th (Mccoy),3,6,"['3', '5', '7', '1', '6']","['7sus4', 'Locrian', 'Dorian']","{'Locrian': 0.8, 'Dorian': 0.6, 'Myxolidian': 0.5}",0
+Farao,#11,3,"['#11', '9', '4', '9', '3']",['7sus4'],"{'Locrian': 0.5, 'Myxolidian': 0.4, 'Dorian': 0.1}",0
+Freddie Hubbard,9,1,"['9', '4', '3', '9', '1']","['7sus4', 'Myxolidian', 'Locrian']","{'Myxolidian': 0.9, 'Locrian': 0.7, 'Dorian': 0.4}",6
+George Coleman minor 7,6,3,"['6', '5', '9', '4', '3']","['7sus4', 'Locrian']","{'Locrian': 0.7, 'Dorian': 0.5, 'Myxolidian': 0.4}",11
+Hank Mobley (Mccoy),7,1,"['7', '9', '6', '5', '1']","['7sus4', 'Myxolidian']","{'Myxolidian': 0.7, 'Dorian': 0.5, 'Locrian': 0.3}",0
+Hidden Ideal maj7 Arpeggio to 13th (Mccoy),6,6,"['6', '7', '9', '4', '6']",['7sus4'],"{'Dorian': 0.5, 'Locrian': 0.1, 'Myxolidian': 0.0}",0
+Johnny Griffin Enclosure of 5th (Mccoy),9,5,"['9', '4', '#11', '6', '5']","['7sus4', 'Dorian']","{'Dorian': 0.8, 'Locrian': 0.5, 'Myxolidian': 0.3}",1
+Lee Morgan Dominant (Mccoy),1,6,"['1', 'maj7', '7', '9', '6']","['7sus4', 'Myxolidian']","{'Myxolidian': 0.7, 'Dorian': 0.5, 'Locrian': 0.3}",0
+Minor Honeysuckle Rose,1,6,"['1', '7', '9', '4', '6']",['7sus4'],"{'Myxolidian': 0.5, 'Dorian': 0.4, 'Locrian': 0.1}",13
+Passing Tone Enclosure,9,3,"['9', '4', '9', '#9', '3']","['7sus4', 'Locrian', 'Dorian']","{'Locrian': 0.8, 'Dorian': 0.6, 'Myxolidian': 0.4}",6
+Perfect Chromatic Enclosure of 5th,4,5,"['4', '#11', '6', '#5', '5']","['7sus4', 'Dorian']","{'Dorian': 0.6, 'Locrian': 0.4, 'Myxolidian': 0.3}",2
 Reverse Coltrane Pattern,4,6,"['4', '9', '1', '7', '6']",['7sus4'],"{'Myxolidian': 0.5, 'Dorian': 0.1, 'Locrian': 0.0}",3
-Reverse George Coleman Dominant from 6th (Mccoy),6,1,"['6', '5', '3', '9', '1']","['7sus4', 'Myxolidian', 'Locrian']","{'Myxolidian': 0.9, 'Locrian': 0.8, 'Dorian': 0.2}",8
-Reverse Minor Coltrane,9,1,"['9', '7', '6', '5', '1']",['7sus4'],"{'Myxolidian': 0.5, 'Dorian': 0.4, 'Locrian': 0.2}",7
+Reverse George Coleman Dominant from 6th (Mccoy),6,1,"['6', '5', '3', '9', '1']","['7sus4', 'Myxolidian']","{'Myxolidian': 0.9, 'Locrian': 0.5, 'Dorian': 0.2}",8
+Reverse Minor Coltrane,9,1,"['9', '7', '6', '5', '1']",['7sus4'],"{'Myxolidian': 0.5, 'Dorian': 0.4, 'Locrian': 0.1}",7
 Sonny Rollins,6,6,"['6', '7', '4', '5', '6']",['7sus4'],"{'Dorian': 0.2, 'Myxolidian': 0.0, 'Locrian': 0.0}",5
-Sonny Stitt Enclosure of II Root,#11,5,"['#11', '6', '#5', '#11', '5']","['7sus4', 'Locrian']","{'Locrian': 0.6, 'Dorian': 0.5, 'Myxolidian': 0.3}",6
-Stan Getz enclosure of II 3rd,9,7,"['9', '#5', '6', '1', '7']","['7sus4', 'Dorian', 'Locrian']","{'Dorian': 0.8, 'Locrian': 0.6, 'Myxolidian': 0.1}",2
-Stan Getz enclosure of II Root starting from 6th (Mccoy),6,5,"['6', '#11', '5', '6', '5']","['7sus4', 'Locrian', 'Dorian']","{'Locrian': 1.2, 'Dorian': 1.1, 'Myxolidian': 0.5}",2
-Stan Getz enclosure of II Root starting from 7th,7,5,"['7', '4', '#11', '6', '5']","['7sus4', 'Locrian', 'Dorian']","{'Locrian': 1.0, 'Dorian': 0.9, 'Myxolidian': 0.4}",0
+Sonny Stitt Enclosure of II Root,#11,5,"['#11', '6', '#5', '#11', '5']",['7sus4'],"{'Dorian': 0.5, 'Locrian': 0.4, 'Myxolidian': 0.3}",6
+Stan Getz enclosure of II 3rd,9,7,"['9', '#5', '6', '1', '7']","['7sus4', 'Dorian']","{'Dorian': 0.8, 'Locrian': 0.4, 'Myxolidian': 0.1}",2
+Stan Getz enclosure of II Root starting from 6th (Mccoy),6,5,"['6', '#11', '5', '6', '5']","['7sus4', 'Dorian', 'Locrian']","{'Dorian': 1.1, 'Locrian': 0.8, 'Myxolidian': 0.5}",2
+Stan Getz enclosure of II Root starting from 7th,7,5,"['7', '4', '#11', '6', '5']","['7sus4', 'Dorian', 'Locrian']","{'Dorian': 0.9, 'Locrian': 0.7, 'Myxolidian': 0.4}",0

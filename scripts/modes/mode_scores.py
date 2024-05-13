@@ -28,7 +28,7 @@ def compute_scores(cells, majchord=False):
             # Average score per cell = average score per note * 3
             score["Myxolidian"] = round(myxolidian_score / 7.5, 1)
             score["Dorian"] = round(dorian_score / 8, 1)
-            score["Locrian"] = round(locrian_score / 5.0, 1)
+            score["Locrian"] = round(locrian_score / 7.5, 1)
             score = dict(sorted(score.items(), key=lambda item: item[1], reverse=True))
             # Determine the mode based on higher score
             modes = ["7sus4"]

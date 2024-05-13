@@ -105,14 +105,15 @@ with c1:
             "Select the last connecting note (optional) ",
             list(tmp_df["Start Note"].unique()),
             index=list(tmp_df["Start Note"].unique()).index(
-                random.choice(list(tmp_df["Start Note"].unique()))
+                st.session_state.get(
+                    "ending_note", random.choice(list(tmp_df["Start Note"].unique()))
+                )
             ),
         )
     else:
         st.session_state.ending_note = None
     st.write("Melodic Lines sampled according to the following cells : ", sample_path)
-    # st.write(st.session_state.ending_note)
-
+    st.write("Ending note for pivot :", st.session_state.ending_note)
 
 if st.button("Generate melodic line", type="primary"):
     st.session_state.melodic_line, st.session_state.note_representations = (
@@ -135,9 +136,10 @@ if st.button("Generate melodic line", type="primary"):
         c1.write(f"##### :blue[{mode}]")
         c2.write(f"##### {name}")
         c3.write(join_notes(notes))
+    st.session_state.tmp = True
 
 st.session_state.grade = st.number_input(
-    "How good is it?", min_value=1, max_value=5, value=5
+    "How good was it?", min_value=1, max_value=5, value=5
 )
 if st.session_state.get("tmp"):
     # Prepare the session details

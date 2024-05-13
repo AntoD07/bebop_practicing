@@ -226,6 +226,7 @@ def sample_line_from_path_with_connecting_note(
                 df_cells = df_cells[
                     df_cells["Start Note"].astype(str) == required_connecting_note
                 ]
+                st.write(df_cells)
             final_cell = df_cells.sample(
                 weights=(1 / (df_cells["Sample Count"] + 1)), n=1
             ).iloc[0]
