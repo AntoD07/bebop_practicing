@@ -5,98 +5,98 @@
             "b6(lower)",
             "#9(higher)",
             "b9",
-            "1=5"
+            "1"
         ],
         "b13 Enclosure (from 13th)": [
             "6",
             "5",
             "b6",
             "3",
-            "5=1"
+            "1"
         ],
         "Bill Evans enclosure (from #9)": [
             "9",
             "b9",
             "b6",
             "7",
-            "1=5"
+            "1"
         ],
         "Bill Evans variation (from #9)": [
             "9",
             "b9",
             "b6",
             "3",
-            "1=5"
+            "1"
         ],
         "Bill Evans Ascending enclosure (from b13)": [
             "6",
             "7",
             "#9",
             "b9",
-            "1=5"
+            "1"
         ],
         "Descending Dominant Arpeggio": [
             "5",
             "3",
             "1",
             "7",
-            "6=3"
+            "6"
         ],
         "Descending Dominant scale from 5th": [
             "5",
             "4",
             "3",
-            "9",
-            "1=5"
+            "b9",
+            "1"
         ],
         "Diminished to dominant": [
             "#11",
             "6",
             "5",
             "3",
-            "1=5"
+            "1"
         ],
         "Dominant Scale from 3rd": [
             "3",
             "9",
             "1",
             "7",
-            "6=3"
+            "6"
         ],
         "Dominant b9 Arpeggio from 3rd": [
             "3",
             "5",
             "7",
             "b9",
-            "1=5"
+            "1"
         ],
         "Dominant Turn": [
             "6",
             "5",
             "#11",
             "5",
-            "1=5"
+            "1"
         ],
         "Early b9/#9 Approach (start b9)": [
             "9",
             "#9",
             "1",
             "7",
-            "6=3"
+            "6"
         ],
         "Lee Morgan Dominant": [
             "1",
             "maj7",
             "7",
             "9",
-            "6=3"
+            "6"
         ],
         "Late #9/b9 approach": [
             "1",
             "7",
             "#9",
             "b9",
-            "1=5"
+            "1"
         ],
         "Full Altered Hank Mobley": [
             "3",
@@ -110,28 +110,28 @@
             "b6",
             "3",
             "1",
-            "5=9"
+            "5"
         ],
         "Hidden Augmented Triad pivot at 5th": [
             "5",
             "b6",
             "3",
             "1",
-            "5=9"
+            "5"
         ],
         "Hidden Augmented Triad pivot at 7th": [
             "7",
             "b6",
             "3",
             "1",
-            "5=9"
+            "5"
         ],
         "Hidden Augmented Triad pivot at 13th": [
             "6",
             "b6",
             "3",
             "1",
-            "5=9"
+            "5"
         ],
         "Hidden Fully Altered reverse Minor Coltrane (from b13)": [
             "6",
@@ -140,47 +140,47 @@
             "b9",
             "1"
         ],
-        "Hidden Half Diminished Chord (from b13)": [
+        "Hidden Half Diminished Chord (from b13) Farao": [
             "6",
             "3",
             "b9",
             "7",
-            "6=3"
+            "6"
         ],
         "Hidden Minor triad pivot at 5th": [
             "5",
             "b6",
             "3",
             "b9",
-            "1=5"
+            "1"
         ],
         "Hidden Minor triad pivot at 7th": [
             "7",
             "b6",
             "3",
             "b9",
-            "1=5"
+            "1"
         ],
         "Hidden Minor triad pivot at 13th": [
             "6",
             "b6",
             "3",
             "b9",
-            "1=5"
+            "1"
         ],
         "Octave displaced Dominant b9 from 3rd": [
             "3",
             "b9(higher)",
             "1",
             "7",
-            "6=3"
+            "6"
         ],
         "Super Locrian scale (from #9)": [
             "9",
             "b9",
             "1",
             "7",
-            "6=3"
+            "6"
         ]
     },
     "bonus": {
@@ -189,14 +189,14 @@
             "b9",
             "1",
             "7",
-            "6=3"
+            "6"
         ],
         "Dominant enclosure": [
             "3",
             "b2",
             "7",
             "maj7",
-            "1=5"
+            "1"
         ],
         "Octave Displaced dominant enclosure": [
             "3",

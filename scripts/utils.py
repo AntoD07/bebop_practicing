@@ -1,3 +1,5 @@
+import pandas as pd
+
 import streamlit as st
 import json
 import datetime
@@ -70,3 +72,20 @@ def get_or_update_practice_details():
             json.dump(practice_details, file)
 
     return practice_details["key"], practice_details["position"]
+
+
+def save_practice_session(details, file_path="practice_sessions.csv"):
+    """
+    Appends practice session details to a CSV file.
+    Parameters:
+    - details: A dictionary containing the session details (date, chord type, pivot note, tempo, grade).
+    - file_path: Path to the CSV file where session details are saved.
+    """
+    # Convert the details dictionary to a DataFrame
+    df = pd.DataFrame([details])
+
+    # Try to append to the file if it exists, otherwise create a new file
+    try:
+        df.to_csv(file_path, mode="a", index=False)
+    except FileNotFoundError:
+        df.to_csv(file_path, mode="w", header=True, index=False)

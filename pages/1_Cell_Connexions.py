@@ -83,26 +83,6 @@ with c1:
         st.session_state.loc_2_dom1,
         st.session_state.dom_to_minor1,
     )
-    # st.write(df_cell_1["End Note"].unique())
-    # st.write(mapped_names_1)
-    # st.write(mapping_1)
-
-    # all_cells_1, _, _ = get_all_cells(
-    #     st.session_state.chord1, st.session_state.include_bonus
-    # )
-    # df_cells_1 = fetch_and_update_data_base(
-    #     "{}_sampling.csv".format(st.session_state.chord1),
-    #     all_cells_1,
-    #     majchord=st.session_state.chord1 == "Maj7",
-    # )
-
-    # if st.session_state.mode_filter and (
-    #     st.session_state.chord1 in ["Dorian", "Locrian", "Myxolidian"]
-    # ):
-    #     df_cells_1 = df_cells_1[
-    #         df_cells_1["Modes"].apply(lambda x: st.session_state.chord1 in x)
-    #     ]
-
 
 with c2:
     st.session_state.chord2 = st.selectbox(
@@ -163,12 +143,6 @@ st.subheader("", divider="red")
 st.session_state.tone_modified = st.selectbox(
     "Select a pivot note (starting second cell)",
     list(mapped_names_2),
-    # index=list(mapped_names_2).index(
-    #     st.session_state.get(
-    #         "tone_modified",
-    #         random.choice(list(mapped_names_2)),
-    #     )
-    # ),
 )
 
 
@@ -188,12 +162,7 @@ st.subheader(
         st.session_state.tone_modified, len(combinations)
     ),
 )
-# translate_sus4_to_other_mode,
-# translate_loc_to_dominant,
-# map_loc_to_dom_notes,
-# map_dom_to_minor,
-# translate_note_cells,
-# loc_to_dom_mapping,
+
 if st.session_state.permute1 and (st.session_state.chord1 in ["Dorian", "Locrian"]):
     ending_cells = translate_sus4_to_other_mode(ending_cells, st.session_state.chord1)
     if st.session_state.chord1 == "Locrian" and st.session_state.loc_2_dom1:
@@ -219,33 +188,13 @@ with st.expander("Show Cells"):
     for i, cell in ending_cells.reset_index().iterrows():
         n = cell["Cell Name"]
         notes = cell["Notes"]
-        # if st.session_state.permute and (
-        #     st.session_state.chord1 in ["Dorian", "Locrian"]
-        # ):
-        #     notes = translate_note_cells(notes, st.session_state.chord1)
-        #     if st.session_state.chord1 == "Locrian" and st.session_state.loc_2_dom:
-        #         notes = map_loc_to_dom_notes(notes)
-        # if (
-        #     st.session_state.chord1 in ["MinorResolutions", "Locrian"]
-        # ) and st.session_state.dom_to_minor:
-        #     notes = map_dom_to_minor(notes)
+
         c1.write(f"##### {n}")
         c1.write(join_notes(notes))
     for i, cell in starting_cells.reset_index().iterrows():
         n = cell["Cell Name"]
         notes = cell["Notes"]
-        # if st.session_state.permute_2 and (
-        #     st.session_state.chord2 in ["Dorian", "Locrian"]
-        # ):
-        #     # c2.write(notes)
-        #     notes = translate_note_cells(notes, st.session_state.chord2)
-        #     # c2.write(notes)
-        #     if (st.session_state.chord2 == "Locrian") and st.session_state.loc_2_dom_2:
-        #         notes = map_loc_to_dom_notes(notes)
-        # if (
-        #     st.session_state.chord2 in ["MinorResolutions", "Locrian"]
-        # ) and st.session_state.dom_to_minor2:
-        #     notes = map_dom_to_minor(notes)
+
         c2.write(f"##### {n}")
         c2.write(join_notes(notes))
 

@@ -3,7 +3,6 @@ import streamlit as st
 import re
 
 
-@st.cache_data
 def translate_note_cells(note_cells, mode):
     """
     Translates note cells by applying an arithmetic shift and taking modulo 8 to the numeric part of each note,
@@ -50,7 +49,6 @@ def translate_note_cells(note_cells, mode):
     return translated_cells
 
 
-@st.cache_data
 def translate_sus4_to_other_mode(df_cells, mode):
     new_df = df_cells.copy()
     new_df["Notes"] = df_cells["Notes"].apply(translate_note_cells, mode=mode)
@@ -90,7 +88,6 @@ dom_to_min_mapping = {
 }
 
 
-@st.cache_data
 def map_loc_to_dom_notes(note_cells):
     simple_string = False
     if isinstance(note_cells, str):
@@ -106,16 +103,13 @@ def map_loc_to_dom_notes(note_cells):
     return translated_cells
 
 
-@st.cache_data
 def translate_loc_to_dominant(df_cells):
-    new_df = df_cells.copy()
-    new_df["Notes"] = df_cells["Notes"].apply(map_loc_to_dom_notes)
-    new_df["Start Note"] = df_cells["Start Note"].apply(map_loc_to_dom_notes)
-    new_df["End Note"] = df_cells["End Note"].apply(map_loc_to_dom_notes)
-    return new_df
+    df_cells["Notes"] = df_cells["Notes"].apply(map_loc_to_dom_notes)
+    df_cells["Start Note"] = df_cells["Start Note"].apply(map_loc_to_dom_notes)
+    df_cells["End Note"] = df_cells["End Note"].apply(map_loc_to_dom_notes)
+    return df_cells
 
 
-@st.cache_data
 def map_dom_to_minor(note_cells):
     simple_string = False
     if isinstance(note_cells, str):
@@ -131,10 +125,21 @@ def map_dom_to_minor(note_cells):
     return translated_cells
 
 
-@st.cache_data
 def translate_dom_to_minor(df_cells):
     new_df = df_cells.copy()
     new_df["Notes"] = df_cells["Notes"].apply(map_dom_to_minor)
     new_df["Start Note"] = df_cells["Start Note"].apply(map_dom_to_minor)
     new_df["End Note"] = df_cells["End Note"].apply(map_dom_to_minor)
     return new_df
+
+
+def change_note_representation(
+    df_cells, mode, loc_to_dom, dom_to_minor, sus_to_loc_dorian
+):
+    if (mode in ["Dorian", "Locrian"]) and sus_to_loc_dorian:
+        df_cells = translate_sus4_to_other_mode(df_cells, mode)
+    if (mode in ["Locrian"]) and loc_to_dom:
+        df_cells = translate_loc_to_dominant(df_cells)
+    if (mode in ["Locrian", "MinorResolutions"]) and dom_to_minor:
+        df_cells = translate_dom_to_minor(df_cells)
+    return df_cells
