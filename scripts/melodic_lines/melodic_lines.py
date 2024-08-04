@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import random
+import numpy as np
 
 from scripts.load_cells import create_cell_frames
 from scripts.modes.mode_transposition import (
@@ -13,6 +15,8 @@ from scripts.modes.mode_transposition import (
 line_structure_dic = {
     "Maj7": ["Maj7", "Maj7", "Maj7", "Maj7"],
     "7sus4 Infinity Loop": ["7sus4", "7sus4", "7sus4", "7sus4"],
+    "Dorian": ["Dorian", "Dorian", "Dorian", "Dorian"],
+    "Myxolidian": ["Myxolidian", "Myxolidian", "Myxolidian", "Myxolidian"],
     "Short Maj 2-5-1": ["7sus4", "MajorResolutions"],
     "Long Maj 2-5-1": ["7sus4", "7sus4", "7sus4", "MajorResolutions"],
     "Long Maj 2-5-1 with Maj7 ending": [
@@ -180,14 +184,30 @@ def sample_melodic_line_backward_for_251(
     return melodic_line, df
 
 
+def line_structure_mapping(type, length=None):
+    if type not in ["Dorian x Dominant", "Major x Dominant", "Dorian", "Maj7"]:
+        return line_structure_dic[type]
+    elif type == "Dorian":
+        return [random.choice(["Dorian"]) for _ in range(length)]
+    elif type == "Maj7":
+        return [random.choice(["Maj7"]) for _ in range(length)]
+    elif type == "Dorian x Dominant":
+        return [random.choice(["Dorian", "MinorResolutions"]) for _ in range(length)]
+    elif type == "Major x Dominant":
+        return [random.choice(["Maj7", "MajorResolutions"]) for _ in range(length)]
+
+
 def sample_line_from_path_with_connecting_note(
-    mode_list,
+    line_type,
     include_bonus,
     mode_filter,
     loc_to_dom,
     dom_to_minor,
     sus_to_loc_dorian,
-    required_connecting_note,
+    length,
+    movement=None,
+    starting_note=None,
+    ending_note=None,
 ):
     """
     Samples a sequence of cells that connect to each other and include a required connecting note,
@@ -204,11 +224,13 @@ def sample_line_from_path_with_connecting_note(
     """
 
     success = False
+    count = 0
     # Start by the ending cell to take into account the pivot note
-    while not success:
+    while not success and count < 100:
         try:
             melodic_line = []
             note_representations = []
+            mode_list = line_structure_mapping(line_type, length=length)
             df_cells, mapped_notes, mapping = create_cell_frames(
                 mode_list[-1],
                 mode_filter,
@@ -222,24 +244,31 @@ def sample_line_from_path_with_connecting_note(
             df_cells = change_note_representation(
                 df_cells, mode_list[-1], loc_to_dom, dom_to_minor, sus_to_loc_dorian
             )
-            if required_connecting_note is not None:
-                df_cells = df_cells[
-                    df_cells["Start Note"].astype(str) == required_connecting_note
+            if movement is not None:
+                filtered_df = df_cells[
+                    df_cells["Movement"].astype(str).isin(["N", movement])
                 ]
-                st.write(df_cells)
-            final_cell = df_cells.sample(
-                weights=(1 / (df_cells["Sample Count"] + 1)), n=1
-            ).iloc[0]
+                if filtered_df.empty:
+                    st.write("No cells match the movement criteria.")
+                    return None
+                else:
+                    df_cells = filtered_df.reset_index(drop=True)
+                    # st.write("DataFrame after filtering by movement:", df_cells)
+            if ending_note not in ["None", None]:
+                # st.write(ending_note)
+                filtered_df = filtered_df[filtered_df["End Note"] == ending_note]
+            if filtered_df.empty:
+                st.write("No cells match the end note criteria.")
+                return None
+
+            final_cell = df_cells.sample(weights=1 / (df_cells.index + 1), n=1).iloc[0]
+            # final_cell = filtered_df.sample(n=1).iloc[0]
             melodic_line.append(final_cell["Cell Name"])
-            note_representations.append(final_cell["Notes"])
-            df_cells.loc[
-                df_cells["Cell Name"] == final_cell["Cell Name"], "Sample Count"
-            ] += 1
+            note_representations.append(str(final_cell["Notes"]))
 
             # st.write("Last cell df", df_cells)
             # st.write("Last cell sampled", melodic_line)
             # st.write("Last cell notes", note_representations)
-
             # Construct the line backward from the second last cell to the first
             for i, mode in enumerate(mode_list[:-1][::-1]):
                 # st.write(mode)
@@ -254,27 +283,35 @@ def sample_line_from_path_with_connecting_note(
                 )
 
                 df_cells = df_cells.reset_index()
-
+                if movement is not None:
+                    df_cells = df_cells.loc[df_cells["Movement"].isin(["N", movement])]
+                # st.write(df_cells)
                 df_cells = change_note_representation(
                     df_cells, mode, loc_to_dom, dom_to_minor, sus_to_loc_dorian
                 )
-                # st.write(mode)
                 # st.write(df_cells)
+                # st.write(mode)
                 # st.write(note_representations[-1][0])
                 df_cells = df_cells[
-                    df_cells["End Note"].astype(str) == note_representations[-1][0]
+                    df_cells["End Note"].astype(str) == note_representations[-1][2]
                 ]
-                # st.write(df_cells)
-                sampled_cell = df_cells.sample(
-                    weights=(1 / (df_cells["Sample Count"] + 1)), n=1
-                ).iloc[0]
-                melodic_line.append(sampled_cell["Cell Name"])
-                note_representations.append(sampled_cell["Notes"])
-                df_cells.loc[
-                    df_cells["Cell Name"] == sampled_cell["Cell Name"], "Sample Count"
-                ] += 1
+                if i == len(mode_list) - 2:
+                    # st.write("Last cells options", df_cells)
+                    if starting_note not in ["None", None]:
+                        #    st.write(starting_note)
+                        df_cells = df_cells[df_cells["Start Note"] == starting_note]
+                    if df_cells.empty:
+                        st.write("No cells match the start note criteria.")
+                        raise ValueError
 
-                # st.write("Last cell df", df_cells)
+                sampled_cell = df_cells.sample(n=1).iloc[0]
+                # sampled_cell = df_cells.sample(
+                #     weights=1 / (df_cells.index + 1), n=1
+                # ).iloc[0]
+                melodic_line.append(sampled_cell["Cell Name"])
+                note_representations.append(str(sampled_cell["Notes"]))
+
+                # st.write("Sampled cell", sampled_cell["Cell Name"])
                 # st.write("Last cell sampled", melodic_line)
                 # st.write("Last cell notes", note_representations)
 
@@ -282,4 +319,5 @@ def sample_line_from_path_with_connecting_note(
         except ValueError:
             st.write("Sampling melodic line failed, retrying")
             success = False
-    return melodic_line[::-1], note_representations[::-1]
+            count += 1
+    return melodic_line[::-1], note_representations[::-1], mode_list

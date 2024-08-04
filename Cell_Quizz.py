@@ -30,7 +30,6 @@ st.session_state.chord = st.selectbox(
     "Select chord to practice",
     [
         "Maj7",
-        "7sus4",
         "Dorian",
         "Myxolidian",
         "Locrian",
@@ -40,12 +39,6 @@ st.session_state.chord = st.selectbox(
     index=1,
 )
 
-st.session_state.permute = st.checkbox(
-    "Whether to change to translate 7sus4 intervals for other modes", value=True
-)
-st.session_state.mode_filter = st.checkbox(
-    "Whether to filter cells with high mode score", value=False
-)
 if st.session_state.chord == "Locrian":
     st.session_state.loc_2_dominant = st.checkbox(
         "Translate Locrian to Dominant", value=True
@@ -61,18 +54,18 @@ else:
 
 df_cells, _, mapping_1 = create_cell_frames(
     st.session_state.chord,
-    st.session_state.mode_filter,
-    st.session_state.permute,
+    False,
+    False,
     st.session_state.include_bonus,
     "End Note",
     st.session_state.loc_2_dominant,
     st.session_state.dom_to_minor,
 )
 
-if st.session_state.permute and (st.session_state.chord in ["Dorian", "Locrian"]):
-    df_cells = translate_sus4_to_other_mode(df_cells, st.session_state.chord)
-    if st.session_state.chord == "Locrian" and st.session_state.loc_2_dom:
-        df_cells = translate_loc_to_dominant(df_cells)
+# if st.session_state.permute and (st.session_state.chord in ["Dorian", "Locrian"]):
+#     df_cells = translate_sus4_to_other_mode(df_cells, st.session_state.chord)
+#     if st.session_state.chord == "Locrian" and st.session_state.loc_2_dom:
+#         df_cells = translate_loc_to_dominant(df_cells)
 if (
     st.session_state.chord in ["MinorResolutions", "Locrian"]
 ) and st.session_state.dom_to_minor:
@@ -109,9 +102,9 @@ st.session_state.name = st.selectbox(
 )
 input = st.text_input("Cell notes (w.r.t. to the type of chord)")
 c = cell_from_string(input)
-answer = join_notes(df_cells.loc[st.session_state.name, "Notes"])
+answer = df_cells.loc[st.session_state.name]
 with st.expander("See solution"):
-    st.write(answer)
+    st.write(join_notes(answer["Notes"]), answer["Movement"])
 
 # Exercise 1
 st.subheader("", divider="red")
@@ -139,12 +132,14 @@ starting_cells = df_cells.loc[df_cells["Start Note"] == st.session_state.startin
 
 with st.expander("Show Cells"):
     c1, c2 = st.columns((0.5, 0.5))
-    for n in ending_cells.index:
-        c1.write(f"##### {n}")
-        c1.write(join_notes(df_cells.loc[n, "Notes"]))
-    for n in starting_cells.index:
-        c2.write(f"##### {n}")
-        c2.write(join_notes(df_cells.loc[n, "Notes"]))
+    with c1:
+        for n in ending_cells.index:
+            st.write(f"##### {n}")
+            st.write(join_notes(df_cells.loc[n, "Notes"]), df_cells.loc[n, "Movement"])
+    with c2:
+        for n in starting_cells.index:
+            st.write(f"##### {n}")
+            st.write(join_notes(df_cells.loc[n, "Notes"]), df_cells.loc[n, "Movement"])
 
 st.write(
     "## Exercise 1 : Cells starting on {}".format(st.session_state.starting_note),

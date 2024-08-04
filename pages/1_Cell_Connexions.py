@@ -13,6 +13,7 @@ from scripts.modes.mode_transposition import (
     translate_sus4_to_other_mode,
     translate_loc_to_dominant,
     translate_dom_to_minor,
+    translate_dom_to_major,
 )
 
 from scripts.load_cells import create_cell_frames
@@ -29,7 +30,6 @@ st.sidebar.subheader(
 st.session_state.include_bonus = st.sidebar.checkbox(
     "Whether to include bonus cells", value=st.session_state.get("include_bonus", False)
 )
-
 # Use key and position in your Streamlit application
 c1, c2 = st.columns((0.5, 0.5))
 
@@ -38,7 +38,7 @@ with c1:
         "Select first chord to practice",
         [
             "Maj7",
-            "7sus4",
+            #   "7sus4",
             "Dorian",
             "Myxolidian",
             "Locrian",
@@ -47,41 +47,45 @@ with c1:
         ],
         index=[
             "Maj7",
-            "7sus4",
+            # "7sus4",
             "Dorian",
             "Myxolidian",
             "Locrian",
             "MajorResolutions",
             "MinorResolutions",
-        ].index(st.session_state.get("chord1", "7sus4")),
+        ].index(st.session_state.get("chord1", "Dorian")),
     )
-    st.session_state.permute1 = st.checkbox(
-        "Whether to change to translate the intervals for other modes", value=True
-    )
-    st.session_state.mode_filter1 = st.checkbox(
-        "Whether to filter cells with high mode score", value=False
-    )
-    if st.session_state.chord1 == "Locrian":
-        st.session_state.loc_2_dom1 = st.checkbox(
-            "Translate Locrian to Dominant", value=True
-        )
-    else:
-        st.session_state.loc_2_dom1 = False
-    if st.session_state.chord1 in ["MinorResolutions", "Locrian"]:
-        st.session_state.dom_to_minor1 = st.checkbox(
-            "Translate Dominant to Minor-I", value=True
-        )
-    else:
-        st.session_state.dom_to_minor1 = False
+    # st.session_state.permute1 = st.checkbox(
+    #     "Whether to change to translate the intervals for other modes", value=False
+    # )
+    # st.session_state.mode_filter1 = st.checkbox(
+    #     "Whether to filter cells with high mode score", value=False
+    # )
+    # if st.session_state.chord1 == "Locrian":
+    #     st.session_state.loc_2_dom1 = st.checkbox(
+    #         "Translate Locrian to Dominant", value=False
+    #     )
+    # else:
+    #     st.session_state.loc_2_dom1 = False
+    # if st.session_state.chord1 in [
+    #     "MinorResolutions",
+    #     "MajorResolutions",
+    #     "Locrian",
+    # ]:
+    #     st.session_state.dom_to_minor1 = st.checkbox(
+    #         "Translate Dominant to Minor/Major-I", value=False
+    #     )
+    # else:
+    st.session_state.dom_to_minor1 = False
 
     df_cells_1, mapped_names_1, mapping_1 = create_cell_frames(
         st.session_state.chord1,
-        st.session_state.mode_filter1,
-        st.session_state.permute1,
+        False,
+        False,
         st.session_state.include_bonus,
         "End Note",
-        st.session_state.loc_2_dom1,
-        st.session_state.dom_to_minor1,
+        False,
+        False,
     )
 
 with c2:
@@ -104,53 +108,78 @@ with c2:
             "Locrian",
             "MajorResolutions",
             "MinorResolutions",
-        ].index(st.session_state.get("chord2", "7sus4")),
+        ].index(st.session_state.get("chord2", st.session_state.get("chord1"))),
     )
-    st.session_state.permute_2 = st.checkbox(
-        "Whether to change to translate the intervals for other modes ", value=True
-    )
-    st.session_state.mode_filter_2 = st.checkbox(
-        "Whether to filter cells with high mode score ", value=False
-    )
+    # st.session_state.mode_filter_2 = st.checkbox(
+    #     "Whether to filter cells with high mode score ", value=False
+    # )
     # Locrian to dominant
-    if st.session_state.chord2 == "Locrian":
-        st.session_state.loc_2_dom_2 = st.checkbox(
-            "Translate Locrian to Dominant ", value=True
-        )
-    else:
-        st.session_state.loc_2_dom_2 = False
-    # Minor Resolution Cell transposition
-    if st.session_state.chord2 == "MinorResolutions":
-        st.session_state.dom_to_minor2 = st.checkbox(
-            "Translate Dominant to Minor-I ", value=True
-        )
-    else:
-        st.session_state.dom_to_minor2 = False
+    # if st.session_state.chord2 == "Locrian":
+    #     st.session_state.loc_2_dom_2 = st.checkbox(
+    #         "Translate Locrian to Dominant ", value=False
+    #     )
+    # else:
+    #     st.session_state.loc_2_dom_2 = False
+    # # Minor Resolution Cell transposition
+    # if st.session_state.chord2 in [
+    #     "MinorResolutions",
+    #     "MajorResolutions",
+    #     "Myxolidian",
+    # ]:
+    #     st.session_state.dom_to_minor2 = st.checkbox(
+    #         "Translate Dominant to Minor/Major-I ", value=False
+    #     )
+    # else:
+    st.session_state.dom_to_minor2 = False
 
     df_cells_2, mapped_names_2, mapping_2 = create_cell_frames(
         st.session_state.chord2,
-        st.session_state.mode_filter_2,
-        st.session_state.permute_2,
+        False,
+        False,
         st.session_state.include_bonus,
         "Start Note",
-        st.session_state.loc_2_dom_2,
-        st.session_state.dom_to_minor2,
+        False,
+        False,
     )
 
 
 st.subheader("", divider="red")
 
+
 st.session_state.tone_modified = st.selectbox(
     "Select a pivot note (starting second cell)",
-    list(mapped_names_2),
+    set(
+        list(
+            set(mapped_names_2.astype(str)).intersection(
+                set(mapped_names_1.astype(str))
+            )
+        )
+        + list(
+            set(mapped_names_1.astype(str)).intersection(
+                set(mapped_names_2.astype(str))
+            )
+        )
+    ),
 )
 
-
+st.session_state.movement = st.sidebar.selectbox(
+    "Select the line movement (optional) ",
+    [None, "A", "D"],
+    index=[None, "A", "D"].index(st.session_state.get("movement", None)),
+)
 st.session_state.tone = mapping_2[st.session_state.tone_modified]
+if st.session_state.movement is None:
+    movements = ["N", "A", "D"]
+else:
+    movements = ["N", st.session_state.movement]
 
-starting_cells = df_cells_2.loc[df_cells_2["Start Note"] == st.session_state.tone]
+starting_cells = df_cells_2.loc[
+    (df_cells_2["Start Note"] == st.session_state.tone)
+    & df_cells_2["Movement"].astype(str).isin(movements)
+]
 ending_cells = df_cells_1.loc[
-    df_cells_1["End Note"] == mapping_1[st.session_state.tone_modified]
+    (df_cells_1["End Note"] == mapping_1[st.session_state.tone_modified])
+    & df_cells_1["Movement"].astype(str).isin(movements)
 ]
 
 combinations, names = find_combinations_on_pivot_new(
@@ -163,40 +192,51 @@ st.subheader(
     ),
 )
 
-if st.session_state.permute1 and (st.session_state.chord1 in ["Dorian", "Locrian"]):
-    ending_cells = translate_sus4_to_other_mode(ending_cells, st.session_state.chord1)
-    if st.session_state.chord1 == "Locrian" and st.session_state.loc_2_dom1:
-        ending_cells = translate_loc_to_dominant(ending_cells)
-if (
-    st.session_state.chord1 in ["MinorResolutions", "Locrian"]
-) and st.session_state.dom_to_minor1:
-    ending_cells = translate_dom_to_minor(ending_cells)
+# if st.session_state.permute1 and (st.session_state.chord1 in ["Dorian", "Locrian"]):
+#     ending_cells = translate_sus4_to_other_mode(ending_cells, st.session_state.chord1)
+#     if st.session_state.chord1 == "Locrian" and st.session_state.loc_2_dom1:
+#         ending_cells = translate_loc_to_dominant(ending_cells)
+# if (
+#     st.session_state.chord1 in ["MinorResolutions", "Locrian"]
+# ) and st.session_state.dom_to_minor1:
+#     ending_cells = translate_dom_to_minor(ending_cells)
+# elif (
+#     st.session_state.chord1 in ["Myxolidian", "MajorResolutions"]
+# ) and st.session_state.dom_to_minor1:
+#     ending_cells = translate_dom_to_major(ending_cells)
 
-if st.session_state.permute_2 and (st.session_state.chord2 in ["Dorian", "Locrian"]):
-    starting_cells = translate_sus4_to_other_mode(
-        starting_cells, st.session_state.chord2
-    )
-    if st.session_state.chord2 == "Locrian" and st.session_state.loc_2_dom_2:
-        starting_cells = translate_loc_to_dominant(starting_cells)
-if (
-    st.session_state.chord2 in ["MinorResolutions", "Locrian"]
-) and st.session_state.dom_to_minor2:
-    starting_cells = translate_dom_to_minor(starting_cells)
+# if st.session_state.permute_2 and (st.session_state.chord2 in ["Dorian", "Locrian"]):
+#     starting_cells = translate_sus4_to_other_mode(
+#         starting_cells, st.session_state.chord2
+#     )
+#     if st.session_state.chord2 == "Locrian" and st.session_state.loc_2_dom_2:
+#         starting_cells = translate_loc_to_dominant(starting_cells)
+# if (
+#     st.session_state.chord2 in ["MinorResolutions", "Locrian"]
+# ) and st.session_state.dom_to_minor2:
+#     starting_cells = translate_dom_to_minor(starting_cells)
+# elif (
+#     st.session_state.chord2 in ["Myxolidian", "MajorResolutions"]
+# ) and st.session_state.dom_to_minor2:
+#     starting_cells = translate_dom_to_major(starting_cells)
 
 with st.expander("Show Cells"):
     c1, c2 = st.columns((0.5, 0.5))
     for i, cell in ending_cells.reset_index().iterrows():
         n = cell["Cell Name"]
         notes = cell["Notes"]
+        mvt = cell["Movement"]
 
         c1.write(f"##### {n}")
-        c1.write(join_notes(notes))
+        c1.write(join_notes(notes) + "  " + mvt)
+
     for i, cell in starting_cells.reset_index().iterrows():
         n = cell["Cell Name"]
         notes = cell["Notes"]
+        mvt = cell["Movement"]
 
         c2.write(f"##### {n}")
-        c2.write(join_notes(notes))
+        c2.write(join_notes(notes) + "  " + mvt)
 
 st.session_state.tempo = st.number_input(
     "Metronome [Bpms] [link](https://www.imusic-school.com/app/v3sap/src/index.html#/access/metronome)",

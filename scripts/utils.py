@@ -1,5 +1,5 @@
 import pandas as pd
-
+import ast
 import streamlit as st
 import json
 import datetime
@@ -21,7 +21,13 @@ def names_to_notes(all_cells, names):
 
 @st.cache_data
 def join_notes(cell):
-    return "-".join(cell)
+    # Extract numbers using regular expression
+    try:
+        notes_list = ast.literal_eval(cell)
+    except ValueError:
+        notes_list = cell
+    # Join the extracted numbers with a hyphen
+    return "-".join(notes_list)
 
 
 @st.cache_data
@@ -86,6 +92,6 @@ def save_practice_session(details, file_path="practice_sessions.csv"):
 
     # Try to append to the file if it exists, otherwise create a new file
     try:
-        df.to_csv(file_path, mode="a", index=False)
+        df.to_csv(file_path, mode="a", index=False, header=False)
     except FileNotFoundError:
         df.to_csv(file_path, mode="w", header=True, index=False)

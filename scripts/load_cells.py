@@ -2,11 +2,12 @@ import streamlit as st
 import json
 
 
-from scripts.database import fetch_and_update_data_base
+from scripts.database import fetch_data_base
 from scripts.modes.mode_transposition import (
     translate_sus4_to_other_mode,
     translate_loc_to_dominant,
     translate_dom_to_minor,
+    translate_dom_to_major,
 )
 
 
@@ -78,12 +79,14 @@ def create_cell_frames(
     loc_to_dominant=False,
     dom_to_minor=False,
 ):
-    all_cells, _, _ = get_all_cells(chord, bonus)
-    df_cells = fetch_and_update_data_base(
+    df_cells = fetch_data_base(
         "{}_sampling.csv".format(chord),
-        all_cells,
-        majchord=chord == "Maj7",
+        bonus=bonus,
+        # all_cells,
+        # majchord=chord == "Maj7",
     )
+    df_cells["Start Note"] = df_cells["Start Note"].astype(str)
+    df_cells["End Note"] = df_cells["End Note"].astype(str)
 
     if mode_filter and (chord in ["Dorian", "Locrian", "Myxolidian"]):
         df_cells = df_cells[df_cells["Modes"].apply(lambda x: chord in x)]
@@ -121,6 +124,26 @@ def create_cell_frames(
         if dom_to_minor:
 
             df_cells_tmp_for_pivot_note_2 = translate_dom_to_minor(
+                df_cells_tmp_for_pivot_note
+            )
+        else:
+            df_cells_tmp_for_pivot_note_2 = df_cells_tmp_for_pivot_note
+        chord_tones_mapping = dict(
+            zip(
+                df_cells_tmp_for_pivot_note_2[field].unique(),
+                df_cells[field].unique(),
+            )
+        )
+
+        return (
+            df_cells,
+            df_cells_tmp_for_pivot_note_2[field].unique(),
+            chord_tones_mapping,
+        )
+    elif chord in ["MajorResolutions", "Myxolidian"]:
+        if dom_to_minor:
+
+            df_cells_tmp_for_pivot_note_2 = translate_dom_to_major(
                 df_cells_tmp_for_pivot_note
             )
         else:

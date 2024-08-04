@@ -1,4 +1,6 @@
 import streamlit as st
+import ast
+import pandas as pd
 import datetime
 import time
 
@@ -13,10 +15,11 @@ from scripts.melodic_lines.melodic_lines import (
     sample_melodic_line_with_connecting_note,
     sample_melodic_line_backward_for_251,
     sample_line_from_path_with_connecting_note,
+    line_structure_mapping,
 )
 from scripts.modes.mode_transposition import change_note_representation
 
-from scripts.database import fetch_and_update_data_base
+from scripts.database import fetch_data_base
 
 
 import random
@@ -38,17 +41,20 @@ st.session_state.include_bonus = st.sidebar.checkbox(
 )
 
 st.session_state.sus_to_loc_dorian = c2.checkbox(
-    "Whether to change to translate the intervals for other modes", value=True
-)
-st.session_state.mode_filter = c2.checkbox(
-    "Whether to filter cells with high mode score", value=False
+    "Whether to change to translate the intervals for other modes", value=False
 )
 st.session_state.loc_to_dom = c2.checkbox(
-    "Whether to translate Locrian cells to Dominant", value=True
+    "Whether to translate Locrian cells to Dominant", value=False
 )
 
 st.session_state.dom_to_minor = c2.checkbox(
-    "Whether to translate Dominant and Locrian cells to Minor-I", value=True
+    "Whether to translate Dominant and Locrian cells to Minor/Major-I", value=False
+)
+st.session_state.length = st.sidebar.number_input(
+    "Select the line length (depends on the line type) ",
+    min_value=2,
+    max_value=6,
+    value=4,
 )
 with c1:
     st.session_state.line_type = st.selectbox(
@@ -56,6 +62,8 @@ with c1:
         options=[
             "Maj7",
             "7sus4 Infinity Loop",
+            "Dorian",
+            "Myxolidian",
             "Short Maj 2-5-1",
             "Long Maj 2-5-1",
             "Long Maj 2-5-1 with Maj7 ending",
@@ -64,10 +72,14 @@ with c1:
             "Long Minor 2-5-1 with Dorian ending",
             "Double resolution",
             "Dorian and Dominant 2-cells alternated",
+            "Dorian x Dominant",
+            "Major x Dominant",
         ],
         index=[
             "Maj7",
             "7sus4 Infinity Loop",
+            "Dorian",
+            "Myxolidian",
             "Short Maj 2-5-1",
             "Long Maj 2-5-1",
             "Long Maj 2-5-1 with Maj7 ending",
@@ -76,56 +88,68 @@ with c1:
             "Long Minor 2-5-1 with Dorian ending",
             "Double resolution",
             "Dorian and Dominant 2-cells alternated",
-        ].index(st.session_state.get("line_type", "7sus4 Infinity Loop")),
+            "Dorian x Dominant",
+            "Major x Dominant",
+        ].index(st.session_state.get("line_type", "Dorian")),
     )
 
-    sample_path = line_structure_dic[st.session_state.line_type]
+    sample_path = line_structure_mapping(
+        st.session_state.line_type, st.session_state.length
+    )
     if st.session_state.line_type not in [
         "Long Minor 2-5-1 with Dorian ending",
         "Long Maj 2-5-1 with Maj7 ending",
         "Dorian and Dominant 2-cells alternated",
     ]:
-        tmp_df, _, _ = create_cell_frames(
-            sample_path[-1],
-            st.session_state.mode_filter,
-            st.session_state.sus_to_loc_dorian,
-            st.session_state.include_bonus,
-            field="Start Note",
-            loc_to_dominant=st.session_state.loc_to_dom,
-            dom_to_minor=st.session_state.dom_to_minor,
+        # tmp_df, _, _ = create_cell_frames(
+        #     sample_path[-1],
+        #     False,
+        #     st.session_state.sus_to_loc_dorian,
+        #     st.session_state.include_bonus,
+        #     field="Start Note",
+        #     loc_to_dominant=st.session_state.loc_to_dom,
+        #     dom_to_minor=st.session_state.dom_to_minor,
+        # )
+        # tmp_df = change_note_representation(
+        #     tmp_df,
+        #     sample_path[-1],
+        #     st.session_state.sus_to_loc_dorian,
+        #     st.session_state.loc_to_dom,
+        #     st.session_state.dom_to_minor,
+        # )
+        st.session_state.starting_note = st.text_input(
+            "Select the last note (optional) ",
+            st.session_state.get("starting_note", None),
         )
-        tmp_df = change_note_representation(
-            tmp_df,
-            sample_path[-1],
-            st.session_state.sus_to_loc_dorian,
-            st.session_state.loc_to_dom,
-            st.session_state.dom_to_minor,
+        st.session_state.ending_note = st.text_input(
+            "Select the first note (optional) ",
+            st.session_state.get("ending_note", None),
         )
-        st.session_state.ending_note = st.selectbox(
-            "Select the last connecting note (optional) ",
-            list(tmp_df["Start Note"].unique()),
-            index=list(tmp_df["Start Note"].unique()).index(
-                st.session_state.get(
-                    "ending_note", random.choice(list(tmp_df["Start Note"].unique()))
-                )
-            ),
-        )
-    else:
-        st.session_state.ending_note = None
+
+    st.session_state.movement = st.sidebar.selectbox(
+        "Select the line movement (optional) ",
+        [None, "A", "D"],
+        index=[None, "A", "D"].index(st.session_state.get("movement", None)),
+    )
+
     st.write("Melodic Lines sampled according to the following cells : ", sample_path)
-    st.write("Ending note for pivot :", st.session_state.ending_note)
 
 if st.button("Generate melodic line", type="primary"):
-    st.session_state.melodic_line, st.session_state.note_representations = (
-        sample_line_from_path_with_connecting_note(
-            sample_path,
-            st.session_state.include_bonus,
-            st.session_state.mode_filter,
-            st.session_state.loc_to_dom,
-            st.session_state.dom_to_minor,
-            st.session_state.sus_to_loc_dorian,
-            st.session_state.ending_note,
-        )
+    (
+        st.session_state.melodic_line,
+        st.session_state.note_representations,
+        sample_path,
+    ) = sample_line_from_path_with_connecting_note(
+        st.session_state.line_type,
+        st.session_state.include_bonus,
+        False,
+        st.session_state.loc_to_dom,
+        st.session_state.dom_to_minor,
+        st.session_state.sus_to_loc_dorian,
+        length=st.session_state.length,
+        movement=st.session_state.movement,
+        starting_note=st.session_state.starting_note,
+        ending_note=st.session_state.ending_note,
     )
     c1, c2, c3 = st.columns((0.2, 0.5, 0.3))
     for mode, name, notes in zip(
@@ -152,8 +176,48 @@ if st.session_state.get("tmp"):
             "Note sequence": st.session_state.note_representations,
             "Grade": st.session_state.grade,
             "Comment": st.session_state.text,
+            "Movement": st.session_state.movement,
         }
         # Save the session details to CSV
         save_practice_session(session_details, "melodic_lines.csv")
 
         st.success("Line saved successfully!")
+
+
+st.write("---")
+st.write("## Accessing Saved melodic lines")
+
+lines = pd.read_csv("melodic_lines.csv")
+
+filtered_lines = lines.loc[lines["Line type"] == st.session_state.line_type]
+filtered_lines["Start Note"] = filtered_lines["Note sequence"].str[4]
+filtered_lines["Last Note"] = filtered_lines["Note sequence"].str[-5]
+
+
+filtered_lines["sort_key"] = filtered_lines["Movement"].apply(
+    lambda x: 0 if x == st.session_state.movement else 1
+)
+filtered_lines = filtered_lines.sort_values(
+    by=["sort_key", "Grade"], ascending=[True, False]
+).drop("sort_key", axis=1)
+st.dataframe(
+    filtered_lines.drop(columns=["Note sequence"]),
+    use_container_width=True,
+    selection_mode="single-row",
+    on_select="rerun",
+    key="selected_line_cb",
+)
+
+if len(st.session_state.selected_line_cb.selection["rows"]) > 0:
+    (
+        c1,
+        c2,
+    ) = st.columns((0.5, 0.5))
+    line = filtered_lines.iloc[st.session_state.selected_line_cb.selection["rows"][0]]
+    for name, notes in zip(
+        ast.literal_eval(line["Line"]),
+        ast.literal_eval(line["Note sequence"]),
+    ):
+
+        c1.write(f"##### {name}")
+        c2.write(join_notes(notes))

@@ -1,6 +1,5 @@
 import streamlit as st
-from scripts.practice_cells import get_all_cells
-from scripts.database import fetch_and_update_data_base
+from scripts.database import fetch_data_base
 from scripts.modes.mode_transposition import (
     translate_sus4_to_other_mode,
     translate_loc_to_dominant,
@@ -12,16 +11,16 @@ def create_cell_frames(
     chord,
     mode_filter,
     permute_notes,
-    bonus,
+    bonus=False,
     field="Start Note",
     loc_to_dominant=False,
     dom_to_minor=False,
 ):
-    all_cells, _, _ = get_all_cells(chord, bonus)
-    df_cells = fetch_and_update_data_base(
+    df_cells = fetch_data_base(
         "{}_sampling.csv".format(chord),
-        all_cells,
-        majchord=chord == "Maj7",
+        bonus=bonus,
+        # all_cells,
+        # majchord=chord == "Maj7",
     )
 
     if mode_filter and (chord in ["Dorian", "Locrian", "Myxolidian"]):
