@@ -9,9 +9,10 @@ Ascendng b9 Arpeggio,5,1,"['5', 'b6', '#7', '3', '1']",Essential,A
 Ascending Aug Triad from 5th,5,#7,"['5','#7','3','5','#7']",Essential,A
 Hidden min-maj7 Chord,5,5,"['5', '3', '#7', 'b6', '5']",Essential,D
 Hidden Augmented Triad,5,9,"['5', '3', '#7', '5', '9']",Essential,D
-Stan Getz Enclosure of min-3rd,5,3,"['5', 'b9', '9', '4', '3']",Essential,D
-Dominant Diminished Enclosure of min-3rd,5,3,"['5', '4', 'maj3', '9', '3']",Essential,D
+Stan Getz Enclosure of min-3rd,5,3,"['5', 'b9', '9', '4', '3']",Bonus,D
+Dominant Diminished Enclosure of min-3rd,5,3,"['5', '4', 'maj3', '9', '3']",Bonus,D
 Bill Evans enclosure HS Vibe (from 7th),7,5,"['7', 'b6', '3', '4', '5']",Essential,D
+Reverse 13 Arpeggio(Farao),7,3,"['7', 'b6', '4', 'b9', '3']",Essential,D
 Bill Evans variation (dark),7,5,"['7', 'b6', '3', '#7', '5']",Essential,D
 Super Locrian scale (from #9),7,3,"['7', 'b6', '5', '4', '3']",Essential,D
 Hidden Minor triad pivot at 5th,9,5,"['9', '3', '#7', 'b6', '5']",Essential,D
