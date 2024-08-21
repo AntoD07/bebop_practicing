@@ -128,8 +128,10 @@ with c1:
 
     st.session_state.movement = st.sidebar.selectbox(
         "Select the line movement (optional) ",
-        [None, "A", "D"],
-        index=[None, "A", "D"].index(st.session_state.get("movement", None)),
+        [None, "A and N", "D and N", "A", "D"],
+        index=[None, "A and N", "D and N", "A", "D"].index(
+            st.session_state.get("movement", None)
+        ),
     )
 
     st.write("Melodic Lines sampled according to the following cells : ", sample_path)

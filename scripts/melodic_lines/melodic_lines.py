@@ -245,15 +245,20 @@ def sample_line_from_path_with_connecting_note(
                 df_cells, mode_list[-1], loc_to_dom, dom_to_minor, sus_to_loc_dorian
             )
             if movement is not None:
-                filtered_df = df_cells[
-                    df_cells["Movement"].astype(str).isin(["N", movement])
-                ]
-                if filtered_df.empty:
-                    st.write("No cells match the movement criteria.")
-                    return None
+                if movement in ["A and N", "D and N"]:
+                    filtered_df = df_cells[
+                        df_cells["Movement"].astype(str).isin(["N", movement[0]])
+                    ]
                 else:
-                    df_cells = filtered_df.reset_index(drop=True)
-                    # st.write("DataFrame after filtering by movement:", df_cells)
+                    filtered_df = df_cells[
+                        df_cells["Movement"].astype(str).isin([movement])
+                    ]
+            if filtered_df.empty:
+                st.write("No cells match the movement criteria.")
+                return None
+            else:
+                df_cells = filtered_df.reset_index(drop=True)
+                # st.write("DataFrame after filtering by movement:", df_cells)
             if ending_note not in ["None", None]:
                 # st.write(ending_note)
                 filtered_df = filtered_df[filtered_df["End Note"] == ending_note]
@@ -284,7 +289,13 @@ def sample_line_from_path_with_connecting_note(
 
                 df_cells = df_cells.reset_index()
                 if movement is not None:
-                    df_cells = df_cells.loc[df_cells["Movement"].isin(["N", movement])]
+                    if movement in ["A and N", "D and N"]:
+                        df_cells = df_cells.loc[
+                            df_cells["Movement"].isin(["N", movement[0]])
+                        ]
+                    else:
+                        df_cells = df_cells.loc[df_cells["Movement"].isin([movement])]
+
                 # st.write(df_cells)
                 df_cells = change_note_representation(
                     df_cells, mode, loc_to_dom, dom_to_minor, sus_to_loc_dorian
