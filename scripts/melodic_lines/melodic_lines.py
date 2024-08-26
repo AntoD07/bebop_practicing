@@ -18,7 +18,7 @@ line_structure_dic = {
     "Dorian": ["Dorian", "Dorian", "Dorian", "Dorian"],
     "Myxolidian": ["Myxolidian", "Myxolidian", "Myxolidian", "Myxolidian"],
     "Short Maj 2-5-1": ["7sus4", "MajorResolutions"],
-    "Long Maj 2-5-1": ["7sus4", "7sus4", "7sus4", "MajorResolutions"],
+    "Long Maj 2-5-1": ["Myxolidian", "Myxolidian", "Myxolidian", "MajorResolutions"],
     "Long Maj 2-5-1 with Maj7 ending": [
         "7sus4",
         "7sus4",
@@ -185,12 +185,20 @@ def sample_melodic_line_backward_for_251(
 
 
 def line_structure_mapping(type, length=None):
-    if type not in ["Dorian x Dominant", "Major x Dominant", "Dorian", "Maj7"]:
+    if type not in [
+        "Dorian x Dominant",
+        "Major x Dominant",
+        "Dorian",
+        "Maj7",
+        "Locrian",
+    ]:
         return line_structure_dic[type]
     elif type == "Dorian":
         return [random.choice(["Dorian"]) for _ in range(length)]
     elif type == "Maj7":
         return [random.choice(["Maj7"]) for _ in range(length)]
+    elif type == "Locrian":
+        return [random.choice(["Locrian"]) for _ in range(length)]
     elif type == "Dorian x Dominant":
         return [random.choice(["Dorian", "MinorResolutions"]) for _ in range(length)]
     elif type == "Major x Dominant":
@@ -253,11 +261,11 @@ def sample_line_from_path_with_connecting_note(
                     filtered_df = df_cells[
                         df_cells["Movement"].astype(str).isin([movement])
                     ]
-            if filtered_df.empty:
-                st.write("No cells match the movement criteria.")
-                return None
+                if filtered_df.empty:
+                    st.write("No cells match the movement criteria.")
+                    return None
             else:
-                df_cells = filtered_df.reset_index(drop=True)
+                filtered_df = df_cells.reset_index(drop=True)
                 # st.write("DataFrame after filtering by movement:", df_cells)
             if ending_note not in ["None", None]:
                 # st.write(ending_note)

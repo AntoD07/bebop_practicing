@@ -97,8 +97,8 @@ def create_cell_frames(
             df_cells_tmp_for_pivot_note = translate_sus4_to_other_mode(
                 df_cells_tmp_for_pivot_note, chord
             )
-        if chord == "Locrian":
-            if loc_to_dominant:
+        if chord in ["Locrian", "Myxolidian"]:
+            if chord == loc_to_dominant:
                 df_cells_tmp_for_pivot_note_2 = translate_loc_to_dominant(
                     df_cells_tmp_for_pivot_note
                 )
@@ -142,7 +142,6 @@ def create_cell_frames(
         )
     elif chord in ["MajorResolutions", "Myxolidian"]:
         if dom_to_minor:
-
             df_cells_tmp_for_pivot_note_2 = translate_dom_to_major(
                 df_cells_tmp_for_pivot_note
             )

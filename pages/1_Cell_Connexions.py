@@ -38,7 +38,7 @@ with c1:
         "Select first chord to practice",
         [
             "Maj7",
-            #   "7sus4",
+            # "7sus4",
             "Dorian",
             "Myxolidian",
             "Locrian",
@@ -67,16 +67,17 @@ with c1:
     #     )
     # else:
     #     st.session_state.loc_2_dom1 = False
-    # if st.session_state.chord1 in [
-    #     "MinorResolutions",
-    #     "MajorResolutions",
-    #     "Locrian",
-    # ]:
-    #     st.session_state.dom_to_minor1 = st.checkbox(
-    #         "Translate Dominant to Minor/Major-I", value=False
-    #     )
-    # else:
-    st.session_state.dom_to_minor1 = False
+    if st.session_state.chord1 in [
+        "MinorResolutions",
+        "MajorResolutions",
+        "Locrian",
+        "Myxolidian",
+    ]:
+        st.session_state.dom_to_minor1 = st.checkbox(
+            "Translate Dominant to Minor/Major-I", value=False
+        )
+    else:
+        st.session_state.dom_to_minor1 = False
 
     df_cells_1, mapped_names_1, mapping_1 = create_cell_frames(
         st.session_state.chord1,
@@ -85,7 +86,7 @@ with c1:
         st.session_state.include_bonus,
         "End Note",
         False,
-        False,
+        st.session_state.dom_to_minor1,
     )
 
 with c2:
@@ -93,7 +94,7 @@ with c2:
         "Select second chord to connect to",
         [
             "Maj7",
-            "7sus4",
+            # "7sus4",
             "Dorian",
             "Myxolidian",
             "Locrian",
@@ -102,7 +103,7 @@ with c2:
         ],
         index=[
             "Maj7",
-            "7sus4",
+            # "7sus4",
             "Dorian",
             "Myxolidian",
             "Locrian",
@@ -120,17 +121,18 @@ with c2:
     #     )
     # else:
     #     st.session_state.loc_2_dom_2 = False
-    # # Minor Resolution Cell transposition
-    # if st.session_state.chord2 in [
-    #     "MinorResolutions",
-    #     "MajorResolutions",
-    #     "Myxolidian",
-    # ]:
-    #     st.session_state.dom_to_minor2 = st.checkbox(
-    #         "Translate Dominant to Minor/Major-I ", value=False
-    #     )
-    # else:
-    st.session_state.dom_to_minor2 = False
+    # Minor Resolution Cell transposition
+    if st.session_state.chord2 in [
+        "MinorResolutions",
+        "MajorResolutions",
+        "Locrian",
+        "Myxolidian",
+    ]:
+        st.session_state.dom_to_minor2 = st.checkbox(
+            "Translate Dominant to Minor/Major-I ", value=False
+        )
+    else:
+        st.session_state.dom_to_minor2 = False
 
     df_cells_2, mapped_names_2, mapping_2 = create_cell_frames(
         st.session_state.chord2,
@@ -139,7 +141,7 @@ with c2:
         st.session_state.include_bonus,
         "Start Note",
         False,
-        False,
+        st.session_state.dom_to_minor2,
     )
 
 
@@ -192,33 +194,28 @@ st.subheader(
     ),
 )
 
-# if st.session_state.permute1 and (st.session_state.chord1 in ["Dorian", "Locrian"]):
-#     ending_cells = translate_sus4_to_other_mode(ending_cells, st.session_state.chord1)
-#     if st.session_state.chord1 == "Locrian" and st.session_state.loc_2_dom1:
-#         ending_cells = translate_loc_to_dominant(ending_cells)
-# if (
-#     st.session_state.chord1 in ["MinorResolutions", "Locrian"]
-# ) and st.session_state.dom_to_minor1:
-#     ending_cells = translate_dom_to_minor(ending_cells)
-# elif (
-#     st.session_state.chord1 in ["Myxolidian", "MajorResolutions"]
-# ) and st.session_state.dom_to_minor1:
-#     ending_cells = translate_dom_to_major(ending_cells)
+if st.session_state.chord1 == "Locrian" and st.session_state.loc_2_dom1:
+    ending_cells = translate_loc_to_dominant(ending_cells)
+if (
+    st.session_state.chord1 in ["MinorResolutions", "Locrian"]
+) and st.session_state.dom_to_minor1:
+    ending_cells = translate_dom_to_minor(ending_cells)
+elif (
+    st.session_state.chord1 in ["Myxolidian", "MajorResolutions"]
+) and st.session_state.dom_to_minor1:
+    ending_cells = translate_dom_to_major(ending_cells)
 
-# if st.session_state.permute_2 and (st.session_state.chord2 in ["Dorian", "Locrian"]):
-#     starting_cells = translate_sus4_to_other_mode(
-#         starting_cells, st.session_state.chord2
-#     )
-#     if st.session_state.chord2 == "Locrian" and st.session_state.loc_2_dom_2:
-#         starting_cells = translate_loc_to_dominant(starting_cells)
-# if (
-#     st.session_state.chord2 in ["MinorResolutions", "Locrian"]
-# ) and st.session_state.dom_to_minor2:
-#     starting_cells = translate_dom_to_minor(starting_cells)
-# elif (
-#     st.session_state.chord2 in ["Myxolidian", "MajorResolutions"]
-# ) and st.session_state.dom_to_minor2:
-#     starting_cells = translate_dom_to_major(starting_cells)
+
+if st.session_state.chord2 == "Locrian" and st.session_state.loc_2_dom_2:
+    starting_cells = translate_loc_to_dominant(starting_cells)
+if (
+    st.session_state.chord2 in ["MinorResolutions", "Locrian"]
+) and st.session_state.dom_to_minor2:
+    starting_cells = translate_dom_to_minor(starting_cells)
+elif (
+    st.session_state.chord2 in ["Myxolidian", "MajorResolutions"]
+) and st.session_state.dom_to_minor2:
+    starting_cells = translate_dom_to_major(starting_cells)
 
 with st.expander("Show Cells"):
     c1, c2 = st.columns((0.5, 0.5))

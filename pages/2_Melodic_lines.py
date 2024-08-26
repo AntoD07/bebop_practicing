@@ -61,9 +61,10 @@ with c1:
         "Type of line to practice",
         options=[
             "Maj7",
-            "7sus4 Infinity Loop",
+            # "7sus4 Infinity Loop",
             "Dorian",
             "Myxolidian",
+            "Locrian",
             "Short Maj 2-5-1",
             "Long Maj 2-5-1",
             "Long Maj 2-5-1 with Maj7 ending",
@@ -77,9 +78,10 @@ with c1:
         ],
         index=[
             "Maj7",
-            "7sus4 Infinity Loop",
+            # "7sus4 Infinity Loop",
             "Dorian",
             "Myxolidian",
+            "Locrian",
             "Short Maj 2-5-1",
             "Long Maj 2-5-1",
             "Long Maj 2-5-1 with Maj7 ending",
