@@ -10,7 +10,6 @@ from scripts.melodic_lines.combinations import find_combinations_on_pivot_new
 
 
 from scripts.modes.mode_transposition import (
-    translate_sus4_to_other_mode,
     translate_loc_to_dominant,
     translate_dom_to_minor,
     translate_dom_to_major,
@@ -194,8 +193,8 @@ st.subheader(
     ),
 )
 
-if st.session_state.chord1 == "Locrian" and st.session_state.loc_2_dom1:
-    ending_cells = translate_loc_to_dominant(ending_cells)
+if st.session_state.chord1 == "Locrian":
+    st.write("Locrian cells are translated to Dominant by default")
 if (
     st.session_state.chord1 in ["MinorResolutions", "Locrian"]
 ) and st.session_state.dom_to_minor1:
@@ -247,14 +246,19 @@ combinations, names = find_combinations_on_pivot_new(
     st.session_state.tone, starting_cells, ending_cells
 )
 # Total duration for practicing all combinations
-total_duration_minutes = st.sidebar.number_input(
-    "Part 1 Duration : ", min_value=1, max_value=30, value=15
+time_per_combination = st.sidebar.number_input(
+    "Time per combination (s) : ", min_value=10, max_value=300, value=40
+)
+st.sidebar.write(
+    "Total time for all combinations : ",
+    len(combinations) * time_per_combination / 60,
+    "minutes",
 )
 # Calculate display time per combination
 if combinations:
-    time_per_combination = total_duration_minutes / len(combinations)
+    time_per_combination = time_per_combination
     st.write(
-        f"Each combination will be displayed for :green[{int(time_per_combination*60)}] seconds. Press 'Next Combination' to rotate through the combinations."
+        f"Each combination will be displayed for :green[{int(time_per_combination)}] seconds."
     )
 else:
     st.write("No combinations available for the selected pivot note.")
@@ -293,7 +297,7 @@ if st.button("Start exercise 1", type="primary"):
             c1.markdown(f"##### {current_combination[0]}")
             c2.markdown(f"##### {current_combination[1]}")
             ph = c3.empty()
-            N = int(time_per_combination * 60)
+            N = int(time_per_combination)
             for secs in range(N, -1, -1):
                 mm, ss = secs // 60, secs % 60
                 ph.metric(

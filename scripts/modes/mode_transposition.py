@@ -82,7 +82,6 @@ loc_to_dom_mapping = {
     "#9": "6",
     "maj5": "9",
     "#3": "maj7",
-    "#7": "#11",
     "maj7": "#11",
     "#6": "3",
 }
@@ -98,7 +97,7 @@ dom_to_min_mapping = {
     "#9": "7",
     "b9": "b6",
     "b6": "3",
-    "maj7": "b5",
+    "maj7": "#11",
     "#11": "b9",
 }
 
@@ -117,7 +116,7 @@ dom_to_maj_mapping = {
     "b9(higher)": "b6(higher)",
     "#5": "b6",
     "b6": "min3",
-    "maj7": "b5",
+    "maj7": "#11",
     "#11": "b9",
     "b6(lower)": "min3(lower)",
 }

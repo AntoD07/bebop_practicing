@@ -1,6 +1,7 @@
 Cell Name,Start Note,End Note,Notes,Movement,Type
 Coltrane Pattern from root,1,7,"['1', '9', '3', '5', '7']",A,Essential
 Descending Bebop scale from root,1,5,"['1', 'maj7', '7', '6', '5']",D,Essential
+George Coleman from root,1,9,"['1', '6', '5', '3', '9']",D,Essential
 Lee Morgan Dominant (Mccoy),1,6,"['1', 'maj7', '7', '9', '6']",N,Essential
 Minor Honeysuckle Rose,1,6,"['1', '7', '9', '4', '6']",N,Essential
 Descending Dominant Scale from 3rd,3,6,"['3', '9', '1', '7', '6']",D,Essential
@@ -18,16 +19,16 @@ Dominant #5 Scale from 6th (Mccoy),6,3,"['6', '#5', '5', '4', '3']",D,Essential
 Dominant Turn,6,1,"['6', '5', '#11', '5', '1']",D,Bonus
 Chromatic Passing Tone Enclosure of II 3rd,6,7,"['6', '7', '1', 'maj7', '7']",N,Essential
 Coltrane Pattern from 7th (ending on 3rd),7,3,"['7', '1', '9', '4', '3']",A,Essential
+Hank Mobley from 7th (ending on root),7,1,"['7', '9', '6', '5', '1']",N,Essential
 Coltrane Pattern from 7th (ending on #11),7,#11,"['7', '1', '9', '4', '#11']",A,Essential
 Descending Dominant Scale from 7th ending on 3rd,7,3,"['7', '6', '5', '4', '3']",D,Essential
 Descending Dominant Scale from 7th ending on #11,7,#11,"['7', '6', '5', '4', '#11']",D,Essential
-Stan Getz enclosure of II Root starting from 7th,7,5,"['7', '4', '#11', '6', '5']",N,Essential
+Stan Getz enclosure of II Root starting from 7th,7,5,"['7', '4', '#11', '6', '5']",N,Bonus
 Freddie Hubbard,9,1,"['9', '4', '3', '9', '1']",N,Essential
 Descending II Scale,9,5,"['9', '1', '7', '6', '5']",D,Essential
 Passing Tone Enclosure,9,3,"['9', '4', '9', '#9', '3']",N,Essential
 Johnny Griffin Enclosure of 5th (Mccoy),9,5,"['9', '4', '#11', '6', '5']",N,Bonus
 Descending II Arpeggio from II-5th,9,3,"['9', '7', '5', '4', '3']",D,Essential
-Reverse Minor Coltrane,9,1,"['9', '7', '6', '5', '1']",D,Essential
 Stan Getz enclosure of II 3rd,9,7,"['9', '#5', '6', '1', '7']",N,Bonus
 Circle of 5th Approach,#11,3,"['#11', '6', '5', '4', '3']",N,Essential
 Diminished-to-Dominant,#11,1,"['#11', '6', '5', '3', '1']",D,Essential

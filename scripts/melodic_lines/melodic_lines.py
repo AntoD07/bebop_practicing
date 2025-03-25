@@ -14,10 +14,10 @@ from scripts.modes.mode_transposition import (
 
 line_structure_dic = {
     "Maj7": ["Maj7", "Maj7", "Maj7", "Maj7"],
-    "7sus4 Infinity Loop": ["7sus4", "7sus4", "7sus4", "7sus4"],
+    "7sus4 Infinity Loop": ["Myxolidian", "Myxolidian", "Myxolidian", "Myxolidian"],
     "Dorian": ["Dorian", "Dorian", "Dorian", "Dorian"],
     "Myxolidian": ["Myxolidian", "Myxolidian", "Myxolidian", "Myxolidian"],
-    "Short Maj 2-5-1": ["7sus4", "MajorResolutions"],
+    "Short Maj 2-5-1": ["Myxolidian", "MajorResolutions"],
     "Long Maj 2-5-1": ["Myxolidian", "Myxolidian", "Myxolidian", "MajorResolutions"],
     "Long Maj 2-5-1 with Maj7 ending": [
         "7sus4",
@@ -234,7 +234,7 @@ def sample_line_from_path_with_connecting_note(
     success = False
     count = 0
     # Start by the ending cell to take into account the pivot note
-    while not success and count < 100:
+    while not success and count < 2000:
         try:
             melodic_line = []
             note_representations = []
@@ -262,19 +262,20 @@ def sample_line_from_path_with_connecting_note(
                         df_cells["Movement"].astype(str).isin([movement])
                     ]
                 if filtered_df.empty:
-                    st.write("No cells match the movement criteria.")
+                    # st.write("No cells match the movement criteria.")
                     return None
             else:
                 filtered_df = df_cells.reset_index(drop=True)
                 # st.write("DataFrame after filtering by movement:", df_cells)
             if ending_note not in ["None", None]:
-                # st.write(ending_note)
                 filtered_df = filtered_df[filtered_df["End Note"] == ending_note]
             if filtered_df.empty:
                 st.write("No cells match the end note criteria.")
                 return None
-
-            final_cell = df_cells.sample(weights=1 / (df_cells.index + 1), n=1).iloc[0]
+            # st.write(filtered_df)
+            final_cell = filtered_df.sample(
+                weights=1 / (filtered_df.index + 1), n=1
+            ).iloc[0]
             # final_cell = filtered_df.sample(n=1).iloc[0]
             melodic_line.append(final_cell["Cell Name"])
             note_representations.append(str(final_cell["Notes"]))
@@ -320,7 +321,7 @@ def sample_line_from_path_with_connecting_note(
                         #    st.write(starting_note)
                         df_cells = df_cells[df_cells["Start Note"] == starting_note]
                     if df_cells.empty:
-                        st.write("No cells match the start note criteria.")
+                        # st.write("No cells match the start note criteria.")
                         raise ValueError
 
                 sampled_cell = df_cells.sample(n=1).iloc[0]
@@ -336,7 +337,7 @@ def sample_line_from_path_with_connecting_note(
 
             success = True
         except ValueError:
-            st.write("Sampling melodic line failed, retrying")
+            # st.write("Sampling melodic line failed, retrying")
             success = False
             count += 1
     return melodic_line[::-1], note_representations[::-1], mode_list

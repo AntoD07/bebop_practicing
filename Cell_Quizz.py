@@ -103,6 +103,11 @@ st.session_state.name = st.selectbox(
 input = st.text_input("Cell notes (w.r.t. to the type of chord)")
 c = cell_from_string(input)
 answer = df_cells.loc[st.session_state.name]
+if st.button("Submit"):
+    if c == join_notes(answer["Notes"]):
+        st.success("Good Answer !")
+    else:
+        st.error("Incorrect !")
 with st.expander("See solution"):
     st.write(join_notes(answer["Notes"]), answer["Movement"])
 

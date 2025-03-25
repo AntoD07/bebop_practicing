@@ -120,11 +120,11 @@ with c1:
         #     st.session_state.dom_to_minor,
         # )
         st.session_state.starting_note = st.text_input(
-            "Select the last note (optional) ",
+            "Select the first note (optional) ",
             st.session_state.get("starting_note", None),
         )
         st.session_state.ending_note = st.text_input(
-            "Select the first note (optional) ",
+            "Select the end note (optional) ",
             st.session_state.get("ending_note", None),
         )
 
@@ -148,8 +148,8 @@ if st.button("Generate melodic line", type="primary"):
         st.session_state.include_bonus,
         False,
         st.session_state.loc_to_dom,
-        st.session_state.dom_to_minor,
-        st.session_state.sus_to_loc_dorian,
+        dom_to_minor=st.session_state.dom_to_minor,
+        sus_to_loc_dorian=st.session_state.sus_to_loc_dorian,
         length=st.session_state.length,
         movement=st.session_state.movement,
         starting_note=st.session_state.starting_note,

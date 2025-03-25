@@ -8,6 +8,7 @@ Hidden Augmented Triad pivot at 4th,4,9,"['4', '3', '#7', '5', '9']",Bonus,D
 Ascendng b9 Arpeggio,5,1,"['5', 'b6', '#7', '3', '1']",Essential,A
 Ascending Aug Triad from 5th,5,#7,"['5','#7','3','5','#7']",Essential,A
 Hidden min-maj7 Chord,5,5,"['5', '3', '#7', 'b6', '5']",Essential,D
+Domb9scale 5,5,"['5', '4', '#7', 'b6', '5']",Essential,D
 Hidden Augmented Triad,5,9,"['5', '3', '#7', '5', '9']",Essential,D
 Stan Getz Enclosure of min-3rd,5,3,"['5', 'b9', '9', '4', '3']",Bonus,D
 Dominant Diminished Enclosure of min-3rd,5,3,"['5', '4', 'maj3', '9', '3']",Bonus,D
@@ -21,8 +22,8 @@ Fully Altered Hank Mobley,#7,5,"['#7', '3', '7', 'b6', '5']",Essential,N
 Dominant b9 Arpeggio from 3rd,#7,5,"['#7', '9', '4', 'b6', '5']",Essential,A
 Ascending Aug Triad from maj7,#7,3,"['#7','3','5','#7','3']",Essential,A
 7th Enclosure to 5th,#7,5,"['#7', '6', '7', 'b6', '5']",Essential,N
-Chromatic Enclosure of 5th,#7,5,"['#7', 'b6', '4', 'b5', '5']",Essential,N
-Octave Displaced Dominant Enclosure,#7,5,"['#7', 'b6', '4', 'b5', '5']",Bonus,N
+Chromatic Enclosure of 5th,#7,5,"['#7', 'b6', '4', '#11', '5']",Essential,N
+Octave Displaced Dominant Enclosure,#7,5,"['#7', 'b6', '4', #11', '5']",Bonus,N
 Dominant b9 scale from 3rd,#7,3,"['#7', 'b6', '5', '4', '3']",Bonus,D
 Octave Displaced Dominant b9 scale,#7,3,"['#7', 'b6', '5', '4', '3']",Bonus,A
 Arpeggio to chromatic Arpeggio,#7,3,"['#7', '9', '4', 'maj3', '3']",Bonus,N
