@@ -1,0 +1,26 @@
+Cell Name,Start Note,End Note,Notes,Movement,Type
+Ascending II-Minor 7th Arpeggio (ending on 6th),4,5,"['4', 'b6', '1', '3', '5']",A,Essential
+Dominant arperggio (Mccoy),9,5,"['9', '4', 'b6', '7', '5']",A,Essential
+Ascending Scale from 7th,b6,3,"['b6', '7', '1', '9', '3']",A,Essential
+Descending Dominant Scale from 3rd,9,5,"['9', '1', '7', 'b6', '5']",D,Essential
+Reverse Coltrane Pattern,3,5,"['3', '1', '7', 'b6', '5']",D,Essential
+Dexter Gordon,9,5,"['9', '3', '1', 'b6', '5']",D,Bonus
+Sonny Rollins,5,5,"['5', 'b6', '3', '4', '5']",N,Bonus
+Hank Mobley (Mccoy),b6,7,"['b6', '1', '5', '4', '7']",N,Bonus
+Reverse George Coleman(Mccoy),5,7,"['5', '4', '9', '1', '7']",D,Essential
+Reverse Minor Coltrane,1,7,"['1', 'b6', '5', '4', '7']",N,Bonus
+Ascending II-Minor 7th Arpeggio (ending on 3rd),4,9,"['4', 'b6', '1', '3', '9']",A,Essential
+Dominant Bop Scale (Mccoy),5,9,"['5', '#11', '4', '3', '9']",D,Essential
+Descending II Arpeggio from II-5th,1,9,"['1', 'b6', '4', '3', '9']",D,Essential
+Coltrane Pattern from 7th (ending on 3rd),b6,9,"['b6', '7', '1', '3', '9']",A,Essential
+Descending Dominant Scale from 7th ending on 3rd,b6,9,"['b6', '5', '4', '3', '9']",D,Essential
+George Coleman,5,9,"['5', '4', '1', '3', '9']",A,Essential
+Locrian Arpeggio,9,#7,"['9','4','b6','1','#7']",A,Essential
+Reverse Coltrane Loc (Mccoy),5,#7,"['5','3','9','1','#7']",D,Essential
+Reverse Loc Arpeggio,1,#7,"['1','b6','4','9','#7']",D,Essential
+Locrian Scale from Minor 4th,4,#7,"['4', '3','9', '1', '#7']",D,Essential
+Locrian Diatonic Enclosure,4,#7,"['4','b6','1','7','#7']",N,
+Freddie Hubbard,1,#7,"['1', '3', '9', '1', '#7']",N,Bonus
+Coltrane Pattern,7,b6,"['7', '1', '9', '4', 'b6']",A,Essential
+Dominant Bebop Scale,9,b6,"['9', '1', '7', '6', 'b6']",D,Essential
+Stan Getz enclosure,1,b6,"['1', '#11', '5', '7', 'b6']",N,Essential

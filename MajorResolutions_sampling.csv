@@ -4,8 +4,9 @@ Late V-#9/b9 approach,1,1,"['1', '7', '#9', 'b9', '1']",N,Essential
 Lee Morgan Dominant,1,6,"['1', 'maj7', '7', '9', '6']",N,Bonus
 Dominant b9 from 3rd,3,6,"['3', 'b9', '1', '7', '6']",D,Essential
 Dominant b9 Arpeggio from V-3rd,3,1,"['3', '5', '7', 'b9', '1']",A,Essential
+Bill Evans enclosure (from #9),3,1,"['3', 'b9', 'b6', '7', '1']",N,Essential
+Super Locrian scale (from #9),3,6,"['3', 'b9', '1', '7', '6']",N,Essential
 Full Altered Hank Mobley,3,1,"['3', '#5', '#9', 'b9', '1']",N,Essential
-Desc Dominant Scale from V-3rd,3,6,"['3', '9', '1', '7', '6']",D,Essential
 Octave displaced Dominant b9 from 3rd,3,6,"['3', 'b9(higher)', '1', '7', '6']",A,Essential
 Hank Mobley to 5th (+root),4,1,"['4', '6', '3', '9', '5']",N,Essential
 Descending Dominant Arpeggio,5,6,"['5', '3', '1', '7', '6']",N,Essential

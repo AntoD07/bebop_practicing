@@ -216,6 +216,7 @@ def sample_line_from_path_with_connecting_note(
     movement=None,
     starting_note=None,
     ending_note=None,
+    connecting_notes=None,
 ):
     """
     Samples a sequence of cells that connect to each other and include a required connecting note,
@@ -315,6 +316,11 @@ def sample_line_from_path_with_connecting_note(
                 df_cells = df_cells[
                     df_cells["End Note"].astype(str) == note_representations[-1][2]
                 ]
+                if connecting_notes is not None:
+                    df_cells = df_cells[
+                        (df_cells["Start Note"].isin(connecting_notes))
+                        & (df_cells["End Note"].isin(connecting_notes))
+                    ]
                 if i == len(mode_list) - 2:
                     # st.write("Last cells options", df_cells)
                     if starting_note not in ["None", None]:

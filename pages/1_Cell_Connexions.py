@@ -1,4 +1,6 @@
 import streamlit as st
+import streamlit.components.v1 as components
+
 import time
 
 from scripts.utils import (
@@ -205,8 +207,8 @@ elif (
     ending_cells = translate_dom_to_major(ending_cells)
 
 
-if st.session_state.chord2 == "Locrian" and st.session_state.loc_2_dom_2:
-    starting_cells = translate_loc_to_dominant(starting_cells)
+# if st.session_state.chord2 == "Locrian" and st.session_state.loc_2_dom_2:
+#     starting_cells = translate_loc_to_dominant(starting_cells)
 if (
     st.session_state.chord2 in ["MinorResolutions", "Locrian"]
 ) and st.session_state.dom_to_minor2:
@@ -235,12 +237,20 @@ with st.expander("Show Cells"):
         c2.write(join_notes(notes) + "  " + mvt)
 
 st.session_state.tempo = st.number_input(
-    "Metronome [Bpms] [link](https://www.imusic-school.com/app/v3sap/src/index.html#/access/metronome)",
+    "Metronome tempo (bpm) : ",
     min_value=30,
     max_value=300,
-    value=st.session_state.get("tempo", 80),
+    value=60,
     help="Setup the metronome to 2 beats, stressing first beat, without time",
 )
+metronome_html = f"""
+<iframe src="https://guitarapp.com/metronome.html?embed=true&tempo={st.session_state.tempo}&timeSignature=2&pattern=0"
+        title="Online Metronome"
+        style="width: 360px; height:520px; border:none; border-radius:4px;">
+</iframe>
+"""
+
+components.html(metronome_html, height=540, width=380)
 
 combinations, names = find_combinations_on_pivot_new(
     st.session_state.tone, starting_cells, ending_cells

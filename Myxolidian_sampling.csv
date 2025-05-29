@@ -10,6 +10,7 @@ Dominant arperggio to 13th (Mccoy),3,6,"['3', '5', '7', '1', '6']",A,Essential
 Dominant Bebop Scale from 3rd,3,7,"['3', '9', '1', 'maj7', '7']",D,Essential
 Reverse Coltrane Pattern,4,6,"['4', '9', '1', '7', '6']",D,Essential
 Ascending II-Minor 7th Arpeggio (ending on 3rd),5,3,"['5', '7', '9', '4', '3']",A,Essential
+Ascending II-Minor 7th Arpeggio (ending on #11),5,#11,"['5', '7', '9', '4', '#11']",A,Essential
 Descending Dominant Scale from 5th,5,1,"['5', '4', '3', '2', '1']",D,Essential
 Cannonball Adderley Approach,5,9,"['5', '4', '3', '4', '9']",D,Essential
 Diatonic Enclosure of 3rd,5,3,"['5', '9', '4', '9', '3']",N,Bonus
@@ -19,16 +20,15 @@ Dominant #5 Scale from 6th (Mccoy),6,3,"['6', '#5', '5', '4', '3']",D,Essential
 Dominant Turn,6,1,"['6', '5', '#11', '5', '1']",D,Bonus
 Chromatic Passing Tone Enclosure of II 3rd,6,7,"['6', '7', '1', 'maj7', '7']",N,Essential
 Coltrane Pattern from 7th (ending on 3rd),7,3,"['7', '1', '9', '4', '3']",A,Essential
-Hank Mobley from 7th (ending on root),7,1,"['7', '9', '6', '5', '1']",N,Essential
 Coltrane Pattern from 7th (ending on #11),7,#11,"['7', '1', '9', '4', '#11']",A,Essential
 Descending Dominant Scale from 7th ending on 3rd,7,3,"['7', '6', '5', '4', '3']",D,Essential
 Descending Dominant Scale from 7th ending on #11,7,#11,"['7', '6', '5', '4', '#11']",D,Essential
 Stan Getz enclosure of II Root starting from 7th,7,5,"['7', '4', '#11', '6', '5']",N,Bonus
+Descending II Arpeggio from II-5th,9,3,"['9', '7', '5', '4', '3']",D,Essential
 Freddie Hubbard,9,1,"['9', '4', '3', '9', '1']",N,Essential
 Descending II Scale,9,5,"['9', '1', '7', '6', '5']",D,Essential
-Passing Tone Enclosure,9,3,"['9', '4', '9', '#9', '3']",N,Essential
-Johnny Griffin Enclosure of 5th (Mccoy),9,5,"['9', '4', '#11', '6', '5']",N,Bonus
-Descending II Arpeggio from II-5th,9,3,"['9', '7', '5', '4', '3']",D,Essential
+Passing Tone Enclosure,9,3,"['9', '4', '9', '#9', '3']",N,Bonus
+Johnny Griffin Enclosure of 5th (Mccoy),9,5,"['9', '4', '#11', '6', '5']",N,Essential
 Stan Getz enclosure of II 3rd,9,7,"['9', '#5', '6', '1', '7']",N,Bonus
 Circle of 5th Approach,#11,3,"['#11', '6', '5', '4', '3']",N,Essential
 Diminished-to-Dominant,#11,1,"['#11', '6', '5', '3', '1']",D,Essential

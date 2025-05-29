@@ -119,13 +119,43 @@ with c1:
         #     st.session_state.loc_to_dom,
         #     st.session_state.dom_to_minor,
         # )
-        st.session_state.starting_note = st.text_input(
+        st.session_state.starting_note = st.selectbox(
             "Select the first note (optional) ",
-            st.session_state.get("starting_note", None),
+            options=[
+                "None",
+                "1",
+                "9",
+                "3",
+                "11",
+                "#11",
+                "5",
+                "6",
+                "7",
+                "b7",
+                "b6",
+                "b9",
+                "#9",
+            ],
+            # st.session_state.get("starting_note", None),
         )
-        st.session_state.ending_note = st.text_input(
+        st.session_state.ending_note = st.selectbox(
             "Select the end note (optional) ",
-            st.session_state.get("ending_note", None),
+            options=[
+                "None",
+                "1",
+                "9",
+                "3",
+                "11",
+                "#11",
+                "5",
+                "6",
+                "7",
+                "b7",
+                "b6",
+                "b9",
+                "#9",
+            ],
+            # st.session_state.get("ending_note", None),
         )
 
     st.session_state.movement = st.sidebar.selectbox(
@@ -137,7 +167,11 @@ with c1:
     )
 
     st.write("Melodic Lines sampled according to the following cells : ", sample_path)
-
+    connecting_notes = st.multiselect(
+        "Select connecting notes",
+        options=["1", "9", "3", "11", "#11", "5", "6", "7", "b7", "b6", "b9", "#9"],
+        default=["1", "3", "5", "7"],
+    )
 if st.button("Generate melodic line", type="primary"):
     (
         st.session_state.melodic_line,
@@ -154,6 +188,7 @@ if st.button("Generate melodic line", type="primary"):
         movement=st.session_state.movement,
         starting_note=st.session_state.starting_note,
         ending_note=st.session_state.ending_note,
+        connecting_notes=connecting_notes,
     )
     c1, c2, c3 = st.columns((0.2, 0.5, 0.3))
     for mode, name, notes in zip(
