@@ -102,15 +102,7 @@ with c2:
             "MajorResolutions",
             "MinorResolutions",
         ],
-        index=[
-            "Maj7",
-            # "7sus4",
-            "Dorian",
-            "Myxolidian",
-            "Locrian",
-            "MajorResolutions",
-            "MinorResolutions",
-        ].index(st.session_state.get("chord2", st.session_state.get("chord1"))),
+        index=2,
     )
     # st.session_state.mode_filter_2 = st.checkbox(
     #     "Whether to filter cells with high mode score ", value=False
@@ -236,7 +228,7 @@ with st.expander("Show Cells"):
         c2.write(f"##### {n}")
         c2.write(join_notes(notes) + "  " + mvt)
 
-st.session_state.tempo = st.number_input(
+st.sidebar.session_state.tempo = st.number_input(
     "Metronome tempo (bpm) : ",
     min_value=30,
     max_value=300,

@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import ast
 import pandas as pd
 import datetime
@@ -13,7 +14,6 @@ from scripts.load_cells import get_all_cells, create_cell_frames
 from scripts.melodic_lines.melodic_lines import (
     line_structure_dic,
     sample_melodic_line_with_connecting_note,
-    sample_melodic_line_backward_for_251,
     sample_line_from_path_with_connecting_note,
     line_structure_mapping,
 )
@@ -43,9 +43,7 @@ st.session_state.include_bonus = st.sidebar.checkbox(
 st.session_state.sus_to_loc_dorian = c2.checkbox(
     "Whether to change to translate the intervals for other modes", value=False
 )
-st.session_state.loc_to_dom = c2.checkbox(
-    "Whether to translate Locrian cells to Dominant", value=False
-)
+
 
 st.session_state.dom_to_minor = c2.checkbox(
     "Whether to translate Dominant and Locrian cells to Minor/Major-I", value=False
@@ -67,32 +65,14 @@ with c1:
             "Locrian",
             "Short Maj 2-5-1",
             "Long Maj 2-5-1",
-            "Long Maj 2-5-1 with Maj7 ending",
             "Short Minor 2-5-1",
             "Long Minor 2-5-1",
-            "Long Minor 2-5-1 with Dorian ending",
             "Double resolution",
             "Dorian and Dominant 2-cells alternated",
             "Dorian x Dominant",
             "Major x Dominant",
         ],
-        index=[
-            "Maj7",
-            # "7sus4 Infinity Loop",
-            "Dorian",
-            "Myxolidian",
-            "Locrian",
-            "Short Maj 2-5-1",
-            "Long Maj 2-5-1",
-            "Long Maj 2-5-1 with Maj7 ending",
-            "Short Minor 2-5-1",
-            "Long Minor 2-5-1",
-            "Long Minor 2-5-1 with Dorian ending",
-            "Double resolution",
-            "Dorian and Dominant 2-cells alternated",
-            "Dorian x Dominant",
-            "Major x Dominant",
-        ].index(st.session_state.get("line_type", "Dorian")),
+        index=5,  # Default to "Long Maj 2-5-1"
     )
 
     sample_path = line_structure_mapping(
@@ -165,23 +145,37 @@ with c1:
             st.session_state.get("movement", None)
         ),
     )
-
+    used_notes = ["1", "9", "3", "11", "#11", "5", "6", "7", "b7", "b6", "b9", "#9"]
     st.write("Melodic Lines sampled according to the following cells : ", sample_path)
     connecting_notes = st.multiselect(
         "Select connecting notes",
-        options=["1", "9", "3", "11", "#11", "5", "6", "7", "b7", "b6", "b9", "#9"],
-        default=["1", "3", "5", "7"],
+        options=used_notes,
+        default=(
+            ["1", "3", "5", "7"]
+            if st.session_state.line_type
+            not in ["Long Minor 2-5-1", "Short Minor 2-5-1", "Double resolution"]
+            else used_notes
+        ),
     )
+    connecting_notes = [list(connecting_notes) for _ in range(len(sample_path))]
+chord_tones = st.checkbox("Connecting note are chord tones", value=False)
+if chord_tones and ("2-5-1" in st.session_state.line_type):
+    connecting_notes = [
+        ["9", "6", "b6", "b9", "#9", "11", "#11", "5"],
+        ["9", "6", "b6", "b9", "#9", "11", "#11", "5"],
+        ["1", "3", "5", "7"],
+        ["1", "3", "5", "7"],
+    ]
 if st.button("Generate melodic line", type="primary"):
     (
         st.session_state.melodic_line,
         st.session_state.note_representations,
         sample_path,
     ) = sample_line_from_path_with_connecting_note(
-        st.session_state.line_type,
-        st.session_state.include_bonus,
-        False,
-        st.session_state.loc_to_dom,
+        line_type=st.session_state.line_type,
+        include_bonus=st.session_state.include_bonus,
+        mode_filter=False,
+        loc_to_dom=False,
         dom_to_minor=st.session_state.dom_to_minor,
         sus_to_loc_dorian=st.session_state.sus_to_loc_dorian,
         length=st.session_state.length,
@@ -200,6 +194,21 @@ if st.button("Generate melodic line", type="primary"):
         c2.write(f"##### {name}")
         c3.write(join_notes(notes))
     st.session_state.tmp = True
+
+st.session_state.tempo = st.number_input(
+    "Metronome tempo (bpm) : ",
+    min_value=30,
+    max_value=300,
+    value=60,
+    help="Setup the metronome to 2 beats, stressing first beat, without time",
+)
+metronome_html = f"""
+<iframe src="https://guitarapp.com/metronome.html?embed=true&tempo={st.session_state.tempo}&timeSignature=2&pattern=0"
+        title="Online Metronome"
+        style="width: 360px; height:520px; border:none; border-radius:4px;">
+</iframe>
+"""
+components.html(metronome_html, height=540, width=380)
 
 st.session_state.grade = st.number_input(
     "How good was it?", min_value=1, max_value=5, value=5
@@ -224,7 +233,7 @@ if st.session_state.get("tmp"):
 
 
 st.write("---")
-st.write("## Accessing Saved melodic lines")
+st.write("## Saved melodic lines")
 
 lines = pd.read_csv("melodic_lines.csv")
 

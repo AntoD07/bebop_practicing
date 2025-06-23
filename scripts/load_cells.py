@@ -98,12 +98,12 @@ def create_cell_frames(
                 df_cells_tmp_for_pivot_note, chord
             )
         if chord in ["Locrian", "Myxolidian"]:
-            if chord == loc_to_dominant:
-                df_cells_tmp_for_pivot_note_2 = translate_loc_to_dominant(
-                    df_cells_tmp_for_pivot_note
-                )
-            else:
-                df_cells_tmp_for_pivot_note_2 = df_cells_tmp_for_pivot_note
+            # # if chord == loc_to_dominant:
+            # #     df_cells_tmp_for_pivot_note_2 = translate_loc_to_dominant(
+            # #         df_cells_tmp_for_pivot_note
+            # #     )
+            # else:
+            df_cells_tmp_for_pivot_note_2 = df_cells_tmp_for_pivot_note
             if dom_to_minor:
                 df_cells_tmp_for_pivot_note_2 = translate_dom_to_minor(
                     df_cells_tmp_for_pivot_note_2
