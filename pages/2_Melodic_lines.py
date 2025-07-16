@@ -51,7 +51,7 @@ st.session_state.dom_to_minor = c2.checkbox(
 st.session_state.length = st.sidebar.number_input(
     "Select the line length (depends on the line type) ",
     min_value=2,
-    max_value=6,
+    max_value=8,
     value=4,
 )
 with c1:
@@ -145,7 +145,21 @@ with c1:
             st.session_state.get("movement", None)
         ),
     )
-    used_notes = ["1", "9", "3", "11", "#11", "5", "6", "7", "b7", "b6", "b9", "#9"]
+    used_notes = [
+        "1",
+        "9",
+        "3",
+        "11",
+        "#11",
+        "5",
+        "6",
+        "7",
+        "b7",
+        "b6",
+        "b9",
+        "#9",
+        None,
+    ]
     st.write("Melodic Lines sampled according to the following cells : ", sample_path)
     connecting_notes = st.multiselect(
         "Select connecting notes",

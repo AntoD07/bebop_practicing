@@ -189,6 +189,7 @@ def line_structure_mapping(type, length=None):
         "Dorian x Dominant",
         "Major x Dominant",
         "Dorian",
+        "Myxolidian",
         "Maj7",
         "Locrian",
     ]:
@@ -197,6 +198,8 @@ def line_structure_mapping(type, length=None):
         return [random.choice(["Dorian"]) for _ in range(length)]
     elif type == "Maj7":
         return [random.choice(["Maj7"]) for _ in range(length)]
+    elif type == "Myxolidian":
+        return [random.choice(["Myxolidian"]) for _ in range(length)]
     elif type == "Locrian":
         return [random.choice(["Locrian"]) for _ in range(length)]
     elif type == "Dorian x Dominant":
@@ -317,7 +320,7 @@ def sample_line_from_path_with_connecting_note(
                 df_cells = df_cells[
                     df_cells["End Note"].astype(str) == note_representations[-1][2]
                 ]
-                if connecting_notes is not None:
+                if None in connecting_notes:
                     connecting_notes_reversed = connecting_notes[:-1][::-1]
                     # st.write(i)
                     # st.write(mode)

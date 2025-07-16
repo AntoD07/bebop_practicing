@@ -1,5 +1,4 @@
 Cell Name,Start Note,End Note,Notes,Modes,Mode scores,Sample Count
-Ascending II Scale,5,9,"['5', '6', '7', '1', '9']","['7sus4', 'Dorian', 'Locrian']","{'Dorian': 1.1, 'Locrian': 0.8, 'Myxolidian': 0.4}",8
 Ascending II-Minor 7th Arpeggio (ending on 3rd),5,3,"['5', '7', '9', '4', '3']","['7sus4', 'Locrian', 'Dorian', 'Myxolidian']","{'Locrian': 1.1, 'Dorian': 0.9, 'Myxolidian': 0.7}",8
 Ascending II-Minor 7th Arpeggio (ending on 6th),5,6,"['5', '7', '9', '4', '6']","['7sus4', 'Dorian']","{'Dorian': 0.9, 'Locrian': 0.5, 'Myxolidian': 0.3}",5
 Ascending Scale from 7th,7,4,"['7', '1', '9', '3', '4']","['7sus4', 'Dorian']","{'Dorian': 0.6, 'Locrian': 0.4, 'Myxolidian': 0.1}",3
