@@ -29,6 +29,12 @@ line_structure_dic = {
     ],
     "Short Minor 2-5-1": ["Locrian", "MinorResolutions"],
     "Long Minor 2-5-1": ["Locrian", "Locrian", "Locrian", "MinorResolutions"],
+    "Long Minor with double resolution": [
+        "Locrian",
+        "Locrian",
+        "MinorResolutions",
+        "MinorResolutions",
+    ],
     "Long Minor 2-5-1 with Dorian ending": [
         "Locrian",
         "Locrian",

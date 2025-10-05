@@ -67,6 +67,7 @@ with c1:
             "Long Maj 2-5-1",
             "Short Minor 2-5-1",
             "Long Minor 2-5-1",
+            "Long Minor with double resolution",
             "Double resolution",
             "Dorian and Dominant 2-cells alternated",
             "Dorian x Dominant",
