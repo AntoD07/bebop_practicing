@@ -10,19 +10,12 @@ from scripts.utils import (
     join_notes,
     save_practice_session,
 )
-from scripts.load_cells import get_all_cells, create_cell_frames
 from scripts.melodic_lines.melodic_lines import (
-    line_structure_dic,
-    sample_melodic_line_with_connecting_note,
     sample_line_from_path_with_connecting_note,
     line_structure_mapping,
 )
-from scripts.modes.mode_transposition import change_note_representation
+from scripts.paths import MELODIC_LINES_LOG
 
-from scripts.database import fetch_data_base
-
-
-import random
 
 st.set_page_config(layout="wide")
 # Example of setting up the practice routine
@@ -243,7 +236,7 @@ if st.session_state.get("tmp"):
             "Movement": st.session_state.movement,
         }
         # Save the session details to CSV
-        save_practice_session(session_details, "melodic_lines.csv")
+        save_practice_session(session_details, MELODIC_LINES_LOG)
 
         st.success("Line saved successfully!")
 
@@ -251,7 +244,7 @@ if st.session_state.get("tmp"):
 st.write("---")
 st.write("## Saved melodic lines")
 
-lines = pd.read_csv("melodic_lines.csv")
+lines = pd.read_csv(MELODIC_LINES_LOG)
 
 filtered_lines = lines.loc[lines["Line type"] == st.session_state.line_type]
 filtered_lines["Start Note"] = filtered_lines["Note sequence"].str[4]

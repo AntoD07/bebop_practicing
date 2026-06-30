@@ -12,7 +12,6 @@ from scripts.melodic_lines.combinations import find_combinations_on_pivot_new
 
 
 from scripts.modes.mode_transposition import (
-    translate_loc_to_dominant,
     translate_dom_to_minor,
     translate_dom_to_major,
 )

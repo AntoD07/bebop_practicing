@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "bebop-practicing"
+version = "0.1.0"
+description = "Streamlit app for practicing bebop cells, connections, and melodic lines."
+authors = ["Antony Doukhan <anto.doukhan@gmail.com>"]
+readme = "README.md"
+# This is a Streamlit application, not an installable library — Poetry only manages
+# the virtualenv and dependencies (no package is built or installed).
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.13"
+# Pinned to the known-good line. Newer streamlit/pandas pull numpy 2.x, which breaks
+# numpy-1.x-compiled extensions (numexpr, bottleneck) in this environment. Bump these
+# deliberately (and rebuild those extensions for numpy 2) if you want newer versions.
+streamlit = "~1.36.0"
+pandas = "~2.2.2"
+numpy = "<2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

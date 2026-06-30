@@ -1,24 +1,15 @@
 import streamlit as st
 import random
 
-from scripts.load_cells import (
-    get_all_cells,
-    create_starting_ending_cells,
-    create_cell_frames,
-)
+from scripts.load_cells import create_cell_frames
 
 from scripts.utils import (
     validate_results,
-    names_to_notes,
     join_notes,
     cell_from_string,
 )
 
-from scripts.modes.mode_transposition import (
-    translate_sus4_to_other_mode,
-    translate_loc_to_dominant,
-    translate_dom_to_minor,
-)
+from scripts.modes.mode_transposition import translate_dom_to_minor
 
 st.title("Bebop practice app")
 previous_chord = st.session_state.get("chord")
@@ -72,9 +63,6 @@ if (
     df_cells = translate_dom_to_minor(df_cells)
 
 
-# all_cells, starting_cells, ending_cells = get_all_cells(
-#     st.session_state.chord, st.session_state.include_bonus
-# )
 names = list(df_cells.index)
 
 if st.session_state.chord != previous_chord:

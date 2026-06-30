@@ -4,86 +4,74 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Running the app
 
-This is a Streamlit multi-page app. Run from the **repo root** (required — modules use
-absolute `from scripts....` imports that only resolve from the root):
+This is a Streamlit multi-page app managed with [Poetry](https://python-poetry.org/):
 
 ```bash
-streamlit run Cell_Quizz.py        # Cell_Quizz.py is the home page; pages/ are auto-discovered
+poetry install
+poetry run streamlit run Cell_Quizz.py     # home page; pages/ are auto-discovered
 ```
 
-Serves on port 8501. Dependencies are not pinned anywhere — install manually:
+Serves on port 8501. Without Poetry, any env with `streamlit` + `pandas` works:
+`streamlit run Cell_Quizz.py`. Dependencies are declared in `pyproject.toml`
+(`streamlit`, `pandas`, Python `>=3.10,<3.13`). There is no test suite or linter configured.
 
-```bash
-pip install streamlit pandas       # plus stdlib: ast, json, datetime, random, re
-```
-
-Notes:
-- There is **no** `requirements.txt`, test suite, or linter configured.
-- `.devcontainer/devcontainer.json` references `app.py` and `requirements.txt`, **neither
-  of which exist** — the real entry point is `Cell_Quizz.py`.
+Data paths are resolved relative to the repo root via `scripts/paths.py`, so the app is
+CWD-independent for data files. (Imports are absolute `from scripts...`; Streamlit puts the
+entry-script dir — the repo root — on `sys.path`, so launching via the entry script is what
+makes those imports resolve.)
 
 ## Core domain concept: the "cell"
 
 A *cell* is a short (~5-note) melodic motif expressed as **scale-degree strings**, not pitches:
-chord tones `1/3/5/7`, extensions `9/11/6`, alterations `b7/#11/b9/#9/b6` (and `Locrian.json`
-uses `#8` for octave displacement). Each cell carries a `Start Note`, `End Note`, a `Movement`
-(`A` ascending / `D` descending / `N` neutral), and mode compatibility tags.
+chord tones `1/3/5/7`, extensions `9/11/6`, alterations `b7/#11/b9/#9/b6`. Each cell carries a
+`Start Note`, `End Note`, a `Movement` (`A` ascending / `D` descending / `N` neutral), and
+(in some CSVs) mode tags. Two cells **connect** when the first cell's `End Note` equals the
+second's `Start Note` — the *pivot*. Melodic lines are chains of pivot-connected cells.
 
-Two cells **connect** when the first cell's `End Note` equals the second's `Start Note` — this
-shared note is the *pivot*. Melodic lines are chains of pivot-connected cells.
+No MIDI/audio/notation — everything is text (`"1-3-5-7"` via `join_notes`); the metronome is an
+embedded `guitarapp.com` iframe.
 
-There is no MIDI/audio/notation rendering — everything is text (e.g. `"1-3-5-7"` via
-`join_notes`), and the metronome is an embedded `guitarapp.com` iframe.
+## The cell library is the CSVs
 
-## Architecture (three layers)
+`data/sampling/*_sampling.csv` (one per mode: `Maj7`, `Dorian`, `Myxolidian`, `Locrian`,
+`MajorResolutions`, `MinorResolutions`, `7sus4`) are the **hand-edited source of truth** for the
+cells — edit them directly to add/change cells. Columns: `Cell Name`, `Start Note`, `End Note`,
+`Notes`, `Movement`, `Type` (Essential/Bonus); some also carry `Modes`/`Mode scores`.
+`fetch_data_base` filters to `Type == "Essential"` unless bonus cells are requested.
 
-**1. Cell definitions — source of truth**
-- `scripts/cells/*.json` (`7sus4.json`, `maj7.json`, `maj_resolution.json`,
-  `minor_resolution.json`, `Locrian.json`) define cells under `essential`/`bonus` keys.
-- Root-level `*_sampling.csv` (one per mode: `Maj7`, `Dorian`, `Myxolidian`, `Locrian`,
-  `MajorResolutions`, `MinorResolutions`, `7sus4`) are **pregenerated DataFrame caches** of
-  those cells, with a `Sample Count` column used to bias sampling toward less-practiced cells.
+> Schema note: the CSVs are inconsistent — only `7sus4`/`MinorResolutions` have a `Modes`
+> column. Live code only reads `Modes` when `mode_filter=True`, and every call site passes
+> `mode_filter=False`, so this is latent, not active.
 
-**2. Logic — `scripts/`**
-- `load_cells.py` — primary loader. `create_cell_frames(chord, ...)` returns a cell DataFrame;
-  `get_all_cells()` / `create_starting_ending_cells()` build note→cell indices for connections.
-- `modes/mode_transposition.py` — `change_note_representation(df, ...)` orchestrates remapping
-  notes between harmonic contexts (sus4→Dorian/Locrian, Locrian→Dominant, Dominant→Minor/Major)
-  via per-context mapping dicts.
-- `modes/mode_scores.py` — `compute_scores()` rates a cell's affinity to Myxolidian/Dorian/
-  Locrian by inspecting notes at indices `[0, 2, 4]`.
-- `melodic_lines/combinations.py` — `find_combinations_on_pivot_new()` pairs ending cells ×
-  starting cells that share a pivot note.
-- `melodic_lines/melodic_lines.py` — `line_structure_dic` / `line_structure_mapping()` define
-  the cell-mode sequence for each line type (e.g. "Long Maj 2-5-1" → Myxolidian×3 +
-  MajorResolutions). `sample_line_from_path_with_connecting_note()` builds a line **backward
-  from the ending cell** to guarantee note continuity, honoring movement/note constraints.
-- `utils.py` — `join_notes` (display), `validate_results` (quiz checking),
-  `get_or_update_practice_details` (daily key/position), `save_practice_session` (CSV logging).
-- `database.py`, `main_fcts.py` — older/duplicate helpers largely superseded by `load_cells.py`.
+The original JSON cell definitions and the JSON→CSV generation code (`get_all_cells`,
+`create_data_base`, `compute_scores`) are **retired in `archive/`** — not used at runtime.
 
-**3. UI — Streamlit pages**
-- `Cell_Quizz.py` (home) — memorization quiz on individual cells for a chosen chord.
-- `pages/1_Cell_Connexions.py` — timed drill connecting two chords' cells at a pivot note.
-- `pages/2_Melodic_Lines.py` — generate, grade, and log full melodic lines (2-5-1s etc.).
+## Architecture
 
-**Canonical data pipeline** (repeated across pages):
-`create_cell_frames(chord)` → `change_note_representation(df, ...)` → filter by
+**Runtime pipeline:** `scripts/load_cells.create_cell_frames(chord, ...)` →
+`scripts/database.fetch_data_base` (reads the CSV) → optional
+`scripts/modes/mode_transposition.change_note_representation` (remaps notes between harmonic
+contexts: sus4→Dorian/Locrian, Locrian→Dominant, Dominant→Minor/Major) → filter by
 `Start Note`/`End Note` + `Movement` → render.
 
-## State & persistence
+- `scripts/paths.py` — `sampling_file(chord)`, `PRACTICE_DETAILS`, `MELODIC_LINES_LOG`.
+- `scripts/melodic_lines/combinations.py` — `find_combinations_on_pivot_new()` pairs ending ×
+  starting cells on a pivot.
+- `scripts/melodic_lines/melodic_lines.py` — `line_structure_dic` / `line_structure_mapping()`
+  define the cell-mode sequence per line type (e.g. "Long Maj 2-5-1" → Myxolidian×3 +
+  MajorResolutions); `sample_line_from_path_with_connecting_note()` builds a line **backward
+  from the ending cell** to keep note continuity, honoring movement/note constraints.
+- `scripts/utils.py` — `join_notes`, `validate_results`, `get_or_update_practice_details`
+  (daily key/position), `save_practice_session`.
 
-- Each page **re-initializes** its own `st.session_state` (daily `key`/`position`,
-  `include_bonus`, chord selections, transposition flags, generated lines). State is **not**
-  reliably shared across pages; pages re-read the day's context from `practice_details.json`.
-- `practice_details.json` — daily `{date, key, position}`, rotated by `get_or_update_practice_details()`.
-- `melodic_lines.csv` — graded melodic-line history (primary log).
-- `practice_sessions.csv` — legacy session log.
+**UI pages:** `Cell_Quizz.py` (home; cell memorization quiz, builds start/end indices from the
+CSV DataFrame), `pages/1_Cell_Connexions.py` (timed pivot-connection drill),
+`pages/2_Melodic_Lines.py` (generate, grade, and log melodic lines).
 
-## Gotchas
+## Data & persistence
 
-- Always run from the repo root (absolute `scripts.` imports).
-- `scripts/cells/*.json` are the source of truth; editing them does **not** auto-update the
-  `*_sampling.csv` caches — regenerate via `database.create_data_base()` if cell data changes.
-- On macOS (case-insensitive FS) git may display `pages/2_Melodic_lines.py`; the real filename
-  is `pages/2_Melodic_Lines.py`.
+- `data/sampling/*_sampling.csv` — the cell library (see above).
+- `data/logs/practice_details.json` — daily `{date, key, position}`, rotated by
+  `get_or_update_practice_details()`.
+- `data/logs/melodic_lines.csv` — graded melodic-line history (written by page 2).
+- `archive/` — retired JSON pipeline + orphan data files, kept for reference only.

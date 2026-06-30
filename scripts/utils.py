@@ -5,6 +5,8 @@ import json
 import datetime
 import random
 
+from scripts.paths import PRACTICE_DETAILS, MELODIC_LINES_LOG
+
 
 @st.cache_data
 def validate_results(answer, gt):
@@ -42,7 +44,7 @@ def get_or_update_practice_details():
     Returns:
     - A tuple containing the key and position for today's practice.
     """
-    filename = "practice_details.json"
+    filename = PRACTICE_DETAILS
     today = datetime.date.today().isoformat()
 
     try:
@@ -80,7 +82,7 @@ def get_or_update_practice_details():
     return practice_details["key"], practice_details["position"]
 
 
-def save_practice_session(details, file_path="practice_sessions.csv"):
+def save_practice_session(details, file_path=MELODIC_LINES_LOG):
     """
     Appends practice session details to a CSV file.
     Parameters:
