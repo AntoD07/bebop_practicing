@@ -177,16 +177,6 @@ ending_cells = df_cells_1.loc[
     & df_cells_1["Movement"].astype(str).isin(movements)
 ]
 
-combinations, names = find_combinations_on_pivot_new(
-    st.session_state.tone, starting_cells, ending_cells
-)
-
-st.subheader(
-    "Practicing cells around chord tone :blue[{}] - All :red[{}] combinaisons".format(
-        st.session_state.tone_modified, len(combinations)
-    ),
-)
-
 if st.session_state.chord1 == "Locrian":
     st.write("Locrian cells are translated to Dominant by default")
 if (
@@ -210,9 +200,48 @@ elif (
 ) and st.session_state.dom_to_minor2:
     starting_cells = translate_dom_to_major(starting_cells)
 
+st.session_state.use_cell_selector = st.checkbox(
+    "Filter cells by selection", value=False
+)
+
+# Cell selectors outside expander (conditional)
+if st.session_state.use_cell_selector:
+    c1, c2 = st.columns((0.5, 0.5))
+
+    with c1:
+        st.write(f"**{st.session_state.chord1} Cells** (ending)")
+        ending_cell_names = ending_cells.index.tolist()
+        st.session_state.selected_ending_cells = st.multiselect(
+            "Select ending cells:",
+            ending_cell_names,
+            default=ending_cell_names,
+            key="ending_cells_selector",
+        )
+
+    with c2:
+        st.write(f"**{st.session_state.chord2} Cells** (starting)")
+        starting_cell_names = starting_cells.index.tolist()
+        st.session_state.selected_starting_cells = st.multiselect(
+            "Select starting cells:",
+            starting_cell_names,
+            default=starting_cell_names,
+            key="starting_cells_selector",
+        )
+
+    # Filter cells based on selection
+    ending_cells_filtered = ending_cells.loc[
+        ending_cells.index.isin(st.session_state.selected_ending_cells)
+    ]
+    starting_cells_filtered = starting_cells.loc[
+        starting_cells.index.isin(st.session_state.selected_starting_cells)
+    ]
+else:
+    ending_cells_filtered = ending_cells
+    starting_cells_filtered = starting_cells
+
 with st.expander("Show Cells"):
     c1, c2 = st.columns((0.5, 0.5))
-    for i, cell in ending_cells.reset_index().iterrows():
+    for i, cell in ending_cells_filtered.reset_index().iterrows():
         n = cell["Cell Name"]
         notes = cell["Notes"]
         mvt = cell["Movement"]
@@ -220,7 +249,7 @@ with st.expander("Show Cells"):
         c1.write(f"##### {n}")
         c1.write(join_notes(notes) + "  " + mvt)
 
-    for i, cell in starting_cells.reset_index().iterrows():
+    for i, cell in starting_cells_filtered.reset_index().iterrows():
         n = cell["Cell Name"]
         notes = cell["Notes"]
         mvt = cell["Movement"]
@@ -232,35 +261,45 @@ st.sidebar.session_state.tempo = st.number_input(
     "Metronome tempo (bpm) : ",
     min_value=30,
     max_value=300,
-    value=60,
+    value=80,
     help="Setup the metronome to 2 beats, stressing first beat, without time",
 )
-metronome_html = f"""
+
+with st.expander("🎵 Metronome"):
+    metronome_html = f"""
 <iframe src="https://guitarapp.com/metronome.html?embed=true&tempo={st.session_state.tempo}&timeSignature=2&pattern=0"
         title="Online Metronome"
         style="width: 360px; height:520px; border:none; border-radius:4px;">
 </iframe>
 """
-
-components.html(metronome_html, height=540, width=380)
+    components.html(metronome_html, height=540, width=380)
 
 combinations, names = find_combinations_on_pivot_new(
-    st.session_state.tone, starting_cells, ending_cells
+    st.session_state.tone, starting_cells_filtered, ending_cells_filtered
+)
+
+st.subheader(
+    "Practicing cells around chord tone :blue[{}] - All :red[{}] combinaisons".format(
+        st.session_state.tone_modified, len(combinations)
+    ),
 )
 # Total duration for practicing all combinations
-time_per_combination = st.sidebar.number_input(
-    "Time per combination (s) : ", min_value=10, max_value=300, value=40
+total_time_minutes = st.sidebar.number_input(
+    "Total practice time (min) : ", min_value=1, max_value=120, value=10
 )
-st.sidebar.write(
-    "Total time for all combinations : ",
-    len(combinations) * time_per_combination / 60,
-    "minutes",
-)
+
+# Calculate time per combination
+if combinations:
+    time_per_combination = int((total_time_minutes * 60) / len(combinations))
+    st.sidebar.write(
+        f"Time per combination : :blue[{time_per_combination}] seconds"
+    )
+else:
+    time_per_combination = 0
 # Calculate display time per combination
 if combinations:
-    time_per_combination = time_per_combination
     st.write(
-        f"Each combination will be displayed for :green[{int(time_per_combination)}] seconds."
+        f"Each combination will be displayed for :green[{time_per_combination}] seconds."
     )
 else:
     st.write("No combinations available for the selected pivot note.")

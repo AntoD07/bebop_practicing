@@ -158,18 +158,6 @@ def create_cell_frames(
             df_cells_tmp_for_pivot_note_2[field].unique(),
             chord_tones_mapping,
         )
-    #     if loc_to_dominant:
-    #         df_cells_tmp_for_pivot_note_2 = translate_loc_to_dominant(
-    #             df_cells_tmp_for_pivot_note
-    #         )
-
-    # if loc_to_dominant:
-    #     chord_tones_mapping = dict(
-    #         zip(
-    #             df_cells_tmp_for_pivot_note_2[field].unique(),
-    #             df_cells[field].unique(),
-    #         )
-    #     )
     chord_tones_mapping = dict(
         zip(
             df_cells_tmp_for_pivot_note[field].unique(),

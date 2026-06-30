@@ -210,11 +210,11 @@ if st.button("Generate melodic line", type="primary"):
         c3.write(join_notes(notes))
     st.session_state.tmp = True
 
-st.session_state.tempo = st.number_input(
+st.session_state.tempo = st.sidebar.number_input(
     "Metronome tempo (bpm) : ",
     min_value=30,
     max_value=300,
-    value=60,
+    value=80,
     help="Setup the metronome to 2 beats, stressing first beat, without time",
 )
 metronome_html = f"""
@@ -223,6 +223,7 @@ metronome_html = f"""
         style="width: 360px; height:520px; border:none; border-radius:4px;">
 </iframe>
 """
+
 components.html(metronome_html, height=540, width=380)
 
 st.session_state.grade = st.number_input(

@@ -58,6 +58,20 @@ line_structure_dic = {
         "Locrian",
         "MinorResolutions",
     ],
+    "Dorian x Dominant": [
+        "Dorian",
+        "Dorian",
+        "MinorResolutions",
+        "MinorResolutions",
+        "Dorian",
+        "Dorian",
+        "MinorResolutions",
+        "MinorResolutions",
+        "Dorian",
+        "Dorian",
+        "MinorResolutions",
+        "MinorResolutions",
+    ],
 }
 
 
@@ -192,7 +206,7 @@ df_sus4 = pd.read_csv("7sus4_sampling.csv")
 
 def line_structure_mapping(type, length=None):
     if type not in [
-        "Dorian x Dominant",
+        # "Dorian x Dominant",
         "Major x Dominant",
         "Dorian",
         "Myxolidian",
@@ -208,8 +222,6 @@ def line_structure_mapping(type, length=None):
         return [random.choice(["Myxolidian"]) for _ in range(length)]
     elif type == "Locrian":
         return [random.choice(["Locrian"]) for _ in range(length)]
-    elif type == "Dorian x Dominant":
-        return [random.choice(["Dorian", "MinorResolutions"]) for _ in range(length)]
     elif type == "Major x Dominant":
         return [random.choice(["Maj7", "MajorResolutions"]) for _ in range(length)]
 
