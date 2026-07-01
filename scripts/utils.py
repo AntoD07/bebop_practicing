@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import ast
 import streamlit as st
@@ -6,6 +7,17 @@ import datetime
 import random
 
 from scripts.paths import PRACTICE_DETAILS, MELODIC_LINES_LOG
+
+# Column order for the graded melodic-line log (data/logs/melodic_lines.csv).
+PRACTICE_LOG_COLUMNS = [
+    "Date",
+    "Line type",
+    "Line",
+    "Note sequence",
+    "Grade",
+    "Comment",
+    "Movement",
+]
 
 
 @st.cache_data
@@ -76,6 +88,7 @@ def get_or_update_practice_details():
             "position": random.choice(positions),
         }
 
+        os.makedirs(os.path.dirname(filename) or ".", exist_ok=True)
         with open(filename, "w") as file:
             json.dump(practice_details, file)
 
@@ -89,11 +102,20 @@ def save_practice_session(details, file_path=MELODIC_LINES_LOG):
     - details: A dictionary containing the session details (date, chord type, pivot note, tempo, grade).
     - file_path: Path to the CSV file where session details are saved.
     """
-    # Convert the details dictionary to a DataFrame
     df = pd.DataFrame([details])
 
-    # Try to append to the file if it exists, otherwise create a new file
-    try:
-        df.to_csv(file_path, mode="a", index=False, header=False)
-    except FileNotFoundError:
-        df.to_csv(file_path, mode="w", header=True, index=False)
+    os.makedirs(os.path.dirname(file_path) or ".", exist_ok=True)
+    # Write a header row only when starting a fresh (missing or empty) file.
+    is_new = (not os.path.exists(file_path)) or os.path.getsize(file_path) == 0
+    df.to_csv(file_path, mode="a", index=False, header=is_new)
+
+
+def load_practice_lines(file_path=MELODIC_LINES_LOG):
+    """
+    Loads the graded melodic-line log, returning an empty (correctly-columned)
+    DataFrame when the file doesn't exist yet — so the UI works on a fresh deploy
+    where the runtime log isn't checked into git.
+    """
+    if os.path.exists(file_path):
+        return pd.read_csv(file_path)
+    return pd.DataFrame(columns=PRACTICE_LOG_COLUMNS)

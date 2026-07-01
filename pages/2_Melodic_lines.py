@@ -9,6 +9,7 @@ from scripts.utils import (
     get_or_update_practice_details,
     join_notes,
     save_practice_session,
+    load_practice_lines,
 )
 from scripts.melodic_lines.melodic_lines import (
     sample_line_from_path_with_connecting_note,
@@ -244,7 +245,7 @@ if st.session_state.get("tmp"):
 st.write("---")
 st.write("## Saved melodic lines")
 
-lines = pd.read_csv(MELODIC_LINES_LOG)
+lines = load_practice_lines()
 
 filtered_lines = lines.loc[lines["Line type"] == st.session_state.line_type]
 filtered_lines["Start Note"] = filtered_lines["Note sequence"].str[4]

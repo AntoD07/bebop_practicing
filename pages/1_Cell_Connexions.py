@@ -256,7 +256,7 @@ with st.expander("Show Cells"):
         c2.write(f"##### {n}")
         c2.write(join_notes(notes) + "  " + mvt)
 
-st.sidebar.session_state.tempo = st.number_input(
+st.session_state.tempo = st.number_input(
     "Metronome tempo (bpm) : ",
     min_value=30,
     max_value=300,
