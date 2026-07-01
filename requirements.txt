@@ -1,0 +1,5 @@
+# Runtime dependencies for Streamlit Community Cloud (kept in sync with pyproject.toml).
+# Streamlit Cloud installs from this file; a plain requirements.txt builds faster and more
+# deterministically than resolving Poetry/pyproject on the server.
+streamlit>=1.36
+pandas>=2.2

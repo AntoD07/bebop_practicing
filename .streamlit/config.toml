@@ -1,0 +1,11 @@
+# Streamlit settings safe for BOTH local runs and Streamlit Community Cloud.
+# Tunnel-only relaxations (server.address / enableCORS / enableXsrfProtection) live in
+# scripts/dev_preview.sh so they apply only to the local cloudflared preview and never
+# weaken the public hosted deploy.
+
+[server]
+# Auto-rerun the app whenever a source file is saved — gives the fast phone-preview loop.
+runOnSave = true
+
+[browser]
+gatherUsageStats = false
