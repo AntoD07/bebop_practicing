@@ -21,7 +21,7 @@ Descending Bebop scale from 4th,4,1,"['4', 'maj3', '3', '9', '1']","{'Myxolidian
 Bebop scale from 4th (back to 4th),4,4,"['4', 'maj3', '3', '5', '4']","{'Myxolidian': 0.9, 'Dorian': 0.9, 'Locrian': 0.7}",N,Essential
 Coltrane Pattern from 4th,4,3,"['4', '5', '6', '1', '3']","{'Myxolidian': 1.1, 'Locrian': 0.8, 'Dorian': 0.5}",A,Essential
 Descending II Scale,5,1,"['5', '4', '3', '9', '1']","{'Dorian': 1.1, 'Locrian': 0.8, 'Myxolidian': 0.4}",D,Essential
-Minor Honeysuckle Rose,4,9,"['4', '3', '5', '7', '9']","{'Myxolidian': 0.5, 'Dorian': 0.4, 'Locrian': 0.1}",N,Bonus
+Minor Honeysuckle Rose,4,9,"['4', '3', '5(lower)', '7', '9']","{'Myxolidian': 0.5, 'Dorian': 0.4, 'Locrian': 0.1}",N,Bonus
 Descending II Arpeggio from II-5th,5,6,"['5', '3', '1', '7', '6']","{'Locrian': 1.1, 'Dorian': 0.9, 'Myxolidian': 0.7}",D,Essential
 Lee Morgan Dominant (Mccoy),4,9,"['4', 'maj3', '3', '5', '9']","{'Myxolidian': 0.7, 'Dorian': 0.5, 'Locrian': 0.3}",D,Bonus
 Freddie Hubbard,5,4,"['5', '7', '6', '5', '4']","{'Myxolidian': 0.9, 'Locrian': 0.7, 'Dorian': 0.4}",N,Bonus

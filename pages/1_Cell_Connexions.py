@@ -1,7 +1,10 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
+import ast
 import time
+
+import pandas as pd
 
 from scripts.utils import (
     get_or_update_practice_details,
@@ -9,6 +12,22 @@ from scripts.utils import (
 )
 
 from scripts.melodic_lines.combinations import find_combinations_on_pivot_new
+
+from scripts.fingering.config import FingeringConfig
+from scripts.fingering.optimizer import optimize_fingering
+from scripts.fingering.render import render_html, format_report
+from scripts.fingering.cell_bridge import (
+    build_connection_line,
+    chord_symbol_for_mode,
+    chord_symbol_for_root_pc,
+    DEFAULT_MODE_ROOT_OFFSET,
+    root_pc,
+)
+from scripts.fingering.positions import (
+    classify_position,
+    position_config_for_key,
+    POSITIONS,
+)
 
 
 from scripts.modes.mode_transposition import (
@@ -29,6 +48,17 @@ st.sidebar.subheader(
 )
 st.session_state.include_bonus = st.sidebar.checkbox(
     "Whether to include bonus cells", value=st.session_state.get("include_bonus", False)
+)
+_POS_OPTIONS = ["Free (best on the neck)"] + POSITIONS
+_default_pos = (st.session_state.position
+                if isinstance(st.session_state.position, int)
+                and 1 <= st.session_state.position <= len(POSITIONS) else 0)
+st.session_state.fingering_position = st.sidebar.selectbox(
+    "Fingering position",
+    _POS_OPTIONS,
+    index=_default_pos,
+    help="Free = the single cheapest fingering anywhere on the neck. Pick a "
+         "named position to force every connection into that key-anchored box.",
 )
 # Use key and position in your Streamlit application
 c1, c2 = st.columns((0.5, 0.5))
@@ -260,7 +290,7 @@ st.session_state.tempo = st.number_input(
     "Metronome tempo (bpm) : ",
     min_value=30,
     max_value=300,
-    value=80,
+    value=160,
     help="Setup the metronome to 2 beats, stressing first beat, without time",
 )
 
@@ -282,6 +312,153 @@ st.subheader(
         st.session_state.tone_modified, len(combinations)
     ),
 )
+
+
+# --------------------------------------------------------------------------- #
+# Fingering + score for every pairwise connection (same engine as the quiz).
+# --------------------------------------------------------------------------- #
+def _cell_records(df):
+    """Hashable (name, degrees, movement) tuples for st.cache_data."""
+    recs = []
+    for _, row in df.reset_index().iterrows():
+        notes = row["Notes"]
+        degs = notes if isinstance(notes, list) else ast.literal_eval(str(notes))
+        recs.append((row["Cell Name"], tuple(s.strip() for s in degs),
+                     str(row["Movement"])))
+    return tuple(recs)
+
+
+@st.cache_data(show_spinner=False)
+def score_connections(key, chord1, chord2, end_records, start_records,
+                      position="Free (best on the neck)"):
+    """Score each ending->starting pair as ONE merged line.
+
+    The pivot note is SHARED — the last note of the first cell IS the first
+    note of the second (len1 + len2 - 1 notes total) — and the whole line goes
+    through a single DP, so the cost is the cost of the entire connection.
+    Cell 2's root is derived from the pivot pitch, so the join is seamless.
+
+    ``position``: "Free" searches the whole neck for the single cheapest
+    fingering; a named position constrains the search to that key-anchored box
+    (trying each octave the line fits in, keeping the cheapest).
+    """
+    sym1 = chord_symbol_for_mode(key, chord1)
+    kpc = root_pc(key)
+    constrained = position in POSITIONS
+    if constrained:
+        pos_cfg, pos_root_midi = position_config_for_key(position, key)
+    rows = []
+    for n1, d1, mv1 in end_records:
+        for n2, d2, mv2 in start_records:
+            cell1 = {"name": n1,
+                     "root": (kpc + DEFAULT_MODE_ROOT_OFFSET.get(chord1, 0)) % 12,
+                     "degrees": list(d1), "mode": chord1, "movement": mv1}
+            cell2 = {"name": n2, "root": 0,  # derived from the pivot
+                     "degrees": list(d2), "mode": chord2, "movement": mv2}
+            # Overlapping 5-note cells stride every 4 beats: the pivot lands
+            # on beat 1 of the second bar (a rest-stroke downbeat).
+            bpb = max(1, len(d1) - 1)
+            result, pivot_index, err = None, len(d1) - 1, None
+            if constrained:
+                # Try each octave register of the position's box, keep cheapest.
+                for off in (-12, 0, 12, 24):
+                    try:
+                        line, pivot_index, root2_pc = build_connection_line(
+                            cell1, cell2, base_midi=pos_root_midi + off)
+                        ctx = {"key": key, "beats_per_bar": bpb,
+                               "chords": [{"start_beat": 0, "symbol": sym1},
+                                          {"start_beat": pivot_index,
+                                           "symbol": chord_symbol_for_root_pc(root2_pc, chord2)}]}
+                        cand = optimize_fingering(
+                            line, ctx, pos_cfg.with_overrides(beats_per_bar=bpb))
+                    except (ValueError, KeyError) as e:
+                        err = e
+                        continue
+                    if result is None or cand.best.total_cost < result.best.total_cost:
+                        result = cand
+                if result is None:
+                    rows.append({"end": n1, "start": n2, "cost": None,
+                                 "pivot": "does not fit this position",
+                                 "position": "-", "result": None,
+                                 "n_up": None, "n_flags": None})
+                    continue
+            else:
+                try:
+                    line, pivot_index, root2_pc = build_connection_line(cell1, cell2)
+                    sym2 = chord_symbol_for_root_pc(root2_pc, chord2)
+                    ctx = {"key": key, "beats_per_bar": bpb,
+                           "chords": [{"start_beat": 0, "symbol": sym1},
+                                      {"start_beat": pivot_index, "symbol": sym2}]}
+                    cfg = FingeringConfig(beats_per_bar=bpb)
+                    result = optimize_fingering(line, ctx, cfg)
+                except (ValueError, KeyError) as e:
+                    rows.append({"end": n1, "start": n2, "cost": None,
+                                 "pivot": f"error: {e}", "position": "-",
+                                 "result": None, "n_up": None, "n_flags": None})
+                    continue
+            pv = result.notes[pivot_index]
+            rows.append({
+                "end": n1, "start": n2,
+                "cost": result.best.total_cost,
+                "pivot": f"{pv.name} ({d1[-1]}={d2[0]})",
+                "position": classify_position(result.best.placed, key),
+                "n_up": sum(1 for p in result.best.placed if p.stroke == "U"),
+                "n_flags": len(result.best.flags),
+                "result": result,
+            })
+    # Rank by cost, decreasing (hardest first); failures sink to the bottom.
+    rows.sort(key=lambda r: (r["cost"] is None,
+                             -(r["cost"] if r["cost"] is not None else 0.0)))
+    return rows
+
+
+st.subheader("", divider="red")
+st.write("## Fingering for each connection (one line, ranked by cost — "
+         "click a row to see its tab)")
+
+conn_rows = []
+if combinations:
+    with st.spinner("Scoring all pairwise connections..."):
+        conn_rows = score_connections(
+            st.session_state.key,
+            st.session_state.chord1,
+            st.session_state.chord2,
+            _cell_records(ending_cells_filtered),
+            _cell_records(starting_cells_filtered),
+            position=st.session_state.fingering_position,
+        )
+
+if conn_rows:
+    st.dataframe(
+        pd.DataFrame([
+            {"Ending cell": r["end"], "Starting cell": r["start"],
+             "Cost": r["cost"], "Pivot": r["pivot"], "Position": r["position"],
+             "Upstrokes": r["n_up"], "Flags": r["n_flags"]}
+            for r in conn_rows
+        ]),
+        use_container_width=True,
+        selection_mode="single-row",
+        on_select="rerun",
+        key="conn_table",
+    )
+    # Row click selects the connection; default to the hardest one.
+    _sel_rows = st.session_state.conn_table.selection["rows"]
+    _row = conn_rows[_sel_rows[0]] if _sel_rows else conn_rows[0]
+    st.write(f"**{_row['end']}  →  {_row['start']}**   ·   cost "
+             + (f"{_row['cost']:.2f}" if _row["cost"] is not None else "n/a")
+             + f"   ·   {_row['position']}")
+    if _row["result"] is None:
+        st.warning(f"No playable fingering: {_row['pivot']}")
+    else:
+        components.html(
+            render_html(_row["result"], tempo=int(st.session_state.get("tempo", 160))),
+            height=360, scrolling=True)
+        with st.expander("Full report (per-note table, flags, cost)"):
+            st.code(format_report(_row["result"]), language="text")
+
+_conn_lookup = {(r["end"], r["start"]): r["result"] for r in conn_rows}
+st.session_state.show_tab_in_exercise = st.checkbox(
+    "Show fingering tab during the exercise", value=True)
 # Total duration for practicing all combinations
 total_time_minutes = st.sidebar.number_input(
     "Total practice time (min) : ", min_value=1, max_value=120, value=10
@@ -336,6 +513,12 @@ if st.button("Start exercise 1", type="primary"):
 
             c1.markdown(f"##### {current_combination[0]}")
             c2.markdown(f"##### {current_combination[1]}")
+            if st.session_state.get("show_tab_in_exercise"):
+                _r = _conn_lookup.get(tuple(current_name))
+                if _r is not None:
+                    components.html(
+                        render_html(_r, tempo=int(st.session_state.tempo)),
+                        height=340, scrolling=True)
             ph = c3.empty()
             N = int(time_per_combination)
             for secs in range(N, -1, -1):

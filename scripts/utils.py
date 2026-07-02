@@ -17,6 +17,8 @@ PRACTICE_LOG_COLUMNS = [
     "Grade",
     "Comment",
     "Movement",
+    "Tab",        # compact fingering: "5/3D 5/6D ..." (string/fret + stroke)
+    "Tab file",   # saved SVG of the tab, relative to the repo root
 ]
 
 
@@ -97,17 +99,22 @@ def get_or_update_practice_details():
 
 def save_practice_session(details, file_path=MELODIC_LINES_LOG):
     """
-    Appends practice session details to a CSV file.
-    Parameters:
-    - details: A dictionary containing the session details (date, chord type, pivot note, tempo, grade).
-    - file_path: Path to the CSV file where session details are saved.
+    Appends practice session details to a CSV file, migrating the file's schema
+    when new columns (e.g. "Tab", "Tab file") are introduced: the existing log
+    is read, aligned to the union of columns, and rewritten — so old rows keep
+    working and new rows never mis-align.
     """
-    df = pd.DataFrame([details])
-
     os.makedirs(os.path.dirname(file_path) or ".", exist_ok=True)
-    # Write a header row only when starting a fresh (missing or empty) file.
-    is_new = (not os.path.exists(file_path)) or os.path.getsize(file_path) == 0
-    df.to_csv(file_path, mode="a", index=False, header=is_new)
+    new_row = pd.DataFrame([details])
+    if os.path.exists(file_path) and os.path.getsize(file_path) > 0:
+        existing = pd.read_csv(file_path)
+        combined = pd.concat([existing, new_row], ignore_index=True)
+    else:
+        combined = new_row
+    # Stable column order: canonical first, any extras preserved at the end.
+    cols = [c for c in PRACTICE_LOG_COLUMNS if c in combined.columns] + \
+           [c for c in combined.columns if c not in PRACTICE_LOG_COLUMNS]
+    combined[cols].to_csv(file_path, index=False)
 
 
 def load_practice_lines(file_path=MELODIC_LINES_LOG):

@@ -19,3 +19,4 @@ def sampling_file(chord):
 
 PRACTICE_DETAILS = str(LOGS_DIR / "practice_details.json")
 MELODIC_LINES_LOG = str(LOGS_DIR / "melodic_lines.csv")
+TABS_DIR = str(LOGS_DIR / "tabs")  # saved fingering tabs (SVG), one per saved line

@@ -31,7 +31,7 @@ Hank Mobley (Mccoy),7,1,"['7', '9', '6', '5', '1']","['7sus4', 'Myxolidian']","{
 Hidden Ideal maj7 Arpeggio to 13th (Mccoy),6,6,"['6', '7', '9', '4', '6']",['7sus4'],"{'Dorian': 0.5, 'Locrian': 0.1, 'Myxolidian': 0.0}",0
 Johnny Griffin Enclosure of 5th (Mccoy),9,5,"['9', '4', '#11', '6', '5']","['7sus4', 'Dorian']","{'Dorian': 0.8, 'Locrian': 0.5, 'Myxolidian': 0.3}",1
 Lee Morgan Dominant (Mccoy),1,6,"['1', 'maj7', '7', '9', '6']","['7sus4', 'Myxolidian']","{'Myxolidian': 0.7, 'Dorian': 0.5, 'Locrian': 0.3}",0
-Minor Honeysuckle Rose,1,6,"['1', '7', '9', '4', '6']",['7sus4'],"{'Myxolidian': 0.5, 'Dorian': 0.4, 'Locrian': 0.1}",13
+Minor Honeysuckle Rose,1,6,"['1', '7', '9(lower)', '4', '6']",['7sus4'],"{'Myxolidian': 0.5, 'Dorian': 0.4, 'Locrian': 0.1}",13
 Passing Tone Enclosure,9,3,"['9', '4', '9', '#9', '3']","['7sus4', 'Locrian', 'Dorian']","{'Locrian': 0.8, 'Dorian': 0.6, 'Myxolidian': 0.4}",6
 Perfect Chromatic Enclosure of 5th,4,5,"['4', '#11', '6', '#5', '5']","['7sus4', 'Dorian']","{'Dorian': 0.6, 'Locrian': 0.4, 'Myxolidian': 0.3}",2
 Reverse Coltrane Pattern,4,6,"['4', '9', '1', '7', '6']",['7sus4'],"{'Myxolidian': 0.5, 'Dorian': 0.1, 'Locrian': 0.0}",3

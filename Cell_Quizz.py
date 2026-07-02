@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import random
 
 from scripts.load_cells import create_cell_frames
@@ -7,14 +8,38 @@ from scripts.utils import (
     validate_results,
     join_notes,
     cell_from_string,
+    get_or_update_practice_details,
 )
 
 from scripts.modes.mode_transposition import translate_dom_to_minor
+from scripts.fingering.config import FingeringConfig
+from scripts.fingering.cell_bridge import cell_degrees, cell_movement
+from scripts.fingering.positions import optimize_all_positions, POSITION_DESC, POSITIONS
+from scripts.fingering.render import render_html, format_note_table
 
 st.title("Bebop practice app")
 previous_chord = st.session_state.get("chord")
+
+# Today's rotating practice key + position (shared with the other pages).
+st.session_state.practice_key, st.session_state.practice_position = (
+    get_or_update_practice_details()
+)
+st.sidebar.subheader(f"Today's Key: :blue[{st.session_state.practice_key}]")
+st.sidebar.subheader(
+    f"Today's Position (for guitar): :blue[{st.session_state.practice_position}]"
+)
+
 st.session_state.include_bonus = st.sidebar.checkbox(
     "Whether to include bonus cells", value=st.session_state.get("include_bonus", False)
+)
+_KEYS = ["C", "G", "D", "A", "E", "B", "F#", "Db", "Ab", "Eb", "Bb", "F"]
+_default_key_idx = (
+    _KEYS.index(st.session_state.practice_key)
+    if st.session_state.practice_key in _KEYS else 0
+)
+st.session_state.fingering_key = st.sidebar.selectbox(
+    "Key (for the fingering tabs)", _KEYS, index=_default_key_idx,
+    help="Defaults to today's practice key; change it to transpose the fingering.",
 )
 
 st.session_state.chord = st.selectbox(
@@ -98,6 +123,73 @@ if st.button("Submit"):
         st.error("Incorrect !")
 with st.expander("See solution"):
     st.write(join_notes(answer["Notes"]), answer["Movement"])
+
+# --- Fingering for the selected cell, in all five positions ----------------
+st.subheader("", divider="red")
+st.write(f"## Fingering for **{st.session_state.name}**  "
+         f"(:blue[{st.session_state.fingering_key} {st.session_state.chord}])")
+st.caption(
+    "Pitches fixed by the cell; the solver finds each position's string/fret "
+    "layout and derives Gypsy picking (⊓ rest-stroke down, ∨ parity upstroke)."
+)
+try:
+    _degs = cell_degrees(st.session_state.chord, st.session_state.name)
+    _mv = cell_movement(st.session_state.chord, st.session_state.name)
+    _cell = {
+        "name": st.session_state.name,
+        "root": st.session_state.fingering_key,
+        "degrees": _degs,
+        "mode": st.session_state.chord,
+        "movement": _mv,
+    }
+    _ctx = {
+        "key": st.session_state.fingering_key,
+        "chords": [{"start_beat": 0,
+                    "symbol": f"{st.session_state.fingering_key} {st.session_state.chord}"}],
+    }
+    # Positions are anchored to today's KEY and returned ranked by cost (desc).
+    _positions = optimize_all_positions(_cell, _ctx, FingeringConfig())
+
+    # Today's rotating position (1..5) maps to a fixed position name (order-independent).
+    _today_pos = st.session_state.practice_position
+    _today_name = (POSITIONS[_today_pos - 1]
+                   if isinstance(_today_pos, int) and 1 <= _today_pos <= len(POSITIONS)
+                   else None)
+    if _today_name:
+        st.caption(f"⭐ Today's focus position: {_today_pos} — {_today_name}  "
+                   f"(tabs ranked by cost, hardest first)")
+
+    def _pos_label(p):
+        star = "⭐ " if p["name"] == _today_name else ""
+        c = f" · {p['best_cost']:.1f}" if p["best_cost"] is not None else " · n/a"
+        return f"{star}{p['name']}{c}"
+
+    _tabs = st.tabs([_pos_label(p) for p in _positions])
+    for _tab, p in zip(_tabs, _positions):
+        with _tab:
+            st.caption(POSITION_DESC.get(p["name"], ""))
+            octs = p["octaves"]
+            if not octs:
+                st.warning("this cell's range does not fit this position.")
+                continue
+            # Every octave this cell can be played in, cheapest first + its cost.
+            st.markdown("**Octaves available here** (cheapest first):")
+            for o in octs:
+                extra = f"  _({o['note']})_" if o["note"] else ""
+                st.write(f"- {o['register']} — **cost {o['cost']:.2f}**{extra}")
+            _opts = [f"{o['register']}  ·  cost {o['cost']:.2f}" for o in octs]
+            _sel = st.selectbox("Show octave", _opts, key=f"oct_{p['name']}")
+            chosen = octs[_opts.index(_sel)]
+            if chosen["note"]:
+                st.info(chosen["note"])
+            components.html(render_html(chosen["result"], tempo=160), height=340,
+                            scrolling=True)
+            with st.expander("Per-note detail"):
+                st.code(format_note_table(chosen["result"].best.placed), language="text")
+except KeyError:
+    st.info("Fingering unavailable for this cell (not found in the sampling table).")
+except Exception as e:  # noqa: BLE001 — never break the quiz on a fingering hiccup
+    st.warning(f"Could not compute fingering: {e}")
 
 # Exercise 1
 st.subheader("", divider="red")

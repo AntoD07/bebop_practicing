@@ -11,9 +11,6 @@ Reverse Coltrane,5,7,"['5', '3', '9', '1', '7']",D,Essential
 Hiddent Minor triad,5,6,"['5', '3', '7', '5', '6']",D,Essential
 Octave displaced enclosure of 3rd,5,3,"['5','7', '9','4','3']",D,Essential
 Descending Maj Scale from 5th,5,7,"['5', '4', '3', '9', '7']",D,Essential
-Barry Harris 5,5,3,"['5','7','1','4','3']",D,Essential
-Barry Harris 4,5,3,"['5','4','9','#9','3']",D,Essential
-(5 notes) Barry Harris 3,5,9,"['5','4','3','5','7','9']",D,Essential
 Whole Step Double Enclosure,6,"5 ","['6', '5', '#5', '#11', '5']",D,Essential
 Major Bebop Scale from 6th,6,3,"['6', '#5', '5', '4', '3']",D,Essential
 Ideal Maj 7 Arpeggio,7,7,"['7', '1', '3', '5', '7']",A,Essential
@@ -23,7 +20,7 @@ Chromatic Passing tone enclosure (of Maj 7 root),7,1,"['7', '1', '9', 'b9', '1']
 Lydian augmented enclosure,7,5,"['7', '6', '#5', '#4', '5']",D,Essential
 Descending Maj Scale from 9th,9,5,"['9', '1', '7', '6', '5']",D,Essential
 Lee Morgan Maj7,9,7,"['9', 'b9', '1', '3', '7']",D,Essential
-Major Honeysuckle,9,7,"['9', '1', '3', '5', '7']",N,Essential
+Major Honeysuckle,9,7,"['9', '1', '3(lower)', '5', '7']",N,Essential
 Maj Triad from root,1,3,"['1', '3', '5', '1', '3']",A,Bonus
 Maj Triad from 3rd,3,5,"['3', '5', '1', '3', '5']",A,Bonus
 Maj Triad from 5th,5,1,"['5', '1', '3', '5', '1']",A,Bonus
