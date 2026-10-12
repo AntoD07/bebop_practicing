@@ -57,7 +57,7 @@ export const useConnections = create<ConnectionsState>()(
       set: (p) => set({ ...p, updatedAt: nowIso() }),
       updateCuration: (pickKey, fn) => set((s) => ({ curations: { ...s.curations, [pickKey]: fn(s.curations[pickKey] ?? emptyCuration()) } })),
     }),
-    { name: "bebop.connections", version: 1, partialize: (s) => ({ ...s, selectedPair: null }) as ConnectionsState },
+    { name: "bebop.connections", version: 1, partialize: (s) => ({ ...s, selectedPair: null }) as ConnectionsState, skipHydration: true },
   ),
 );
 

@@ -124,9 +124,11 @@ export const useDrill = create<DrillStore>()(
       reset: () => set({ ...initial, deviceId: get().deviceId, updatedAt: Date.now() }),
       setItems: (items) => {
         const s = get();
+        if (!items.length) return; // an empty rebuild never wipes a session
         const cur = s.items[s.currentIndex];
-        const idx = cur ? Math.max(0, items.findIndex((it) => it.id === cur.id)) : 0;
-        set({ items, currentIndex: Math.min(idx, Math.max(0, items.length - 1)) });
+        const found = cur ? items.findIndex((it) => it.id === cur.id) : -1;
+        const idx = found >= 0 ? found : Math.min(s.currentIndex, items.length - 1);
+        set({ items, currentIndex: idx });
       },
       setConfig: (patch) => {
         const s = get();
@@ -138,6 +140,7 @@ export const useDrill = create<DrillStore>()(
     {
       name: "bebop.drill",
       version: 1,
+      skipHydration: true,
       // a reload never auto-starts audio: a running drill comes back paused
       merge: (persisted, current) => {
         const p = (persisted ?? {}) as Partial<DrillState>;

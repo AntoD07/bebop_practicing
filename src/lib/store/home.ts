@@ -22,6 +22,6 @@ export const useHome = create<HomeState>()(
       fingeringKey: null,
       set: (p) => set({ ...p, updatedAt: nowIso() }),
     }),
-    { name: "bebop.home", version: 1 },
+    { name: "bebop.home", version: 1, skipHydration: true },
   ),
 );

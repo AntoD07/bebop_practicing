@@ -15,14 +15,6 @@ dependencies = [
     "numpy>=2",
 ]
 
-[project.optional-dependencies]
-# The legacy Streamlit app (legacy/), runnable until feature parity:
-#   cd legacy && PYTHONPATH=.. uv run --extra legacy streamlit run Cell_Quizz.py
-legacy = [
-    "streamlit>=1.36,<2",
-    "pandas>=2.2",
-]
-
 [dependency-groups]
 dev = [
     "uvicorn[standard]>=0.30",

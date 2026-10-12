@@ -10,5 +10,5 @@ export type ScoreState = Synced & {
 };
 
 export const useScore = create<ScoreState>()(
-  persist((set) => ({ updatedAt: "", posKey: null, set: (p) => set({ ...p, updatedAt: nowIso() }) }), { name: "bebop.score", version: 1 }),
+  persist((set) => ({ updatedAt: "", posKey: null, set: (p) => set({ ...p, updatedAt: nowIso() }) }), { name: "bebop.score", version: 1, skipHydration: true }),
 );

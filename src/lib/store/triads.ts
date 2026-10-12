@@ -53,7 +53,7 @@ export const useTriads = create<TriadsState>()(
       styleFilter: [],
       set: (p) => set({ ...p, updatedAt: nowIso() }),
     }),
-    { name: "bebop.triads", version: 1 },
+    { name: "bebop.triads", version: 1, skipHydration: true },
   ),
 );
 

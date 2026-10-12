@@ -1,110 +1,66 @@
 #!/usr/bin/env bash
 #
-# Fast local preview loop: run Streamlit + a public cloudflared quick tunnel so you can
-# check the app on your phone within seconds of an edit (Streamlit auto-reloads on save).
+# Fast local preview: the Python API (uvicorn, auto-reload) + Next.js dev server
+# + a public cloudflared quick tunnel so you can check the app on a phone.
 #
-#   Usage:   ./scripts/dev_preview.sh          (preferred)
-#            bash scripts/dev_preview.sh
-#            zsh  scripts/dev_preview.sh        (auto re-execs under bash)
-#   Stop:    Ctrl-C                             (tears down Streamlit, the tunnel, caffeinate)
-#   Test:    DRY_RUN=1 ./scripts/dev_preview.sh (checks setup, launches nothing)
+#   Usage:   ./scripts/dev_preview.sh           (Ctrl-C tears everything down)
+#            DRY_RUN=1 ./scripts/dev_preview.sh (checks the setup, launches nothing)
+#            NO_TUNNEL=1 ./scripts/dev_preview.sh (local only)
 #
-# Open the printed  https://<random>.trycloudflare.com  URL on your phone. The URL changes
-# each launch (quick tunnels are ephemeral); for a stable URL set up a named Cloudflare
-# tunnel or `tailscale serve` later.
-#
-# Run inside the env that has streamlit (e.g. `conda activate sandbox`). Requires cloudflared
-# — install (Apple Silicon, no Homebrew):
+# Reads .env.local (APP_PASSWORD, AUTH_SECRET, ENGINE_API_KEY, ENGINE_URL,
+# TURSO_*). The API key given to the Python side is ENGINE_API_KEY. Requires
+# node on PATH (or ~/.local/node/bin), uv, and cloudflared for the tunnel:
 #   curl -fsSL https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-darwin-arm64.tgz \
 #     | tar -xz -C "$HOME/.local/bin" && chmod +x "$HOME/.local/bin/cloudflared"
 
-# Re-exec under bash when launched with another shell (zsh/sh) so bash-only syntax works.
-if [ -z "${BASH_VERSION:-}" ]; then
-  exec bash "$0" "$@"
-fi
-
+if [ -z "${BASH_VERSION:-}" ]; then exec bash "$0" "$@"; fi
 set -euo pipefail
 
-# --- locate repo root (this script lives in <root>/scripts) ---
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
 ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 cd "$ROOT"
+export PATH="$HOME/.local/node/bin:$HOME/.local/bin:$PATH"
 
-PORT="${PORT:-8501}"
+WEB_PORT="${PORT:-3000}"
+API_PORT="${API_PORT:-8000}"
 
-if [ ! -f "$ROOT/Cell_Quizz.py" ]; then
-  echo "Error: Cell_Quizz.py not found in $ROOT (run this script from the repo's scripts/ dir)." >&2
-  exit 1
+[ -f .env.local ] || { echo "No .env.local — copy .env.example and fill it in." >&2; exit 1; }
+set -a; # shellcheck disable=SC1091
+source .env.local; set +a
+export BEBOP_API_KEY="${ENGINE_API_KEY:-}"
+export BEBOP_ALLOWED_ORIGINS="http://localhost:$WEB_PORT"
+[ -n "$BEBOP_API_KEY" ] || export BEBOP_DEV=1
+export ENGINE_URL="${ENGINE_URL:-http://127.0.0.1:$API_PORT}"
+
+command -v node >/dev/null || { echo "node not found (install Node 24 under ~/.local/node)" >&2; exit 1; }
+command -v uv >/dev/null || { echo "uv not found" >&2; exit 1; }
+CLOUDFLARED="$(command -v cloudflared || true)"
+if [ -z "$CLOUDFLARED" ] && [ -z "${NO_TUNNEL:-}" ]; then
+  echo "cloudflared not found — set NO_TUNNEL=1 for a local-only preview." >&2; exit 1
 fi
-
-# --- locate cloudflared (PATH, then ~/.local/bin) ---
-if command -v cloudflared >/dev/null 2>&1; then
-  CLOUDFLARED="$(command -v cloudflared)"
-elif [ -x "$HOME/.local/bin/cloudflared" ]; then
-  CLOUDFLARED="$HOME/.local/bin/cloudflared"
-else
-  echo "cloudflared not found. See the install one-liner in this script's header." >&2
-  exit 1
-fi
-
-# --- streamlit must be on PATH (activate the right env first) ---
-if ! command -v streamlit >/dev/null 2>&1; then
-  echo "streamlit not found on PATH. Activate the env that has it, e.g. 'conda activate sandbox'." >&2
-  exit 1
-fi
-
 if [ "${DRY_RUN:-0}" = "1" ]; then
-  echo "dry-run OK — root: $ROOT | port: $PORT | cloudflared: $CLOUDFLARED | streamlit: $(command -v streamlit)"
+  echo "dry-run OK — root: $ROOT | web :$WEB_PORT | api :$API_PORT | node $(node --version) | tunnel: ${CLOUDFLARED:-none}"
   exit 0
 fi
 
-# --- tear down every child process on exit ---
-CAF_PID=""; ST_PID=""; CF_PID=""
-cleanup() {
-  echo
-  echo "Shutting down preview..."
-  kill "$CAF_PID" "$ST_PID" "$CF_PID" 2>/dev/null || true
-}
+PIDS=()
+cleanup() { echo; echo "Shutting down preview..."; kill "${PIDS[@]}" 2>/dev/null || true; }
 trap cleanup EXIT INT TERM
 
-# keep the Mac awake while previewing (so the tunnel stays up); harmless if it exits
-caffeinate -dis & CAF_PID=$!
+caffeinate -dis & PIDS+=($!)
+echo "Starting the Python API on :$API_PORT (auto-reload)"
+uv run uvicorn api.index:app --port "$API_PORT" --reload & PIDS+=($!)
+echo "Starting Next.js dev on :$WEB_PORT"
+npx next dev -p "$WEB_PORT" & PIDS+=($!)
 
-echo "Starting Streamlit on http://localhost:$PORT  (auto-reloads on save)"
-# CORS/XSRF disabled here ONLY (local tunnel): Streamlit otherwise rejects the cross-origin
-# trycloudflare host and the websocket/uploads break. The hosted deploy keeps secure defaults.
-streamlit run Cell_Quizz.py \
-  --server.port "$PORT" \
-  --server.address 0.0.0.0 \
-  --server.headless true \
-  --server.runOnSave true \
-  --server.enableCORS false \
-  --server.enableXsrfProtection false \
-  --browser.gatherUsageStats false & ST_PID=$!
-
-# wait for Streamlit to be ready before tunnelling (clearer than a refused-origin error)
-printf "Waiting for Streamlit to come up"
-ready=0
-for _ in $(seq 1 45); do
-  if curl -sf "http://localhost:$PORT/_stcore/health" >/dev/null 2>&1; then
-    ready=1; break
-  fi
-  if ! kill -0 "$ST_PID" 2>/dev/null; then   # Streamlit already died
-    break
-  fi
-  printf "."
-  sleep 1
+printf "Waiting for the app"
+for _ in $(seq 1 60); do
+  curl -sf "http://localhost:$WEB_PORT/login" >/dev/null 2>&1 && break
+  printf "."; sleep 1
 done
-printf "\n"
-if [ "$ready" != "1" ]; then
-  echo "Streamlit did not become ready on port $PORT — check its output above." >&2
-  exit 1
+echo
+if [ -z "${NO_TUNNEL:-}" ]; then
+  echo "Opening the public tunnel — open the trycloudflare URL below on your phone:"
+  "$CLOUDFLARED" tunnel --url "http://localhost:$WEB_PORT" & PIDS+=($!)
 fi
-
-echo
-echo "Opening public tunnel via cloudflared — open the trycloudflare URL below on your phone:"
-echo
-"$CLOUDFLARED" tunnel --url "http://localhost:$PORT" & CF_PID=$!
-
-# block until a child exits or Ctrl-C
 wait

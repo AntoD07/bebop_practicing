@@ -53,7 +53,7 @@ export const usePenta = create<PentaState>()(
       styleFilter: [],
       set: (p) => set({ ...p, updatedAt: nowIso() }),
     }),
-    { name: "bebop.pentatonics", version: 1 },
+    { name: "bebop.pentatonics", version: 1, skipHydration: true },
   ),
 );
 

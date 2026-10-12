@@ -1,22 +1,19 @@
-"""Score import: MusicXML (exact) and PDF/image via OMR (best-effort).
+"""Score import: MusicXML (exact) -> the pitch ``line`` the optimizer consumes.
 
-Turns a written score into the pitch ``line`` the fingering optimizer consumes:
 ``{"pitch": midi, "start": onset_in_beats, "phrase_start": bool, "degree": ...}``
 plus the chord context. Pitches from a score are ABSOLUTE — no octave choice,
 no transposition; the optimizer only decides where on the neck to play them.
 
-Parsing uses music21 when available (handles .xml/.musicxml/.mxl robustly) with
-a small stdlib fallback for plain monophonic MusicXML. OMR runs through
-``oemer`` (if installed) on a rendered PNG; its output is MusicXML, which flows
-through the same parser — and the same human review table, because OMR is
-never 100%.
+Parsing uses music21 when importable (handles .xml/.musicxml/.mxl robustly)
+with a stdlib fallback for plain monophonic MusicXML — the deployed API ships
+only the stdlib path. Images/PDFs go through the Claude-vision reader
+(``vision_omr.py``); the classical oemer OMR tier was retired (unusable on
+jazz fonts). Every reading flows through the app's human review table.
 """
 
 from __future__ import annotations
 
 import os
-import shutil
-import subprocess
 import tempfile
 import zipfile
 from typing import List, Optional, Tuple
@@ -293,73 +290,3 @@ def line_from_score(parsed: dict) -> Tuple[List[dict], dict]:
         "density": density,
     }
     return line, context
-
-
-# --------------------------------------------------------------------------- #
-# PDF / image -> MusicXML via OMR
-# --------------------------------------------------------------------------- #
-def pdf_to_png(pdf_path: str, out_dir: str, size: int = 4000) -> str:
-    """Render page 1 of a PDF to PNG. Uses macOS qlmanage (no extra deps)."""
-    subprocess.run(
-        ["qlmanage", "-t", "-s", str(size), "-o", out_dir, pdf_path],
-        capture_output=True, timeout=120,
-    )
-    png = os.path.join(out_dir, os.path.basename(pdf_path) + ".png")
-    if not os.path.exists(png):
-        raise RuntimeError("PDF rendering failed (qlmanage produced no PNG)")
-    return png
-
-
-# Preferred: an isolated venv with oemer's supported deps (numpy<2, opencv 4.x)
-# — the main env's opencv-5/numpy-2 stack breaks oemer 0.1.x internally.
-_OEMER_VENV_PYTHON = os.path.expanduser("~/.venvs/oemer-omr/bin/python")
-
-
-def _omr_python() -> Optional[str]:
-    if os.path.exists(_OEMER_VENV_PYTHON):
-        return _OEMER_VENV_PYTHON
-    if shutil.which("oemer") is not None:
-        return "python"  # fall back to the current env (may be less compatible)
-    return None
-
-
-def omr_available() -> bool:
-    return _omr_python() is not None
-
-
-# oemer 0.1.x still uses NumPy<1.24 aliases (np.int / np.float / np.bool),
-# which NumPy 2 removed. Rather than patching site-packages, run oemer through
-# a shim that restores the aliases at runtime — self-contained and reversible.
-_OEMER_SHIM = (
-    "import sys, numpy as np\n"
-    "for _a, _t in (('int', int), ('float', float), ('bool', bool)):\n"
-    "    if not hasattr(np, _a):\n"
-    "        setattr(np, _a, _t)\n"
-    "from oemer.ete import main\n"
-    "sys.argv = ['oemer'] + sys.argv[1:]\n"
-    "main()\n"
-)
-
-
-def run_omr(png_path: str, out_dir: str, timeout: int = 900) -> bytes:
-    """Run oemer on a score image; return the resulting MusicXML bytes.
-
-    Slow (deep-learning inference on CPU, minutes on first run while models
-    download). Output must ALWAYS pass through the human review table.
-    """
-    os.makedirs(out_dir, exist_ok=True)
-    py = _omr_python()
-    if py is None:
-        raise RuntimeError("oemer is not installed (main env or ~/.venvs/oemer-omr)")
-    proc = subprocess.run(
-        [py, "-c", _OEMER_SHIM, png_path, "-o", out_dir, "--without-deskew"],
-        capture_output=True, text=True, timeout=timeout,
-    )
-    produced = [os.path.join(out_dir, f) for f in os.listdir(out_dir)
-                if f.endswith(".musicxml") or f.endswith(".xml")]
-    if not produced:
-        raise RuntimeError(
-            f"oemer produced no MusicXML. stderr tail: {proc.stderr[-400:]}")
-    newest = max(produced, key=os.path.getmtime)
-    with open(newest, "rb") as f:
-        return f.read()

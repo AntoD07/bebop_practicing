@@ -1,7 +1,7 @@
 """Centralized, CWD-independent paths to the project's data files.
 
-All paths derive from this file's location, so the app works regardless of the current
-working directory.
+All paths derive from this file's location, so the engine works regardless of
+the current working directory (the Vercel function, uvicorn, pytest).
 """
 
 from pathlib import Path
@@ -9,8 +9,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 SAMPLING_DIR = DATA_DIR / "sampling"
-LOGS_DIR = DATA_DIR / "logs"
 PENTATONICS_DIR = DATA_DIR / "pentatonics"
+# Runtime data of the local dev database (git-ignored); the app itself keeps
+# its state in Turso / the local libSQL file, not in files here.
+LOGS_DIR = DATA_DIR / "logs"
 
 
 def sampling_file(chord):
@@ -18,14 +20,4 @@ def sampling_file(chord):
     return str(SAMPLING_DIR / f"{chord}_sampling.csv")
 
 
-PRACTICE_DETAILS = str(LOGS_DIR / "practice_details.json")
-MELODIC_LINES_LOG = str(LOGS_DIR / "melodic_lines.csv")
-TABS_DIR = str(LOGS_DIR / "tabs")  # saved fingering tabs (SVG), one per saved line
 BERGONZI_PATTERNS = str(PENTATONICS_DIR / "bergonzi_patterns.json")
-
-# Score library (page 4): user-uploaded MusicXML + chosen best fingering per
-# named sequence. NOT regenerable runtime data — versioned, unlike data/logs/.
-SCORES_DIR = DATA_DIR / "scores"
-SCORES_INDEX = str(SCORES_DIR / "index.csv")
-SCORE_FILES_DIR = str(SCORES_DIR / "files")
-SCORE_TABS_DIR = str(SCORES_DIR / "tabs")

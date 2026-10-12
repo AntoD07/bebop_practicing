@@ -115,7 +115,11 @@ export function DrillPanel({ onStart, summary, className }: { onStart?: () => vo
           {d.config?.showTab ? "Hide the tab (T)" : "Show the tab (T)"}
         </Button>
       )}
-      {d.items.length > 0 && <DrillStrip items={d.items} current={d.currentIndex} onJump={d.jumpTo} orientation="vertical" />}
+      {d.items.length > 0 && (
+        <div className="hidden lg:block">
+          <DrillStrip items={d.items} current={d.currentIndex} onJump={d.jumpTo} orientation="vertical" />
+        </div>
+      )}
       {!active && onStart && (
         <Button size="lg" className="w-full" onClick={onStart}>
           <Play size={18} /> Start exercise

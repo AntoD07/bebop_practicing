@@ -62,7 +62,7 @@ export const useSession = create<SessionState>()(
       setShowIframe: (showIframe) => set({ showIframe, updatedAt: nowIso() }),
       setTheme: (theme) => set({ theme, updatedAt: nowIso() }),
     }),
-    { name: "bebop.session", version: 1 },
+    { name: "bebop.session", version: 1, skipHydration: true },
   ),
 );
 

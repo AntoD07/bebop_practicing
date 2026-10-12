@@ -110,7 +110,11 @@ export function ConnectionsPage() {
   const perItem = secondsPerItem(s.totalMinutes, items.length);
   const drill = useDrill();
   const fingeringByItem = (itemId: string) => {
-    const [pk, sig] = itemId.split("#");
+    // item id = `${pairKey}#${layout}`; cell names may contain '#' (e.g. "#11"),
+    // the layout never does, so split on the LAST one
+    const cut = itemId.lastIndexOf("#");
+    const pk = itemId.slice(0, cut);
+    const sig = itemId.slice(cut + 1);
     return visible.find((r) => r.pairKey === pk)?.inBox.find((f) => f.layout === sig);
   };
 
@@ -121,7 +125,9 @@ export function ConnectionsPage() {
   const currentRequestSig = JSON.stringify({ key: session.key, pairs: req, position, anchor: pairs?.single_chord ? "key" : s.anchor, flags: { bonus: s.bonus, domToMinor1: s.domToMinor1, domToMinor2: s.domToMinor2 } });
   React.useEffect(() => {
     registerFingerings(items.map((it) => [it.id, fingeringByItem(it.id)!]).filter((e) => e[1]) as [string, NonNullable<ReturnType<typeof fingeringByItem>>][]);
-    if (drill.status !== "idle" && drillRequestSig === currentRequestSig && pending.length === 0) {
+    // rebuild only once THIS setup's pairs are fully loaded (never from an
+    // empty/partial list: that would wipe a live drill)
+    if (drill.status !== "idle" && drillRequestSig === currentRequestSig && pairs && list.length > 0 && pending.length === 0 && items.length > 0) {
       const d = useDrill.getState();
       const cur = d.items[d.currentIndex];
       const same = d.items.map((i) => i.id).join("|") === itemsSig;

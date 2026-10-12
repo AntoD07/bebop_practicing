@@ -33,16 +33,23 @@ export function useDrillSync(onAdopted?: () => void) {
     const put = debounce((state: DrillState) => {
       fetch(`/api/drill/${ID}`, { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify({ state }) }).catch(() => {});
     }, 2000);
+    let applyingRemote = false;
     fetchRemoteDrill().then((remote) => {
       if (cancelled || !remote) return;
       const local = useDrill.getState();
       if (remote.updatedAt > local.updatedAt && remote.deviceId !== local.deviceId && remote.items.length) {
-        useDrill.getState().hydrate(remote);
+        applyingRemote = true; // adopting never writes back: the other device owns that state
+        try {
+          useDrill.getState().hydrate(remote);
+        } finally {
+          applyingRemote = false;
+        }
         adoptedRef.current = true;
         onAdopted?.();
       }
     });
     const unsub = useDrill.subscribe((s, prev) => {
+      if (applyingRemote) return;
       if (s.updatedAt === prev.updatedAt && s.currentIndex === prev.currentIndex && s.status === prev.status) return;
       const state = pickState(s);
       if (s.status !== prev.status) put.flush(state);

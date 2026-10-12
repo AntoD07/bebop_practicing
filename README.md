@@ -1,53 +1,78 @@
 # Bebop Practicing
 
-A Streamlit app for practicing bebop improvisation: memorizing melodic **cells**, drilling how
-they **connect** at pivot notes, and generating full **melodic lines** (2-5-1s, modal lines).
+A single-user guitar practice app for bebop improvisation: memorising melodic **cells**,
+drilling how they **connect** at pivot notes, generating **melodic lines**, pentatonic and
+triad-pair exercises, and reading scores — every line rendered as a Gypsy-jazz
+**fingering tab** (string/fret/finger/picking) with a native metronome and play-along.
 
-## Setup & run
+It is a **Next.js 16** app (phone + laptop, installable as a PWA) in front of a **Python
+compute API** (FastAPI) that wraps the fingering engine. Both deploy as ONE Vercel project;
+state (today's key, curated connections, saved lines, drill progress) lives in **Turso**
+(libSQL) so every device sees the same thing.
 
-This project uses [Poetry](https://python-poetry.org/) for dependency management.
+```
+src/                 Next.js app (App Router, TypeScript, Tailwind v4)
+api/                 FastAPI compute API  (api/index.py = the Vercel Python function)
+scripts/fingering/   the fingering engine (Viterbi/DP), unchanged domain logic
+scripts/domain/      pure-stdlib cell catalog, translations, pairing, sampling, lines
+scripts/pentatonics/ scripts/triad_pairs/   exercise generators + rankers
+data/sampling/*.csv  the cell library — the hand-edited source of truth
+tests/               pytest (API) + golden fixtures; e2e/ Playwright specs
+```
+
+## Run it locally
 
 ```bash
-poetry install
-poetry run streamlit run Cell_Quizz.py
+# once
+uv sync                       # Python 3.12 venv with the API deps (+ pytest, uvicorn)
+npm install                   # Node 24; also copies pdf.js's worker into public/
+cp .env.example .env.local    # set APP_PASSWORD, AUTH_SECRET, ENGINE_API_KEY (= BEBOP_API_KEY)
+
+# every time: two processes
+BEBOP_API_KEY=<same as ENGINE_API_KEY> uv run uvicorn api.index:app --port 8000 --reload
+npm run dev                   # http://localhost:3000 — sign in with APP_PASSWORD
 ```
 
-The app serves on http://localhost:8501. `Cell_Quizz.py` is the home page; Streamlit
-auto-discovers the other pages from `pages/`.
+Without `TURSO_DATABASE_URL` the app uses a local libSQL file (`data/logs/bebop.db`, created
+on first use). `./scripts/dev_preview.sh` starts both servers plus a public cloudflared
+tunnel for a quick phone check.
 
-> Don't have Poetry? Install it with `pipx install poetry` (or `brew install poetry`).
-> Alternatively, run directly with an environment that has `streamlit` and `pandas`:
-> `streamlit run Cell_Quizz.py`.
+## Tests
 
-## Layout
-
+```bash
+python -m scripts.fingering.tests          # engine T1–T9 (run after touching costs/optimizer/picking)
+BEBOP_DEV=1 uv run pytest tests/api -q     # API: auth, catalog, connections, lines, golden…
+uv run python -m scripts.golden.dump --update   # refresh tests/golden/responses after an intended engine change
+uv run python -m scripts.golden.bench      # 2400 random connection requests, every one < 3.5 s
+npm run typecheck && npm run lint && npm test   # TS, ESLint, Vitest (stores, geometry, pick keys…)
+npm run build && npm run e2e               # Playwright: login + drill resume (needs the API running)
 ```
-Cell_Quizz.py            # home page (cell memorization quiz)
-pages/                   # additional Streamlit pages
-  1_Cell_Connexions.py   # drill connecting two chords' cells at a pivot note
-  2_Melodic_Lines.py     # generate, grade, and log full melodic lines
-scripts/                 # application logic (imported as `scripts.*`)
-  paths.py               # resolves data paths relative to the repo root
-  load_cells.py          # create_cell_frames() — loads cell DataFrames from the CSVs
-  database.py            # fetch_data_base() — reads a sampling CSV
-  utils.py               # display/validation helpers, daily key/position, session logging
-  modes/                 # note transposition between harmonic contexts
-  melodic_lines/         # cell combinations and melodic-line sampling
-data/
-  sampling/*_sampling.csv  # the cell library — source of truth (see below)
-  logs/                    # runtime data written by the app
-archive/                 # retired code/data, kept for reference (not used at runtime)
-```
+
+## Deploy (Vercel Hobby + Turso, $0/month)
+
+1. **Turso**: `turso db create bebop` → `turso db show bebop --url` and
+   `turso db tokens create bebop` give `TURSO_DATABASE_URL` / `TURSO_AUTH_TOKEN`.
+2. **Vercel**: import the repo (root directory = repo root; the Python function is detected
+   from `api/index.py` + `vercel.json`). Set the environment variables from `.env.example`:
+   `APP_PASSWORD`, `AUTH_SECRET` (long random), `ENGINE_API_KEY` and `BEBOP_API_KEY` (the same
+   value), `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`, optionally `ANTHROPIC_API_KEY` (score
+   reader) and `BEBOP_ALLOWED_ORIGINS=https://<your-app>.vercel.app`. Leave `ENGINE_URL` unset
+   on Vercel (the app calls its own origin). Point production at the `nextjs-migration` branch
+   until it is merged.
+3. **Schema + data**: `npm run db:push` (drizzle-kit) with the Turso variables exported, then
+   `LEGACY_ROOT=/path/to/old/checkout npm run migrate:logs` to import `data/logs/*` and
+   `data/scores/*` (the tables are also created lazily on first use).
+4. Install on the phone from the browser's "Add to Home Screen" — it opens on `/connections`.
+
+Fallback for the API (if Hobby's CPU hours ever bite): `fly launch` with the included
+`Dockerfile` / `fly.toml`, then set `ENGINE_URL=https://<app>.fly.dev` on Vercel.
 
 ## The cell library is the CSVs
 
-The per-mode files in `data/sampling/` (`Maj7_sampling.csv`, `Dorian_sampling.csv`, …) are the
-**hand-edited source of truth** for the cells. Edit them directly to add/change cells. Columns:
-`Cell Name`, `Start Note`, `End Note`, `Notes`, `Movement` (A/D/N), `Type` (Essential/Bonus),
-plus `Modes`/`Mode scores`.
-
-Cells are written as **scale-degree strings**, not pitches: chord tones `1/3/5/7`, extensions
-`9/11/6`, alterations `b7/#11/b9/#9/b6`. Two cells connect when one's `End Note` equals the
-next's `Start Note` (the *pivot*).
-
-The original JSON cell definitions and the JSON→CSV generation code are retired in `archive/`.
+`data/sampling/<Mode>_sampling.csv` (`Maj7`, `Minor`, `Dorian`, `Myxolidian`, `Locrian`,
+`MajorResolutions`, `MinorResolutions`, `7sus4`) are the hand-edited source of truth. Columns:
+`Cell Name`, `Start Note`, `End Note`, `Notes` (degree list), `Movement` (A/D/N), `Type`
+(Essential/Bonus). Cells are **scale-degree strings** (chord tones `1/3/5/7`, extensions
+`9/11/6`, alterations `b7/#11/b9/#9/b6`); two cells connect when one's `End Note` equals the
+next's `Start Note` (the *pivot*). Edit the CSVs and restart the API: cell ids are content
+hashes, data oddities (Start/End ≠ Notes, duplicate names) are listed by `GET /api/py/health`.

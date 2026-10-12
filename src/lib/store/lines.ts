@@ -68,7 +68,7 @@ export const useLines = create<LinesState>()(
       comment: "",
       set: (p) => set({ ...p, updatedAt: nowIso() }),
     }),
-    { name: "bebop.lines", version: 1 },
+    { name: "bebop.lines", version: 1, skipHydration: true },
   ),
 );
 
