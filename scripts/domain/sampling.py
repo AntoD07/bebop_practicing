@@ -95,6 +95,43 @@ def line_structure_mapping(line_type: str, length: Optional[int] = None,
     return list(line_structure_dic[line_type])
 
 
+# Pivots into the V7 cells of a 2-5-1 when "chord tones" is ticked: the
+# dominant's colour tones (page 2's hard-coded list).
+ALTERED_DOMINANT_PIVOTS = ["9", "6", "b6", "b9", "#9", "11", "#11", "5"]
+
+
+def default_connecting_selection(line_type: str) -> List[str]:
+    """The connecting-notes picker's default: every note for the minor 2-5-1
+    types, the chord tones otherwise."""
+    from scripts.domain.notes import CHORD_TONES, NOTE_OPTIONS
+
+    return list(NOTE_OPTIONS) if line_type in ALL_NOTES_DEFAULT_TYPES else list(CHORD_TONES)
+
+
+def connecting_note_lists(line_type: str, structure: Sequence[str],
+                          selected: Optional[Sequence[str]] = None,
+                          chord_tones: bool = False) -> List[List[str]]:
+    """Per-cell allowed pivot lists, exactly as page 2 derived them from the
+    picker (``selected``; None = the type's default) and the "connecting
+    notes are chord tones" checkbox: a 2-5-1 then pivots into its V7 cells on
+    the altered colour tones and into the I on 1-3-5-7; the Dorian x
+    Myxolidian combo uses each chord's tones in the shared ii spelling; the
+    line's FIRST note is only constrained when chord tones are requested."""
+    from scripts.domain.notes import CHORD_TONES, combo_chord_tone_connecting_notes
+
+    sel = [str(s) for s in (selected if selected is not None else default_connecting_selection(line_type))
+           if s is not None]
+    cn = [list(sel) for _ in structure]
+    if chord_tones and "2-5-1" in line_type:
+        cn = [list(ALTERED_DOMINANT_PIVOTS), list(ALTERED_DOMINANT_PIVOTS),
+              list(CHORD_TONES), list(CHORD_TONES)]
+    if line_type == MYXO_TO_DORIAN_LINE_TYPE and chord_tones:
+        cn = combo_chord_tone_connecting_notes(structure)
+    if cn:
+        cn[0] = list(CHORD_TONES) if chord_tones else []
+    return cn
+
+
 def allowed_starts(connecting_notes, k: int) -> Optional[set]:
     """Allowed start notes of cell ``k``, or None for no constraint.
 

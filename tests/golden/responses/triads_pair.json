@@ -1,0 +1,902 @@
+{
+ "body": {
+  "boxes": {
+   "CAGED A string root": [
+    {
+     "fret_hi": 7,
+     "fret_lo": 2,
+     "strings": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ]
+    },
+    {
+     "fret_hi": 19,
+     "fret_lo": 14,
+     "strings": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ]
+    }
+   ],
+   "CAGED E string root": [
+    {
+     "fret_hi": 12,
+     "fret_lo": 7,
+     "strings": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ]
+    }
+   ],
+   "Diagonal A string root": [
+    {
+     "fret_hi": 3,
+     "fret_lo": 0,
+     "strings": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ]
+    },
+    {
+     "fret_hi": 15,
+     "fret_lo": 12,
+     "strings": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ]
+    }
+   ],
+   "Diagonal E string root": [
+    {
+     "fret_hi": 8,
+     "fret_lo": 5,
+     "strings": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ]
+    }
+   ],
+   "More Horizontal, D string root": [
+    {
+     "fret_hi": 19,
+     "fret_lo": 7,
+     "strings": [
+      2,
+      3,
+      4,
+      5
+     ]
+    }
+   ]
+  },
+  "colours": [
+   "#2962b3",
+   "#d9822b"
+  ],
+  "common": [],
+  "constants": {
+   "alternating_directions": [
+    "ascending",
+    "descending",
+    "alternating ↑↓ (climbing)",
+    "alternating ↓↑ (falling)"
+   ],
+   "default_interval": 2,
+   "qualities": [
+    "major",
+    "minor",
+    "diminished",
+    "augmented",
+    "sus4",
+    "sus2"
+   ],
+   "roots": [
+    "C",
+    "Db",
+    "D",
+    "Eb",
+    "E",
+    "F",
+    "F#",
+    "G",
+    "Ab",
+    "A",
+    "Bb",
+    "B"
+   ],
+   "scale_directions": [
+    "ascending",
+    "descending",
+    "both"
+   ]
+  },
+  "hexatonic": [
+   {
+    "label": "C:1",
+    "labels": [
+     "C:1"
+    ],
+    "name": "C",
+    "offset": 0,
+    "pc": 0,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "label": "D:1",
+    "labels": [
+     "D:1"
+    ],
+    "name": "D",
+    "offset": 2,
+    "pc": 2,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "label": "C:3",
+    "labels": [
+     "C:3"
+    ],
+    "name": "E",
+    "offset": 4,
+    "pc": 4,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "label": "D:3",
+    "labels": [
+     "D:3"
+    ],
+    "name": "F#",
+    "offset": 6,
+    "pc": 6,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "label": "C:5",
+    "labels": [
+     "C:5"
+    ],
+    "name": "G",
+    "offset": 7,
+    "pc": 7,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "label": "D:5",
+    "labels": [
+     "D:5"
+    ],
+    "name": "A",
+    "offset": 9,
+    "pc": 9,
+    "triads": [
+     1
+    ]
+   }
+  ],
+  "hexatonic_names": [
+   "C",
+   "D",
+   "E",
+   "F#",
+   "G",
+   "A"
+  ],
+  "identical": false,
+  "interval_name": "a whole tone apart",
+  "markers": [
+   {
+    "degree": "3",
+    "fret": 0,
+    "midi": 64,
+    "name": "E",
+    "pc": 4,
+    "roots": [],
+    "string": 1,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "3",
+    "fret": 2,
+    "midi": 66,
+    "name": "F#",
+    "pc": 6,
+    "roots": [],
+    "string": 1,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "5",
+    "fret": 3,
+    "midi": 67,
+    "name": "G",
+    "pc": 7,
+    "roots": [],
+    "string": 1,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "5",
+    "fret": 5,
+    "midi": 69,
+    "name": "A",
+    "pc": 9,
+    "roots": [],
+    "string": 1,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "1",
+    "fret": 8,
+    "midi": 72,
+    "name": "C",
+    "pc": 0,
+    "roots": [
+     0
+    ],
+    "string": 1,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "1",
+    "fret": 10,
+    "midi": 74,
+    "name": "D",
+    "pc": 2,
+    "roots": [
+     1
+    ],
+    "string": 1,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "3",
+    "fret": 12,
+    "midi": 76,
+    "name": "E",
+    "pc": 4,
+    "roots": [],
+    "string": 1,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "3",
+    "fret": 14,
+    "midi": 78,
+    "name": "F#",
+    "pc": 6,
+    "roots": [],
+    "string": 1,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "5",
+    "fret": 15,
+    "midi": 79,
+    "name": "G",
+    "pc": 7,
+    "roots": [],
+    "string": 1,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "1",
+    "fret": 1,
+    "midi": 60,
+    "name": "C",
+    "pc": 0,
+    "roots": [
+     0
+    ],
+    "string": 2,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "1",
+    "fret": 3,
+    "midi": 62,
+    "name": "D",
+    "pc": 2,
+    "roots": [
+     1
+    ],
+    "string": 2,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "3",
+    "fret": 5,
+    "midi": 64,
+    "name": "E",
+    "pc": 4,
+    "roots": [],
+    "string": 2,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "3",
+    "fret": 7,
+    "midi": 66,
+    "name": "F#",
+    "pc": 6,
+    "roots": [],
+    "string": 2,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "5",
+    "fret": 8,
+    "midi": 67,
+    "name": "G",
+    "pc": 7,
+    "roots": [],
+    "string": 2,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "5",
+    "fret": 10,
+    "midi": 69,
+    "name": "A",
+    "pc": 9,
+    "roots": [],
+    "string": 2,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "1",
+    "fret": 13,
+    "midi": 72,
+    "name": "C",
+    "pc": 0,
+    "roots": [
+     0
+    ],
+    "string": 2,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "1",
+    "fret": 15,
+    "midi": 74,
+    "name": "D",
+    "pc": 2,
+    "roots": [
+     1
+    ],
+    "string": 2,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "5",
+    "fret": 0,
+    "midi": 55,
+    "name": "G",
+    "pc": 7,
+    "roots": [],
+    "string": 3,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "5",
+    "fret": 2,
+    "midi": 57,
+    "name": "A",
+    "pc": 9,
+    "roots": [],
+    "string": 3,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "1",
+    "fret": 5,
+    "midi": 60,
+    "name": "C",
+    "pc": 0,
+    "roots": [
+     0
+    ],
+    "string": 3,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "1",
+    "fret": 7,
+    "midi": 62,
+    "name": "D",
+    "pc": 2,
+    "roots": [
+     1
+    ],
+    "string": 3,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "3",
+    "fret": 9,
+    "midi": 64,
+    "name": "E",
+    "pc": 4,
+    "roots": [],
+    "string": 3,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "3",
+    "fret": 11,
+    "midi": 66,
+    "name": "F#",
+    "pc": 6,
+    "roots": [],
+    "string": 3,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "5",
+    "fret": 12,
+    "midi": 67,
+    "name": "G",
+    "pc": 7,
+    "roots": [],
+    "string": 3,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "5",
+    "fret": 14,
+    "midi": 69,
+    "name": "A",
+    "pc": 9,
+    "roots": [],
+    "string": 3,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "1",
+    "fret": 0,
+    "midi": 50,
+    "name": "D",
+    "pc": 2,
+    "roots": [
+     1
+    ],
+    "string": 4,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "3",
+    "fret": 2,
+    "midi": 52,
+    "name": "E",
+    "pc": 4,
+    "roots": [],
+    "string": 4,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "3",
+    "fret": 4,
+    "midi": 54,
+    "name": "F#",
+    "pc": 6,
+    "roots": [],
+    "string": 4,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "5",
+    "fret": 5,
+    "midi": 55,
+    "name": "G",
+    "pc": 7,
+    "roots": [],
+    "string": 4,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "5",
+    "fret": 7,
+    "midi": 57,
+    "name": "A",
+    "pc": 9,
+    "roots": [],
+    "string": 4,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "1",
+    "fret": 10,
+    "midi": 60,
+    "name": "C",
+    "pc": 0,
+    "roots": [
+     0
+    ],
+    "string": 4,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "1",
+    "fret": 12,
+    "midi": 62,
+    "name": "D",
+    "pc": 2,
+    "roots": [
+     1
+    ],
+    "string": 4,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "3",
+    "fret": 14,
+    "midi": 64,
+    "name": "E",
+    "pc": 4,
+    "roots": [],
+    "string": 4,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "5",
+    "fret": 0,
+    "midi": 45,
+    "name": "A",
+    "pc": 9,
+    "roots": [],
+    "string": 5,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "1",
+    "fret": 3,
+    "midi": 48,
+    "name": "C",
+    "pc": 0,
+    "roots": [
+     0
+    ],
+    "string": 5,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "1",
+    "fret": 5,
+    "midi": 50,
+    "name": "D",
+    "pc": 2,
+    "roots": [
+     1
+    ],
+    "string": 5,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "3",
+    "fret": 7,
+    "midi": 52,
+    "name": "E",
+    "pc": 4,
+    "roots": [],
+    "string": 5,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "3",
+    "fret": 9,
+    "midi": 54,
+    "name": "F#",
+    "pc": 6,
+    "roots": [],
+    "string": 5,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "5",
+    "fret": 10,
+    "midi": 55,
+    "name": "G",
+    "pc": 7,
+    "roots": [],
+    "string": 5,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "5",
+    "fret": 12,
+    "midi": 57,
+    "name": "A",
+    "pc": 9,
+    "roots": [],
+    "string": 5,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "1",
+    "fret": 15,
+    "midi": 60,
+    "name": "C",
+    "pc": 0,
+    "roots": [
+     0
+    ],
+    "string": 5,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "3",
+    "fret": 0,
+    "midi": 40,
+    "name": "E",
+    "pc": 4,
+    "roots": [],
+    "string": 6,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "3",
+    "fret": 2,
+    "midi": 42,
+    "name": "F#",
+    "pc": 6,
+    "roots": [],
+    "string": 6,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "5",
+    "fret": 3,
+    "midi": 43,
+    "name": "G",
+    "pc": 7,
+    "roots": [],
+    "string": 6,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "5",
+    "fret": 5,
+    "midi": 45,
+    "name": "A",
+    "pc": 9,
+    "roots": [],
+    "string": 6,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "1",
+    "fret": 8,
+    "midi": 48,
+    "name": "C",
+    "pc": 0,
+    "roots": [
+     0
+    ],
+    "string": 6,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "1",
+    "fret": 10,
+    "midi": 50,
+    "name": "D",
+    "pc": 2,
+    "roots": [
+     1
+    ],
+    "string": 6,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "3",
+    "fret": 12,
+    "midi": 52,
+    "name": "E",
+    "pc": 4,
+    "roots": [],
+    "string": 6,
+    "triads": [
+     0
+    ]
+   },
+   {
+    "degree": "3",
+    "fret": 14,
+    "midi": 54,
+    "name": "F#",
+    "pc": 6,
+    "roots": [],
+    "string": 6,
+    "triads": [
+     1
+    ]
+   },
+   {
+    "degree": "5",
+    "fret": 15,
+    "midi": 55,
+    "name": "G",
+    "pc": 7,
+    "roots": [],
+    "string": 6,
+    "triads": [
+     0
+    ]
+   }
+  ],
+  "slack": 1,
+  "title": "C + D",
+  "triads": [
+   {
+    "degrees": [
+     "1",
+     "3",
+     "5"
+    ],
+    "names": [
+     "C",
+     "E",
+     "G"
+    ],
+    "pcs": [
+     0,
+     4,
+     7
+    ],
+    "quality": "major",
+    "root": "C",
+    "symbol": "C"
+   },
+   {
+    "degrees": [
+     "1",
+     "3",
+     "5"
+    ],
+    "names": [
+     "D",
+     "F#",
+     "A"
+    ],
+    "pcs": [
+     2,
+     6,
+     9
+    ],
+    "quality": "major",
+    "root": "D",
+    "symbol": "D"
+   }
+  ]
+ },
+ "status": 200
+}

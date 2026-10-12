@@ -1,0 +1,541 @@
+{
+ "body": {
+  "anchors": {
+   "key": "Today's key — C"
+  },
+  "chord1": "Myxolidian",
+  "chord2": "Myxolidian",
+  "dom_to_minor2_effective": false,
+  "ending": [
+   {
+    "degrees": [
+     "5",
+     "7",
+     "9",
+     "4",
+     "3"
+    ],
+    "end": "3",
+    "error": null,
+    "id": "Myxolidian:262c812a",
+    "index": 11,
+    "mode": "Myxolidian",
+    "movement": "A",
+    "name": "Ascending II-Minor 7th Arpeggio (ending on 3rd)",
+    "nominal_mismatch": false,
+    "pivot_hint": null,
+    "raw_degrees": [
+     "5",
+     "7",
+     "9",
+     "4",
+     "3"
+    ],
+    "raw_end": "3",
+    "raw_start": "5",
+    "start": "5",
+    "steps": [],
+    "type": "Essential"
+   },
+   {
+    "degrees": [
+     "6",
+     "#5",
+     "5",
+     "4",
+     "3"
+    ],
+    "end": "3",
+    "error": null,
+    "id": "Myxolidian:9539edbd",
+    "index": 19,
+    "mode": "Myxolidian",
+    "movement": "D",
+    "name": "Dominant #5 Scale from 6th (Mccoy)",
+    "nominal_mismatch": false,
+    "pivot_hint": null,
+    "raw_degrees": [
+     "6",
+     "#5",
+     "5",
+     "4",
+     "3"
+    ],
+    "raw_end": "3",
+    "raw_start": "6",
+    "start": "6",
+    "steps": [],
+    "type": "Essential"
+   },
+   {
+    "degrees": [
+     "7",
+     "1",
+     "9",
+     "4",
+     "3"
+    ],
+    "end": "3",
+    "error": null,
+    "id": "Myxolidian:594e908e",
+    "index": 22,
+    "mode": "Myxolidian",
+    "movement": "A",
+    "name": "Coltrane Pattern from 7th (ending on 3rd)",
+    "nominal_mismatch": false,
+    "pivot_hint": null,
+    "raw_degrees": [
+     "7",
+     "1",
+     "9",
+     "4",
+     "3"
+    ],
+    "raw_end": "3",
+    "raw_start": "7",
+    "start": "7",
+    "steps": [],
+    "type": "Essential"
+   },
+   {
+    "degrees": [
+     "7",
+     "6",
+     "5",
+     "4",
+     "3"
+    ],
+    "end": "3",
+    "error": null,
+    "id": "Myxolidian:6a7ba7ec",
+    "index": 24,
+    "mode": "Myxolidian",
+    "movement": "D",
+    "name": "Descending Dominant Scale from 7th ending on 3rd",
+    "nominal_mismatch": false,
+    "pivot_hint": null,
+    "raw_degrees": [
+     "7",
+     "6",
+     "5",
+     "4",
+     "3"
+    ],
+    "raw_end": "3",
+    "raw_start": "7",
+    "start": "7",
+    "steps": [],
+    "type": "Essential"
+   },
+   {
+    "degrees": [
+     "9",
+     "7",
+     "5",
+     "4",
+     "3"
+    ],
+    "end": "3",
+    "error": null,
+    "id": "Myxolidian:a4120c7a",
+    "index": 27,
+    "mode": "Myxolidian",
+    "movement": "D",
+    "name": "Descending II Arpeggio from II-5th",
+    "nominal_mismatch": false,
+    "pivot_hint": null,
+    "raw_degrees": [
+     "9",
+     "7",
+     "5",
+     "4",
+     "3"
+    ],
+    "raw_end": "3",
+    "raw_start": "9",
+    "start": "9",
+    "steps": [],
+    "type": "Essential"
+   },
+   {
+    "degrees": [
+     "#11",
+     "6",
+     "5",
+     "4",
+     "3"
+    ],
+    "end": "3",
+    "error": null,
+    "id": "Myxolidian:8bd03805",
+    "index": 33,
+    "mode": "Myxolidian",
+    "movement": "N",
+    "name": "Circle of 5th Approach",
+    "nominal_mismatch": false,
+    "pivot_hint": null,
+    "raw_degrees": [
+     "#11",
+     "6",
+     "5",
+     "4",
+     "3"
+    ],
+    "raw_end": "3",
+    "raw_start": "#11",
+    "start": "#11",
+    "steps": [],
+    "type": "Essential"
+   },
+   {
+    "degrees": [
+     "#11",
+     "9",
+     "4",
+     "9",
+     "3"
+    ],
+    "end": "3",
+    "error": null,
+    "id": "Myxolidian:976fb7bb",
+    "index": 35,
+    "mode": "Myxolidian",
+    "movement": "D",
+    "name": "Farao",
+    "nominal_mismatch": false,
+    "pivot_hint": null,
+    "raw_degrees": [
+     "#11",
+     "9",
+     "4",
+     "9",
+     "3"
+    ],
+    "raw_end": "3",
+    "raw_start": "#11",
+    "start": "#11",
+    "steps": [],
+    "type": "Essential"
+   }
+  ],
+  "free_label": "Free (best on the neck)",
+  "harmony_info": "One chord: C7. Myxolidian → Myxolidian stays on a single chord, so today's key (C) is its root — and the position sits on it.",
+  "mapping_info": null,
+  "myxo_to_dorian": false,
+  "pairs": [
+   {
+    "end_id": "Myxolidian:262c812a",
+    "pair_key": "Ascending II-Minor 7th Arpeggio (ending on 3rd) → Descending Dominant Scale from 3rd",
+    "start_id": "Myxolidian:67050c2a"
+   },
+   {
+    "end_id": "Myxolidian:262c812a",
+    "pair_key": "Ascending II-Minor 7th Arpeggio (ending on 3rd) → Dominant 9th Arpeggio",
+    "start_id": "Myxolidian:97d794e9"
+   },
+   {
+    "end_id": "Myxolidian:262c812a",
+    "pair_key": "Ascending II-Minor 7th Arpeggio (ending on 3rd) → Dominant arperggio to 13th (Mccoy)",
+    "start_id": "Myxolidian:857c2763"
+   },
+   {
+    "end_id": "Myxolidian:262c812a",
+    "pair_key": "Ascending II-Minor 7th Arpeggio (ending on 3rd) → Dominant Bebop Scale from 3rd",
+    "start_id": "Myxolidian:75ed16d4"
+   },
+   {
+    "end_id": "Myxolidian:9539edbd",
+    "pair_key": "Dominant #5 Scale from 6th (Mccoy) → Descending Dominant Scale from 3rd",
+    "start_id": "Myxolidian:67050c2a"
+   },
+   {
+    "end_id": "Myxolidian:9539edbd",
+    "pair_key": "Dominant #5 Scale from 6th (Mccoy) → Dominant 9th Arpeggio",
+    "start_id": "Myxolidian:97d794e9"
+   },
+   {
+    "end_id": "Myxolidian:9539edbd",
+    "pair_key": "Dominant #5 Scale from 6th (Mccoy) → Dominant arperggio to 13th (Mccoy)",
+    "start_id": "Myxolidian:857c2763"
+   },
+   {
+    "end_id": "Myxolidian:9539edbd",
+    "pair_key": "Dominant #5 Scale from 6th (Mccoy) → Dominant Bebop Scale from 3rd",
+    "start_id": "Myxolidian:75ed16d4"
+   },
+   {
+    "end_id": "Myxolidian:594e908e",
+    "pair_key": "Coltrane Pattern from 7th (ending on 3rd) → Descending Dominant Scale from 3rd",
+    "start_id": "Myxolidian:67050c2a"
+   },
+   {
+    "end_id": "Myxolidian:594e908e",
+    "pair_key": "Coltrane Pattern from 7th (ending on 3rd) → Dominant 9th Arpeggio",
+    "start_id": "Myxolidian:97d794e9"
+   },
+   {
+    "end_id": "Myxolidian:594e908e",
+    "pair_key": "Coltrane Pattern from 7th (ending on 3rd) → Dominant arperggio to 13th (Mccoy)",
+    "start_id": "Myxolidian:857c2763"
+   },
+   {
+    "end_id": "Myxolidian:594e908e",
+    "pair_key": "Coltrane Pattern from 7th (ending on 3rd) → Dominant Bebop Scale from 3rd",
+    "start_id": "Myxolidian:75ed16d4"
+   },
+   {
+    "end_id": "Myxolidian:6a7ba7ec",
+    "pair_key": "Descending Dominant Scale from 7th ending on 3rd → Descending Dominant Scale from 3rd",
+    "start_id": "Myxolidian:67050c2a"
+   },
+   {
+    "end_id": "Myxolidian:6a7ba7ec",
+    "pair_key": "Descending Dominant Scale from 7th ending on 3rd → Dominant 9th Arpeggio",
+    "start_id": "Myxolidian:97d794e9"
+   },
+   {
+    "end_id": "Myxolidian:6a7ba7ec",
+    "pair_key": "Descending Dominant Scale from 7th ending on 3rd → Dominant arperggio to 13th (Mccoy)",
+    "start_id": "Myxolidian:857c2763"
+   },
+   {
+    "end_id": "Myxolidian:6a7ba7ec",
+    "pair_key": "Descending Dominant Scale from 7th ending on 3rd → Dominant Bebop Scale from 3rd",
+    "start_id": "Myxolidian:75ed16d4"
+   },
+   {
+    "end_id": "Myxolidian:a4120c7a",
+    "pair_key": "Descending II Arpeggio from II-5th → Descending Dominant Scale from 3rd",
+    "start_id": "Myxolidian:67050c2a"
+   },
+   {
+    "end_id": "Myxolidian:a4120c7a",
+    "pair_key": "Descending II Arpeggio from II-5th → Dominant 9th Arpeggio",
+    "start_id": "Myxolidian:97d794e9"
+   },
+   {
+    "end_id": "Myxolidian:a4120c7a",
+    "pair_key": "Descending II Arpeggio from II-5th → Dominant arperggio to 13th (Mccoy)",
+    "start_id": "Myxolidian:857c2763"
+   },
+   {
+    "end_id": "Myxolidian:a4120c7a",
+    "pair_key": "Descending II Arpeggio from II-5th → Dominant Bebop Scale from 3rd",
+    "start_id": "Myxolidian:75ed16d4"
+   },
+   {
+    "end_id": "Myxolidian:8bd03805",
+    "pair_key": "Circle of 5th Approach → Descending Dominant Scale from 3rd",
+    "start_id": "Myxolidian:67050c2a"
+   },
+   {
+    "end_id": "Myxolidian:8bd03805",
+    "pair_key": "Circle of 5th Approach → Dominant 9th Arpeggio",
+    "start_id": "Myxolidian:97d794e9"
+   },
+   {
+    "end_id": "Myxolidian:8bd03805",
+    "pair_key": "Circle of 5th Approach → Dominant arperggio to 13th (Mccoy)",
+    "start_id": "Myxolidian:857c2763"
+   },
+   {
+    "end_id": "Myxolidian:8bd03805",
+    "pair_key": "Circle of 5th Approach → Dominant Bebop Scale from 3rd",
+    "start_id": "Myxolidian:75ed16d4"
+   },
+   {
+    "end_id": "Myxolidian:976fb7bb",
+    "pair_key": "Farao → Descending Dominant Scale from 3rd",
+    "start_id": "Myxolidian:67050c2a"
+   },
+   {
+    "end_id": "Myxolidian:976fb7bb",
+    "pair_key": "Farao → Dominant 9th Arpeggio",
+    "start_id": "Myxolidian:97d794e9"
+   },
+   {
+    "end_id": "Myxolidian:976fb7bb",
+    "pair_key": "Farao → Dominant arperggio to 13th (Mccoy)",
+    "start_id": "Myxolidian:857c2763"
+   },
+   {
+    "end_id": "Myxolidian:976fb7bb",
+    "pair_key": "Farao → Dominant Bebop Scale from 3rd",
+    "start_id": "Myxolidian:75ed16d4"
+   }
+  ],
+  "pivot": "3",
+  "pivots": [
+   {
+    "raw1": "1",
+    "raw2": "1",
+    "value": "1"
+   },
+   {
+    "raw1": "9",
+    "raw2": "9",
+    "value": "9"
+   },
+   {
+    "raw1": "3",
+    "raw2": "3",
+    "value": "3"
+   },
+   {
+    "raw1": "#11",
+    "raw2": "#11",
+    "value": "#11"
+   },
+   {
+    "raw1": "5",
+    "raw2": "5",
+    "value": "5"
+   },
+   {
+    "raw1": "6",
+    "raw2": "6",
+    "value": "6"
+   },
+   {
+    "raw1": "7",
+    "raw2": "7",
+    "value": "7"
+   }
+  ],
+  "positions": [
+   "CAGED E string root",
+   "CAGED A string root",
+   "Diagonal E string root",
+   "Diagonal A string root",
+   "More Horizontal, D string root"
+  ],
+  "raw_pivot": "3",
+  "read1": "Myxolidian",
+  "read2": "Myxolidian",
+  "single_chord": true,
+  "starting": [
+   {
+    "degrees": [
+     "3",
+     "9",
+     "1",
+     "7",
+     "6"
+    ],
+    "end": "6",
+    "error": null,
+    "id": "Myxolidian:67050c2a",
+    "index": 5,
+    "mode": "Myxolidian",
+    "movement": "D",
+    "name": "Descending Dominant Scale from 3rd",
+    "nominal_mismatch": false,
+    "pivot_hint": null,
+    "raw_degrees": [
+     "3",
+     "9",
+     "1",
+     "7",
+     "6"
+    ],
+    "raw_end": "6",
+    "raw_start": "3",
+    "start": "3",
+    "steps": [],
+    "type": "Essential"
+   },
+   {
+    "degrees": [
+     "3",
+     "5",
+     "7",
+     "9",
+     "1"
+    ],
+    "end": "1",
+    "error": null,
+    "id": "Myxolidian:97d794e9",
+    "index": 6,
+    "mode": "Myxolidian",
+    "movement": "A",
+    "name": "Dominant 9th Arpeggio",
+    "nominal_mismatch": false,
+    "pivot_hint": null,
+    "raw_degrees": [
+     "3",
+     "5",
+     "7",
+     "9",
+     "1"
+    ],
+    "raw_end": "1",
+    "raw_start": "3",
+    "start": "3",
+    "steps": [],
+    "type": "Essential"
+   },
+   {
+    "degrees": [
+     "3",
+     "5",
+     "7",
+     "1",
+     "6"
+    ],
+    "end": "6",
+    "error": null,
+    "id": "Myxolidian:857c2763",
+    "index": 7,
+    "mode": "Myxolidian",
+    "movement": "A",
+    "name": "Dominant arperggio to 13th (Mccoy)",
+    "nominal_mismatch": false,
+    "pivot_hint": null,
+    "raw_degrees": [
+     "3",
+     "5",
+     "7",
+     "1",
+     "6"
+    ],
+    "raw_end": "6",
+    "raw_start": "3",
+    "start": "3",
+    "steps": [],
+    "type": "Essential"
+   },
+   {
+    "degrees": [
+     "3",
+     "9",
+     "1",
+     "maj7",
+     "7"
+    ],
+    "end": "7",
+    "error": null,
+    "id": "Myxolidian:75ed16d4",
+    "index": 8,
+    "mode": "Myxolidian",
+    "movement": "D",
+    "name": "Dominant Bebop Scale from 3rd",
+    "nominal_mismatch": false,
+    "pivot_hint": null,
+    "raw_degrees": [
+     "3",
+     "9",
+     "1",
+     "maj7",
+     "7"
+    ],
+    "raw_end": "7",
+    "raw_start": "3",
+    "start": "3",
+    "steps": [],
+    "type": "Essential"
+   }
+  ],
+  "sym1": "C7"
+ },
+ "status": 200
+}

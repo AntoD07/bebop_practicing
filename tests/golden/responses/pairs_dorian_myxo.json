@@ -1,0 +1,401 @@
+{
+ "body": {
+  "anchors": {
+   "chord1": "1st chord — Fm7",
+   "chord2": "2nd chord — Myxolidian",
+   "key": "Today's key — Eb"
+  },
+  "chord1": "Dorian",
+  "chord2": "Myxolidian",
+  "dom_to_minor2_effective": false,
+  "ending": [
+   {
+    "degrees": [
+     "3",
+     "7",
+     "6",
+     "5",
+     "3"
+    ],
+    "end": "3",
+    "error": null,
+    "id": "Dorian:e5968a33",
+    "index": 3,
+    "mode": "Dorian",
+    "movement": "D",
+    "name": "Convert style",
+    "nominal_mismatch": false,
+    "pivot_hint": null,
+    "raw_degrees": [
+     "3",
+     "7",
+     "6",
+     "5",
+     "3"
+    ],
+    "raw_end": "3",
+    "raw_start": "3",
+    "start": "3",
+    "steps": [],
+    "type": "Essential"
+   },
+   {
+    "degrees": [
+     "4",
+     "5",
+     "6",
+     "1",
+     "3"
+    ],
+    "end": "3",
+    "error": null,
+    "id": "Dorian:bbdd7ba4",
+    "index": 16,
+    "mode": "Dorian",
+    "movement": "A",
+    "name": "Coltrane Pattern from 4th",
+    "nominal_mismatch": false,
+    "pivot_hint": null,
+    "raw_degrees": [
+     "4",
+     "5",
+     "6",
+     "1",
+     "3"
+    ],
+    "raw_end": "3",
+    "raw_start": "4",
+    "start": "4",
+    "steps": [],
+    "type": "Essential"
+   },
+   {
+    "degrees": [
+     "5",
+     "#1",
+     "9",
+     "4",
+     "3"
+    ],
+    "end": "3",
+    "error": null,
+    "id": "Dorian:be06136e",
+    "index": 22,
+    "mode": "Dorian",
+    "movement": "N",
+    "name": "Stan Getz enclosure of II 3rd",
+    "nominal_mismatch": false,
+    "pivot_hint": null,
+    "raw_degrees": [
+     "5",
+     "#1",
+     "9",
+     "4",
+     "3"
+    ],
+    "raw_end": "3",
+    "raw_start": "5",
+    "start": "5",
+    "steps": [],
+    "type": "Essential"
+   },
+   {
+    "degrees": [
+     "6",
+     "5",
+     "4",
+     "maj3",
+     "3"
+    ],
+    "end": "3",
+    "error": null,
+    "id": "Dorian:a60033f3",
+    "index": 27,
+    "mode": "Dorian",
+    "movement": "D",
+    "name": "Dominant Bebop Scale from 6th",
+    "nominal_mismatch": false,
+    "pivot_hint": null,
+    "raw_degrees": [
+     "6",
+     "5",
+     "4",
+     "maj3",
+     "3"
+    ],
+    "raw_end": "3",
+    "raw_start": "6",
+    "start": "6",
+    "steps": [],
+    "type": "Essential"
+   }
+  ],
+  "free_label": "Free (best on the neck)",
+  "harmony_info": "Today's key Eb is read as the I of a ii-V-I: Dorian starts on Fm7; the 2nd chord follows from the pivot (shown on each tab).",
+  "mapping_info": "**Mapping applied:** Myxolidian cells are re-spelled from the ii (Dorian) root, so both chords share one note representation and the pivots line up. V7 degree → ii degree: 1→4, 9→5, 3→6, 4→7, 5→1, 6→9, 7→3, #11→#7, b9→#11. Myxolidian notes shown below (and the start/end/connecting-note pickers) use this ii spelling.",
+  "myxo_to_dorian": true,
+  "pairs": [
+   {
+    "end_id": "Dorian:e5968a33",
+    "pair_key": "Convert style → Coltrane Pattern from 7th (ending on 3rd)",
+    "start_id": "Myxolidian:594e908e"
+   },
+   {
+    "end_id": "Dorian:e5968a33",
+    "pair_key": "Convert style → Coltrane Pattern from 7th (ending on #11)",
+    "start_id": "Myxolidian:7faa0b9a"
+   },
+   {
+    "end_id": "Dorian:e5968a33",
+    "pair_key": "Convert style → Descending Dominant Scale from 7th ending on 3rd",
+    "start_id": "Myxolidian:6a7ba7ec"
+   },
+   {
+    "end_id": "Dorian:e5968a33",
+    "pair_key": "Convert style → Descending Dominant Scale from 7th ending on #11",
+    "start_id": "Myxolidian:7200d04b"
+   },
+   {
+    "end_id": "Dorian:bbdd7ba4",
+    "pair_key": "Coltrane Pattern from 4th → Coltrane Pattern from 7th (ending on 3rd)",
+    "start_id": "Myxolidian:594e908e"
+   },
+   {
+    "end_id": "Dorian:bbdd7ba4",
+    "pair_key": "Coltrane Pattern from 4th → Coltrane Pattern from 7th (ending on #11)",
+    "start_id": "Myxolidian:7faa0b9a"
+   },
+   {
+    "end_id": "Dorian:bbdd7ba4",
+    "pair_key": "Coltrane Pattern from 4th → Descending Dominant Scale from 7th ending on 3rd",
+    "start_id": "Myxolidian:6a7ba7ec"
+   },
+   {
+    "end_id": "Dorian:bbdd7ba4",
+    "pair_key": "Coltrane Pattern from 4th → Descending Dominant Scale from 7th ending on #11",
+    "start_id": "Myxolidian:7200d04b"
+   },
+   {
+    "end_id": "Dorian:be06136e",
+    "pair_key": "Stan Getz enclosure of II 3rd → Coltrane Pattern from 7th (ending on 3rd)",
+    "start_id": "Myxolidian:594e908e"
+   },
+   {
+    "end_id": "Dorian:be06136e",
+    "pair_key": "Stan Getz enclosure of II 3rd → Coltrane Pattern from 7th (ending on #11)",
+    "start_id": "Myxolidian:7faa0b9a"
+   },
+   {
+    "end_id": "Dorian:be06136e",
+    "pair_key": "Stan Getz enclosure of II 3rd → Descending Dominant Scale from 7th ending on 3rd",
+    "start_id": "Myxolidian:6a7ba7ec"
+   },
+   {
+    "end_id": "Dorian:be06136e",
+    "pair_key": "Stan Getz enclosure of II 3rd → Descending Dominant Scale from 7th ending on #11",
+    "start_id": "Myxolidian:7200d04b"
+   },
+   {
+    "end_id": "Dorian:a60033f3",
+    "pair_key": "Dominant Bebop Scale from 6th → Coltrane Pattern from 7th (ending on 3rd)",
+    "start_id": "Myxolidian:594e908e"
+   },
+   {
+    "end_id": "Dorian:a60033f3",
+    "pair_key": "Dominant Bebop Scale from 6th → Coltrane Pattern from 7th (ending on #11)",
+    "start_id": "Myxolidian:7faa0b9a"
+   },
+   {
+    "end_id": "Dorian:a60033f3",
+    "pair_key": "Dominant Bebop Scale from 6th → Descending Dominant Scale from 7th ending on 3rd",
+    "start_id": "Myxolidian:6a7ba7ec"
+   },
+   {
+    "end_id": "Dorian:a60033f3",
+    "pair_key": "Dominant Bebop Scale from 6th → Descending Dominant Scale from 7th ending on #11",
+    "start_id": "Myxolidian:7200d04b"
+   }
+  ],
+  "pivot": "3",
+  "pivots": [
+   {
+    "raw1": "1",
+    "raw2": "1",
+    "value": "1"
+   },
+   {
+    "raw1": "9",
+    "raw2": "9",
+    "value": "9"
+   },
+   {
+    "raw1": "3",
+    "raw2": "3",
+    "value": "3"
+   },
+   {
+    "raw1": "4",
+    "raw2": "4",
+    "value": "4"
+   },
+   {
+    "raw1": "5",
+    "raw2": "5",
+    "value": "5"
+   },
+   {
+    "raw1": "6",
+    "raw2": "6",
+    "value": "6"
+   },
+   {
+    "raw1": "7",
+    "raw2": "7",
+    "value": "7"
+   }
+  ],
+  "positions": [
+   "CAGED E string root",
+   "CAGED A string root",
+   "Diagonal E string root",
+   "Diagonal A string root",
+   "More Horizontal, D string root"
+  ],
+  "raw_pivot": "3",
+  "read1": "Dorian",
+  "read2": "Dorian",
+  "single_chord": false,
+  "starting": [
+   {
+    "degrees": [
+     "3",
+     "4",
+     "5",
+     "7",
+     "6"
+    ],
+    "end": "6",
+    "error": null,
+    "id": "Myxolidian:594e908e",
+    "index": 22,
+    "mode": "Myxolidian",
+    "movement": "A",
+    "name": "Coltrane Pattern from 7th (ending on 3rd)",
+    "nominal_mismatch": false,
+    "pivot_hint": null,
+    "raw_degrees": [
+     "7",
+     "1",
+     "9",
+     "4",
+     "3"
+    ],
+    "raw_end": "3",
+    "raw_start": "7",
+    "start": "3",
+    "steps": [
+     "dom_to_dorian"
+    ],
+    "type": "Essential"
+   },
+   {
+    "degrees": [
+     "3",
+     "4",
+     "5",
+     "7",
+     "#7"
+    ],
+    "end": "#7",
+    "error": null,
+    "id": "Myxolidian:7faa0b9a",
+    "index": 23,
+    "mode": "Myxolidian",
+    "movement": "A",
+    "name": "Coltrane Pattern from 7th (ending on #11)",
+    "nominal_mismatch": false,
+    "pivot_hint": null,
+    "raw_degrees": [
+     "7",
+     "1",
+     "9",
+     "4",
+     "#11"
+    ],
+    "raw_end": "#11",
+    "raw_start": "7",
+    "start": "3",
+    "steps": [
+     "dom_to_dorian"
+    ],
+    "type": "Essential"
+   },
+   {
+    "degrees": [
+     "3",
+     "9",
+     "1",
+     "7",
+     "6"
+    ],
+    "end": "6",
+    "error": null,
+    "id": "Myxolidian:6a7ba7ec",
+    "index": 24,
+    "mode": "Myxolidian",
+    "movement": "D",
+    "name": "Descending Dominant Scale from 7th ending on 3rd",
+    "nominal_mismatch": false,
+    "pivot_hint": null,
+    "raw_degrees": [
+     "7",
+     "6",
+     "5",
+     "4",
+     "3"
+    ],
+    "raw_end": "3",
+    "raw_start": "7",
+    "start": "3",
+    "steps": [
+     "dom_to_dorian"
+    ],
+    "type": "Essential"
+   },
+   {
+    "degrees": [
+     "3",
+     "9",
+     "1",
+     "7",
+     "#7"
+    ],
+    "end": "#7",
+    "error": null,
+    "id": "Myxolidian:7200d04b",
+    "index": 25,
+    "mode": "Myxolidian",
+    "movement": "D",
+    "name": "Descending Dominant Scale from 7th ending on #11",
+    "nominal_mismatch": false,
+    "pivot_hint": null,
+    "raw_degrees": [
+     "7",
+     "6",
+     "5",
+     "4",
+     "#11"
+    ],
+    "raw_end": "#11",
+    "raw_start": "7",
+    "start": "3",
+    "steps": [
+     "dom_to_dorian"
+    ],
+    "type": "Essential"
+   }
+  ],
+  "sym1": "Fm7"
+ },
+ "status": 200
+}

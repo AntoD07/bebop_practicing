@@ -1,0 +1,198 @@
+{
+ "body": {
+  "chord_tones_info": null,
+  "connecting_notes": [
+   [
+    "1",
+    "3",
+    "5",
+    "7"
+   ],
+   [
+    "9",
+    "6",
+    "b6",
+    "b9",
+    "#9",
+    "11",
+    "#11",
+    "5"
+   ],
+   [
+    "1",
+    "3",
+    "5",
+    "7"
+   ],
+   [
+    "1",
+    "3",
+    "5",
+    "7"
+   ]
+  ],
+  "harmony_caption": "Harmony: today's key **Eb** is read as the I of a ii-V-I — the line starts on **Bb7**; later chords follow from the pivots.",
+  "line_type": "Long Maj 2-5-1",
+  "lines": [
+   {
+    "cells": [
+     {
+      "degrees": [
+       "3",
+       "5",
+       "7",
+       "1",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:857c2763",
+      "index": 7,
+      "mode": "Myxolidian",
+      "movement": "A",
+      "name": "Dominant arperggio to 13th (Mccoy)",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "3",
+       "5",
+       "7",
+       "1",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "3",
+      "start": "3",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "7",
+       "1",
+       "maj7",
+       "7"
+      ],
+      "end": "7",
+      "error": null,
+      "id": "Myxolidian:cecaff45",
+      "index": 21,
+      "mode": "Myxolidian",
+      "movement": "N",
+      "name": "Chromatic Passing Tone Enclosure of II 3rd",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "6",
+       "7",
+       "1",
+       "maj7",
+       "7"
+      ],
+      "raw_end": "7",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "7",
+       "6",
+       "5",
+       "4",
+       "3"
+      ],
+      "end": "3",
+      "error": null,
+      "id": "Myxolidian:6a7ba7ec",
+      "index": 24,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "Descending Dominant Scale from 7th ending on 3rd",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "7",
+       "6",
+       "5",
+       "4",
+       "3"
+      ],
+      "raw_end": "3",
+      "raw_start": "7",
+      "start": "7",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "3",
+       "b9",
+       "1",
+       "7",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "MajorResolutions:33e3085b",
+      "index": 3,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Dominant b9 from 3rd",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "3",
+       "b9",
+       "1",
+       "7",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "3",
+      "start": "3",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **Eb** is read as the I of a ii-V-I — the line starts on **Bb7**; later chords follow from the pivots.",
+    "line_type": "Long Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "Myxolidian",
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "Myxolidian",
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:857c2763",
+     "Myxolidian:cecaff45",
+     "Myxolidian:6a7ba7ec",
+     "MajorResolutions:33e3085b"
+    ],
+    "structure": [
+     "Myxolidian",
+     "Myxolidian",
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   }
+  ],
+  "mapping_info": null,
+  "message": null,
+  "structure_preview": [
+   "Myxolidian",
+   "Myxolidian",
+   "Myxolidian",
+   "MajorResolutions"
+  ]
+ },
+ "status": 200
+}

@@ -1,0 +1,513 @@
+{
+ "body": {
+  "anchor": {
+   "name": "key",
+   "pc": 7,
+   "sym": "G (today's key)"
+  },
+  "best": 0,
+  "budget": {
+   "max_layouts": 1,
+   "used": 0
+  },
+  "chunks": [
+   {
+    "box": 0,
+    "layouts": 12,
+    "mode": "optimum",
+    "offset": -24
+   },
+   {
+    "box": 0,
+    "layouts": 108,
+    "mode": "optimum",
+    "offset": 12
+   }
+  ],
+  "config": {},
+  "end": "Coltrane Pattern from 5th",
+  "end_id": null,
+  "error": null,
+  "fingerings": [
+   {
+    "alternate": null,
+    "beats_per_bar": 4,
+    "chords": [
+     {
+      "start_beat": 0,
+      "symbol": "Gmaj7"
+     },
+     {
+      "start_beat": 2.0,
+      "symbol": "Gmaj7"
+     }
+    ],
+    "contributions": [
+     [
+      "u_cost",
+      1.5
+     ],
+     [
+      "break_2nps",
+      1.0
+     ],
+     [
+      "same_str_dd",
+      0.6
+     ],
+     [
+      "sweep_bonus",
+      -0.5
+     ]
+    ],
+    "cost": 2.6,
+    "density": "eighth",
+    "drop_sites": [],
+    "encoding": "3/7D 3/9D 2/7D 2/10U 2/8D 2/7U 3/9D 3/8U 3/7D",
+    "flags": [
+     "note 5 (beat 3.5): U sets parity for the descending crossing note 5->6 (str2->str3).",
+     "note 6 (beat 4.0): descending crossing str2->str3 resolved by PARITY (fix a) — U->D.",
+     "2npS BREAK: 4 notes on str2 (notes 2..5, frets [7, 10, 8, 7]).",
+     "2npS BREAK: 3 notes on str3 (notes 6..8, frets [9, 8, 7])."
+    ],
+    "fret_hi": 10,
+    "fret_lo": 7,
+    "key": "G",
+    "layout": "3/7 3/9 2/7 2/10 2/8 2/7 3/9 3/8 3/7",
+    "mode": "optimum",
+    "n_flags": 4,
+    "n_up": 3,
+    "placed": [
+     {
+      "beat": 1.0,
+      "cell": "Coltrane Pattern from 5th",
+      "degree": "5",
+      "finger": 1,
+      "fret": 7,
+      "grace": false,
+      "i": 0,
+      "midi": 62,
+      "name": "D4",
+      "onset": 0.0,
+      "phrase_start": true,
+      "rest": true,
+      "role": "5",
+      "run_len": 1,
+      "stretch": false,
+      "string": 3,
+      "stroke": "D"
+     },
+     {
+      "beat": 1.5,
+      "cell": "Coltrane Pattern from 5th",
+      "degree": "6",
+      "finger": 3,
+      "fret": 9,
+      "grace": false,
+      "i": 1,
+      "midi": 64,
+      "name": "E4",
+      "onset": 0.5,
+      "phrase_start": false,
+      "rest": true,
+      "role": "6",
+      "run_len": 2,
+      "stretch": false,
+      "string": 3,
+      "stroke": "D"
+     },
+     {
+      "beat": 2.0,
+      "cell": "Coltrane Pattern from 5th",
+      "degree": "7",
+      "finger": 1,
+      "fret": 7,
+      "grace": false,
+      "i": 2,
+      "midi": 66,
+      "name": "F#4",
+      "onset": 1.0,
+      "phrase_start": false,
+      "rest": true,
+      "role": "7th",
+      "run_len": 1,
+      "stretch": false,
+      "string": 2,
+      "stroke": "D"
+     },
+     {
+      "beat": 2.5,
+      "cell": "Coltrane Pattern from 5th",
+      "degree": "9",
+      "finger": 4,
+      "fret": 10,
+      "grace": false,
+      "i": 3,
+      "midi": 69,
+      "name": "A4",
+      "onset": 1.5,
+      "phrase_start": false,
+      "rest": false,
+      "role": "9",
+      "run_len": 2,
+      "stretch": false,
+      "string": 2,
+      "stroke": "U"
+     },
+     {
+      "beat": 3.0,
+      "cell": "Coltrane Pattern from 5th",
+      "degree": "1",
+      "finger": 2,
+      "fret": 8,
+      "grace": false,
+      "i": 4,
+      "midi": 67,
+      "name": "G4",
+      "onset": 2.0,
+      "phrase_start": false,
+      "rest": true,
+      "role": "pivot",
+      "run_len": 3,
+      "stretch": false,
+      "string": 2,
+      "stroke": "D"
+     },
+     {
+      "beat": 3.5,
+      "cell": "Major Bebop Scale from Root",
+      "degree": "7",
+      "finger": 1,
+      "fret": 7,
+      "grace": false,
+      "i": 5,
+      "midi": 66,
+      "name": "F#4",
+      "onset": 2.5,
+      "phrase_start": false,
+      "rest": false,
+      "role": "7th",
+      "run_len": 3,
+      "stretch": false,
+      "string": 2,
+      "stroke": "U"
+     },
+     {
+      "beat": 4.0,
+      "cell": "Major Bebop Scale from Root",
+      "degree": "6",
+      "finger": 4,
+      "fret": 9,
+      "grace": false,
+      "i": 6,
+      "midi": 64,
+      "name": "E4",
+      "onset": 3.0,
+      "phrase_start": false,
+      "rest": true,
+      "role": "6",
+      "run_len": 1,
+      "stretch": false,
+      "string": 3,
+      "stroke": "D"
+     },
+     {
+      "beat": 4.5,
+      "cell": "Major Bebop Scale from Root",
+      "degree": "#5",
+      "finger": 3,
+      "fret": 8,
+      "grace": false,
+      "i": 7,
+      "midi": 63,
+      "name": "D#4",
+      "onset": 3.5,
+      "phrase_start": false,
+      "rest": false,
+      "role": "#5",
+      "run_len": 2,
+      "stretch": false,
+      "string": 3,
+      "stroke": "U"
+     },
+     {
+      "beat": 1.0,
+      "cell": "Major Bebop Scale from Root",
+      "degree": "5",
+      "finger": 2,
+      "fret": 7,
+      "grace": false,
+      "i": 8,
+      "midi": 62,
+      "name": "D4",
+      "onset": 4.0,
+      "phrase_start": false,
+      "rest": true,
+      "role": "5",
+      "run_len": 3,
+      "stretch": false,
+      "string": 3,
+      "stroke": "D"
+     }
+    ],
+    "positions": [
+     "Diagonal A string root",
+     "More Horizontal, D string root"
+    ],
+    "report": null,
+    "warnings": [],
+    "where": "Diagonal A string root · frets 7–10"
+   },
+   {
+    "alternate": null,
+    "beats_per_bar": 4,
+    "chords": [
+     {
+      "start_beat": 0,
+      "symbol": "Gmaj7"
+     },
+     {
+      "start_beat": 2.0,
+      "symbol": "Gmaj7"
+     }
+    ],
+    "contributions": [
+     [
+      "u_cost",
+      1.5
+     ],
+     [
+      "break_2nps",
+      1.0
+     ],
+     [
+      "same_str_dd",
+      0.6
+     ],
+     [
+      "sweep_bonus",
+      -0.5
+     ]
+    ],
+    "cost": 2.6,
+    "density": "eighth",
+    "drop_sites": [],
+    "encoding": "5/5D 5/7D 4/4D 4/7U 4/5D 4/4U 5/7D 5/6U 5/5D",
+    "flags": [
+     "note 5 (beat 3.5): U sets parity for the descending crossing note 5->6 (str4->str5).",
+     "note 6 (beat 4.0): descending crossing str4->str5 resolved by PARITY (fix a) — U->D.",
+     "2npS BREAK: 4 notes on str4 (notes 2..5, frets [4, 7, 5, 4]).",
+     "2npS BREAK: 3 notes on str5 (notes 6..8, frets [7, 6, 5])."
+    ],
+    "fret_hi": 7,
+    "fret_lo": 4,
+    "key": "G",
+    "layout": "5/5 5/7 4/4 4/7 4/5 4/4 5/7 5/6 5/5",
+    "mode": "optimum",
+    "n_flags": 4,
+    "n_up": 3,
+    "placed": [
+     {
+      "beat": 1.0,
+      "cell": "Coltrane Pattern from 5th",
+      "degree": "5",
+      "finger": 1,
+      "fret": 5,
+      "grace": false,
+      "i": 0,
+      "midi": 50,
+      "name": "D3",
+      "onset": 0.0,
+      "phrase_start": true,
+      "rest": true,
+      "role": "5",
+      "run_len": 1,
+      "stretch": false,
+      "string": 5,
+      "stroke": "D"
+     },
+     {
+      "beat": 1.5,
+      "cell": "Coltrane Pattern from 5th",
+      "degree": "6",
+      "finger": 3,
+      "fret": 7,
+      "grace": false,
+      "i": 1,
+      "midi": 52,
+      "name": "E3",
+      "onset": 0.5,
+      "phrase_start": false,
+      "rest": true,
+      "role": "6",
+      "run_len": 2,
+      "stretch": false,
+      "string": 5,
+      "stroke": "D"
+     },
+     {
+      "beat": 2.0,
+      "cell": "Coltrane Pattern from 5th",
+      "degree": "7",
+      "finger": 1,
+      "fret": 4,
+      "grace": false,
+      "i": 2,
+      "midi": 54,
+      "name": "F#3",
+      "onset": 1.0,
+      "phrase_start": false,
+      "rest": true,
+      "role": "7th",
+      "run_len": 1,
+      "stretch": false,
+      "string": 4,
+      "stroke": "D"
+     },
+     {
+      "beat": 2.5,
+      "cell": "Coltrane Pattern from 5th",
+      "degree": "9",
+      "finger": 4,
+      "fret": 7,
+      "grace": false,
+      "i": 3,
+      "midi": 57,
+      "name": "A3",
+      "onset": 1.5,
+      "phrase_start": false,
+      "rest": false,
+      "role": "9",
+      "run_len": 2,
+      "stretch": false,
+      "string": 4,
+      "stroke": "U"
+     },
+     {
+      "beat": 3.0,
+      "cell": "Coltrane Pattern from 5th",
+      "degree": "1",
+      "finger": 2,
+      "fret": 5,
+      "grace": false,
+      "i": 4,
+      "midi": 55,
+      "name": "G3",
+      "onset": 2.0,
+      "phrase_start": false,
+      "rest": true,
+      "role": "pivot",
+      "run_len": 3,
+      "stretch": false,
+      "string": 4,
+      "stroke": "D"
+     },
+     {
+      "beat": 3.5,
+      "cell": "Major Bebop Scale from Root",
+      "degree": "7",
+      "finger": 1,
+      "fret": 4,
+      "grace": false,
+      "i": 5,
+      "midi": 54,
+      "name": "F#3",
+      "onset": 2.5,
+      "phrase_start": false,
+      "rest": false,
+      "role": "7th",
+      "run_len": 3,
+      "stretch": false,
+      "string": 4,
+      "stroke": "U"
+     },
+     {
+      "beat": 4.0,
+      "cell": "Major Bebop Scale from Root",
+      "degree": "6",
+      "finger": 4,
+      "fret": 7,
+      "grace": false,
+      "i": 6,
+      "midi": 52,
+      "name": "E3",
+      "onset": 3.0,
+      "phrase_start": false,
+      "rest": true,
+      "role": "6",
+      "run_len": 1,
+      "stretch": false,
+      "string": 5,
+      "stroke": "D"
+     },
+     {
+      "beat": 4.5,
+      "cell": "Major Bebop Scale from Root",
+      "degree": "#5",
+      "finger": 3,
+      "fret": 6,
+      "grace": false,
+      "i": 7,
+      "midi": 51,
+      "name": "D#3",
+      "onset": 3.5,
+      "phrase_start": false,
+      "rest": false,
+      "role": "#5",
+      "run_len": 2,
+      "stretch": false,
+      "string": 5,
+      "stroke": "U"
+     },
+     {
+      "beat": 1.0,
+      "cell": "Major Bebop Scale from Root",
+      "degree": "5",
+      "finger": 2,
+      "fret": 5,
+      "grace": false,
+      "i": 8,
+      "midi": 50,
+      "name": "D3",
+      "onset": 4.0,
+      "phrase_start": false,
+      "rest": true,
+      "role": "5",
+      "run_len": 3,
+      "stretch": false,
+      "string": 5,
+      "stroke": "D"
+     }
+    ],
+    "positions": [
+     "CAGED E string root",
+     "More Horizontal, D string root"
+    ],
+    "report": null,
+    "warnings": [],
+    "where": "CAGED E string root · frets 4–7"
+   }
+  ],
+  "myxo_to_dorian": false,
+  "n_total": 2,
+  "pair_key": "Coltrane Pattern from 5th → Major Bebop Scale from Root",
+  "pivot": {
+   "index": 4,
+   "label": "1=1",
+   "name": "G4"
+  },
+  "pivot_indices": [
+   4
+  ],
+  "position": "More Horizontal, D string root",
+  "read1": "Maj7",
+  "read2": "Maj7",
+  "single_chord": true,
+  "start": "Major Bebop Scale from Root",
+  "start_id": null,
+  "sym1": "Gmaj7",
+  "sym2": "Gmaj7",
+  "truncated": true
+ },
+ "status": 200
+}

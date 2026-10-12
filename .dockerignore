@@ -1,0 +1,13 @@
+.git
+.venv
+node_modules
+.next
+legacy
+archive
+data/logs
+data/scores
+tests
+__pycache__
+*.pyc
+*.db
+.env*

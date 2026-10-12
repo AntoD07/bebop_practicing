@@ -1,0 +1,702 @@
+[
+ {
+  "name": "cells_myxolidian",
+  "method": "GET",
+  "path": "/cells?mode=Myxolidian"
+ },
+ {
+  "name": "cells_dorian_translated",
+  "method": "GET",
+  "path": "/cells?mode=Myxolidian&translate=dom_to_dorian"
+ },
+ {
+  "name": "positions_eb",
+  "method": "GET",
+  "path": "/positions?key=Eb"
+ },
+ {
+  "name": "pairs_myxo_myxo",
+  "method": "POST",
+  "path": "/connections/pairs",
+  "body": {
+   "chord1": "Myxolidian",
+   "chord2": "Myxolidian",
+   "key": "C"
+  }
+ },
+ {
+  "name": "pairs_dorian_myxo",
+  "method": "POST",
+  "path": "/connections/pairs",
+  "body": {
+   "chord1": "Dorian",
+   "chord2": "Myxolidian",
+   "key": "Eb"
+  }
+ },
+ {
+  "name": "pairs_loc_minres_translated",
+  "method": "POST",
+  "path": "/connections/pairs",
+  "body": {
+   "chord1": "Locrian",
+   "chord2": "MinorResolutions",
+   "key": "D",
+   "dom_to_minor1": true,
+   "dom_to_minor2": true,
+   "pivot": "3"
+  }
+ },
+ {
+  "name": "conn_free",
+  "method": "POST",
+  "path": "/fingering/connection",
+  "body": {
+   "key": "C",
+   "chord1": "Myxolidian",
+   "chord2": "Myxolidian",
+   "cell1": {
+    "name": "Dominant 9th Arpeggio",
+    "mode": "Myxolidian",
+    "degrees": [
+     "3",
+     "5",
+     "7",
+     "9",
+     "1"
+    ],
+    "movement": "A"
+   },
+   "cell2": {
+    "name": "Coltrane Pattern from root",
+    "mode": "Myxolidian",
+    "degrees": [
+     "1",
+     "9",
+     "3",
+     "5",
+     "7"
+    ],
+    "movement": "A"
+   },
+   "position": null,
+   "anchor": "key"
+  }
+ },
+ {
+  "name": "conn_caged_e",
+  "method": "POST",
+  "path": "/fingering/connection",
+  "body": {
+   "key": "C",
+   "chord1": "Myxolidian",
+   "chord2": "Myxolidian",
+   "cell1": {
+    "name": "Dominant 9th Arpeggio",
+    "mode": "Myxolidian",
+    "degrees": [
+     "3",
+     "5",
+     "7",
+     "9",
+     "1"
+    ],
+    "movement": "A"
+   },
+   "cell2": {
+    "name": "Coltrane Pattern from root",
+    "mode": "Myxolidian",
+    "degrees": [
+     "1",
+     "9",
+     "3",
+     "5",
+     "7"
+    ],
+    "movement": "A"
+   },
+   "position": "CAGED E string root",
+   "anchor": "key",
+   "with_reports": false
+  }
+ },
+ {
+  "name": "conn_caged_a",
+  "method": "POST",
+  "path": "/fingering/connection",
+  "body": {
+   "key": "C",
+   "chord1": "Myxolidian",
+   "chord2": "Myxolidian",
+   "cell1": {
+    "name": "Dominant 9th Arpeggio",
+    "mode": "Myxolidian",
+    "degrees": [
+     "3",
+     "5",
+     "7",
+     "9",
+     "1"
+    ],
+    "movement": "A"
+   },
+   "cell2": {
+    "name": "Coltrane Pattern from root",
+    "mode": "Myxolidian",
+    "degrees": [
+     "1",
+     "9",
+     "3",
+     "5",
+     "7"
+    ],
+    "movement": "A"
+   },
+   "position": "CAGED A string root",
+   "anchor": "key",
+   "with_reports": false
+  }
+ },
+ {
+  "name": "conn_diag_e",
+  "method": "POST",
+  "path": "/fingering/connection",
+  "body": {
+   "key": "Eb",
+   "chord1": "Dorian",
+   "chord2": "Myxolidian",
+   "cell1": {
+    "name": "Convert style",
+    "mode": "Dorian",
+    "degrees": [
+     "3",
+     "7",
+     "6",
+     "5",
+     "3"
+    ],
+    "movement": "D"
+   },
+   "cell2": {
+    "name": "Reverse Coltrane Pattern",
+    "mode": "Myxolidian",
+    "degrees": [
+     "7",
+     "5",
+     "1",
+     "3",
+     "9"
+    ],
+    "movement": "D"
+   },
+   "position": "Diagonal E string root",
+   "anchor": "chord2"
+  }
+ },
+ {
+  "name": "conn_diag_a",
+  "method": "POST",
+  "path": "/fingering/connection",
+  "body": {
+   "key": "Eb",
+   "chord1": "Dorian",
+   "chord2": "Myxolidian",
+   "cell1": {
+    "name": "Convert style",
+    "mode": "Dorian",
+    "degrees": [
+     "3",
+     "7",
+     "6",
+     "5",
+     "3"
+    ],
+    "movement": "D"
+   },
+   "cell2": {
+    "name": "Reverse Coltrane Pattern",
+    "mode": "Myxolidian",
+    "degrees": [
+     "7",
+     "5",
+     "1",
+     "3",
+     "9"
+    ],
+    "movement": "D"
+   },
+   "position": "Diagonal A string root",
+   "anchor": "key",
+   "with_reports": false
+  }
+ },
+ {
+  "name": "conn_horizontal",
+  "method": "POST",
+  "path": "/fingering/connection",
+  "body": {
+   "key": "G",
+   "chord1": "Maj7",
+   "chord2": "Maj7",
+   "cell1": {
+    "name": "Coltrane Pattern from 5th",
+    "mode": "Maj7",
+    "degrees": [
+     "5",
+     "6",
+     "7",
+     "9",
+     "1"
+    ],
+    "movement": "A"
+   },
+   "cell2": {
+    "name": "Major Bebop Scale from Root",
+    "mode": "Maj7",
+    "degrees": [
+     "1",
+     "7",
+     "6",
+     "#5",
+     "5"
+    ],
+    "movement": "D"
+   },
+   "position": "More Horizontal, D string root",
+   "anchor": "key",
+   "with_reports": false,
+   "max_layouts": 400
+  }
+ },
+ {
+  "name": "conn_horizontal_truncated",
+  "method": "POST",
+  "path": "/fingering/connection",
+  "body": {
+   "key": "G",
+   "chord1": "Maj7",
+   "chord2": "Maj7",
+   "cell1": {
+    "name": "Coltrane Pattern from 5th",
+    "mode": "Maj7",
+    "degrees": [
+     "5",
+     "6",
+     "7",
+     "9",
+     "1"
+    ],
+    "movement": "A"
+   },
+   "cell2": {
+    "name": "Major Bebop Scale from Root",
+    "mode": "Maj7",
+    "degrees": [
+     "1",
+     "7",
+     "6",
+     "#5",
+     "5"
+    ],
+    "movement": "D"
+   },
+   "position": "More Horizontal, D string root",
+   "anchor": "key",
+   "max_layouts": 1,
+   "with_reports": false
+  }
+ },
+ {
+  "name": "sample_long_maj_251",
+  "method": "POST",
+  "path": "/lines/sample",
+  "body": {
+   "line_type": "Long Maj 2-5-1",
+   "key": "Eb",
+   "chord_tones": true,
+   "seed": 11
+  }
+ },
+ {
+  "name": "sample_combo_batch",
+  "method": "POST",
+  "path": "/lines/sample",
+  "body": {
+   "line_type": "Dorian x Myxolidian",
+   "key": "Eb",
+   "chord_tones": true,
+   "n": 5,
+   "seed": 3,
+   "n_dorian": 2,
+   "n_myxo": 1
+  }
+ },
+ {
+  "name": "pairs_short_maj",
+  "method": "POST",
+  "path": "/lines/pairs",
+  "body": {
+   "line_type": "Short Maj 2-5-1",
+   "chord_tones": true,
+   "key": "C"
+  }
+ },
+ {
+  "name": "line_free",
+  "method": "POST",
+  "path": "/fingering/line",
+  "body": {
+   "key": "Eb",
+   "position": null,
+   "cells": [
+    {
+     "name": "Coltrane Pattern from root",
+     "mode": "Myxolidian",
+     "degrees": [
+      "1",
+      "9",
+      "3",
+      "5",
+      "7"
+     ],
+     "movement": "A"
+    },
+    {
+     "name": "Coltrane Pattern from 7th (ending on 3rd)",
+     "mode": "Myxolidian",
+     "degrees": [
+      "7",
+      "1",
+      "9",
+      "4",
+      "3"
+     ],
+     "movement": "A"
+    },
+    {
+     "name": "Dominant 9th Arpeggio",
+     "mode": "Myxolidian",
+     "degrees": [
+      "3",
+      "5",
+      "7",
+      "9",
+      "1"
+     ],
+     "movement": "A"
+    },
+    {
+     "name": "Late V-#9/b9 approach",
+     "mode": "MajorResolutions",
+     "degrees": [
+      "1",
+      "7",
+      "#9",
+      "b9",
+      "1"
+     ],
+     "movement": "N"
+    }
+   ],
+   "reading_modes": [
+    "Myxolidian",
+    "Myxolidian",
+    "Myxolidian",
+    "MajorResolutions"
+   ],
+   "with_reports": false
+  }
+ },
+ {
+  "name": "line_caged_a",
+  "method": "POST",
+  "path": "/fingering/line",
+  "body": {
+   "key": "Eb",
+   "position": "CAGED A string root",
+   "cells": [
+    {
+     "name": "Coltrane Pattern from root",
+     "mode": "Myxolidian",
+     "degrees": [
+      "1",
+      "9",
+      "3",
+      "5",
+      "7"
+     ],
+     "movement": "A"
+    },
+    {
+     "name": "Coltrane Pattern from 7th (ending on 3rd)",
+     "mode": "Myxolidian",
+     "degrees": [
+      "7",
+      "1",
+      "9",
+      "4",
+      "3"
+     ],
+     "movement": "A"
+    },
+    {
+     "name": "Dominant 9th Arpeggio",
+     "mode": "Myxolidian",
+     "degrees": [
+      "3",
+      "5",
+      "7",
+      "9",
+      "1"
+     ],
+     "movement": "A"
+    },
+    {
+     "name": "Late V-#9/b9 approach",
+     "mode": "MajorResolutions",
+     "degrees": [
+      "1",
+      "7",
+      "#9",
+      "b9",
+      "1"
+     ],
+     "movement": "N"
+    }
+   ],
+   "reading_modes": [
+    "Myxolidian",
+    "Myxolidian",
+    "Myxolidian",
+    "MajorResolutions"
+   ],
+   "with_reports": false
+  }
+ },
+ {
+  "name": "positions_minor_cell",
+  "method": "POST",
+  "path": "/fingering/positions",
+  "body": {
+   "key": "Eb",
+   "mode": "Minor",
+   "cell": {
+    "name": "Min Melodic Arpeggio ending on 3rd",
+    "mode": "Minor",
+    "degrees": [
+     "1",
+     "3",
+     "5",
+     "#7",
+     "3"
+    ],
+    "movement": "A"
+   },
+   "with_reports": false
+  }
+ },
+ {
+  "name": "rank_absolute_small",
+  "method": "POST",
+  "path": "/fingering/rank-absolute",
+  "body": {
+   "key": "C",
+   "beats_per_bar": 4,
+   "line": [
+    {
+     "pitch": "E4",
+     "start": 0
+    },
+    {
+     "pitch": "G4",
+     "start": 0.5
+    },
+    {
+     "pitch": "C5",
+     "start": 1
+    },
+    {
+     "pitch": "B4",
+     "start": 1.5
+    },
+    {
+     "pitch": "G4",
+     "start": 2
+    },
+    {
+     "pitch": "E4",
+     "start": 2.5
+    },
+    {
+     "pitch": "D4",
+     "start": 3
+    }
+   ],
+   "chords": [
+    {
+     "start_beat": 0,
+     "symbol": "Cmaj7"
+    },
+    {
+     "start_beat": 2,
+     "symbol": "G7"
+    }
+   ],
+   "with_reports": false
+  }
+ },
+ {
+  "name": "penta_patterns",
+  "method": "GET",
+  "path": "/pentatonics/patterns"
+ },
+ {
+  "name": "penta_generate_scale",
+  "method": "POST",
+  "path": "/pentatonics/generate",
+  "body": {
+   "key": "A",
+   "penta": "minor",
+   "exercise": "scale",
+   "n_octaves": 2,
+   "low_octave": 2,
+   "start_degs": [
+    0
+   ]
+  }
+ },
+ {
+  "name": "penta_rank_scale_free",
+  "method": "POST",
+  "path": "/pentatonics/rank",
+  "body": {
+   "key": "A",
+   "penta": "minor",
+   "line": [
+    {
+     "pitch": 45,
+     "degree": "1"
+    },
+    {
+     "pitch": 48,
+     "degree": "b3"
+    },
+    {
+     "pitch": 50,
+     "degree": "4"
+    },
+    {
+     "pitch": 52,
+     "degree": "5"
+    },
+    {
+     "pitch": 55,
+     "degree": "b7"
+    },
+    {
+     "pitch": 57,
+     "degree": "1"
+    },
+    {
+     "pitch": 60,
+     "degree": "b3"
+    },
+    {
+     "pitch": 62,
+     "degree": "4"
+    },
+    {
+     "pitch": 64,
+     "degree": "5"
+    },
+    {
+     "pitch": 67,
+     "degree": "b7"
+    },
+    {
+     "pitch": 69,
+     "degree": "1"
+    }
+   ],
+   "with_reports": false
+  }
+ },
+ {
+  "name": "penta_rank_scale_caged_e",
+  "method": "POST",
+  "path": "/pentatonics/rank",
+  "body": {
+   "key": "A",
+   "penta": "minor",
+   "position": "CAGED E string root",
+   "line": [
+    {
+     "pitch": 45,
+     "degree": "1"
+    },
+    {
+     "pitch": 48,
+     "degree": "b3"
+    },
+    {
+     "pitch": 50,
+     "degree": "4"
+    },
+    {
+     "pitch": 52,
+     "degree": "5"
+    },
+    {
+     "pitch": 55,
+     "degree": "b7"
+    },
+    {
+     "pitch": 57,
+     "degree": "1"
+    },
+    {
+     "pitch": 60,
+     "degree": "b3"
+    },
+    {
+     "pitch": 62,
+     "degree": "4"
+    },
+    {
+     "pitch": 64,
+     "degree": "5"
+    },
+    {
+     "pitch": 67,
+     "degree": "b7"
+    },
+    {
+     "pitch": 69,
+     "degree": "1"
+    }
+   ],
+   "with_reports": false,
+   "max_layouts": 150
+  }
+ },
+ {
+  "name": "triads_pair",
+  "method": "GET",
+  "path": "/triads/pair?root1=C&root2=D&key=C"
+ },
+ {
+  "name": "triads_generate_alt",
+  "method": "POST",
+  "path": "/triads/generate",
+  "body": {
+   "root1": "C",
+   "root2": "D",
+   "exercise": "alternating",
+   "direction": "ascending",
+   "x": 3,
+   "start_degs": [
+    0
+   ]
+  }
+ }
+]

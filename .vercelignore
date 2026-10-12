@@ -1,0 +1,11 @@
+legacy/
+archive/
+data/logs/
+data/scores/
+tests/
+scripts/golden/
+*.pkl
+__pycache__/
+.venv/
+.pytest_cache/
+*.db

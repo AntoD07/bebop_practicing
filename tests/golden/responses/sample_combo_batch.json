@@ -1,0 +1,627 @@
+{
+ "body": {
+  "chord_tones_info": "**Chord-tone pivots:** a pivot is the first note of the cell it enters, so it must be a chord tone of THAT cell's chord. Entering a Dorian cell: 1, 3, 5, 7 (ii-7 chord tones). Entering a Myxolidian cell: 4, 6, 1, 3 (the V7's 1-3-5-7, in ii spelling).",
+  "connecting_notes": [
+   [
+    "1",
+    "3",
+    "5",
+    "7"
+   ],
+   [
+    "1",
+    "3",
+    "5",
+    "7"
+   ],
+   [
+    "4",
+    "6",
+    "1",
+    "3"
+   ]
+  ],
+  "harmony_caption": "Harmony: today's key **Eb** is read as the I of a ii-V-I — the line starts on **Fm7**; later chords follow from the pivots.",
+  "line_type": "Dorian x Myxolidian",
+  "lines": [
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "6",
+       "5",
+       "4",
+       "5"
+      ],
+      "end": "5",
+      "error": null,
+      "id": "Dorian:3a902331",
+      "index": 5,
+      "mode": "Dorian",
+      "movement": "D",
+      "name": "Reverse coltrane from root",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "6",
+       "5",
+       "4",
+       "5"
+      ],
+      "raw_end": "5",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "5",
+       "6",
+       "9",
+       "b9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "Dorian:ed73718a",
+      "index": 23,
+      "mode": "Dorian",
+      "movement": "A",
+      "name": "Ezthetic descending bebop",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "6",
+       "9",
+       "b9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "1",
+       "9",
+       "3",
+       "4",
+       "5"
+      ],
+      "end": "5",
+      "error": null,
+      "id": "Myxolidian:5f5f8e1a",
+      "index": 10,
+      "mode": "Myxolidian",
+      "movement": "A",
+      "name": "Ascending II Scale",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "6",
+       "7",
+       "1",
+       "9"
+      ],
+      "raw_end": "9",
+      "raw_start": "5",
+      "start": "1",
+      "steps": [
+       "dom_to_dorian"
+      ],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **Eb** is read as the I of a ii-V-I — the line starts on **Fm7**; later chords follow from the pivots.",
+    "line_type": "Dorian x Myxolidian",
+    "movement_modes": [
+     "Dorian",
+     "Dorian",
+     "Myxolidian"
+    ],
+    "reading_modes": [
+     "Dorian",
+     "Dorian",
+     "Dorian"
+    ],
+    "signature": [
+     "Dorian:3a902331",
+     "Dorian:ed73718a",
+     "Myxolidian:5f5f8e1a"
+    ],
+    "structure": [
+     "Dorian",
+     "Dorian",
+     "Myxolidian"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "6",
+       "5",
+       "4",
+       "5"
+      ],
+      "end": "5",
+      "error": null,
+      "id": "Dorian:3a902331",
+      "index": 5,
+      "mode": "Dorian",
+      "movement": "D",
+      "name": "Reverse coltrane from root",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "6",
+       "5",
+       "4",
+       "5"
+      ],
+      "raw_end": "5",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "5",
+       "#1",
+       "9",
+       "4",
+       "3"
+      ],
+      "end": "3",
+      "error": null,
+      "id": "Dorian:be06136e",
+      "index": 22,
+      "mode": "Dorian",
+      "movement": "N",
+      "name": "Stan Getz enclosure of II 3rd",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "#1",
+       "9",
+       "4",
+       "3"
+      ],
+      "raw_end": "3",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "3",
+       "9",
+       "1",
+       "7",
+       "#7"
+      ],
+      "end": "#7",
+      "error": null,
+      "id": "Myxolidian:7200d04b",
+      "index": 25,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "Descending Dominant Scale from 7th ending on #11",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "7",
+       "6",
+       "5",
+       "4",
+       "#11"
+      ],
+      "raw_end": "#11",
+      "raw_start": "7",
+      "start": "3",
+      "steps": [
+       "dom_to_dorian"
+      ],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **Eb** is read as the I of a ii-V-I — the line starts on **Fm7**; later chords follow from the pivots.",
+    "line_type": "Dorian x Myxolidian",
+    "movement_modes": [
+     "Dorian",
+     "Dorian",
+     "Myxolidian"
+    ],
+    "reading_modes": [
+     "Dorian",
+     "Dorian",
+     "Dorian"
+    ],
+    "signature": [
+     "Dorian:3a902331",
+     "Dorian:be06136e",
+     "Myxolidian:7200d04b"
+    ],
+    "structure": [
+     "Dorian",
+     "Dorian",
+     "Myxolidian"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "7",
+       "6",
+       "7",
+       "5"
+      ],
+      "end": "5",
+      "error": null,
+      "id": "Dorian:45fac0bb",
+      "index": 4,
+      "mode": "Dorian",
+      "movement": "D",
+      "name": "Cannonball Adderley Approach",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "7",
+       "6",
+       "7",
+       "5"
+      ],
+      "raw_end": "5",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "5",
+       "6",
+       "9",
+       "b9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "Dorian:ed73718a",
+      "index": 23,
+      "mode": "Dorian",
+      "movement": "A",
+      "name": "Ezthetic descending bebop",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "6",
+       "9",
+       "b9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "1",
+       "9",
+       "3",
+       "4",
+       "5"
+      ],
+      "end": "5",
+      "error": null,
+      "id": "Myxolidian:5f5f8e1a",
+      "index": 10,
+      "mode": "Myxolidian",
+      "movement": "A",
+      "name": "Ascending II Scale",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "6",
+       "7",
+       "1",
+       "9"
+      ],
+      "raw_end": "9",
+      "raw_start": "5",
+      "start": "1",
+      "steps": [
+       "dom_to_dorian"
+      ],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **Eb** is read as the I of a ii-V-I — the line starts on **Fm7**; later chords follow from the pivots.",
+    "line_type": "Dorian x Myxolidian",
+    "movement_modes": [
+     "Dorian",
+     "Dorian",
+     "Myxolidian"
+    ],
+    "reading_modes": [
+     "Dorian",
+     "Dorian",
+     "Dorian"
+    ],
+    "signature": [
+     "Dorian:45fac0bb",
+     "Dorian:ed73718a",
+     "Myxolidian:5f5f8e1a"
+    ],
+    "structure": [
+     "Dorian",
+     "Dorian",
+     "Myxolidian"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "6",
+       "5",
+       "4",
+       "5"
+      ],
+      "end": "5",
+      "error": null,
+      "id": "Dorian:3a902331",
+      "index": 5,
+      "mode": "Dorian",
+      "movement": "D",
+      "name": "Reverse coltrane from root",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "6",
+       "5",
+       "4",
+       "5"
+      ],
+      "raw_end": "5",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "5",
+       "6",
+       "9",
+       "b9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "Dorian:ed73718a",
+      "index": 23,
+      "mode": "Dorian",
+      "movement": "A",
+      "name": "Ezthetic descending bebop",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "6",
+       "9",
+       "b9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "1",
+       "3",
+       "5",
+       "7",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:262c812a",
+      "index": 11,
+      "mode": "Myxolidian",
+      "movement": "A",
+      "name": "Ascending II-Minor 7th Arpeggio (ending on 3rd)",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "7",
+       "9",
+       "4",
+       "3"
+      ],
+      "raw_end": "3",
+      "raw_start": "5",
+      "start": "1",
+      "steps": [
+       "dom_to_dorian"
+      ],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **Eb** is read as the I of a ii-V-I — the line starts on **Fm7**; later chords follow from the pivots.",
+    "line_type": "Dorian x Myxolidian",
+    "movement_modes": [
+     "Dorian",
+     "Dorian",
+     "Myxolidian"
+    ],
+    "reading_modes": [
+     "Dorian",
+     "Dorian",
+     "Dorian"
+    ],
+    "signature": [
+     "Dorian:3a902331",
+     "Dorian:ed73718a",
+     "Myxolidian:262c812a"
+    ],
+    "structure": [
+     "Dorian",
+     "Dorian",
+     "Myxolidian"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "5",
+       "4",
+       "3",
+       "9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "Dorian:fcc9f835",
+      "index": 17,
+      "mode": "Dorian",
+      "movement": "D",
+      "name": "Descending II Scale",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "4",
+       "3",
+       "9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "1",
+       "5",
+       "7",
+       "5",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Dorian:7c3c9624",
+      "index": 7,
+      "mode": "Dorian",
+      "movement": "N",
+      "name": "Diatonic Enclosure of 6th",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "5",
+       "7",
+       "5",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "1",
+       "3",
+       "4",
+       "9"
+      ],
+      "end": "9",
+      "error": null,
+      "id": "Myxolidian:857c2763",
+      "index": 7,
+      "mode": "Myxolidian",
+      "movement": "A",
+      "name": "Dominant arperggio to 13th (Mccoy)",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "3",
+       "5",
+       "7",
+       "1",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "3",
+      "start": "6",
+      "steps": [
+       "dom_to_dorian"
+      ],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **Eb** is read as the I of a ii-V-I — the line starts on **Fm7**; later chords follow from the pivots.",
+    "line_type": "Dorian x Myxolidian",
+    "movement_modes": [
+     "Dorian",
+     "Dorian",
+     "Myxolidian"
+    ],
+    "reading_modes": [
+     "Dorian",
+     "Dorian",
+     "Dorian"
+    ],
+    "signature": [
+     "Dorian:fcc9f835",
+     "Dorian:7c3c9624",
+     "Myxolidian:857c2763"
+    ],
+    "structure": [
+     "Dorian",
+     "Dorian",
+     "Myxolidian"
+    ]
+   }
+  ],
+  "mapping_info": "**Mapping applied:** Myxolidian cells are re-spelled from the ii (Dorian) root, so both chords share one note representation and the pivots line up. V7 degree → ii degree: 1→4, 9→5, 3→6, 4→7, 5→1, 6→9, 7→3, #11→#7, b9→#11. Myxolidian notes shown below (and the start/end/connecting-note pickers) use this ii spelling.",
+  "message": null,
+  "structure_preview": [
+   "Dorian",
+   "Dorian",
+   "Myxolidian"
+  ]
+ },
+ "status": 200
+}

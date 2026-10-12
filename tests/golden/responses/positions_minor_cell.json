@@ -1,0 +1,912 @@
+{
+ "body": {
+  "cell": {
+   "degrees": [
+    "1",
+    "3",
+    "5",
+    "#7",
+    "3"
+   ],
+   "movement": "A",
+   "name": "Min Melodic Arpeggio ending on 3rd"
+  },
+  "config": {},
+  "key": "Eb",
+  "mode": "Minor",
+  "positions": [
+   {
+    "best_cost": 1.6,
+    "index": 3,
+    "name": "Diagonal E string root",
+    "octaves": [
+     {
+      "cost": 1.6,
+      "fingering": {
+       "alternate": null,
+       "beats_per_bar": 4,
+       "chords": [
+        {
+         "start_beat": 0,
+         "symbol": "Eb Minor"
+        }
+       ],
+       "contributions": [
+        [
+         "shift",
+         2.0
+        ],
+        [
+         "box_overflow",
+         1.0
+        ],
+        [
+         "same_str_dd",
+         0.6
+        ],
+        [
+         "sweep_bonus",
+         -1.0
+        ]
+       ],
+       "cost": 2.6,
+       "density": "eighth",
+       "drop_sites": [],
+       "encoding": "6/11D 5/9D 4/8D 4/12D 3/11D",
+       "flags": [],
+       "fret_hi": 12,
+       "fret_lo": 8,
+       "key": "Eb",
+       "layout": "6/11 5/9 4/8 4/12 3/11",
+       "mode": "optimum",
+       "n_flags": 0,
+       "n_up": 0,
+       "placed": [
+        {
+         "beat": 1.0,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "1",
+         "finger": 1,
+         "fret": 11,
+         "grace": false,
+         "i": 0,
+         "midi": 51,
+         "name": "D#3",
+         "onset": 0.0,
+         "phrase_start": true,
+         "rest": true,
+         "role": "root",
+         "run_len": 1,
+         "stretch": false,
+         "string": 6,
+         "stroke": "D"
+        },
+        {
+         "beat": 1.5,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "3",
+         "finger": 2,
+         "fret": 9,
+         "grace": false,
+         "i": 1,
+         "midi": 54,
+         "name": "F#3",
+         "onset": 0.5,
+         "phrase_start": false,
+         "rest": true,
+         "role": "3rd",
+         "run_len": 1,
+         "stretch": false,
+         "string": 5,
+         "stroke": "D"
+        },
+        {
+         "beat": 2.0,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "5",
+         "finger": 1,
+         "fret": 8,
+         "grace": false,
+         "i": 2,
+         "midi": 58,
+         "name": "A#3",
+         "onset": 1.0,
+         "phrase_start": false,
+         "rest": true,
+         "role": "5",
+         "run_len": 1,
+         "stretch": false,
+         "string": 4,
+         "stroke": "D"
+        },
+        {
+         "beat": 2.5,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "#7",
+         "finger": 4,
+         "fret": 12,
+         "grace": false,
+         "i": 3,
+         "midi": 62,
+         "name": "D4",
+         "onset": 1.5,
+         "phrase_start": false,
+         "rest": true,
+         "role": "chromatic-approach",
+         "run_len": 2,
+         "stretch": false,
+         "string": 4,
+         "stroke": "D"
+        },
+        {
+         "beat": 3.0,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "3",
+         "finger": 3,
+         "fret": 11,
+         "grace": false,
+         "i": 4,
+         "midi": 66,
+         "name": "F#4",
+         "onset": 2.0,
+         "phrase_start": false,
+         "rest": true,
+         "role": "3rd",
+         "run_len": 1,
+         "stretch": false,
+         "string": 3,
+         "stroke": "D"
+        }
+       ],
+       "positions": [],
+       "report": null,
+       "warnings": [],
+       "where": "frets 8–12"
+      },
+      "note": null,
+      "register": "D#3–F#4 · frets 8–12 · root on 6th str"
+     }
+    ]
+   },
+   {
+    "best_cost": 1.0,
+    "index": 4,
+    "name": "Diagonal A string root",
+    "octaves": [
+     {
+      "cost": 1.0,
+      "fingering": {
+       "alternate": null,
+       "beats_per_bar": 4,
+       "chords": [
+        {
+         "start_beat": 0,
+         "symbol": "Eb Minor"
+        }
+       ],
+       "contributions": [
+        [
+         "shift",
+         2.0
+        ],
+        [
+         "box_overflow",
+         1.0
+        ],
+        [
+         "sweep_bonus",
+         -1.0
+        ]
+       ],
+       "cost": 2.0,
+       "density": "eighth",
+       "drop_sites": [],
+       "encoding": "5/6D 4/4D 3/3D 2/3D 1/2D",
+       "flags": [],
+       "fret_hi": 6,
+       "fret_lo": 2,
+       "key": "Eb",
+       "layout": "5/6 4/4 3/3 2/3 1/2",
+       "mode": "optimum",
+       "n_flags": 0,
+       "n_up": 0,
+       "placed": [
+        {
+         "beat": 1.0,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "1",
+         "finger": 1,
+         "fret": 6,
+         "grace": false,
+         "i": 0,
+         "midi": 51,
+         "name": "D#3",
+         "onset": 0.0,
+         "phrase_start": true,
+         "rest": true,
+         "role": "root",
+         "run_len": 1,
+         "stretch": false,
+         "string": 5,
+         "stroke": "D"
+        },
+        {
+         "beat": 1.5,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "3",
+         "finger": 2,
+         "fret": 4,
+         "grace": false,
+         "i": 1,
+         "midi": 54,
+         "name": "F#3",
+         "onset": 0.5,
+         "phrase_start": false,
+         "rest": true,
+         "role": "3rd",
+         "run_len": 1,
+         "stretch": false,
+         "string": 4,
+         "stroke": "D"
+        },
+        {
+         "beat": 2.0,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "5",
+         "finger": 1,
+         "fret": 3,
+         "grace": false,
+         "i": 2,
+         "midi": 58,
+         "name": "A#3",
+         "onset": 1.0,
+         "phrase_start": false,
+         "rest": true,
+         "role": "5",
+         "run_len": 1,
+         "stretch": false,
+         "string": 3,
+         "stroke": "D"
+        },
+        {
+         "beat": 2.5,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "#7",
+         "finger": 2,
+         "fret": 3,
+         "grace": false,
+         "i": 3,
+         "midi": 62,
+         "name": "D4",
+         "onset": 1.5,
+         "phrase_start": false,
+         "rest": true,
+         "role": "chromatic-approach",
+         "run_len": 1,
+         "stretch": false,
+         "string": 2,
+         "stroke": "D"
+        },
+        {
+         "beat": 3.0,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "3",
+         "finger": 1,
+         "fret": 2,
+         "grace": false,
+         "i": 4,
+         "midi": 66,
+         "name": "F#4",
+         "onset": 2.0,
+         "phrase_start": false,
+         "rest": false,
+         "role": "3rd",
+         "run_len": 1,
+         "stretch": false,
+         "string": 1,
+         "stroke": "D"
+        }
+       ],
+       "positions": [],
+       "report": null,
+       "warnings": [],
+       "where": "frets 2–6"
+      },
+      "note": null,
+      "register": "D#3–F#4 · frets 2–6 · root on 5th str"
+     }
+    ]
+   },
+   {
+    "best_cost": -0.4,
+    "index": 1,
+    "name": "CAGED E string root",
+    "octaves": [
+     {
+      "cost": -0.4,
+      "fingering": {
+       "alternate": null,
+       "beats_per_bar": 4,
+       "chords": [
+        {
+         "start_beat": 0,
+         "symbol": "Eb Minor"
+        }
+       ],
+       "contributions": [
+        [
+         "same_str_dd",
+         0.6
+        ],
+        [
+         "sweep_bonus",
+         -1.0
+        ]
+       ],
+       "cost": -0.4,
+       "density": "eighth",
+       "drop_sites": [],
+       "encoding": "6/11D 6/14D 5/13D 4/12D 3/11D",
+       "flags": [],
+       "fret_hi": 14,
+       "fret_lo": 11,
+       "key": "Eb",
+       "layout": "6/11 6/14 5/13 4/12 3/11",
+       "mode": "optimum",
+       "n_flags": 0,
+       "n_up": 0,
+       "placed": [
+        {
+         "beat": 1.0,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "1",
+         "finger": 1,
+         "fret": 11,
+         "grace": false,
+         "i": 0,
+         "midi": 51,
+         "name": "D#3",
+         "onset": 0.0,
+         "phrase_start": true,
+         "rest": true,
+         "role": "root",
+         "run_len": 1,
+         "stretch": false,
+         "string": 6,
+         "stroke": "D"
+        },
+        {
+         "beat": 1.5,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "3",
+         "finger": 4,
+         "fret": 14,
+         "grace": false,
+         "i": 1,
+         "midi": 54,
+         "name": "F#3",
+         "onset": 0.5,
+         "phrase_start": false,
+         "rest": true,
+         "role": "3rd",
+         "run_len": 2,
+         "stretch": false,
+         "string": 6,
+         "stroke": "D"
+        },
+        {
+         "beat": 2.0,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "5",
+         "finger": 3,
+         "fret": 13,
+         "grace": false,
+         "i": 2,
+         "midi": 58,
+         "name": "A#3",
+         "onset": 1.0,
+         "phrase_start": false,
+         "rest": true,
+         "role": "5",
+         "run_len": 1,
+         "stretch": false,
+         "string": 5,
+         "stroke": "D"
+        },
+        {
+         "beat": 2.5,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "#7",
+         "finger": 2,
+         "fret": 12,
+         "grace": false,
+         "i": 3,
+         "midi": 62,
+         "name": "D4",
+         "onset": 1.5,
+         "phrase_start": false,
+         "rest": true,
+         "role": "chromatic-approach",
+         "run_len": 1,
+         "stretch": false,
+         "string": 4,
+         "stroke": "D"
+        },
+        {
+         "beat": 3.0,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "3",
+         "finger": 1,
+         "fret": 11,
+         "grace": false,
+         "i": 4,
+         "midi": 66,
+         "name": "F#4",
+         "onset": 2.0,
+         "phrase_start": false,
+         "rest": true,
+         "role": "3rd",
+         "run_len": 1,
+         "stretch": false,
+         "string": 3,
+         "stroke": "D"
+        }
+       ],
+       "positions": [
+        "CAGED E string root"
+       ],
+       "report": null,
+       "warnings": [],
+       "where": "CAGED E string root · frets 11–14"
+      },
+      "note": null,
+      "register": "D#3–F#4 · frets 11–14 · root on 6th str"
+     },
+     {
+      "cost": 1.6,
+      "fingering": {
+       "alternate": null,
+       "beats_per_bar": 4,
+       "chords": [
+        {
+         "start_beat": 0,
+         "symbol": "Eb Minor"
+        }
+       ],
+       "contributions": [
+        [
+         "shift",
+         2.0
+        ],
+        [
+         "same_str_dd",
+         0.6
+        ],
+        [
+         "sweep_bonus",
+         -1.0
+        ]
+       ],
+       "cost": 1.6,
+       "density": "eighth",
+       "drop_sites": [],
+       "encoding": "4/13D 3/11D 2/11D 2/15D 1/14D",
+       "flags": [],
+       "fret_hi": 15,
+       "fret_lo": 11,
+       "key": "Eb",
+       "layout": "4/13 3/11 2/11 2/15 1/14",
+       "mode": "optimum",
+       "n_flags": 0,
+       "n_up": 0,
+       "placed": [
+        {
+         "beat": 1.0,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "1",
+         "finger": 2,
+         "fret": 13,
+         "grace": false,
+         "i": 0,
+         "midi": 63,
+         "name": "D#4",
+         "onset": 0.0,
+         "phrase_start": true,
+         "rest": true,
+         "role": "root",
+         "run_len": 1,
+         "stretch": false,
+         "string": 4,
+         "stroke": "D"
+        },
+        {
+         "beat": 1.5,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "3",
+         "finger": 1,
+         "fret": 11,
+         "grace": false,
+         "i": 1,
+         "midi": 66,
+         "name": "F#4",
+         "onset": 0.5,
+         "phrase_start": false,
+         "rest": true,
+         "role": "3rd",
+         "run_len": 1,
+         "stretch": false,
+         "string": 3,
+         "stroke": "D"
+        },
+        {
+         "beat": 2.0,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "5",
+         "finger": 1,
+         "fret": 11,
+         "grace": false,
+         "i": 2,
+         "midi": 70,
+         "name": "A#4",
+         "onset": 1.0,
+         "phrase_start": false,
+         "rest": true,
+         "role": "5",
+         "run_len": 1,
+         "stretch": false,
+         "string": 2,
+         "stroke": "D"
+        },
+        {
+         "beat": 2.5,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "#7",
+         "finger": 4,
+         "fret": 15,
+         "grace": false,
+         "i": 3,
+         "midi": 74,
+         "name": "D5",
+         "onset": 1.5,
+         "phrase_start": false,
+         "rest": true,
+         "role": "chromatic-approach",
+         "run_len": 2,
+         "stretch": false,
+         "string": 2,
+         "stroke": "D"
+        },
+        {
+         "beat": 3.0,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "3",
+         "finger": 3,
+         "fret": 14,
+         "grace": false,
+         "i": 4,
+         "midi": 78,
+         "name": "F#5",
+         "onset": 2.0,
+         "phrase_start": false,
+         "rest": false,
+         "role": "3rd",
+         "run_len": 1,
+         "stretch": false,
+         "string": 1,
+         "stroke": "D"
+        }
+       ],
+       "positions": [
+        "CAGED E string root"
+       ],
+       "report": null,
+       "warnings": [],
+       "where": "CAGED E string root · frets 11–15"
+      },
+      "note": null,
+      "register": "D#4–F#5 · frets 11–15 · root on 4th str"
+     }
+    ]
+   },
+   {
+    "best_cost": -0.4,
+    "index": 2,
+    "name": "CAGED A string root",
+    "octaves": [
+     {
+      "cost": -0.4,
+      "fingering": {
+       "alternate": null,
+       "beats_per_bar": 4,
+       "chords": [
+        {
+         "start_beat": 0,
+         "symbol": "Eb Minor"
+        }
+       ],
+       "contributions": [
+        [
+         "same_str_dd",
+         0.6
+        ],
+        [
+         "sweep_bonus",
+         -1.0
+        ]
+       ],
+       "cost": -0.4,
+       "density": "eighth",
+       "drop_sites": [],
+       "encoding": "5/6D 5/9D 4/8D 3/7D 2/7D",
+       "flags": [],
+       "fret_hi": 9,
+       "fret_lo": 6,
+       "key": "Eb",
+       "layout": "5/6 5/9 4/8 3/7 2/7",
+       "mode": "optimum",
+       "n_flags": 0,
+       "n_up": 0,
+       "placed": [
+        {
+         "beat": 1.0,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "1",
+         "finger": 1,
+         "fret": 6,
+         "grace": false,
+         "i": 0,
+         "midi": 51,
+         "name": "D#3",
+         "onset": 0.0,
+         "phrase_start": true,
+         "rest": true,
+         "role": "root",
+         "run_len": 1,
+         "stretch": false,
+         "string": 5,
+         "stroke": "D"
+        },
+        {
+         "beat": 1.5,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "3",
+         "finger": 4,
+         "fret": 9,
+         "grace": false,
+         "i": 1,
+         "midi": 54,
+         "name": "F#3",
+         "onset": 0.5,
+         "phrase_start": false,
+         "rest": true,
+         "role": "3rd",
+         "run_len": 2,
+         "stretch": false,
+         "string": 5,
+         "stroke": "D"
+        },
+        {
+         "beat": 2.0,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "5",
+         "finger": 3,
+         "fret": 8,
+         "grace": false,
+         "i": 2,
+         "midi": 58,
+         "name": "A#3",
+         "onset": 1.0,
+         "phrase_start": false,
+         "rest": true,
+         "role": "5",
+         "run_len": 1,
+         "stretch": false,
+         "string": 4,
+         "stroke": "D"
+        },
+        {
+         "beat": 2.5,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "#7",
+         "finger": 2,
+         "fret": 7,
+         "grace": false,
+         "i": 3,
+         "midi": 62,
+         "name": "D4",
+         "onset": 1.5,
+         "phrase_start": false,
+         "rest": true,
+         "role": "chromatic-approach",
+         "run_len": 1,
+         "stretch": false,
+         "string": 3,
+         "stroke": "D"
+        },
+        {
+         "beat": 3.0,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "3",
+         "finger": 2,
+         "fret": 7,
+         "grace": false,
+         "i": 4,
+         "midi": 66,
+         "name": "F#4",
+         "onset": 2.0,
+         "phrase_start": false,
+         "rest": true,
+         "role": "3rd",
+         "run_len": 1,
+         "stretch": false,
+         "string": 2,
+         "stroke": "D"
+        }
+       ],
+       "positions": [
+        "CAGED A string root"
+       ],
+       "report": null,
+       "warnings": [],
+       "where": "CAGED A string root · frets 6–9"
+      },
+      "note": null,
+      "register": "D#3–F#4 · frets 6–9 · root on 5th str"
+     }
+    ]
+   },
+   {
+    "best_cost": -0.4,
+    "index": 5,
+    "name": "More Horizontal, D string root",
+    "octaves": [
+     {
+      "cost": -0.4,
+      "fingering": {
+       "alternate": null,
+       "beats_per_bar": 4,
+       "chords": [
+        {
+         "start_beat": 0,
+         "symbol": "Eb Minor"
+        }
+       ],
+       "contributions": [
+        [
+         "root_pin",
+         1.0
+        ],
+        [
+         "same_str_dd",
+         0.6
+        ],
+        [
+         "sweep_bonus",
+         -1.0
+        ]
+       ],
+       "cost": 0.6,
+       "density": "eighth",
+       "drop_sites": [],
+       "encoding": "5/6D 5/9D 4/8D 3/7D 2/7D",
+       "flags": [],
+       "fret_hi": 9,
+       "fret_lo": 6,
+       "key": "Eb",
+       "layout": "5/6 5/9 4/8 3/7 2/7",
+       "mode": "optimum",
+       "n_flags": 0,
+       "n_up": 0,
+       "placed": [
+        {
+         "beat": 1.0,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "1",
+         "finger": 1,
+         "fret": 6,
+         "grace": false,
+         "i": 0,
+         "midi": 51,
+         "name": "D#3",
+         "onset": 0.0,
+         "phrase_start": true,
+         "rest": true,
+         "role": "root",
+         "run_len": 1,
+         "stretch": false,
+         "string": 5,
+         "stroke": "D"
+        },
+        {
+         "beat": 1.5,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "3",
+         "finger": 4,
+         "fret": 9,
+         "grace": false,
+         "i": 1,
+         "midi": 54,
+         "name": "F#3",
+         "onset": 0.5,
+         "phrase_start": false,
+         "rest": true,
+         "role": "3rd",
+         "run_len": 2,
+         "stretch": false,
+         "string": 5,
+         "stroke": "D"
+        },
+        {
+         "beat": 2.0,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "5",
+         "finger": 3,
+         "fret": 8,
+         "grace": false,
+         "i": 2,
+         "midi": 58,
+         "name": "A#3",
+         "onset": 1.0,
+         "phrase_start": false,
+         "rest": true,
+         "role": "5",
+         "run_len": 1,
+         "stretch": false,
+         "string": 4,
+         "stroke": "D"
+        },
+        {
+         "beat": 2.5,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "#7",
+         "finger": 2,
+         "fret": 7,
+         "grace": false,
+         "i": 3,
+         "midi": 62,
+         "name": "D4",
+         "onset": 1.5,
+         "phrase_start": false,
+         "rest": true,
+         "role": "chromatic-approach",
+         "run_len": 1,
+         "stretch": false,
+         "string": 3,
+         "stroke": "D"
+        },
+        {
+         "beat": 3.0,
+         "cell": "Min Melodic Arpeggio ending on 3rd",
+         "degree": "3",
+         "finger": 2,
+         "fret": 7,
+         "grace": false,
+         "i": 4,
+         "midi": 66,
+         "name": "F#4",
+         "onset": 2.0,
+         "phrase_start": false,
+         "rest": true,
+         "role": "3rd",
+         "run_len": 1,
+         "stretch": false,
+         "string": 2,
+         "stroke": "D"
+        }
+       ],
+       "positions": [
+        "CAGED A string root"
+       ],
+       "report": null,
+       "warnings": [],
+       "where": "CAGED A string root · frets 6–9"
+      },
+      "note": null,
+      "register": "D#3–F#4 · frets 6–9 · root on 5th str"
+     }
+    ]
+   }
+  ]
+ },
+ "status": 200
+}

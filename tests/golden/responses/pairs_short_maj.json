@@ -1,0 +1,4526 @@
+{
+ "body": {
+  "connecting_notes": [
+   [
+    "1",
+    "3",
+    "5",
+    "7"
+   ],
+   [
+    "9",
+    "6",
+    "b6",
+    "b9",
+    "#9",
+    "11",
+    "#11",
+    "5"
+   ],
+   [
+    "1",
+    "3",
+    "5",
+    "7"
+   ],
+   [
+    "1",
+    "3",
+    "5",
+    "7"
+   ]
+  ],
+  "line_type": "Short Maj 2-5-1",
+  "lines": [
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "maj7",
+       "7",
+       "6",
+       "5"
+      ],
+      "end": "5",
+      "error": null,
+      "id": "Myxolidian:976e19c4",
+      "index": 1,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "Descending Bebop scale from root",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "maj7",
+       "7",
+       "6",
+       "5"
+      ],
+      "raw_end": "5",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "5",
+       "3",
+       "1",
+       "7",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "MajorResolutions:7c02ac45",
+      "index": 11,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "Descending Dominant Arpeggio",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "3",
+       "1",
+       "7",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:976e19c4",
+     "MajorResolutions:7c02ac45"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "maj7",
+       "7",
+       "6",
+       "5"
+      ],
+      "end": "5",
+      "error": null,
+      "id": "Myxolidian:976e19c4",
+      "index": 1,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "Descending Bebop scale from root",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "maj7",
+       "7",
+       "6",
+       "5"
+      ],
+      "raw_end": "5",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "5",
+       "b6",
+       "3",
+       "1",
+       "5"
+      ],
+      "end": "5",
+      "error": null,
+      "id": "MajorResolutions:4f348537",
+      "index": 12,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "Hidden Augmented Triad pivot at 5th",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "b6",
+       "3",
+       "1",
+       "5"
+      ],
+      "raw_end": "5",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:976e19c4",
+     "MajorResolutions:4f348537"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "maj7",
+       "7",
+       "6",
+       "5"
+      ],
+      "end": "5",
+      "error": null,
+      "id": "Myxolidian:976e19c4",
+      "index": 1,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "Descending Bebop scale from root",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "maj7",
+       "7",
+       "6",
+       "5"
+      ],
+      "raw_end": "5",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "5",
+       "b6",
+       "3",
+       "b9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:4b3538bf",
+      "index": 13,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Hidden Minor triad pivot at 5th",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "b6",
+       "3",
+       "b9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:976e19c4",
+     "MajorResolutions:4b3538bf"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "maj7",
+       "7",
+       "6",
+       "5"
+      ],
+      "end": "5",
+      "error": null,
+      "id": "Myxolidian:976e19c4",
+      "index": 1,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "Descending Bebop scale from root",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "maj7",
+       "7",
+       "6",
+       "5"
+      ],
+      "raw_end": "5",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "5",
+       "4",
+       "3",
+       "b9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:ceeedaf3",
+      "index": 14,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Descending Dominant scale from 5th",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "4",
+       "3",
+       "b9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:976e19c4",
+     "MajorResolutions:ceeedaf3"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "maj7",
+       "7",
+       "6",
+       "5"
+      ],
+      "end": "5",
+      "error": null,
+      "id": "Myxolidian:976e19c4",
+      "index": 1,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "Descending Bebop scale from root",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "maj7",
+       "7",
+       "6",
+       "5"
+      ],
+      "raw_end": "5",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "5",
+       "3",
+       "#9",
+       "b9",
+       "1",
+       "7",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:8ee8d596",
+      "index": 33,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "MJP Delayed SemitoneTone (from #11)",
+      "nominal_mismatch": false,
+      "pivot_hint": "#11",
+      "raw_degrees": [
+       "5",
+       "3",
+       "#9",
+       "b9",
+       "1",
+       "7",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:976e19c4",
+     "MajorResolutions:8ee8d596"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "6",
+       "5",
+       "3",
+       "9"
+      ],
+      "end": "9",
+      "error": null,
+      "id": "Myxolidian:ce3f6453",
+      "index": 2,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "George Coleman from root",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "6",
+       "5",
+       "3",
+       "9"
+      ],
+      "raw_end": "9",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "9",
+       "b9",
+       "b6",
+       "7",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:2bd098ae",
+      "index": 25,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "Bill Evans enclosure (from #9)",
+      "nominal_mismatch": false,
+      "pivot_hint": "#9",
+      "raw_degrees": [
+       "9",
+       "b9",
+       "b6",
+       "7",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "9",
+      "start": "9",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:ce3f6453",
+     "MajorResolutions:2bd098ae"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "6",
+       "5",
+       "3",
+       "9"
+      ],
+      "end": "9",
+      "error": null,
+      "id": "Myxolidian:ce3f6453",
+      "index": 2,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "George Coleman from root",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "6",
+       "5",
+       "3",
+       "9"
+      ],
+      "raw_end": "9",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "9",
+       "#9",
+       "1",
+       "7",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "MajorResolutions:8ddd1a3f",
+      "index": 26,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Early b9/#9 Approach (start b9)",
+      "nominal_mismatch": false,
+      "pivot_hint": "b9",
+      "raw_degrees": [
+       "9",
+       "#9",
+       "1",
+       "7",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "9",
+      "start": "9",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:ce3f6453",
+     "MajorResolutions:8ddd1a3f"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "6",
+       "5",
+       "3",
+       "9"
+      ],
+      "end": "9",
+      "error": null,
+      "id": "Myxolidian:ce3f6453",
+      "index": 2,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "George Coleman from root",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "6",
+       "5",
+       "3",
+       "9"
+      ],
+      "raw_end": "9",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "9",
+       "b9",
+       "1",
+       "7",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "MajorResolutions:0a44f9e7",
+      "index": 27,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "Super Locrian scale (from #9)",
+      "nominal_mismatch": false,
+      "pivot_hint": "#9",
+      "raw_degrees": [
+       "9",
+       "b9",
+       "1",
+       "7",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "9",
+      "start": "9",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:ce3f6453",
+     "MajorResolutions:0a44f9e7"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "6",
+       "5",
+       "3",
+       "9"
+      ],
+      "end": "9",
+      "error": null,
+      "id": "Myxolidian:ce3f6453",
+      "index": 2,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "George Coleman from root",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "6",
+       "5",
+       "3",
+       "9"
+      ],
+      "raw_end": "9",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "9",
+       "b9",
+       "b6",
+       "3",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:b7ff7210",
+      "index": 28,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "Bill Evans variation (from #9)",
+      "nominal_mismatch": false,
+      "pivot_hint": "#9",
+      "raw_degrees": [
+       "9",
+       "b9",
+       "b6",
+       "3",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "9",
+      "start": "9",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:ce3f6453",
+     "MajorResolutions:b7ff7210"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "6",
+       "5",
+       "3",
+       "9"
+      ],
+      "end": "9",
+      "error": null,
+      "id": "Myxolidian:ce3f6453",
+      "index": 2,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "George Coleman from root",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "6",
+       "5",
+       "3",
+       "9"
+      ],
+      "raw_end": "9",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "b9",
+       "#9",
+       "1",
+       "7",
+       "b6",
+       "3",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:bb622cdb",
+      "index": 30,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "MJP Delayed Early b9/#9",
+      "nominal_mismatch": true,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "b9",
+       "#9",
+       "1",
+       "7",
+       "b6",
+       "3",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "9",
+      "start": "9",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:ce3f6453",
+     "MajorResolutions:bb622cdb"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "6",
+       "5",
+       "3",
+       "9"
+      ],
+      "end": "9",
+      "error": null,
+      "id": "Myxolidian:ce3f6453",
+      "index": 2,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "George Coleman from root",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "6",
+       "5",
+       "3",
+       "9"
+      ],
+      "raw_end": "9",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "9",
+       "b9",
+       "b6",
+       "3",
+       "#9",
+       "b9",
+       "6",
+       "7",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:d4002e01",
+      "index": 32,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "MJP Delayed BillEvans (from #9)",
+      "nominal_mismatch": false,
+      "pivot_hint": "#9",
+      "raw_degrees": [
+       "9",
+       "b9",
+       "b6",
+       "3",
+       "#9",
+       "b9",
+       "6",
+       "7",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "9",
+      "start": "9",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:ce3f6453",
+     "MajorResolutions:d4002e01"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "maj7",
+       "7",
+       "9",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:df9b5a38",
+      "index": 3,
+      "mode": "Myxolidian",
+      "movement": "N",
+      "name": "Lee Morgan Dominant (Mccoy)",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "maj7",
+       "7",
+       "9",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "5",
+       "3",
+       "1",
+       "9"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "MajorResolutions:2fb679f9",
+      "index": 15,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Hidden Half Diminished Chord (from b13) Farao",
+      "nominal_mismatch": true,
+      "pivot_hint": "b6",
+      "raw_degrees": [
+       "6",
+       "5",
+       "3",
+       "1",
+       "9"
+      ],
+      "raw_end": "6",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:df9b5a38",
+     "MajorResolutions:2fb679f9"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "maj7",
+       "7",
+       "9",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:df9b5a38",
+      "index": 3,
+      "mode": "Myxolidian",
+      "movement": "N",
+      "name": "Lee Morgan Dominant (Mccoy)",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "maj7",
+       "7",
+       "9",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "b6",
+       "3",
+       "1",
+       "5"
+      ],
+      "end": "5",
+      "error": null,
+      "id": "MajorResolutions:01c8f76a",
+      "index": 16,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "Hidden Augmented Triad pivot at 13th",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "6",
+       "b6",
+       "3",
+       "1",
+       "5"
+      ],
+      "raw_end": "5",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:df9b5a38",
+     "MajorResolutions:01c8f76a"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "maj7",
+       "7",
+       "9",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:df9b5a38",
+      "index": 3,
+      "mode": "Myxolidian",
+      "movement": "N",
+      "name": "Lee Morgan Dominant (Mccoy)",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "maj7",
+       "7",
+       "9",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "3",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:c6b28179",
+      "index": 17,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Hidden Fully Altered reverse Minor Coltrane (from b13)",
+      "nominal_mismatch": false,
+      "pivot_hint": "b6",
+      "raw_degrees": [
+       "6",
+       "3",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:df9b5a38",
+     "MajorResolutions:c6b28179"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "maj7",
+       "7",
+       "9",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:df9b5a38",
+      "index": 3,
+      "mode": "Myxolidian",
+      "movement": "N",
+      "name": "Lee Morgan Dominant (Mccoy)",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "maj7",
+       "7",
+       "9",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "b6",
+       "3",
+       "b9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:f93bc6f7",
+      "index": 18,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Hidden Minor triad pivot at 13th",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "6",
+       "b6",
+       "3",
+       "b9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:df9b5a38",
+     "MajorResolutions:f93bc6f7"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "maj7",
+       "7",
+       "9",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:df9b5a38",
+      "index": 3,
+      "mode": "Myxolidian",
+      "movement": "N",
+      "name": "Lee Morgan Dominant (Mccoy)",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "maj7",
+       "7",
+       "9",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "5",
+       "b6",
+       "3",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:6371d511",
+      "index": 19,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "b13 Enclosure (from 13th)",
+      "nominal_mismatch": false,
+      "pivot_hint": "6",
+      "raw_degrees": [
+       "6",
+       "5",
+       "b6",
+       "3",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:df9b5a38",
+     "MajorResolutions:6371d511"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "maj7",
+       "7",
+       "9",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:df9b5a38",
+      "index": 3,
+      "mode": "Myxolidian",
+      "movement": "N",
+      "name": "Lee Morgan Dominant (Mccoy)",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "maj7",
+       "7",
+       "9",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "7",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:0ea6c1e3",
+      "index": 20,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Bill Evans Ascending enclosure (from b13)",
+      "nominal_mismatch": false,
+      "pivot_hint": "b6",
+      "raw_degrees": [
+       "6",
+       "7",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:df9b5a38",
+     "MajorResolutions:0ea6c1e3"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "maj7",
+       "7",
+       "9",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:df9b5a38",
+      "index": 3,
+      "mode": "Myxolidian",
+      "movement": "N",
+      "name": "Lee Morgan Dominant (Mccoy)",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "maj7",
+       "7",
+       "9",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "5",
+       "#11",
+       "5",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:54aceb87",
+      "index": 21,
+      "mode": "MajorResolutions",
+      "movement": "A",
+      "name": "Dominant Turn",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "6",
+       "5",
+       "#11",
+       "5",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:df9b5a38",
+     "MajorResolutions:54aceb87"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "7",
+       "9(lower)",
+       "4",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:d1898233",
+      "index": 4,
+      "mode": "Myxolidian",
+      "movement": "N",
+      "name": "Minor Honeysuckle Rose",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "7",
+       "9(lower)",
+       "4",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "5",
+       "3",
+       "1",
+       "9"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "MajorResolutions:2fb679f9",
+      "index": 15,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Hidden Half Diminished Chord (from b13) Farao",
+      "nominal_mismatch": true,
+      "pivot_hint": "b6",
+      "raw_degrees": [
+       "6",
+       "5",
+       "3",
+       "1",
+       "9"
+      ],
+      "raw_end": "6",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:d1898233",
+     "MajorResolutions:2fb679f9"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "7",
+       "9(lower)",
+       "4",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:d1898233",
+      "index": 4,
+      "mode": "Myxolidian",
+      "movement": "N",
+      "name": "Minor Honeysuckle Rose",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "7",
+       "9(lower)",
+       "4",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "b6",
+       "3",
+       "1",
+       "5"
+      ],
+      "end": "5",
+      "error": null,
+      "id": "MajorResolutions:01c8f76a",
+      "index": 16,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "Hidden Augmented Triad pivot at 13th",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "6",
+       "b6",
+       "3",
+       "1",
+       "5"
+      ],
+      "raw_end": "5",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:d1898233",
+     "MajorResolutions:01c8f76a"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "7",
+       "9(lower)",
+       "4",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:d1898233",
+      "index": 4,
+      "mode": "Myxolidian",
+      "movement": "N",
+      "name": "Minor Honeysuckle Rose",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "7",
+       "9(lower)",
+       "4",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "3",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:c6b28179",
+      "index": 17,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Hidden Fully Altered reverse Minor Coltrane (from b13)",
+      "nominal_mismatch": false,
+      "pivot_hint": "b6",
+      "raw_degrees": [
+       "6",
+       "3",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:d1898233",
+     "MajorResolutions:c6b28179"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "7",
+       "9(lower)",
+       "4",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:d1898233",
+      "index": 4,
+      "mode": "Myxolidian",
+      "movement": "N",
+      "name": "Minor Honeysuckle Rose",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "7",
+       "9(lower)",
+       "4",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "b6",
+       "3",
+       "b9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:f93bc6f7",
+      "index": 18,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Hidden Minor triad pivot at 13th",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "6",
+       "b6",
+       "3",
+       "b9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:d1898233",
+     "MajorResolutions:f93bc6f7"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "7",
+       "9(lower)",
+       "4",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:d1898233",
+      "index": 4,
+      "mode": "Myxolidian",
+      "movement": "N",
+      "name": "Minor Honeysuckle Rose",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "7",
+       "9(lower)",
+       "4",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "5",
+       "b6",
+       "3",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:6371d511",
+      "index": 19,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "b13 Enclosure (from 13th)",
+      "nominal_mismatch": false,
+      "pivot_hint": "6",
+      "raw_degrees": [
+       "6",
+       "5",
+       "b6",
+       "3",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:d1898233",
+     "MajorResolutions:6371d511"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "7",
+       "9(lower)",
+       "4",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:d1898233",
+      "index": 4,
+      "mode": "Myxolidian",
+      "movement": "N",
+      "name": "Minor Honeysuckle Rose",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "7",
+       "9(lower)",
+       "4",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "7",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:0ea6c1e3",
+      "index": 20,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Bill Evans Ascending enclosure (from b13)",
+      "nominal_mismatch": false,
+      "pivot_hint": "b6",
+      "raw_degrees": [
+       "6",
+       "7",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:d1898233",
+     "MajorResolutions:0ea6c1e3"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "1",
+       "7",
+       "9(lower)",
+       "4",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:d1898233",
+      "index": 4,
+      "mode": "Myxolidian",
+      "movement": "N",
+      "name": "Minor Honeysuckle Rose",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "1",
+       "7",
+       "9(lower)",
+       "4",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "1",
+      "start": "1",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "5",
+       "#11",
+       "5",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:54aceb87",
+      "index": 21,
+      "mode": "MajorResolutions",
+      "movement": "A",
+      "name": "Dominant Turn",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "6",
+       "5",
+       "#11",
+       "5",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:d1898233",
+     "MajorResolutions:54aceb87"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "3",
+       "9",
+       "1",
+       "7",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:67050c2a",
+      "index": 5,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "Descending Dominant Scale from 3rd",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "3",
+       "9",
+       "1",
+       "7",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "3",
+      "start": "3",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "5",
+       "3",
+       "1",
+       "9"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "MajorResolutions:2fb679f9",
+      "index": 15,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Hidden Half Diminished Chord (from b13) Farao",
+      "nominal_mismatch": true,
+      "pivot_hint": "b6",
+      "raw_degrees": [
+       "6",
+       "5",
+       "3",
+       "1",
+       "9"
+      ],
+      "raw_end": "6",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:67050c2a",
+     "MajorResolutions:2fb679f9"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "3",
+       "9",
+       "1",
+       "7",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:67050c2a",
+      "index": 5,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "Descending Dominant Scale from 3rd",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "3",
+       "9",
+       "1",
+       "7",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "3",
+      "start": "3",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "b6",
+       "3",
+       "1",
+       "5"
+      ],
+      "end": "5",
+      "error": null,
+      "id": "MajorResolutions:01c8f76a",
+      "index": 16,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "Hidden Augmented Triad pivot at 13th",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "6",
+       "b6",
+       "3",
+       "1",
+       "5"
+      ],
+      "raw_end": "5",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:67050c2a",
+     "MajorResolutions:01c8f76a"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "3",
+       "9",
+       "1",
+       "7",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:67050c2a",
+      "index": 5,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "Descending Dominant Scale from 3rd",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "3",
+       "9",
+       "1",
+       "7",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "3",
+      "start": "3",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "3",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:c6b28179",
+      "index": 17,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Hidden Fully Altered reverse Minor Coltrane (from b13)",
+      "nominal_mismatch": false,
+      "pivot_hint": "b6",
+      "raw_degrees": [
+       "6",
+       "3",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:67050c2a",
+     "MajorResolutions:c6b28179"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "3",
+       "9",
+       "1",
+       "7",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:67050c2a",
+      "index": 5,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "Descending Dominant Scale from 3rd",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "3",
+       "9",
+       "1",
+       "7",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "3",
+      "start": "3",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "b6",
+       "3",
+       "b9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:f93bc6f7",
+      "index": 18,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Hidden Minor triad pivot at 13th",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "6",
+       "b6",
+       "3",
+       "b9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:67050c2a",
+     "MajorResolutions:f93bc6f7"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "3",
+       "9",
+       "1",
+       "7",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:67050c2a",
+      "index": 5,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "Descending Dominant Scale from 3rd",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "3",
+       "9",
+       "1",
+       "7",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "3",
+      "start": "3",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "5",
+       "b6",
+       "3",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:6371d511",
+      "index": 19,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "b13 Enclosure (from 13th)",
+      "nominal_mismatch": false,
+      "pivot_hint": "6",
+      "raw_degrees": [
+       "6",
+       "5",
+       "b6",
+       "3",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:67050c2a",
+     "MajorResolutions:6371d511"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "3",
+       "9",
+       "1",
+       "7",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:67050c2a",
+      "index": 5,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "Descending Dominant Scale from 3rd",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "3",
+       "9",
+       "1",
+       "7",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "3",
+      "start": "3",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "7",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:0ea6c1e3",
+      "index": 20,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Bill Evans Ascending enclosure (from b13)",
+      "nominal_mismatch": false,
+      "pivot_hint": "b6",
+      "raw_degrees": [
+       "6",
+       "7",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:67050c2a",
+     "MajorResolutions:0ea6c1e3"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "3",
+       "9",
+       "1",
+       "7",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:67050c2a",
+      "index": 5,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "Descending Dominant Scale from 3rd",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "3",
+       "9",
+       "1",
+       "7",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "3",
+      "start": "3",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "5",
+       "#11",
+       "5",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:54aceb87",
+      "index": 21,
+      "mode": "MajorResolutions",
+      "movement": "A",
+      "name": "Dominant Turn",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "6",
+       "5",
+       "#11",
+       "5",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:67050c2a",
+     "MajorResolutions:54aceb87"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "3",
+       "5",
+       "7",
+       "1",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:857c2763",
+      "index": 7,
+      "mode": "Myxolidian",
+      "movement": "A",
+      "name": "Dominant arperggio to 13th (Mccoy)",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "3",
+       "5",
+       "7",
+       "1",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "3",
+      "start": "3",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "5",
+       "3",
+       "1",
+       "9"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "MajorResolutions:2fb679f9",
+      "index": 15,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Hidden Half Diminished Chord (from b13) Farao",
+      "nominal_mismatch": true,
+      "pivot_hint": "b6",
+      "raw_degrees": [
+       "6",
+       "5",
+       "3",
+       "1",
+       "9"
+      ],
+      "raw_end": "6",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:857c2763",
+     "MajorResolutions:2fb679f9"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "3",
+       "5",
+       "7",
+       "1",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:857c2763",
+      "index": 7,
+      "mode": "Myxolidian",
+      "movement": "A",
+      "name": "Dominant arperggio to 13th (Mccoy)",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "3",
+       "5",
+       "7",
+       "1",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "3",
+      "start": "3",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "b6",
+       "3",
+       "1",
+       "5"
+      ],
+      "end": "5",
+      "error": null,
+      "id": "MajorResolutions:01c8f76a",
+      "index": 16,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "Hidden Augmented Triad pivot at 13th",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "6",
+       "b6",
+       "3",
+       "1",
+       "5"
+      ],
+      "raw_end": "5",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:857c2763",
+     "MajorResolutions:01c8f76a"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "3",
+       "5",
+       "7",
+       "1",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:857c2763",
+      "index": 7,
+      "mode": "Myxolidian",
+      "movement": "A",
+      "name": "Dominant arperggio to 13th (Mccoy)",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "3",
+       "5",
+       "7",
+       "1",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "3",
+      "start": "3",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "3",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:c6b28179",
+      "index": 17,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Hidden Fully Altered reverse Minor Coltrane (from b13)",
+      "nominal_mismatch": false,
+      "pivot_hint": "b6",
+      "raw_degrees": [
+       "6",
+       "3",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:857c2763",
+     "MajorResolutions:c6b28179"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "3",
+       "5",
+       "7",
+       "1",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:857c2763",
+      "index": 7,
+      "mode": "Myxolidian",
+      "movement": "A",
+      "name": "Dominant arperggio to 13th (Mccoy)",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "3",
+       "5",
+       "7",
+       "1",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "3",
+      "start": "3",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "b6",
+       "3",
+       "b9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:f93bc6f7",
+      "index": 18,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Hidden Minor triad pivot at 13th",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "6",
+       "b6",
+       "3",
+       "b9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:857c2763",
+     "MajorResolutions:f93bc6f7"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "3",
+       "5",
+       "7",
+       "1",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:857c2763",
+      "index": 7,
+      "mode": "Myxolidian",
+      "movement": "A",
+      "name": "Dominant arperggio to 13th (Mccoy)",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "3",
+       "5",
+       "7",
+       "1",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "3",
+      "start": "3",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "5",
+       "b6",
+       "3",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:6371d511",
+      "index": 19,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "b13 Enclosure (from 13th)",
+      "nominal_mismatch": false,
+      "pivot_hint": "6",
+      "raw_degrees": [
+       "6",
+       "5",
+       "b6",
+       "3",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:857c2763",
+     "MajorResolutions:6371d511"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "3",
+       "5",
+       "7",
+       "1",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:857c2763",
+      "index": 7,
+      "mode": "Myxolidian",
+      "movement": "A",
+      "name": "Dominant arperggio to 13th (Mccoy)",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "3",
+       "5",
+       "7",
+       "1",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "3",
+      "start": "3",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "7",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:0ea6c1e3",
+      "index": 20,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Bill Evans Ascending enclosure (from b13)",
+      "nominal_mismatch": false,
+      "pivot_hint": "b6",
+      "raw_degrees": [
+       "6",
+       "7",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:857c2763",
+     "MajorResolutions:0ea6c1e3"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "3",
+       "5",
+       "7",
+       "1",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "Myxolidian:857c2763",
+      "index": 7,
+      "mode": "Myxolidian",
+      "movement": "A",
+      "name": "Dominant arperggio to 13th (Mccoy)",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "3",
+       "5",
+       "7",
+       "1",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "3",
+      "start": "3",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "6",
+       "5",
+       "#11",
+       "5",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:54aceb87",
+      "index": 21,
+      "mode": "MajorResolutions",
+      "movement": "A",
+      "name": "Dominant Turn",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "6",
+       "5",
+       "#11",
+       "5",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "6",
+      "start": "6",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:857c2763",
+     "MajorResolutions:54aceb87"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "5",
+       "6",
+       "7",
+       "1",
+       "9"
+      ],
+      "end": "9",
+      "error": null,
+      "id": "Myxolidian:5f5f8e1a",
+      "index": 10,
+      "mode": "Myxolidian",
+      "movement": "A",
+      "name": "Ascending II Scale",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "6",
+       "7",
+       "1",
+       "9"
+      ],
+      "raw_end": "9",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "9",
+       "b9",
+       "b6",
+       "7",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:2bd098ae",
+      "index": 25,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "Bill Evans enclosure (from #9)",
+      "nominal_mismatch": false,
+      "pivot_hint": "#9",
+      "raw_degrees": [
+       "9",
+       "b9",
+       "b6",
+       "7",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "9",
+      "start": "9",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:5f5f8e1a",
+     "MajorResolutions:2bd098ae"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "5",
+       "6",
+       "7",
+       "1",
+       "9"
+      ],
+      "end": "9",
+      "error": null,
+      "id": "Myxolidian:5f5f8e1a",
+      "index": 10,
+      "mode": "Myxolidian",
+      "movement": "A",
+      "name": "Ascending II Scale",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "6",
+       "7",
+       "1",
+       "9"
+      ],
+      "raw_end": "9",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "9",
+       "#9",
+       "1",
+       "7",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "MajorResolutions:8ddd1a3f",
+      "index": 26,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Early b9/#9 Approach (start b9)",
+      "nominal_mismatch": false,
+      "pivot_hint": "b9",
+      "raw_degrees": [
+       "9",
+       "#9",
+       "1",
+       "7",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "9",
+      "start": "9",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:5f5f8e1a",
+     "MajorResolutions:8ddd1a3f"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "5",
+       "6",
+       "7",
+       "1",
+       "9"
+      ],
+      "end": "9",
+      "error": null,
+      "id": "Myxolidian:5f5f8e1a",
+      "index": 10,
+      "mode": "Myxolidian",
+      "movement": "A",
+      "name": "Ascending II Scale",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "6",
+       "7",
+       "1",
+       "9"
+      ],
+      "raw_end": "9",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "9",
+       "b9",
+       "1",
+       "7",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "MajorResolutions:0a44f9e7",
+      "index": 27,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "Super Locrian scale (from #9)",
+      "nominal_mismatch": false,
+      "pivot_hint": "#9",
+      "raw_degrees": [
+       "9",
+       "b9",
+       "1",
+       "7",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "9",
+      "start": "9",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:5f5f8e1a",
+     "MajorResolutions:0a44f9e7"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "5",
+       "6",
+       "7",
+       "1",
+       "9"
+      ],
+      "end": "9",
+      "error": null,
+      "id": "Myxolidian:5f5f8e1a",
+      "index": 10,
+      "mode": "Myxolidian",
+      "movement": "A",
+      "name": "Ascending II Scale",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "6",
+       "7",
+       "1",
+       "9"
+      ],
+      "raw_end": "9",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "9",
+       "b9",
+       "b6",
+       "3",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:b7ff7210",
+      "index": 28,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "Bill Evans variation (from #9)",
+      "nominal_mismatch": false,
+      "pivot_hint": "#9",
+      "raw_degrees": [
+       "9",
+       "b9",
+       "b6",
+       "3",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "9",
+      "start": "9",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:5f5f8e1a",
+     "MajorResolutions:b7ff7210"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "5",
+       "6",
+       "7",
+       "1",
+       "9"
+      ],
+      "end": "9",
+      "error": null,
+      "id": "Myxolidian:5f5f8e1a",
+      "index": 10,
+      "mode": "Myxolidian",
+      "movement": "A",
+      "name": "Ascending II Scale",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "6",
+       "7",
+       "1",
+       "9"
+      ],
+      "raw_end": "9",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "b9",
+       "#9",
+       "1",
+       "7",
+       "b6",
+       "3",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:bb622cdb",
+      "index": 30,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "MJP Delayed Early b9/#9",
+      "nominal_mismatch": true,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "b9",
+       "#9",
+       "1",
+       "7",
+       "b6",
+       "3",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "9",
+      "start": "9",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:5f5f8e1a",
+     "MajorResolutions:bb622cdb"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "5",
+       "6",
+       "7",
+       "1",
+       "9"
+      ],
+      "end": "9",
+      "error": null,
+      "id": "Myxolidian:5f5f8e1a",
+      "index": 10,
+      "mode": "Myxolidian",
+      "movement": "A",
+      "name": "Ascending II Scale",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "6",
+       "7",
+       "1",
+       "9"
+      ],
+      "raw_end": "9",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "9",
+       "b9",
+       "b6",
+       "3",
+       "#9",
+       "b9",
+       "6",
+       "7",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:d4002e01",
+      "index": 32,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "MJP Delayed BillEvans (from #9)",
+      "nominal_mismatch": false,
+      "pivot_hint": "#9",
+      "raw_degrees": [
+       "9",
+       "b9",
+       "b6",
+       "3",
+       "#9",
+       "b9",
+       "6",
+       "7",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "9",
+      "start": "9",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:5f5f8e1a",
+     "MajorResolutions:d4002e01"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "5",
+       "7",
+       "9",
+       "4",
+       "#11"
+      ],
+      "end": "#11",
+      "error": null,
+      "id": "Myxolidian:10a8ccc3",
+      "index": 12,
+      "mode": "Myxolidian",
+      "movement": "A",
+      "name": "Ascending II-Minor 7th Arpeggio (ending on #11)",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "7",
+       "9",
+       "4",
+       "#11"
+      ],
+      "raw_end": "#11",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "#11",
+       "6",
+       "5",
+       "3",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:4a897f77",
+      "index": 29,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "Diminished to dominant",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "#11",
+       "6",
+       "5",
+       "3",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "#11",
+      "start": "#11",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:10a8ccc3",
+     "MajorResolutions:4a897f77"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "5",
+       "4",
+       "3",
+       "4",
+       "9"
+      ],
+      "end": "9",
+      "error": null,
+      "id": "Myxolidian:4358c73f",
+      "index": 14,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "Cannonball Adderley Approach",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "4",
+       "3",
+       "4",
+       "9"
+      ],
+      "raw_end": "9",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "9",
+       "b9",
+       "b6",
+       "7",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:2bd098ae",
+      "index": 25,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "Bill Evans enclosure (from #9)",
+      "nominal_mismatch": false,
+      "pivot_hint": "#9",
+      "raw_degrees": [
+       "9",
+       "b9",
+       "b6",
+       "7",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "9",
+      "start": "9",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:4358c73f",
+     "MajorResolutions:2bd098ae"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "5",
+       "4",
+       "3",
+       "4",
+       "9"
+      ],
+      "end": "9",
+      "error": null,
+      "id": "Myxolidian:4358c73f",
+      "index": 14,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "Cannonball Adderley Approach",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "4",
+       "3",
+       "4",
+       "9"
+      ],
+      "raw_end": "9",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "9",
+       "#9",
+       "1",
+       "7",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "MajorResolutions:8ddd1a3f",
+      "index": 26,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "Early b9/#9 Approach (start b9)",
+      "nominal_mismatch": false,
+      "pivot_hint": "b9",
+      "raw_degrees": [
+       "9",
+       "#9",
+       "1",
+       "7",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "9",
+      "start": "9",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:4358c73f",
+     "MajorResolutions:8ddd1a3f"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "5",
+       "4",
+       "3",
+       "4",
+       "9"
+      ],
+      "end": "9",
+      "error": null,
+      "id": "Myxolidian:4358c73f",
+      "index": 14,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "Cannonball Adderley Approach",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "4",
+       "3",
+       "4",
+       "9"
+      ],
+      "raw_end": "9",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "9",
+       "b9",
+       "1",
+       "7",
+       "6"
+      ],
+      "end": "6",
+      "error": null,
+      "id": "MajorResolutions:0a44f9e7",
+      "index": 27,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "Super Locrian scale (from #9)",
+      "nominal_mismatch": false,
+      "pivot_hint": "#9",
+      "raw_degrees": [
+       "9",
+       "b9",
+       "1",
+       "7",
+       "6"
+      ],
+      "raw_end": "6",
+      "raw_start": "9",
+      "start": "9",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:4358c73f",
+     "MajorResolutions:0a44f9e7"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "5",
+       "4",
+       "3",
+       "4",
+       "9"
+      ],
+      "end": "9",
+      "error": null,
+      "id": "Myxolidian:4358c73f",
+      "index": 14,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "Cannonball Adderley Approach",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "4",
+       "3",
+       "4",
+       "9"
+      ],
+      "raw_end": "9",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "9",
+       "b9",
+       "b6",
+       "3",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:b7ff7210",
+      "index": 28,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "Bill Evans variation (from #9)",
+      "nominal_mismatch": false,
+      "pivot_hint": "#9",
+      "raw_degrees": [
+       "9",
+       "b9",
+       "b6",
+       "3",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "9",
+      "start": "9",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:4358c73f",
+     "MajorResolutions:b7ff7210"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "5",
+       "4",
+       "3",
+       "4",
+       "9"
+      ],
+      "end": "9",
+      "error": null,
+      "id": "Myxolidian:4358c73f",
+      "index": 14,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "Cannonball Adderley Approach",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "4",
+       "3",
+       "4",
+       "9"
+      ],
+      "raw_end": "9",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "b9",
+       "#9",
+       "1",
+       "7",
+       "b6",
+       "3",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:bb622cdb",
+      "index": 30,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "MJP Delayed Early b9/#9",
+      "nominal_mismatch": true,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "b9",
+       "#9",
+       "1",
+       "7",
+       "b6",
+       "3",
+       "#9",
+       "b9",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "9",
+      "start": "9",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:4358c73f",
+     "MajorResolutions:bb622cdb"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "5",
+       "4",
+       "3",
+       "4",
+       "9"
+      ],
+      "end": "9",
+      "error": null,
+      "id": "Myxolidian:4358c73f",
+      "index": 14,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "Cannonball Adderley Approach",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "5",
+       "4",
+       "3",
+       "4",
+       "9"
+      ],
+      "raw_end": "9",
+      "raw_start": "5",
+      "start": "5",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "9",
+       "b9",
+       "b6",
+       "3",
+       "#9",
+       "b9",
+       "6",
+       "7",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:d4002e01",
+      "index": 32,
+      "mode": "MajorResolutions",
+      "movement": "D",
+      "name": "MJP Delayed BillEvans (from #9)",
+      "nominal_mismatch": false,
+      "pivot_hint": "#9",
+      "raw_degrees": [
+       "9",
+       "b9",
+       "b6",
+       "3",
+       "#9",
+       "b9",
+       "6",
+       "7",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "9",
+      "start": "9",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:4358c73f",
+     "MajorResolutions:d4002e01"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "7",
+       "1",
+       "9",
+       "4",
+       "#11"
+      ],
+      "end": "#11",
+      "error": null,
+      "id": "Myxolidian:7faa0b9a",
+      "index": 23,
+      "mode": "Myxolidian",
+      "movement": "A",
+      "name": "Coltrane Pattern from 7th (ending on #11)",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "7",
+       "1",
+       "9",
+       "4",
+       "#11"
+      ],
+      "raw_end": "#11",
+      "raw_start": "7",
+      "start": "7",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "#11",
+       "6",
+       "5",
+       "3",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:4a897f77",
+      "index": 29,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "Diminished to dominant",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "#11",
+       "6",
+       "5",
+       "3",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "#11",
+      "start": "#11",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:7faa0b9a",
+     "MajorResolutions:4a897f77"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   },
+   {
+    "cells": [
+     {
+      "degrees": [
+       "7",
+       "6",
+       "5",
+       "4",
+       "#11"
+      ],
+      "end": "#11",
+      "error": null,
+      "id": "Myxolidian:7200d04b",
+      "index": 25,
+      "mode": "Myxolidian",
+      "movement": "D",
+      "name": "Descending Dominant Scale from 7th ending on #11",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "7",
+       "6",
+       "5",
+       "4",
+       "#11"
+      ],
+      "raw_end": "#11",
+      "raw_start": "7",
+      "start": "7",
+      "steps": [],
+      "type": "Essential"
+     },
+     {
+      "degrees": [
+       "#11",
+       "6",
+       "5",
+       "3",
+       "1"
+      ],
+      "end": "1",
+      "error": null,
+      "id": "MajorResolutions:4a897f77",
+      "index": 29,
+      "mode": "MajorResolutions",
+      "movement": "N",
+      "name": "Diminished to dominant",
+      "nominal_mismatch": false,
+      "pivot_hint": null,
+      "raw_degrees": [
+       "#11",
+       "6",
+       "5",
+       "3",
+       "1"
+      ],
+      "raw_end": "1",
+      "raw_start": "#11",
+      "start": "#11",
+      "steps": [],
+      "type": "Essential"
+     }
+    ],
+    "harmony_caption": "Harmony: today's key **C** is read as the I of a ii-V-I — the line starts on **G7**; later chords follow from the pivots.",
+    "line_type": "Short Maj 2-5-1",
+    "movement_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "reading_modes": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "signature": [
+     "Myxolidian:7200d04b",
+     "MajorResolutions:4a897f77"
+    ],
+    "structure": [
+     "Myxolidian",
+     "MajorResolutions"
+    ]
+   }
+  ],
+  "structure": [
+   "Myxolidian",
+   "MajorResolutions"
+  ]
+ },
+ "status": 200
+}

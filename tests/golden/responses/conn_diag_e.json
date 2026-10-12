@@ -1,0 +1,60 @@
+{
+ "body": {
+  "anchor": {
+   "name": "chord2",
+   "pc": 3,
+   "sym": "Eb7"
+  },
+  "best": null,
+  "budget": {
+   "max_layouts": 2000,
+   "used": 0
+  },
+  "chunks": [
+   {
+    "box": 0,
+    "layouts": 0,
+    "mode": "empty",
+    "offset": -24
+   },
+   {
+    "box": 0,
+    "layouts": 0,
+    "mode": "empty",
+    "offset": -12
+   },
+   {
+    "box": 0,
+    "layouts": 0,
+    "mode": "empty",
+    "offset": 12
+   }
+  ],
+  "config": {},
+  "end": "Convert style",
+  "end_id": null,
+  "error": "does not fit this position",
+  "fingerings": [],
+  "myxo_to_dorian": true,
+  "n_total": 0,
+  "pair_key": "Convert style → Reverse Coltrane Pattern",
+  "pivot": {
+   "index": 4,
+   "label": "3=7",
+   "name": null
+  },
+  "pivot_indices": [
+   4
+  ],
+  "position": "Diagonal E string root",
+  "read1": "Dorian",
+  "read2": "Dorian",
+  "single_chord": false,
+  "start": "Reverse Coltrane Pattern",
+  "start_id": null,
+  "sym1": "Fm7",
+  "sym2": "Eb7",
+  "truncated": false
+ },
+ "status": 200
+}

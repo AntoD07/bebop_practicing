@@ -1,0 +1,202 @@
+{
+ "body": {
+  "directions": [
+   "ascending",
+   "descending",
+   "both"
+  ],
+  "exercises": [
+   {
+    "id": "scale",
+    "label": "Scale run"
+   },
+   {
+    "id": "pattern",
+    "label": "x-notes pattern"
+   },
+   {
+    "id": "chromatic",
+    "label": "Chromatic passing tones"
+   },
+   {
+    "id": "bergonzi",
+    "label": "Bergonzi patterns"
+   },
+   {
+    "id": "shifting",
+    "label": "Shifting"
+   }
+  ],
+  "names": [
+   "minor",
+   "major",
+   "minor6",
+   "dominant"
+  ],
+  "patterns": [
+   {
+    "description": "A ↓skip B ↓step C ↑skip D ↓step (connect). Groupings descend by skip: C-G-Eb-Bb-F.",
+    "name": "Formula 1 · ↓skip ↓step ↑skip · ↓step→ (desc)",
+    "offsets": [
+     0,
+     -2,
+     -3,
+     -1
+    ],
+    "stride": -2
+   },
+   {
+    "description": "B ↓step C ↑skip D ↓step A ↓skip (connect). Groupings descend by skip.",
+    "name": "Formula 2 · ↓step ↑skip ↓step · ↓skip→ (desc)",
+    "offsets": [
+     0,
+     -1,
+     1,
+     0
+    ],
+    "stride": -2
+   },
+   {
+    "description": "C ↑skip D ↓step A ↓skip B ↓step (connect). Groupings descend by skip.",
+    "name": "Formula 3 · ↑skip ↓step ↓skip · ↓step→ (desc)",
+    "offsets": [
+     0,
+     2,
+     1,
+     -1
+    ],
+    "stride": -2
+   },
+   {
+    "description": "D ↓step A ↓skip B ↓step C ↑skip (connect). Groupings descend by skip.",
+    "name": "Formula 4 · ↓step ↓skip ↓step · ↑skip→ (desc)",
+    "offsets": [
+     0,
+     -1,
+     -3,
+     -4
+    ],
+    "stride": -2
+   },
+   {
+    "description": "A ↑skip B ↑step C ↓skip D ↑step (connect). Groupings ascend by skip: C-F-Bb-Eb-G (mirror of 1).",
+    "name": "Formula 5 · ↑skip ↑step ↓skip · ↑step→ (asc)",
+    "offsets": [
+     0,
+     2,
+     3,
+     1
+    ],
+    "stride": 2
+   },
+   {
+    "description": "B ↑step C ↓skip D ↑step A ↑skip (connect). Groupings ascend by skip (mirror of 2).",
+    "name": "Formula 6 · ↑step ↓skip ↑step · ↑skip→ (asc)",
+    "offsets": [
+     0,
+     1,
+     -1,
+     0
+    ],
+    "stride": 2
+   },
+   {
+    "description": "C ↓skip D ↑step A ↑skip B ↑step (connect). Groupings ascend by skip (mirror of 3).",
+    "name": "Formula 7 · ↓skip ↑step ↑skip · ↑step→ (asc)",
+    "offsets": [
+     0,
+     -2,
+     -1,
+     1
+    ],
+    "stride": 2
+   },
+   {
+    "description": "D ↑step A ↑skip B ↑step C ↓skip (connect). Groupings ascend by skip (mirror of 4).",
+    "name": "Formula 8 · ↑step ↑skip ↑step · ↓skip→ (asc)",
+    "offsets": [
+     0,
+     1,
+     3,
+     4
+    ],
+    "stride": 2
+   }
+  ],
+  "pentatonics": {
+   "dominant": {
+    "degrees": [
+     "1",
+     "2",
+     "3",
+     "5",
+     "b7"
+    ],
+    "intervals": [
+     0,
+     2,
+     4,
+     7,
+     10
+    ]
+   },
+   "major": {
+    "degrees": [
+     "1",
+     "2",
+     "3",
+     "5",
+     "6"
+    ],
+    "intervals": [
+     0,
+     2,
+     4,
+     7,
+     9
+    ]
+   },
+   "minor": {
+    "degrees": [
+     "1",
+     "b3",
+     "4",
+     "5",
+     "b7"
+    ],
+    "intervals": [
+     0,
+     3,
+     5,
+     7,
+     10
+    ]
+   },
+   "minor6": {
+    "degrees": [
+     "1",
+     "2",
+     "b3",
+     "5",
+     "6"
+    ],
+    "intervals": [
+     0,
+     2,
+     3,
+     7,
+     9
+    ]
+   }
+  },
+  "position_slack": 1,
+  "shift_choices": [
+   "Semitone",
+   "Tone",
+   "Minor third",
+   "Major third",
+   "Semitone+tritone cycle (Eb·E·Bb·Eb)"
+  ]
+ },
+ "status": 200
+}

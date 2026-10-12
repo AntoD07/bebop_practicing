@@ -1,0 +1,258 @@
+{
+ "body": {
+  "anchors": {
+   "chord1": "1st chord — Em7b5",
+   "chord2": "2nd chord — MinorResolutions",
+   "key": "Today's key — D"
+  },
+  "chord1": "Locrian",
+  "chord2": "MinorResolutions",
+  "dom_to_minor2_effective": true,
+  "ending": [
+   {
+    "degrees": [
+     "b6",
+     "7",
+     "1",
+     "9",
+     "3"
+    ],
+    "end": "3",
+    "error": null,
+    "id": "Locrian:9ba72a10",
+    "index": 2,
+    "mode": "Locrian",
+    "movement": "A",
+    "name": "Ascending Scale from II-5",
+    "nominal_mismatch": false,
+    "pivot_hint": null,
+    "raw_degrees": [
+     "b9",
+     "#9",
+     "4",
+     "5",
+     "b6"
+    ],
+    "raw_end": "b6",
+    "raw_start": "b9",
+    "start": "b6",
+    "steps": [
+     "dom_to_minor"
+    ],
+    "type": "Essential"
+   },
+   {
+    "degrees": [
+     "7",
+     "1",
+     "9",
+     "4",
+     "3"
+    ],
+    "end": "3",
+    "error": null,
+    "id": "Locrian:7149b61a",
+    "index": 24,
+    "mode": "Locrian",
+    "movement": "A",
+    "name": "Coltrane Pattern from #9",
+    "nominal_mismatch": false,
+    "pivot_hint": null,
+    "raw_degrees": [
+     "#9",
+     "4",
+     "5",
+     "7",
+     "b6"
+    ],
+    "raw_end": "b6",
+    "raw_start": "#9",
+    "start": "7",
+    "steps": [
+     "dom_to_minor"
+    ],
+    "type": "Essential"
+   }
+  ],
+  "free_label": "Free (best on the neck)",
+  "harmony_info": "Today's key D is read as the I of a ii-V-I: Locrian starts on Em7b5; the 2nd chord follows from the pivot (shown on each tab).",
+  "mapping_info": null,
+  "myxo_to_dorian": false,
+  "pairs": [
+   {
+    "end_id": "Locrian:9ba72a10",
+    "pair_key": "Ascending Scale from II-5 → Bill Evans Ascending enclosure (from b13)",
+    "start_id": "MinorResolutions:f7cf72e6"
+   },
+   {
+    "end_id": "Locrian:9ba72a10",
+    "pair_key": "Ascending Scale from II-5 → Hidden Fully Altered reverse Minor Coltrane (from b13)",
+    "start_id": "MinorResolutions:779e6a27"
+   },
+   {
+    "end_id": "Locrian:9ba72a10",
+    "pair_key": "Ascending Scale from II-5 → Hidden Half Diminished Chord (from b13) (Farao)",
+    "start_id": "MinorResolutions:ca61a53c"
+   },
+   {
+    "end_id": "Locrian:7149b61a",
+    "pair_key": "Coltrane Pattern from #9 → Bill Evans Ascending enclosure (from b13)",
+    "start_id": "MinorResolutions:f7cf72e6"
+   },
+   {
+    "end_id": "Locrian:7149b61a",
+    "pair_key": "Coltrane Pattern from #9 → Hidden Fully Altered reverse Minor Coltrane (from b13)",
+    "start_id": "MinorResolutions:779e6a27"
+   },
+   {
+    "end_id": "Locrian:7149b61a",
+    "pair_key": "Coltrane Pattern from #9 → Hidden Half Diminished Chord (from b13) (Farao)",
+    "start_id": "MinorResolutions:ca61a53c"
+   }
+  ],
+  "pivot": "3",
+  "pivots": [
+   {
+    "raw1": "5",
+    "raw2": "5",
+    "value": "9"
+   },
+   {
+    "raw1": "b6",
+    "raw2": "b6",
+    "value": "3"
+   },
+   {
+    "raw1": "1",
+    "raw2": "1",
+    "value": "5"
+   },
+   {
+    "raw1": "b9",
+    "raw2": "b9",
+    "value": "b6"
+   },
+   {
+    "raw1": "#9",
+    "raw2": "#9",
+    "value": "7"
+   },
+   {
+    "raw1": "3",
+    "raw2": "3",
+    "value": "#7"
+   }
+  ],
+  "positions": [
+   "CAGED E string root",
+   "CAGED A string root",
+   "Diagonal E string root",
+   "Diagonal A string root",
+   "More Horizontal, D string root"
+  ],
+  "raw_pivot": "b6",
+  "read1": "Locrian",
+  "read2": "MinorTonic",
+  "single_chord": false,
+  "starting": [
+   {
+    "degrees": [
+     "3",
+     "4",
+     "7",
+     "b6",
+     "5"
+    ],
+    "end": "5",
+    "error": null,
+    "id": "MinorResolutions:f7cf72e6",
+    "index": 2,
+    "mode": "MinorResolutions",
+    "movement": "N",
+    "name": "Bill Evans Ascending enclosure (from b13)",
+    "nominal_mismatch": false,
+    "pivot_hint": "b6",
+    "raw_degrees": [
+     "b6",
+     "7",
+     "#9",
+     "b9",
+     "1"
+    ],
+    "raw_end": "1",
+    "raw_start": "b6",
+    "start": "3",
+    "steps": [
+     "dom_to_minor"
+    ],
+    "type": "Essential"
+   },
+   {
+    "degrees": [
+     "3",
+     "#7",
+     "7",
+     "b6",
+     "5"
+    ],
+    "end": "5",
+    "error": null,
+    "id": "MinorResolutions:779e6a27",
+    "index": 15,
+    "mode": "MinorResolutions",
+    "movement": "N",
+    "name": "Hidden Fully Altered reverse Minor Coltrane (from b13)",
+    "nominal_mismatch": false,
+    "pivot_hint": "b6",
+    "raw_degrees": [
+     "b6",
+     "3",
+     "#9",
+     "b9",
+     "1"
+    ],
+    "raw_end": "1",
+    "raw_start": "b6",
+    "start": "3",
+    "steps": [
+     "dom_to_minor"
+    ],
+    "type": "Essential"
+   },
+   {
+    "degrees": [
+     "3",
+     "#7",
+     "b6",
+     "4",
+     "5"
+    ],
+    "end": "5",
+    "error": null,
+    "id": "MinorResolutions:ca61a53c",
+    "index": 16,
+    "mode": "MinorResolutions",
+    "movement": "N",
+    "name": "Hidden Half Diminished Chord (from b13) (Farao)",
+    "nominal_mismatch": false,
+    "pivot_hint": "b6",
+    "raw_degrees": [
+     "b6",
+     "3",
+     "b9",
+     "7",
+     "1"
+    ],
+    "raw_end": "1",
+    "raw_start": "b6",
+    "start": "3",
+    "steps": [
+     "dom_to_minor"
+    ],
+    "type": "Essential"
+   }
+  ],
+  "sym1": "Em7b5"
+ },
+ "status": 200
+}

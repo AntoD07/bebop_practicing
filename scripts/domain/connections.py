@@ -161,7 +161,8 @@ def score_connection_pair(key, read1: str, read2: str, cell1: dict, cell2: dict,
                           position: Optional[str] = None, anchor: str = "key",
                           myxo_to_dorian: bool = False, single_chord: bool = False,
                           config: Optional[FingeringConfig] = None,
-                          budget: Optional[LayoutBudget] = None) -> dict:
+                          budget: Optional[LayoutBudget] = None,
+                          box: Optional[int] = None) -> dict:
     """Finger one ending -> starting pair (the body of page 1's
     ``score_connections`` for a single pair).
 
@@ -169,7 +170,9 @@ def score_connection_pair(key, read1: str, read2: str, cell1: dict, cell2: dict,
     in the representation the pair is fingered with. ``read1``/``read2``: the
     modes those degrees are READ with. ``position``: a named position (every
     in-box fingering, cheapest first) or None/Free (the single cheapest
-    fingering anywhere). ``anchor``: "key" / "chord1" / "chord2".
+    fingering anywhere). ``anchor``: "key" / "chord1" / "chord2". ``box``
+    restricts the enumeration to one octave of the shape (0 = root fret,
+    1 = twelve frets up) so a client can split a heavy pair in two.
 
     Returns a dict with ``fingerings`` (list of ``(FingeringResult, mode)``
     where mode is "enumerated" / "optimum" / "free"), ``truncated``,
@@ -211,6 +214,8 @@ def score_connection_pair(key, read1: str, read2: str, cell1: dict, cell2: dict,
     if position in POSITIONS:
         chunks: List[Chunk] = []
         for bi, (box_cfg, box_root_midi) in enumerate(position_boxes(position, anchor_pc, cfg)):
+            if box is not None and bi != box:
+                continue
             # The box is a HARD filter (POSITION_SLACK = 0 — validated).
             box_cfg = box_cfg.with_overrides(window_overflow_frets=POSITION_SLACK)
             seen_lines = set()

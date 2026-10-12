@@ -1,0 +1,611 @@
+{
+ "body": {
+  "all_shifted": false,
+  "beats_per_bar": 4,
+  "config": {},
+  "density": "eighth",
+  "key": "C",
+  "n_feasible": 3,
+  "rows": [
+   {
+    "also": [
+     "CAGED E string root",
+     "CAGED A string root",
+     "Diagonal E string root",
+     "Low neck (frets 0–7)",
+     "Mid neck (frets 4–11)"
+    ],
+    "cost": 1.1,
+    "fingering": {
+     "alternate": null,
+     "beats_per_bar": 4,
+     "chords": [
+      {
+       "start_beat": 0.0,
+       "symbol": "Cmaj7"
+      },
+      {
+       "start_beat": 2.0,
+       "symbol": "G7"
+      }
+     ],
+     "contributions": [
+      [
+       "u_cost",
+       1.0
+      ],
+      [
+       "same_str_dd",
+       0.6
+      ],
+      [
+       "sweep_bonus",
+       -0.5
+      ]
+     ],
+     "cost": 1.1,
+     "density": "eighth",
+     "drop_sites": [],
+     "encoding": "2/5D 2/8D 1/8D 1/7U 2/8D 2/5U 3/7D",
+     "flags": [
+      "note 3 (beat 2.5): U sets parity for the descending crossing note 3->4 (str1->str2).",
+      "note 4 (beat 3.0): descending crossing str1->str2 resolved by PARITY (fix a) — U->D.",
+      "note 5 (beat 3.5): U sets parity for the descending crossing note 5->6 (str2->str3).",
+      "note 6 (beat 4.0): descending crossing str2->str3 resolved by PARITY (fix a) — U->D."
+     ],
+     "fret_hi": 8,
+     "fret_lo": 5,
+     "key": "C",
+     "layout": "2/5 2/8 1/8 1/7 2/8 2/5 3/7",
+     "mode": "ranked",
+     "n_flags": 4,
+     "n_up": 2,
+     "placed": [
+      {
+       "beat": 1.0,
+       "cell": null,
+       "degree": null,
+       "finger": 1,
+       "fret": 5,
+       "grace": false,
+       "i": 0,
+       "midi": 64,
+       "name": "E4",
+       "onset": 0.0,
+       "phrase_start": true,
+       "rest": true,
+       "role": null,
+       "run_len": 1,
+       "stretch": false,
+       "string": 2,
+       "stroke": "D"
+      },
+      {
+       "beat": 1.5,
+       "cell": null,
+       "degree": null,
+       "finger": 4,
+       "fret": 8,
+       "grace": false,
+       "i": 1,
+       "midi": 67,
+       "name": "G4",
+       "onset": 0.5,
+       "phrase_start": false,
+       "rest": true,
+       "role": null,
+       "run_len": 2,
+       "stretch": false,
+       "string": 2,
+       "stroke": "D"
+      },
+      {
+       "beat": 2.0,
+       "cell": null,
+       "degree": null,
+       "finger": 4,
+       "fret": 8,
+       "grace": false,
+       "i": 2,
+       "midi": 72,
+       "name": "C5",
+       "onset": 1.0,
+       "phrase_start": false,
+       "rest": false,
+       "role": null,
+       "run_len": 1,
+       "stretch": false,
+       "string": 1,
+       "stroke": "D"
+      },
+      {
+       "beat": 2.5,
+       "cell": null,
+       "degree": null,
+       "finger": 3,
+       "fret": 7,
+       "grace": false,
+       "i": 3,
+       "midi": 71,
+       "name": "B4",
+       "onset": 1.5,
+       "phrase_start": false,
+       "rest": false,
+       "role": null,
+       "run_len": 2,
+       "stretch": false,
+       "string": 1,
+       "stroke": "U"
+      },
+      {
+       "beat": 3.0,
+       "cell": null,
+       "degree": null,
+       "finger": 4,
+       "fret": 8,
+       "grace": false,
+       "i": 4,
+       "midi": 67,
+       "name": "G4",
+       "onset": 2.0,
+       "phrase_start": false,
+       "rest": true,
+       "role": null,
+       "run_len": 1,
+       "stretch": false,
+       "string": 2,
+       "stroke": "D"
+      },
+      {
+       "beat": 3.5,
+       "cell": null,
+       "degree": null,
+       "finger": 1,
+       "fret": 5,
+       "grace": false,
+       "i": 5,
+       "midi": 64,
+       "name": "E4",
+       "onset": 2.5,
+       "phrase_start": false,
+       "rest": false,
+       "role": null,
+       "run_len": 2,
+       "stretch": false,
+       "string": 2,
+       "stroke": "U"
+      },
+      {
+       "beat": 4.0,
+       "cell": null,
+       "degree": null,
+       "finger": 3,
+       "fret": 7,
+       "grace": false,
+       "i": 6,
+       "midi": 62,
+       "name": "D4",
+       "onset": 3.0,
+       "phrase_start": false,
+       "rest": true,
+       "role": null,
+       "run_len": 1,
+       "stretch": false,
+       "string": 3,
+       "stroke": "D"
+      }
+     ],
+     "positions": [
+      "Diagonal E string root"
+     ],
+     "report": null,
+     "warnings": [],
+     "where": "Diagonal E string root · frets 5–8"
+    },
+    "label": "Free (best on the neck)",
+    "n_up": 2,
+    "shift": 0,
+    "shift_text": "as written",
+    "where": "Diagonal E string root · frets 5–8"
+   },
+   {
+    "also": [
+     "High neck (frets 8–15)"
+    ],
+    "cost": 3.5,
+    "fingering": {
+     "alternate": null,
+     "beats_per_bar": 4,
+     "chords": [
+      {
+       "start_beat": 0.0,
+       "symbol": "Cmaj7"
+      },
+      {
+       "start_beat": 2.0,
+       "symbol": "G7"
+      }
+     ],
+     "contributions": [
+      [
+       "shift",
+       3.0
+      ],
+      [
+       "u_cost",
+       1.0
+      ],
+      [
+       "sweep_bonus",
+       -0.5
+      ]
+     ],
+     "cost": 3.5,
+     "density": "eighth",
+     "drop_sites": [],
+     "encoding": "4/14D 3/12D 2/13D 2/12U 3/12D 3/9U 4/12D",
+     "flags": [
+      "note 3 (beat 2.5): descending run kept ON str2 by ROUTING (fix b) — lateral shift 11->9.",
+      "note 3 (beat 2.5): U sets parity for the descending crossing note 3->4 (str2->str3).",
+      "note 4 (beat 3.0): descending crossing str2->str3 resolved by PARITY (fix a) — U->D.",
+      "note 5 (beat 3.5): U sets parity for the descending crossing note 5->6 (str3->str4).",
+      "note 6 (beat 4.0): descending crossing str3->str4 resolved by PARITY (fix a) — U->D."
+     ],
+     "fret_hi": 14,
+     "fret_lo": 9,
+     "key": "C",
+     "layout": "4/14 3/12 2/13 2/12 3/12 3/9 4/12",
+     "mode": "ranked",
+     "n_flags": 5,
+     "n_up": 2,
+     "placed": [
+      {
+       "beat": 1.0,
+       "cell": null,
+       "degree": null,
+       "finger": 1,
+       "fret": 14,
+       "grace": false,
+       "i": 0,
+       "midi": 64,
+       "name": "E4",
+       "onset": 0.0,
+       "phrase_start": true,
+       "rest": true,
+       "role": null,
+       "run_len": 1,
+       "stretch": false,
+       "string": 4,
+       "stroke": "D"
+      },
+      {
+       "beat": 1.5,
+       "cell": null,
+       "degree": null,
+       "finger": 2,
+       "fret": 12,
+       "grace": false,
+       "i": 1,
+       "midi": 67,
+       "name": "G4",
+       "onset": 0.5,
+       "phrase_start": false,
+       "rest": true,
+       "role": null,
+       "run_len": 1,
+       "stretch": false,
+       "string": 3,
+       "stroke": "D"
+      },
+      {
+       "beat": 2.0,
+       "cell": null,
+       "degree": null,
+       "finger": 4,
+       "fret": 13,
+       "grace": false,
+       "i": 2,
+       "midi": 72,
+       "name": "C5",
+       "onset": 1.0,
+       "phrase_start": false,
+       "rest": true,
+       "role": null,
+       "run_len": 1,
+       "stretch": false,
+       "string": 2,
+       "stroke": "D"
+      },
+      {
+       "beat": 2.5,
+       "cell": null,
+       "degree": null,
+       "finger": 3,
+       "fret": 12,
+       "grace": false,
+       "i": 3,
+       "midi": 71,
+       "name": "B4",
+       "onset": 1.5,
+       "phrase_start": false,
+       "rest": false,
+       "role": null,
+       "run_len": 2,
+       "stretch": false,
+       "string": 2,
+       "stroke": "U"
+      },
+      {
+       "beat": 3.0,
+       "cell": null,
+       "degree": null,
+       "finger": 4,
+       "fret": 12,
+       "grace": false,
+       "i": 4,
+       "midi": 67,
+       "name": "G4",
+       "onset": 2.0,
+       "phrase_start": false,
+       "rest": true,
+       "role": null,
+       "run_len": 1,
+       "stretch": false,
+       "string": 3,
+       "stroke": "D"
+      },
+      {
+       "beat": 3.5,
+       "cell": null,
+       "degree": null,
+       "finger": 1,
+       "fret": 9,
+       "grace": false,
+       "i": 5,
+       "midi": 64,
+       "name": "E4",
+       "onset": 2.5,
+       "phrase_start": false,
+       "rest": false,
+       "role": null,
+       "run_len": 2,
+       "stretch": false,
+       "string": 3,
+       "stroke": "U"
+      },
+      {
+       "beat": 4.0,
+       "cell": null,
+       "degree": null,
+       "finger": 4,
+       "fret": 12,
+       "grace": false,
+       "i": 6,
+       "midi": 62,
+       "name": "D4",
+       "onset": 3.0,
+       "phrase_start": false,
+       "rest": true,
+       "role": null,
+       "run_len": 1,
+       "stretch": false,
+       "string": 4,
+       "stroke": "D"
+      }
+     ],
+     "positions": [
+      "More Horizontal, D string root"
+     ],
+     "report": null,
+     "warnings": [],
+     "where": "More Horizontal, D string root · frets 9–14"
+    },
+    "label": "More Horizontal, D string root",
+    "n_up": 2,
+    "shift": 0,
+    "shift_text": "as written",
+    "where": "More Horizontal, D string root · frets 9–14"
+   },
+   {
+    "also": [],
+    "cost": 1.1,
+    "fingering": {
+     "alternate": null,
+     "beats_per_bar": 4,
+     "chords": [
+      {
+       "start_beat": 0.0,
+       "symbol": "Cmaj7"
+      },
+      {
+       "start_beat": 2.0,
+       "symbol": "G7"
+      }
+     ],
+     "contributions": [
+      [
+       "box_overflow",
+       9.0
+      ],
+      [
+       "u_cost",
+       1.0
+      ],
+      [
+       "same_str_dd",
+       0.6
+      ],
+      [
+       "sweep_bonus",
+       -0.5
+      ]
+     ],
+     "cost": 10.1,
+     "density": "eighth",
+     "drop_sites": [],
+     "encoding": "4/2D 4/5D 3/5D 3/4U 4/5D 4/2U 5/5D",
+     "flags": [
+      "note 3 (beat 2.5): U sets parity for the descending crossing note 3->4 (str3->str4).",
+      "note 4 (beat 3.0): descending crossing str3->str4 resolved by PARITY (fix a) — U->D.",
+      "note 5 (beat 3.5): U sets parity for the descending crossing note 5->6 (str4->str5).",
+      "note 6 (beat 4.0): descending crossing str4->str5 resolved by PARITY (fix a) — U->D."
+     ],
+     "fret_hi": 5,
+     "fret_lo": 2,
+     "key": "C",
+     "layout": "4/2 4/5 3/5 3/4 4/5 4/2 5/5",
+     "mode": "ranked",
+     "n_flags": 4,
+     "n_up": 2,
+     "placed": [
+      {
+       "beat": 1.0,
+       "cell": null,
+       "degree": null,
+       "finger": 1,
+       "fret": 2,
+       "grace": false,
+       "i": 0,
+       "midi": 52,
+       "name": "E3",
+       "onset": 0.0,
+       "phrase_start": true,
+       "rest": true,
+       "role": null,
+       "run_len": 1,
+       "stretch": false,
+       "string": 4,
+       "stroke": "D"
+      },
+      {
+       "beat": 1.5,
+       "cell": null,
+       "degree": null,
+       "finger": 4,
+       "fret": 5,
+       "grace": false,
+       "i": 1,
+       "midi": 55,
+       "name": "G3",
+       "onset": 0.5,
+       "phrase_start": false,
+       "rest": true,
+       "role": null,
+       "run_len": 2,
+       "stretch": false,
+       "string": 4,
+       "stroke": "D"
+      },
+      {
+       "beat": 2.0,
+       "cell": null,
+       "degree": null,
+       "finger": 4,
+       "fret": 5,
+       "grace": false,
+       "i": 2,
+       "midi": 60,
+       "name": "C4",
+       "onset": 1.0,
+       "phrase_start": false,
+       "rest": true,
+       "role": null,
+       "run_len": 1,
+       "stretch": false,
+       "string": 3,
+       "stroke": "D"
+      },
+      {
+       "beat": 2.5,
+       "cell": null,
+       "degree": null,
+       "finger": 3,
+       "fret": 4,
+       "grace": false,
+       "i": 3,
+       "midi": 59,
+       "name": "B3",
+       "onset": 1.5,
+       "phrase_start": false,
+       "rest": false,
+       "role": null,
+       "run_len": 2,
+       "stretch": false,
+       "string": 3,
+       "stroke": "U"
+      },
+      {
+       "beat": 3.0,
+       "cell": null,
+       "degree": null,
+       "finger": 4,
+       "fret": 5,
+       "grace": false,
+       "i": 4,
+       "midi": 55,
+       "name": "G3",
+       "onset": 2.0,
+       "phrase_start": false,
+       "rest": true,
+       "role": null,
+       "run_len": 1,
+       "stretch": false,
+       "string": 4,
+       "stroke": "D"
+      },
+      {
+       "beat": 3.5,
+       "cell": null,
+       "degree": null,
+       "finger": 1,
+       "fret": 2,
+       "grace": false,
+       "i": 5,
+       "midi": 52,
+       "name": "E3",
+       "onset": 2.5,
+       "phrase_start": false,
+       "rest": false,
+       "role": null,
+       "run_len": 2,
+       "stretch": false,
+       "string": 4,
+       "stroke": "U"
+      },
+      {
+       "beat": 4.0,
+       "cell": null,
+       "degree": null,
+       "finger": 4,
+       "fret": 5,
+       "grace": false,
+       "i": 6,
+       "midi": 50,
+       "name": "D3",
+       "onset": 3.0,
+       "phrase_start": false,
+       "rest": true,
+       "role": null,
+       "run_len": 1,
+       "stretch": false,
+       "string": 5,
+       "stroke": "D"
+      }
+     ],
+     "positions": [
+      "CAGED A string root"
+     ],
+     "report": null,
+     "warnings": [],
+     "where": "CAGED A string root · frets 2–5"
+    },
+    "label": "Diagonal A string root",
+    "n_up": 2,
+    "shift": -12,
+    "shift_text": "1 octave down",
+    "where": "CAGED A string root · frets 2–5"
+   }
+  ]
+ },
+ "status": 200
+}

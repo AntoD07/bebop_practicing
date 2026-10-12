@@ -1,0 +1,545 @@
+{
+ "body": {
+  "anchor": {
+   "name": "key",
+   "pc": 3,
+   "sym": "Eb (today's key)"
+  },
+  "best": 0,
+  "budget": {
+   "max_layouts": 2000,
+   "used": 2
+  },
+  "chunks": [
+   {
+    "box": 0,
+    "layouts": 1,
+    "mode": "enumerated",
+    "offset": -24
+   },
+   {
+    "box": 0,
+    "layouts": 0,
+    "mode": "empty",
+    "offset": -12
+   },
+   {
+    "box": 0,
+    "layouts": 1,
+    "mode": "enumerated",
+    "offset": 12
+   }
+  ],
+  "config": {},
+  "end": "Convert style",
+  "end_id": null,
+  "error": null,
+  "fingerings": [
+   {
+    "alternate": null,
+    "beats_per_bar": 4,
+    "chords": [
+     {
+      "start_beat": 0,
+      "symbol": "Fm7"
+     },
+     {
+      "start_beat": 2.0,
+      "symbol": "Eb7"
+     }
+    ],
+    "contributions": [
+     [
+      "drop",
+      5.0
+     ],
+     [
+      "u_cost",
+      1.0
+     ],
+     [
+      "downbeat_dd",
+      1.0
+     ]
+    ],
+    "cost": 7.0,
+    "density": "eighth",
+    "drop_sites": [
+     {
+      "beat": 1.5,
+      "fix": "managed_drop",
+      "from_string": 1,
+      "prev_index": 0,
+      "target_index": 1,
+      "to_string": 2
+     },
+     {
+      "beat": 3.0,
+      "fix": "managed_drop",
+      "from_string": 3,
+      "prev_index": 3,
+      "target_index": 4,
+      "to_string": 4
+     }
+    ],
+    "encoding": "1/4D 2/4D 2/3U 3/5D 4/6D 4/3U 6/6D 5/4D 5/3D",
+    "flags": [
+     "note 1 (beat 1.5): descending crossing str1->str2 is a MANAGED DROP (fix c) — D->D, cost 2.50.",
+     "note 2 (beat 2.0): U sets parity for the descending crossing note 2->3 (str2->str3).",
+     "note 3 (beat 2.5): descending crossing str2->str3 resolved by PARITY (fix a) — U->D.",
+     "note 4 (beat 3.0): descending crossing str3->str4 is a MANAGED DROP (fix c) — D->D, cost 2.50.",
+     "note 5 (beat 3.5): U sets parity for the descending crossing note 5->6 (str4->str6).",
+     "note 6 (beat 4.0): descending crossing str4->str6 resolved by PARITY (fix a) — U->D."
+    ],
+    "fret_hi": 6,
+    "fret_lo": 3,
+    "key": "Eb",
+    "layout": "1/4 2/4 2/3 3/5 4/6 4/3 6/6 5/4 5/3",
+    "mode": "enumerated",
+    "n_flags": 6,
+    "n_up": 2,
+    "placed": [
+     {
+      "beat": 1.0,
+      "cell": "Convert style",
+      "degree": "3",
+      "finger": 1,
+      "fret": 4,
+      "grace": false,
+      "i": 0,
+      "midi": 68,
+      "name": "G#4",
+      "onset": 0.0,
+      "phrase_start": true,
+      "rest": false,
+      "role": "3rd",
+      "run_len": 1,
+      "stretch": false,
+      "string": 1,
+      "stroke": "D"
+     },
+     {
+      "beat": 1.5,
+      "cell": "Convert style",
+      "degree": "7",
+      "finger": 4,
+      "fret": 4,
+      "grace": false,
+      "i": 1,
+      "midi": 63,
+      "name": "D#4",
+      "onset": 0.5,
+      "phrase_start": false,
+      "rest": true,
+      "role": "7th",
+      "run_len": 1,
+      "stretch": false,
+      "string": 2,
+      "stroke": "D"
+     },
+     {
+      "beat": 2.0,
+      "cell": "Convert style",
+      "degree": "6",
+      "finger": 3,
+      "fret": 3,
+      "grace": false,
+      "i": 2,
+      "midi": 62,
+      "name": "D4",
+      "onset": 1.0,
+      "phrase_start": false,
+      "rest": false,
+      "role": "6",
+      "run_len": 2,
+      "stretch": false,
+      "string": 2,
+      "stroke": "U"
+     },
+     {
+      "beat": 2.5,
+      "cell": "Convert style",
+      "degree": "5",
+      "finger": 2,
+      "fret": 5,
+      "grace": false,
+      "i": 3,
+      "midi": 60,
+      "name": "C4",
+      "onset": 1.5,
+      "phrase_start": false,
+      "rest": true,
+      "role": "5",
+      "run_len": 1,
+      "stretch": false,
+      "string": 3,
+      "stroke": "D"
+     },
+     {
+      "beat": 3.0,
+      "cell": "Convert style",
+      "degree": "3",
+      "finger": 4,
+      "fret": 6,
+      "grace": false,
+      "i": 4,
+      "midi": 56,
+      "name": "G#3",
+      "onset": 2.0,
+      "phrase_start": false,
+      "rest": true,
+      "role": "pivot",
+      "run_len": 1,
+      "stretch": false,
+      "string": 4,
+      "stroke": "D"
+     },
+     {
+      "beat": 3.5,
+      "cell": "Reverse Coltrane Pattern",
+      "degree": "5",
+      "finger": 1,
+      "fret": 3,
+      "grace": false,
+      "i": 5,
+      "midi": 53,
+      "name": "F3",
+      "onset": 2.5,
+      "phrase_start": false,
+      "rest": false,
+      "role": "5",
+      "run_len": 2,
+      "stretch": false,
+      "string": 4,
+      "stroke": "U"
+     },
+     {
+      "beat": 4.0,
+      "cell": "Reverse Coltrane Pattern",
+      "degree": "1",
+      "finger": 4,
+      "fret": 6,
+      "grace": false,
+      "i": 6,
+      "midi": 46,
+      "name": "A#2",
+      "onset": 3.0,
+      "phrase_start": false,
+      "rest": true,
+      "role": "root",
+      "run_len": 1,
+      "stretch": false,
+      "string": 6,
+      "stroke": "D"
+     },
+     {
+      "beat": 4.5,
+      "cell": "Reverse Coltrane Pattern",
+      "degree": "3",
+      "finger": 2,
+      "fret": 4,
+      "grace": false,
+      "i": 7,
+      "midi": 49,
+      "name": "C#3",
+      "onset": 3.5,
+      "phrase_start": false,
+      "rest": true,
+      "role": "3rd",
+      "run_len": 1,
+      "stretch": false,
+      "string": 5,
+      "stroke": "D"
+     },
+     {
+      "beat": 1.0,
+      "cell": "Reverse Coltrane Pattern",
+      "degree": "9",
+      "finger": 1,
+      "fret": 3,
+      "grace": false,
+      "i": 8,
+      "midi": 48,
+      "name": "C3",
+      "onset": 4.0,
+      "phrase_start": false,
+      "rest": true,
+      "role": "9",
+      "run_len": 2,
+      "stretch": false,
+      "string": 5,
+      "stroke": "D"
+     }
+    ],
+    "positions": [
+     "Diagonal A string root"
+    ],
+    "report": null,
+    "warnings": [],
+    "where": "Diagonal A string root · frets 3–6"
+   },
+   {
+    "alternate": null,
+    "beats_per_bar": 4,
+    "chords": [
+     {
+      "start_beat": 0,
+      "symbol": "Fm7"
+     },
+     {
+      "start_beat": 2.0,
+      "symbol": "Eb7"
+     }
+    ],
+    "contributions": [
+     [
+      "break_2nps",
+      3.0
+     ],
+     [
+      "drop",
+      2.5
+     ],
+     [
+      "u_cost",
+      1.0
+     ],
+     [
+      "downbeat_dd",
+      1.0
+     ],
+     [
+      "sweep_bonus",
+      -0.5
+     ]
+    ],
+    "cost": 7.0,
+    "density": "eighth",
+    "drop_sites": [
+     {
+      "beat": 1.5,
+      "fix": "managed_drop",
+      "from_string": 4,
+      "prev_index": 0,
+      "target_index": 1,
+      "to_string": 5
+     }
+    ],
+    "encoding": "4/6D 5/6D 5/5U 5/3D 4/6D 4/3U 6/6D 5/4D 5/3D",
+    "flags": [
+     "note 1 (beat 1.5): descending crossing str4->str5 is a MANAGED DROP (fix c) — D->D, cost 2.50.",
+     "note 5 (beat 3.5): U sets parity for the descending crossing note 5->6 (str4->str6).",
+     "note 6 (beat 4.0): descending crossing str4->str6 resolved by PARITY (fix a) — U->D.",
+     "2npS BREAK: 3 notes on str5 (notes 1..3, frets [6, 5, 3])."
+    ],
+    "fret_hi": 6,
+    "fret_lo": 3,
+    "key": "Eb",
+    "layout": "4/6 5/6 5/5 5/3 4/6 4/3 6/6 5/4 5/3",
+    "mode": "enumerated",
+    "n_flags": 4,
+    "n_up": 2,
+    "placed": [
+     {
+      "beat": 1.0,
+      "cell": "Convert style",
+      "degree": "3",
+      "finger": 1,
+      "fret": 6,
+      "grace": false,
+      "i": 0,
+      "midi": 56,
+      "name": "G#3",
+      "onset": 0.0,
+      "phrase_start": true,
+      "rest": true,
+      "role": "3rd",
+      "run_len": 1,
+      "stretch": false,
+      "string": 4,
+      "stroke": "D"
+     },
+     {
+      "beat": 1.5,
+      "cell": "Convert style",
+      "degree": "7",
+      "finger": 4,
+      "fret": 6,
+      "grace": false,
+      "i": 1,
+      "midi": 51,
+      "name": "D#3",
+      "onset": 0.5,
+      "phrase_start": false,
+      "rest": true,
+      "role": "7th",
+      "run_len": 1,
+      "stretch": false,
+      "string": 5,
+      "stroke": "D"
+     },
+     {
+      "beat": 2.0,
+      "cell": "Convert style",
+      "degree": "6",
+      "finger": 3,
+      "fret": 5,
+      "grace": false,
+      "i": 2,
+      "midi": 50,
+      "name": "D3",
+      "onset": 1.0,
+      "phrase_start": false,
+      "rest": false,
+      "role": "6",
+      "run_len": 2,
+      "stretch": false,
+      "string": 5,
+      "stroke": "U"
+     },
+     {
+      "beat": 2.5,
+      "cell": "Convert style",
+      "degree": "5",
+      "finger": 1,
+      "fret": 3,
+      "grace": false,
+      "i": 3,
+      "midi": 48,
+      "name": "C3",
+      "onset": 1.5,
+      "phrase_start": false,
+      "rest": true,
+      "role": "5",
+      "run_len": 3,
+      "stretch": false,
+      "string": 5,
+      "stroke": "D"
+     },
+     {
+      "beat": 3.0,
+      "cell": "Convert style",
+      "degree": "3",
+      "finger": 4,
+      "fret": 6,
+      "grace": false,
+      "i": 4,
+      "midi": 56,
+      "name": "G#3",
+      "onset": 2.0,
+      "phrase_start": false,
+      "rest": true,
+      "role": "pivot",
+      "run_len": 1,
+      "stretch": false,
+      "string": 4,
+      "stroke": "D"
+     },
+     {
+      "beat": 3.5,
+      "cell": "Reverse Coltrane Pattern",
+      "degree": "5",
+      "finger": 1,
+      "fret": 3,
+      "grace": false,
+      "i": 5,
+      "midi": 53,
+      "name": "F3",
+      "onset": 2.5,
+      "phrase_start": false,
+      "rest": false,
+      "role": "5",
+      "run_len": 2,
+      "stretch": false,
+      "string": 4,
+      "stroke": "U"
+     },
+     {
+      "beat": 4.0,
+      "cell": "Reverse Coltrane Pattern",
+      "degree": "1",
+      "finger": 4,
+      "fret": 6,
+      "grace": false,
+      "i": 6,
+      "midi": 46,
+      "name": "A#2",
+      "onset": 3.0,
+      "phrase_start": false,
+      "rest": true,
+      "role": "root",
+      "run_len": 1,
+      "stretch": false,
+      "string": 6,
+      "stroke": "D"
+     },
+     {
+      "beat": 4.5,
+      "cell": "Reverse Coltrane Pattern",
+      "degree": "3",
+      "finger": 2,
+      "fret": 4,
+      "grace": false,
+      "i": 7,
+      "midi": 49,
+      "name": "C#3",
+      "onset": 3.5,
+      "phrase_start": false,
+      "rest": true,
+      "role": "3rd",
+      "run_len": 1,
+      "stretch": false,
+      "string": 5,
+      "stroke": "D"
+     },
+     {
+      "beat": 1.0,
+      "cell": "Reverse Coltrane Pattern",
+      "degree": "9",
+      "finger": 1,
+      "fret": 3,
+      "grace": false,
+      "i": 8,
+      "midi": 48,
+      "name": "C3",
+      "onset": 4.0,
+      "phrase_start": false,
+      "rest": true,
+      "role": "9",
+      "run_len": 2,
+      "stretch": false,
+      "string": 5,
+      "stroke": "D"
+     }
+    ],
+    "positions": [
+     "Diagonal A string root"
+    ],
+    "report": null,
+    "warnings": [],
+    "where": "Diagonal A string root · frets 3–6"
+   }
+  ],
+  "myxo_to_dorian": true,
+  "n_total": 2,
+  "pair_key": "Convert style → Reverse Coltrane Pattern",
+  "pivot": {
+   "index": 4,
+   "label": "3=7",
+   "name": "G#3"
+  },
+  "pivot_indices": [
+   4
+  ],
+  "position": "Diagonal A string root",
+  "read1": "Dorian",
+  "read2": "Dorian",
+  "single_chord": false,
+  "start": "Reverse Coltrane Pattern",
+  "start_id": null,
+  "sym1": "Fm7",
+  "sym2": "Eb7",
+  "truncated": false
+ },
+ "status": 200
+}

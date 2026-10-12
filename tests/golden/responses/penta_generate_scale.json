@@ -1,0 +1,70 @@
+{
+ "body": {
+  "exercise": "scale",
+  "group": null,
+  "lines_by_start": {
+   "1": [
+    {
+     "degree": "1",
+     "pitch": 45,
+     "role": "1"
+    },
+    {
+     "degree": "b3",
+     "pitch": 48,
+     "role": "b3"
+    },
+    {
+     "degree": "4",
+     "pitch": 50,
+     "role": "4"
+    },
+    {
+     "degree": "5",
+     "pitch": 52,
+     "role": "5"
+    },
+    {
+     "degree": "b7",
+     "pitch": 55,
+     "role": "b7"
+    },
+    {
+     "degree": "1",
+     "pitch": 57,
+     "role": "1"
+    },
+    {
+     "degree": "b3",
+     "pitch": 60,
+     "role": "b3"
+    },
+    {
+     "degree": "4",
+     "pitch": 62,
+     "role": "4"
+    },
+    {
+     "degree": "5",
+     "pitch": 64,
+     "role": "5"
+    },
+    {
+     "degree": "b7",
+     "pitch": 67,
+     "role": "b7"
+    },
+    {
+     "degree": "1",
+     "pitch": 69,
+     "role": "1"
+    }
+   ]
+  },
+  "start_labels": [
+   "1"
+  ],
+  "title": "A minor pentatonic — ascending (2 oct)"
+ },
+ "status": 200
+}

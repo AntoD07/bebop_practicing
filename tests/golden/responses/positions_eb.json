@@ -1,0 +1,398 @@
+{
+ "body": {
+  "constants": {
+   "all_notes_default_types": [
+    "Long Minor 2-5-1",
+    "Short Minor 2-5-1",
+    "Double resolution"
+   ],
+   "chord_modes": [
+    "Maj7",
+    "Minor",
+    "Dorian",
+    "Myxolidian",
+    "Locrian",
+    "MajorResolutions",
+    "MinorResolutions"
+   ],
+   "chord_tones": [
+    "1",
+    "3",
+    "5",
+    "7"
+   ],
+   "combo_line_type": "Dorian x Myxolidian",
+   "default_line_type": "Long Maj 2-5-1",
+   "degree_order": [
+    "1",
+    "b9",
+    "9",
+    "#9",
+    "3",
+    "maj3",
+    "4",
+    "11",
+    "#11",
+    "5",
+    "#5",
+    "b6",
+    "6",
+    "b7",
+    "7",
+    "#7",
+    "maj7"
+   ],
+   "keys": [
+    "C",
+    "G",
+    "D",
+    "A",
+    "E",
+    "B",
+    "F#",
+    "F",
+    "Bb",
+    "Eb",
+    "Ab",
+    "Db"
+   ],
+   "line_movement_options": [
+    "A and N",
+    "D and N",
+    "A",
+    "D"
+   ],
+   "line_structures": {
+    "7sus4 Infinity Loop": [
+     "Myxolidian",
+     "Myxolidian",
+     "Myxolidian",
+     "Myxolidian"
+    ],
+    "Dorian": [
+     "Dorian",
+     "Dorian",
+     "Dorian",
+     "Dorian"
+    ],
+    "Double resolution": [
+     "Locrian",
+     "Locrian",
+     "MinorResolutions",
+     "MinorResolutions"
+    ],
+    "Long Maj 2-5-1": [
+     "Myxolidian",
+     "Myxolidian",
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "Long Maj 2-5-1 with Maj7 ending": [
+     "7sus4",
+     "7sus4",
+     "7sus4",
+     "MajorResolutions",
+     "Maj7",
+     "Maj7"
+    ],
+    "Long Minor 2-5-1": [
+     "Locrian",
+     "Locrian",
+     "Locrian",
+     "MinorResolutions"
+    ],
+    "Long Minor 2-5-1 with Minor ending": [
+     "Locrian",
+     "Locrian",
+     "Locrian",
+     "MinorResolutions",
+     "Minor",
+     "Minor"
+    ],
+    "Long Minor with double resolution": [
+     "Locrian",
+     "Locrian",
+     "MinorResolutions",
+     "MinorResolutions"
+    ],
+    "Maj7": [
+     "Maj7",
+     "Maj7",
+     "Maj7",
+     "Maj7"
+    ],
+    "Minor": [
+     "Minor",
+     "Minor",
+     "Minor",
+     "Minor"
+    ],
+    "Minor and Dominant 2-cells alternated": [
+     "Minor",
+     "Minor",
+     "Locrian",
+     "MinorResolutions",
+     "Minor",
+     "Minor",
+     "Locrian",
+     "MinorResolutions",
+     "Minor",
+     "Minor",
+     "Locrian",
+     "MinorResolutions"
+    ],
+    "Minor x Dominant": [
+     "Minor",
+     "Minor",
+     "MinorResolutions",
+     "MinorResolutions",
+     "Minor",
+     "Minor",
+     "MinorResolutions",
+     "MinorResolutions",
+     "Minor",
+     "Minor",
+     "MinorResolutions",
+     "MinorResolutions"
+    ],
+    "Myxolidian": [
+     "Myxolidian",
+     "Myxolidian",
+     "Myxolidian",
+     "Myxolidian"
+    ],
+    "Short Maj 2-5-1": [
+     "Myxolidian",
+     "MajorResolutions"
+    ],
+    "Short Minor 2-5-1": [
+     "Locrian",
+     "MinorResolutions"
+    ]
+   },
+   "line_types": [
+    "Maj7",
+    "Minor",
+    "Dorian",
+    "Myxolidian",
+    "Locrian",
+    "Short Maj 2-5-1",
+    "Long Maj 2-5-1",
+    "Short Minor 2-5-1",
+    "Long Minor 2-5-1",
+    "Long Minor with double resolution",
+    "Double resolution",
+    "Minor and Dominant 2-cells alternated",
+    "Minor x Dominant",
+    "Major x Dominant",
+    "Dorian x Myxolidian"
+   ],
+   "modes": [
+    "Maj7",
+    "Minor",
+    "Dorian",
+    "Myxolidian",
+    "Locrian",
+    "MajorResolutions",
+    "MinorResolutions",
+    "7sus4"
+   ],
+   "movements": [
+    "A",
+    "D",
+    "N"
+   ],
+   "no_first_last_note_types": [
+    "Long Minor 2-5-1 with Minor ending",
+    "Long Maj 2-5-1 with Maj7 ending",
+    "Minor and Dominant 2-cells alternated"
+   ],
+   "note_options": [
+    "1",
+    "9",
+    "3",
+    "4",
+    "11",
+    "#11",
+    "5",
+    "6",
+    "7",
+    "b7",
+    "b6",
+    "b9",
+    "#9",
+    "#7"
+   ],
+   "penta_position_slack": 1,
+   "position_desc": {
+    "CAGED A string root": "Root on the A (5th) string; compact CAGED box.",
+    "CAGED E string root": "Root on the low-E (6th) string; compact CAGED box.",
+    "Diagonal A string root": "From the 5th-string root, climbing diagonally up the neck.",
+    "Diagonal E string root": "From the 6th-string root, climbing diagonally up the neck.",
+    "More Horizontal, D string root": "Root on the D (4th) string; lateral, few strings."
+   },
+   "position_slack": 0,
+   "positions": [
+    "CAGED E string root",
+    "CAGED A string root",
+    "Diagonal E string root",
+    "Diagonal A string root",
+    "More Horizontal, D string root"
+   ],
+   "translations": [
+    "none",
+    "loc_to_dom",
+    "dom_to_minor",
+    "dom_to_major",
+    "dom_to_dorian",
+    "sus4"
+   ]
+  },
+  "key": "Eb",
+  "positions": [
+   {
+    "boxes": [
+     {
+      "fret_hi": 15,
+      "fret_lo": 10,
+      "root_midi": 51,
+      "root_strings": [
+       6,
+       4,
+       1
+      ],
+      "strings": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6
+      ]
+     }
+    ],
+    "desc": "Root on the low-E (6th) string; compact CAGED box.",
+    "index": 1,
+    "name": "CAGED E string root"
+   },
+   {
+    "boxes": [
+     {
+      "fret_hi": 10,
+      "fret_lo": 5,
+      "root_midi": 51,
+      "root_strings": [
+       5,
+       3
+      ],
+      "strings": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6
+      ]
+     }
+    ],
+    "desc": "Root on the A (5th) string; compact CAGED box.",
+    "index": 2,
+    "name": "CAGED A string root"
+   },
+   {
+    "boxes": [
+     {
+      "fret_hi": 11,
+      "fret_lo": 8,
+      "root_midi": 51,
+      "root_strings": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6
+      ],
+      "strings": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6
+      ]
+     }
+    ],
+    "desc": "From the 6th-string root, climbing diagonally up the neck.",
+    "index": 3,
+    "name": "Diagonal E string root"
+   },
+   {
+    "boxes": [
+     {
+      "fret_hi": 6,
+      "fret_lo": 3,
+      "root_midi": 51,
+      "root_strings": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6
+      ],
+      "strings": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6
+      ]
+     }
+    ],
+    "desc": "From the 5th-string root, climbing diagonally up the neck.",
+    "index": 4,
+    "name": "Diagonal A string root"
+   },
+   {
+    "boxes": [
+     {
+      "fret_hi": 10,
+      "fret_lo": 0,
+      "root_midi": 51,
+      "root_strings": [
+       4,
+       2
+      ],
+      "strings": [
+       2,
+       3,
+       4,
+       5
+      ]
+     },
+     {
+      "fret_hi": 22,
+      "fret_lo": 10,
+      "root_midi": 63,
+      "root_strings": [
+       4,
+       2
+      ],
+      "strings": [
+       2,
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    "desc": "Root on the D (4th) string; lateral, few strings.",
+    "index": 5,
+    "name": "More Horizontal, D string root"
+   }
+  ]
+ },
+ "status": 200
+}

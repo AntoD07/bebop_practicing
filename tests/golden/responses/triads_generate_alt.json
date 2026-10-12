@@ -1,0 +1,250 @@
+{
+ "body": {
+  "exercise": "alternating",
+  "group": 3,
+  "lines_by_start": {
+   "C": [
+    {
+     "cell": "C↑",
+     "degree": "C:1",
+     "pitch": 36,
+     "role": "C:1"
+    },
+    {
+     "cell": "C↑",
+     "degree": "C:3",
+     "pitch": 40,
+     "role": "C:3"
+    },
+    {
+     "cell": "C↑",
+     "degree": "C:5",
+     "pitch": 43,
+     "role": "C:5"
+    },
+    {
+     "cell": "D↑",
+     "degree": "D:1",
+     "pitch": 38,
+     "role": "D:1"
+    },
+    {
+     "cell": "D↑",
+     "degree": "D:3",
+     "pitch": 42,
+     "role": "D:3"
+    },
+    {
+     "cell": "D↑",
+     "degree": "D:5",
+     "pitch": 45,
+     "role": "D:5"
+    },
+    {
+     "cell": "C↑",
+     "degree": "C:3",
+     "pitch": 40,
+     "role": "C:3"
+    },
+    {
+     "cell": "C↑",
+     "degree": "C:5",
+     "pitch": 43,
+     "role": "C:5"
+    },
+    {
+     "cell": "C↑",
+     "degree": "C:1",
+     "pitch": 48,
+     "role": "C:1"
+    },
+    {
+     "cell": "D↑",
+     "degree": "D:3",
+     "pitch": 42,
+     "role": "D:3"
+    },
+    {
+     "cell": "D↑",
+     "degree": "D:5",
+     "pitch": 45,
+     "role": "D:5"
+    },
+    {
+     "cell": "D↑",
+     "degree": "D:1",
+     "pitch": 50,
+     "role": "D:1"
+    },
+    {
+     "cell": "C↑",
+     "degree": "C:5",
+     "pitch": 43,
+     "role": "C:5"
+    },
+    {
+     "cell": "C↑",
+     "degree": "C:1",
+     "pitch": 48,
+     "role": "C:1"
+    },
+    {
+     "cell": "C↑",
+     "degree": "C:3",
+     "pitch": 52,
+     "role": "C:3"
+    },
+    {
+     "cell": "D↑",
+     "degree": "D:5",
+     "pitch": 45,
+     "role": "D:5"
+    },
+    {
+     "cell": "D↑",
+     "degree": "D:1",
+     "pitch": 50,
+     "role": "D:1"
+    },
+    {
+     "cell": "D↑",
+     "degree": "D:3",
+     "pitch": 54,
+     "role": "D:3"
+    },
+    {
+     "cell": "C↑",
+     "degree": "C:1",
+     "pitch": 48,
+     "role": "C:1"
+    },
+    {
+     "cell": "C↑",
+     "degree": "C:3",
+     "pitch": 52,
+     "role": "C:3"
+    },
+    {
+     "cell": "C↑",
+     "degree": "C:5",
+     "pitch": 55,
+     "role": "C:5"
+    },
+    {
+     "cell": "D↑",
+     "degree": "D:1",
+     "pitch": 50,
+     "role": "D:1"
+    },
+    {
+     "cell": "D↑",
+     "degree": "D:3",
+     "pitch": 54,
+     "role": "D:3"
+    },
+    {
+     "cell": "D↑",
+     "degree": "D:5",
+     "pitch": 57,
+     "role": "D:5"
+    },
+    {
+     "cell": "C↑",
+     "degree": "C:3",
+     "pitch": 52,
+     "role": "C:3"
+    },
+    {
+     "cell": "C↑",
+     "degree": "C:5",
+     "pitch": 55,
+     "role": "C:5"
+    },
+    {
+     "cell": "C↑",
+     "degree": "C:1",
+     "pitch": 60,
+     "role": "C:1"
+    },
+    {
+     "cell": "D↑",
+     "degree": "D:3",
+     "pitch": 54,
+     "role": "D:3"
+    },
+    {
+     "cell": "D↑",
+     "degree": "D:5",
+     "pitch": 57,
+     "role": "D:5"
+    },
+    {
+     "cell": "D↑",
+     "degree": "D:1",
+     "pitch": 62,
+     "role": "D:1"
+    },
+    {
+     "cell": "C↑",
+     "degree": "C:5",
+     "pitch": 55,
+     "role": "C:5"
+    },
+    {
+     "cell": "C↑",
+     "degree": "C:1",
+     "pitch": 60,
+     "role": "C:1"
+    },
+    {
+     "cell": "C↑",
+     "degree": "C:3",
+     "pitch": 64,
+     "role": "C:3"
+    },
+    {
+     "cell": "D↑",
+     "degree": "D:5",
+     "pitch": 57,
+     "role": "D:5"
+    },
+    {
+     "cell": "D↑",
+     "degree": "D:1",
+     "pitch": 62,
+     "role": "D:1"
+    },
+    {
+     "cell": "D↑",
+     "degree": "D:3",
+     "pitch": 66,
+     "role": "D:3"
+    },
+    {
+     "cell": "C↑",
+     "degree": "C:1",
+     "pitch": 60,
+     "role": "C:1"
+    },
+    {
+     "cell": "C↑",
+     "degree": "C:3",
+     "pitch": 64,
+     "role": "C:3"
+    },
+    {
+     "cell": "C↑",
+     "degree": "C:5",
+     "pitch": 67,
+     "role": "C:5"
+    }
+   ]
+  },
+  "message": null,
+  "start_labels": [
+   "C"
+  ],
+  "title": "C + D — alternating triads, 3 notes, ascending (2 oct)"
+ },
+ "status": 200
+}
