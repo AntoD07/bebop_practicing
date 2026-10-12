@@ -1,22 +1,38 @@
-[tool.poetry]
+[project]
 name = "bebop-practicing"
-version = "0.1.0"
-description = "Streamlit app for practicing bebop cells, connections, and melodic lines."
-authors = ["Antony Doukhan <anto.doukhan@gmail.com>"]
+version = "0.2.0"
+description = "Bebop cell practice: the Python compute API (FastAPI) behind the Next.js app."
 readme = "README.md"
-# This is a Streamlit application, not an installable library — Poetry only manages
-# the virtualenv and dependencies (no package is built or installed).
-package-mode = false
+requires-python = ">=3.12"
+# Main dependencies = what the API needs (this is what Vercel's Python builder
+# installs). The fingering engine and the domain layer are pure stdlib.
+dependencies = [
+    "fastapi>=0.115",
+    "pydantic>=2.9",
+    # Score -> Tab vision reader (imported lazily by api/routers/score.py).
+    "anthropic>=0.115",
+    "pillow>=10",
+    "numpy>=2",
+]
 
-[tool.poetry.dependencies]
-python = ">=3.10,<3.13"
-# Pinned to the known-good line. Newer streamlit/pandas pull numpy 2.x, which breaks
-# numpy-1.x-compiled extensions (numexpr, bottleneck) in this environment. Bump these
-# deliberately (and rebuild those extensions for numpy 2) if you want newer versions.
-streamlit = "~1.36.0"
-pandas = "~2.2.2"
-numpy = "<2"
+[project.optional-dependencies]
+# The legacy Streamlit app (legacy/), runnable until feature parity:
+#   cd legacy && PYTHONPATH=.. uv run --extra legacy streamlit run Cell_Quizz.py
+legacy = [
+    "streamlit>=1.36,<2",
+    "pandas>=2.2",
+]
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = [
+    "uvicorn[standard]>=0.30",
+    "pytest>=8",
+    "httpx>=0.27",
+]
+
+[tool.uv]
+# Not an installable library: uv only manages the virtualenv and the lock.
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

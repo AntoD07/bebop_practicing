@@ -23,6 +23,7 @@ returned as an alternate voicing.
 
 from __future__ import annotations
 
+import copy
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
 
@@ -205,7 +206,12 @@ def _backtrack(layers, nodes, term_key: StateKey, entry_idx: int,
     key: Optional[StateKey] = term_key
     idx = entry_idx
     for i in range(n - 1, -1, -1):
-        pn = nodes[i][key]
+        # A COPY: trellis nodes are shared by every path through them, and
+        # relabel_fingers() mutates finger/stretch in place — returning the
+        # shared object let the alternate's relabelling silently rewrite the
+        # best path after it had been analysed (27/392 Free results had
+        # best.total_cost != cost_of(best.placed)).
+        pn = copy.copy(nodes[i][key])
         path.append(pn)
         _cost, back = layers[i][key][idx]
         if back is None:
@@ -466,6 +472,42 @@ def optimize_fingering(line: List[dict], context: Optional[dict] = None,
     return result
 
 
+def _layout_candidates(notes: List[Note], config: FingeringConfig,
+                       hard_root_pin: bool = True):
+    """Per distinct pitch (ascending), the (string, fret) placements a config
+    admits — the root pin applied as a hard FILTER when requested."""
+    pitches = sorted({nt.midi for nt in notes})
+    cands = []
+    for m in pitches:
+        pls = [(p.string, p.fret) for p in candidate_placements(m, config)]
+        if hard_root_pin and config.root_pin is not None:
+            pin_pc, pin_strings = config.root_pin
+            if m % 12 == pin_pc:
+                pls = [pl for pl in pls if pl[0] in pin_strings]
+        cands.append(pls)
+    return pitches, cands
+
+
+def count_layouts(line: List[dict], context: Optional[dict] = None,
+                  config: Optional[FingeringConfig] = None,
+                  hard_root_pin: bool = True) -> int:
+    """How many distinct layouts :func:`enumerate_fingerings` would visit for
+    this line/config — the product of the per-pitch candidate counts, with no
+    DP run. 0 when some pitch has no admissible placement (the enumeration
+    would return nothing). Lets a caller plan a time budget before searching.
+    """
+    config = config or default_config()
+    context = context or {}
+    if not line:
+        return 0
+    notes = build_notes(line, config, context)
+    _pitches, cands = _layout_candidates(notes, config, hard_root_pin)
+    n_layouts = 1
+    for pls in cands:
+        n_layouts *= len(pls)
+    return n_layouts
+
+
 def enumerate_fingerings(line: List[dict], context: Optional[dict] = None,
                          config: Optional[FingeringConfig] = None,
                          hard_root_pin: bool = True,
@@ -496,17 +538,9 @@ def enumerate_fingerings(line: List[dict], context: Optional[dict] = None,
     notes = build_notes(line, config, context)
     n = len(notes)
 
-    pitches = sorted({nt.midi for nt in notes})
-    cands = []
-    for m in pitches:
-        pls = [(p.string, p.fret) for p in candidate_placements(m, config)]
-        if hard_root_pin and config.root_pin is not None:
-            pin_pc, pin_strings = config.root_pin
-            if m % 12 == pin_pc:
-                pls = [pl for pl in pls if pl[0] in pin_strings]
-        if not pls:
-            return []
-        cands.append(pls)
+    pitches, cands = _layout_candidates(notes, config, hard_root_pin)
+    if any(not pls for pls in cands):
+        return []
     n_layouts = 1
     for pls in cands:
         n_layouts *= len(pls)

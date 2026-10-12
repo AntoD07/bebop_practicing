@@ -1,298 +1,78 @@
-import streamlit as st
+"""DataFrame wrappers over the degree translations (legacy Streamlit pages).
 
-import re
-import ast
+The mappings and the marker-aware token translator live in
+``scripts.domain.transposition``; this module keeps the pandas-facing
+signatures the legacy pages call (``translate_dom_to_minor(df)`` etc.) and
+applies the translator row-wise. A token a mapping does not know raises
+``TranslationError`` (a KeyError subclass) naming the token and the mapping.
+"""
+
+from scripts.domain.notes import parse_degrees
+from scripts.domain.transposition import (  # noqa: F401 — re-exported names
+    TranslationError,
+    dom_to_dorian_mapping,
+    dom_to_maj_mapping,
+    dom_to_min_mapping,
+    loc_to_dom_mapping,
+    sus4_token,
+    translate_token,
+)
+
+
+def _listify(note_cells):
+    if isinstance(note_cells, str):
+        return [note_cells], True
+    return list(note_cells), False
 
 
 def translate_note_cells(note_cells, mode):
-    """
-    Translates note cells by applying an arithmetic shift and taking modulo 8 to the numeric part of each note,
-    while retaining any prefixes or suffixes.
+    """The 7sus4 arithmetic shift into ``mode`` (Minor/Dorian +3, Locrian +5)."""
+    cells, simple = _listify(note_cells)
+    out = [sus4_token(n, mode) for n in cells]
+    return out[0] if simple else out
 
-    Parameters:
-    - note_cells: List of notes as strings, possibly containing prefixes or suffixes.
-    - shift: Integer, the arithmetic shift for the translation, reflecting the mode change.
 
-    Returns:
-    - List of translated notes.
-    """
-    if mode in ("Minor", "Dorian"):
-        shift = 3
-    elif mode == "Locrian":
-        shift = 5
-    simple_string = False
-    if isinstance(note_cells, str):
-        note_cells = [note_cells]
-        simple_string = True
-    translated_cells = []
-    for note in note_cells:
-        # st.write(note)
-        # Extract the numeric part and any prefixes/suffixes
-        match = re.match(r"([a-zA-Z#b]*)(\d+)([^\d]*)", note)
-        if match:
-            prefix, number, suffix = match.groups()
-            # st.write("old number ", number)
-            # Convert the number to an integer, apply the shift and modulo 8
-            new_number = (int(number) - 1 + shift) % 7 + 1
-            # st.write("new number ", new_number)
-            if new_number == 2:
-                new_number = 9
-            if (new_number == 4) and bool(prefix):
-                new_number = 11
-            # Recombine into the full note string
-            translated_note = f"{prefix}{new_number}{suffix}"
-            translated_cells.append(translated_note)
-        else:
-            # Handle the case where the note might not contain a number
-            translated_cells.append("0")
-    if simple_string:
-        translated_cells = translated_cells[0]
-    return translated_cells
+def _map_with(mapping_name):
+    def _map(note_cells):
+        cells, simple = _listify(note_cells)
+        out = [translate_token(n, mapping_name) for n in cells]
+        return out[0] if simple else out
+    return _map
+
+
+map_loc_to_dom_notes = _map_with("loc_to_dom")
+map_dom_to_minor = _map_with("dom_to_minor")
+map_dom_to_dorian = _map_with("dom_to_dorian")
+map_dom_to_major = _map_with("dom_to_major")
+
+
+def _translate_frame(df_cells, fn, copy=True):
+    new_df = df_cells.copy() if copy else df_cells
+    new_df["Notes"] = new_df["Notes"].apply(parse_degrees).apply(fn)
+    new_df["Start Note"] = new_df["Start Note"].astype(str).apply(fn)
+    new_df["End Note"] = new_df["End Note"].astype(str).apply(fn)
+    return new_df
 
 
 def translate_sus4_to_other_mode(df_cells, mode):
-    new_df = df_cells.copy()
-
-    # Helper function to convert string representations of lists into actual list objects
-    def convert_string_to_list(string):
-        try:
-            return ast.literal_eval(string)  # Safely evaluate the string to a list
-        except ValueError:
-            return string  # Return the string itself if conversion is not possible
-
-    # Convert string representations to lists
-    new_df["Notes"] = new_df["Notes"].apply(convert_string_to_list)
-
-    # Apply the mode-specific translation function to each of the list-converted columns
-    new_df["Notes"] = new_df["Notes"].apply(translate_note_cells, mode=mode)
-    new_df["Start Note"] = new_df["Start Note"].apply(translate_note_cells, mode=mode)
-    new_df["End Note"] = new_df["End Note"].apply(translate_note_cells, mode=mode)
-
-    return new_df
-
-
-loc_to_dom_mapping = {
-    "1": "5",
-    "4": "1",
-    "7": "4",
-    "3": "7",
-    "9": "b6",
-    "5": "b9",
-    "6": "#9",
-    "#9": "6",
-    "maj5": "9",
-    "#3": "maj7",
-    "maj7": "#11",
-    "#6": "3",
-}
-
-dom_to_min_mapping = {
-    "1": "5",
-    "4": "1",
-    "7": "4",
-    "3": "#7",
-    "9": "6",
-    "5": "9",
-    "6": "maj3",
-    "#9": "7",
-    "b9": "b6",
-    "b6": "3",
-    "maj7": "#11",
-    "#11": "b9",
-}
-
-# Dominant (Myxolidian) degrees re-spelled relative to the ii (Dorian) root,
-# a 4th below the V root (G7 degrees read from D). This is what lets Dorian and
-# Myxolidian cells pivot-connect: both End/Start notes end up in the SAME
-# ii-relative representation. Bare "7" is the mode's b7 on both sides; "#7" is
-# the Dorian spelling of the major 7th (the V root's #11), "maj3" the chromatic
-# major-3rd passing tone (the V's maj7).
-dom_to_dorian_mapping = {
-    "1": "4",
-    "2": "5",
-    "9": "5",
-    "3": "6",
-    "4": "7",
-    "5": "1",
-    "6": "9",
-    "7": "3",
-    "maj7": "maj3",
-    "#11": "#7",
-    "#5": "b9",
-    "#9": "b6",
-    "b9": "#11",
-}
-
-dom_to_maj_mapping = {
-    "1": "5",
-    "4": "1",
-    "7": "4",
-    "3": "7",
-    "9": "6",
-    "2": "6",
-    "5": "9",
-    "6": "3",
-    "#9": "b7",
-    "#9(higher)": "b7(higher)",
-    "b9": "b6",
-    "b9(higher)": "b6(higher)",
-    "#5": "b6",
-    "b6": "min3",
-    "maj7": "#11",
-    "#11": "b9",
-    "b6(lower)": "min3(lower)",
-}
-
-
-def map_loc_to_dom_notes(note_cells):
-    simple_string = False
-    if isinstance(note_cells, str):
-        note_cells = [note_cells]
-        simple_string = True
-    translated_cells = []
-    for note in note_cells:
-        new_note = loc_to_dom_mapping[note]
-        # Recombine into the full note string
-        translated_cells.append(new_note)
-    if simple_string:
-        translated_cells = translated_cells[0]
-    return translated_cells
+    return _translate_frame(df_cells, lambda cells: translate_note_cells(cells, mode))
 
 
 def translate_loc_to_dominant(df_cells):
-    # Define a helper function to safely convert string representations to lists
-    def convert_string_to_list(string):
-        try:
-            # Attempt to evaluate the string as a list
-            return ast.literal_eval(string)
-        except ValueError:
-            # Return the input as-is if conversion fails
-            return string
-
-    # Convert string representations to lists before applying the mapping function
-    df_cells["Notes"] = df_cells["Notes"].apply(convert_string_to_list)
-
-    # Now apply the domain-specific mapping function
-    df_cells["Notes"] = df_cells["Notes"].apply(map_loc_to_dom_notes)
-    df_cells["Start Note"] = df_cells["Start Note"].apply(map_loc_to_dom_notes)
-    df_cells["End Note"] = df_cells["End Note"].apply(map_loc_to_dom_notes)
-
-    return df_cells
-
-
-def map_dom_to_minor(note_cells):
-    simple_string = False
-    if isinstance(note_cells, str):
-        note_cells = [note_cells]
-        simple_string = True
-    translated_cells = []
-    for note in note_cells:
-        new_note = dom_to_min_mapping[note]
-        # Recombine into the full note string
-        translated_cells.append(new_note)
-    if simple_string:
-        translated_cells = translated_cells[0]
-    return translated_cells
+    return _translate_frame(df_cells, map_loc_to_dom_notes, copy=False)
 
 
 def translate_dom_to_minor(df_cells):
-    new_df = df_cells.copy()
-
-    # Define a helper function to convert string representation of a list to a list
-    def convert_string_to_list(string):
-        try:
-            return ast.literal_eval(string)
-        except ValueError:
-            # Handle the case where the string cannot be converted to a list
-            return string
-
-    # Apply the helper function to convert string representations to lists
-    new_df["Notes"] = new_df["Notes"].apply(convert_string_to_list)
-
-    # Apply the mapping function after conversion
-    new_df["Notes"] = new_df["Notes"].apply(map_dom_to_minor)
-    new_df["Start Note"] = new_df["Start Note"].apply(map_dom_to_minor)
-    new_df["End Note"] = new_df["End Note"].apply(map_dom_to_minor)
-
-    return new_df
-
-
-_MARKER_RE = re.compile(r"^(.*?)(\((?:higher|lower)\))$")
-
-
-def _map_with_marker(note, mapping):
-    """Map one degree token, preserving an octave marker like ``9(lower)``."""
-    m = _MARKER_RE.match(note)
-    core, suffix = (m.group(1), m.group(2)) if m else (note, "")
-    return mapping[core] + suffix
-
-
-def map_dom_to_dorian(note_cells):
-    simple_string = False
-    if isinstance(note_cells, str):
-        note_cells = [note_cells]
-        simple_string = True
-    translated_cells = [
-        _map_with_marker(note, dom_to_dorian_mapping) for note in note_cells
-    ]
-    if simple_string:
-        translated_cells = translated_cells[0]
-    return translated_cells
+    return _translate_frame(df_cells, map_dom_to_minor)
 
 
 def translate_dom_to_dorian(df_cells):
     """Re-spell Myxolidian (V-relative) cells in the ii-relative Dorian degrees."""
-    new_df = df_cells.copy()
-
-    def convert_string_to_list(string):
-        try:
-            return ast.literal_eval(string)
-        except ValueError:
-            return string
-
-    new_df["Notes"] = new_df["Notes"].apply(convert_string_to_list)
-    new_df["Notes"] = new_df["Notes"].apply(map_dom_to_dorian)
-    new_df["Start Note"] = new_df["Start Note"].astype(str).apply(map_dom_to_dorian)
-    new_df["End Note"] = new_df["End Note"].astype(str).apply(map_dom_to_dorian)
-
-    return new_df
-
-
-def map_dom_to_major(note_cells):
-    simple_string = False
-    if isinstance(note_cells, str):
-        note_cells = [note_cells]
-        simple_string = True
-    translated_cells = []
-    for note in note_cells:
-        new_note = dom_to_maj_mapping[note]
-        # Recombine into the full note string
-        translated_cells.append(new_note)
-    if simple_string:
-        translated_cells = translated_cells[0]
-    return translated_cells
+    return _translate_frame(df_cells, map_dom_to_dorian)
 
 
 def translate_dom_to_major(df_cells):
-    new_df = df_cells.copy()
-
-    # Define a helper function to convert string representation of a list to a list
-    def convert_string_to_list(string):
-        try:
-            return ast.literal_eval(string)
-        except ValueError:
-            # Handle the case where the string cannot be converted to a list
-            return string
-
-    # Apply the helper function to convert string representations to lists
-    new_df["Notes"] = new_df["Notes"].apply(convert_string_to_list)
-
-    # Apply the mapping function after conversion
-    new_df["Notes"] = new_df["Notes"].apply(map_dom_to_major)
-    new_df["Start Note"] = new_df["Start Note"].astype(str).apply(map_dom_to_major)
-    new_df["End Note"] = new_df["End Note"].astype(str).apply(map_dom_to_major)
-
-    return new_df
+    return _translate_frame(df_cells, map_dom_to_major)
 
 
 def change_note_representation(

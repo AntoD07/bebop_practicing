@@ -19,13 +19,10 @@ spec-exact entry point is still ``optimize_fingering`` on explicit pitches.
 from __future__ import annotations
 
 import ast
-import os
 import re
 from typing import List, Optional, Union
 
-import pandas as pd
-
-from scripts.paths import sampling_file
+from scripts.domain.catalog import cells as _catalog_cells, find_cell as _find_cell, pivot_hint
 
 _PC = {"C": 0, "D": 2, "E": 4, "F": 5, "G": 7, "A": 9, "B": 11}
 
@@ -127,23 +124,9 @@ def chord_symbol_for_root_pc(pc: int, mode: str) -> str:
 
 
 # Cell names may HINT the true sounding degree of their first note, e.g.
-# "Bill Evans enclosure (from #9)" whose Start Note is the nominal "3" (used
-# for pivot MATCHING) while the note actually played is the #9 — the pivot is
-# re-pitched a semitone. "(from ...)" and "(start ...)" both work; ordinal
-# suffixes and b13/13 spellings are normalised. Tokens with a chord prefix
-# (e.g. "(from V-7th)") are ignored — they name another chord's degree.
-_PIVOT_HINT_RE = re.compile(r"\((?:from|start)\s*([#b]?)\s*(\d{1,2}|maj7)"
-                            r"(?:st|nd|rd|th)?\s*\)", re.I)
-_HINT_NORMALISE = {"b13": "b6", "13": "6", "#12": "#11"}
-
-
-def _pivot_hint(name: Optional[str]) -> Optional[str]:
-    """The hinted first-note degree from a cell name, or None."""
-    m = _PIVOT_HINT_RE.search(name or "")
-    if not m:
-        return None
-    token = (m.group(1) or "") + m.group(2)
-    return _HINT_NORMALISE.get(token, token)
+# "Bill Evans enclosure (from #9)" — see ``scripts.domain.catalog.pivot_hint``
+# (the catalog parses it once per cell; kept here under its old name).
+_pivot_hint = pivot_hint
 
 
 def _append_cell_at_pivot(line: List[dict], cell: dict):
@@ -500,50 +483,36 @@ def build_pitch_line(cells: List[dict], base_midi: int = 60,
 
 
 # --------------------------------------------------------------------------- #
-# Loading real cells from the sampling CSVs (the cell DB)
+# Real cells from the cell catalog (scripts.domain.catalog reads the CSVs once)
 # --------------------------------------------------------------------------- #
-def load_sampling(mode: str) -> pd.DataFrame:
-    return pd.read_csv(sampling_file(mode))
-
-
 def cell_degrees(mode: str, name: str) -> List[str]:
-    """Degree list for a named cell in a mode's sampling CSV."""
-    df = load_sampling(mode)
-    row = df[df["Cell Name"] == name]
-    if row.empty:
+    """Degree list for a named cell (first match, any type) in a mode."""
+    c = _find_cell(mode, name)
+    if c is None:
         raise KeyError(f"cell {name!r} not found in {mode}")
-    return [s.strip() for s in ast.literal_eval(row.iloc[0]["Notes"])]
+    return list(c.degrees)
 
 
 def first_cell(mode: str, contains: Optional[str] = None,
                movement: Optional[str] = None) -> dict:
     """Return the first (optionally filtered) cell of a mode as a bridge dict."""
-    df = load_sampling(mode)
-    if movement is not None and "Movement" in df.columns:
-        df = df[df["Movement"].astype(str) == movement]
-    if contains is not None:
-        df = df[df["Cell Name"].str.contains(contains, case=False, na=False)]
-    if df.empty:
-        raise KeyError(f"no matching cell in {mode}")
-    row = df.iloc[0]
-    return {
-        "name": row["Cell Name"],
-        "degrees": [s.strip() for s in ast.literal_eval(row["Notes"])],
-        "mode": mode,
-        "movement": str(row["Movement"]) if "Movement" in df.columns else None,
-    }
+    for c in _catalog_cells(mode, bonus=True):
+        if movement is not None and str(c.movement) != movement:
+            continue
+        if contains is not None and contains.lower() not in c.name.lower():
+            continue
+        return {"name": c.name, "degrees": list(c.degrees), "mode": mode,
+                "movement": str(c.movement) if c.movement is not None else None}
+    raise KeyError(f"no matching cell in {mode}")
 
 
 def cell_movement(mode: str, name: str) -> Optional[str]:
-    """Movement (A/D/N) of a named cell, looked up from the sampling CSV."""
+    """Movement (A/D/N) of a named cell, looked up from the catalog."""
     try:
-        df = load_sampling(mode)
-    except (FileNotFoundError, OSError):
+        c = _find_cell(mode, name)
+    except KeyError:
         return None
-    row = df[df["Cell Name"] == name]
-    if row.empty or "Movement" not in df.columns:
-        return None
-    return str(row.iloc[0]["Movement"])
+    return None if c is None or c.movement is None else str(c.movement)
 
 
 def enclosure_degree_sequences(modes: Optional[List[str]] = None) -> List[List[str]]:
@@ -553,15 +522,10 @@ def enclosure_degree_sequences(modes: Optional[List[str]] = None) -> List[List[s
     out: List[List[str]] = []
     for mode in modes:
         try:
-            df = load_sampling(mode)
-        except (FileNotFoundError, OSError):
+            cells = _catalog_cells(mode, bonus=True)
+        except KeyError:
             continue
-        enc = df[df["Cell Name"].str.contains("nclosure", case=False, na=False)]
-        for _, row in enc.iterrows():
-            try:
-                out.append([s.strip() for s in ast.literal_eval(row["Notes"])])
-            except (ValueError, SyntaxError):
-                continue
+        out.extend(list(c.degrees) for c in cells if "nclosure" in c.name.lower())
     return out
 
 

@@ -33,5 +33,5 @@ MJP Delayed Early b9/#9,9,1,"['b9', '#9', '1', '7', 'b6', '3', '#9', 'b9', '1']"
 MJP Delayed Late #9/b9,1,5,"['1', '7', '#9', 'b9', '1', '7', 'b6', '3', '5']",N,Essential
 MJP Delayed BillEvans (from #9),9,1,"['9', 'b9', 'b6', '3', '#9','b9', '6', '7', '1']",D,Essential
 MJP Delayed SemitoneTone (from #11),5,1,"['5', '3', '#9', 'b9', '1','7', '#9', 'b9', '1']",D,Essential
-MJP Delayed SemitoneTone (from 7),7,5,"['7', '3', '#9', 'b9', '1','7', '(b)6', '3', '9']",D,Essential
-MJP Delayed SemitoneTone (from b6),b6,5,"['b6', '3', '#9', 'b9', '1','7', '(b)6', '3', '9']",D,Essential
+MJP Delayed SemitoneTone (from 7),7,5,"['7', '3', '#9', 'b9', '1','7', 'b6', '3', '9']",D,Essential
+MJP Delayed SemitoneTone (from b6),b6,5,"['b6', '3', '#9', 'b9', '1','7', 'b6', '3', '9']",D,Essential

@@ -261,12 +261,37 @@ def test_T8():
     print(f">>> T8 PASS (pivot on beat 3, stroke {pv.stroke})")
 
 
+def test_T9():
+    _banner("T9", "Reported cost == re-scored cost (no path aliasing), 300 random lines")
+    import random as _random
+    from scripts.fingering.optimizer import cost_of
+    rng = _random.Random(20261012)
+    bad = []
+    for k in range(300):
+        n = rng.randint(4, 9)
+        line = [{"pitch": rng.randint(45, 79)} for _ in range(n)]
+        density = rng.choice(["quarter", "eighth"])
+        ctx = {"key": "C", "density": density, "chords": []}
+        if density == "eighth":
+            line = [dict(d, start=0.5 * i) for i, d in enumerate(line)]
+        r = optimize_fingering(line, ctx)
+        if abs(r.best.total_cost - cost_of(r.best.placed, r.config, density)) > 1e-6:
+            bad.append((k, "best", r.best.total_cost, cost_of(r.best.placed, r.config, density)))
+        if r.alternate is not None and abs(
+                r.alternate.total_cost - cost_of(r.alternate.placed, r.config, density)) > 1e-6:
+            bad.append((k, "alternate", r.alternate.total_cost,
+                        cost_of(r.alternate.placed, r.config, density)))
+    _check(not bad, f"T9 {len(bad)} aliased result(s): {bad[:5]}")
+    print(">>> T9 PASS (300 lines, best and alternate costs stable)")
+
+
 def main():
     print("Convention sanity check ...", end=" ")
     verify_conventions()
     print("OK")
 
-    tests = [test_T1, test_T2, test_T3, test_T5, test_T4, test_T6, test_T7, test_T8]
+    tests = [test_T1, test_T2, test_T3, test_T5, test_T4, test_T6, test_T7, test_T8,
+             test_T9]
     passed, failed = 0, 0
     results = []
     for t in tests:
