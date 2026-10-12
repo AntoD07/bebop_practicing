@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #fbfaf7;
+  --bg-elev: #ffffff;
+  --bg-muted: #f1eee6;
+  --fg: #1c1a16;
+  --fg-muted: #6b655a;
+  --border: #ddd8cc;
+  --accent: #1a3a8f;
+  --accent-fg: #ffffff;
+  --accent-soft: #e5ebf8;
+  --warn: #b06a00;
+  --ok: #3a7d3a;
+  --danger: #c0392b;
+  --up: #fdeaea;
+  --ring: #1a3a8f;
+  --header-h: 56px;
+  --bottom-nav-h: 56px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15140f;
+    --bg-elev: #1f1d17;
+    --bg-muted: #27241d;
+    --fg: #ece7da;
+    --fg-muted: #a39d8f;
+    --border: #3a362c;
+    --accent: #8fa8e8;
+    --accent-fg: #0f1526;
+    --accent-soft: #232a40;
+    --warn: #e0a24a;
+    --ok: #7fbf7f;
+    --danger: #e26a5c;
+    --up: #4a2626;
+    --ring: #8fa8e8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15140f;
+  --bg-elev: #1f1d17;
+  --bg-muted: #27241d;
+  --fg: #ece7da;
+  --fg-muted: #a39d8f;
+  --border: #3a362c;
+  --accent: #8fa8e8;
+  --accent-fg: #0f1526;
+  --accent-soft: #232a40;
+  --warn: #e0a24a;
+  --ok: #7fbf7f;
+  --danger: #e26a5c;
+  --up: #4a2626;
+  --ring: #8fa8e8;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elev: var(--bg-elev);
+  --color-bg-muted: var(--bg-muted);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --color-warn: var(--warn);
+  --color-ok: var(--ok);
+  --color-danger: var(--danger);
+  --color-up: var(--up);
+  --color-ring: var(--ring);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: Menlo, Consolas, "SF Mono", ui-monospace, monospace;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  overscroll-behavior-y: none;
+}
+
+* { border-color: var(--border); }
+
+input, select, textarea, button { font: inherit; }
+
+.touch-pan-x { touch-action: pan-x; }
+
+/* number inputs without spinners on phones */
+input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+.scrollbar-thin { scrollbar-width: thin; }
