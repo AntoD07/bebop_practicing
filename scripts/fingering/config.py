@@ -51,10 +51,20 @@ class FingeringConfig:
     max_fret: int = 15                 # highest fret we will place a note on
     string_range: Tuple[int, ...] = (1, 2, 3, 4, 5, 6)
     expected_notes_per_string: int = 2  # the 2npS default layout
+    # Open strings as placements. OFF by default: opens are not part of the
+    # fretted Gypsy vocabulary (no vibrato/control, dead tone next to rest
+    # strokes) and kept sneaking into "best" fingerings near the nut. The ONE
+    # sanctioned context is pentatonic runs — scripts/pentatonics/ re-enables
+    # them (the 3+2 open-string-pivot system needs the pivot to ring open).
+    allow_open_strings: bool = False
     # Optional fret box: when set, placements are confined near [lo, hi] —
     # the box is SOFT: up to window_overflow_frets outside are allowed but
     # charged per fret (players extend a position transiently all the time).
     fret_window: Optional[Tuple[int, int]] = None
+    # Per-string windows ((string, lo, hi), ...) for SLANTED shapes (the
+    # diagonals): each string gets its own box; ``fret_window`` stays the
+    # global envelope. Strings not listed fall back to ``fret_window``.
+    string_fret_windows: Optional[Tuple[Tuple[int, int, int], ...]] = None
     window_overflow_frets: int = 2
     window_overflow_cost: float = 1.0
     # Optional root pin: (root_pitch_class, allowed_strings). Key-root notes
@@ -77,6 +87,12 @@ class FingeringConfig:
     # ---- Picking / cost weights (lower total = better) ----------------------
     u_cost: float = 0.5                # each upstroke (small; D is free)
     drop_cost: float = 10.0            # a descending crossing arriving D->D
+    # Per-CELL exception to the drop rule: {cell name: multiplier} applied to
+    # the managed-drop charge when BOTH notes of the crossing belong to that
+    # cell (a crossing at the pivot stays at full price). Idiomatic cells that
+    # leap downward twice in five notes (e.g. Dorian "Convert style" 3-7-6-5-3)
+    # would otherwise sink to the bottom of every ranking.
+    cell_drop_scale: Tuple[Tuple[str, float], ...] = (("Convert style", 0.25),)
     sweep_bonus: float = 0.5           # reward an ascending D->D sweep on a beat
     beat3_penalty: float = 2.0         # a U landing on beat 3 (soft)
     shift_cost: float = 1.0            # per fret of hand-anchor movement
@@ -96,6 +112,11 @@ class FingeringConfig:
     # pairs come out D-U — except before an ascending crossing, where staying
     # on D earns the sweep bonus and D-D wins.
     same_string_dd_penalty: float = 0.6
+    # The same D-D when its second D lands on a downbeat (beat 1/3): repeating
+    # the downstroke to put the downbeat on D is accepted, but priced slightly
+    # above a plain D-D so the solver prefers fingerings where the downbeat
+    # falls on a string change or after an even number of notes on the string.
+    downbeat_dd_penalty: float = 1.0
     # Open strings break the hand position mid-line AND dodge all left-hand
     # geometry costs (a fret-0 note has no reach/span/shift) — price them so
     # they never become a teleport loophole.
@@ -127,12 +148,32 @@ class FingeringConfig:
     alt_margin: float = 0.15           # keep a runner-up within this rel. margin
     kbest: int = 3                     # paths tracked per state for the alternate
 
-    # ---- Ornament engine (phase 2 — built but shipped DISABLED) -------------
-    ornament_engine_enabled: bool = False
-    max_ornaments_per_bar: int = 1
+    # ---- Ornament engine (phase 2 — APPLIED when enabled) -------------------
+    # One device only: the upper-neighbor TURN / mordent (pick -> hammer up ->
+    # pull back, e.g. 8h10p8) on sustained/target notes. Single string, no
+    # crossing, mechanically idle — pure phrasing colour. When enabled it is
+    # applied to a COPY of the solution (result.ornamented); the all-picked
+    # phase-1 line stays untouched. Strip turns above ~180 bpm (they smear).
+    ornament_engine_enabled: bool = False   # master switch (UI toggle)
+    turn_fret_interval: int = 2        # upper neighbour: 2 = whole step, 1 = half
+    max_ornaments_per_bar: int = 1     # per-bar cap on turns
 
     def density_scale(self, density: str = "quarter") -> float:
         return self.eighth_density_scale if density == "eighth" else self.quarter_density_scale
+
+    def drop_scale_for(self, cell: Optional[str]) -> float:
+        """Managed-drop multiplier for a crossing inside ``cell`` (1.0 = none)."""
+        for name, scale in self.cell_drop_scale:
+            if name == cell:
+                return scale
+        return 1.0
+
+    def fret_window_for(self, string: int) -> Optional[Tuple[int, int]]:
+        """The (lo, hi) fret box that applies on ``string``."""
+        for s, lo, hi in self.string_fret_windows or ():
+            if s == string:
+                return (lo, hi)
+        return self.fret_window
 
     def with_overrides(self, **kwargs) -> "FingeringConfig":
         """Return a copy with fields overridden (handy for tests)."""

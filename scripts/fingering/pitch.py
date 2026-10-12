@@ -70,6 +70,8 @@ class Note:
     degree: Optional[str] = None  # scale-degree string ("1","b3","5",...) if known
     onset: float = 0.0            # absolute start, in quarter-note beats from 0
     phrase_start: bool = False    # first note of a phrase (line start / after a rest)
+    is_grace: bool = False        # inserted by the ornament engine (sub-beat timing)
+    ornament: Optional[str] = None  # ornament family that inserted/altered this note
 
     @property
     def name(self) -> str:
@@ -124,18 +126,21 @@ def build_notes(line: List[dict], config: FingeringConfig,
 def candidate_placements(midi: int, config: FingeringConfig) -> List[Placement]:
     """All playable ``(string, fret)`` positions for a pitch within reach."""
     out: List[Placement] = []
-    if config.fret_window:
-        # Soft box: a small overflow margin is playable (charged in costs).
-        lo = config.fret_window[0] - config.window_overflow_frets
-        hi = config.fret_window[1] + config.window_overflow_frets
-    else:
-        lo, hi = 0, config.max_fret
     strings = config.string_range
     # (Root pin is SOFT — off-shape root placements are charged in costs.py,
     # not filtered here.)
     for s in strings:
+        win = config.fret_window_for(s)
+        if win:
+            # Soft box: a small overflow margin is playable (charged in costs).
+            lo = win[0] - config.window_overflow_frets
+            hi = win[1] + config.window_overflow_frets
+        else:
+            lo, hi = 0, config.max_fret
         open_midi = STANDARD_TUNING_MIDI[s]
         fret = midi - open_midi
+        if fret == 0 and not config.allow_open_strings:
+            continue
         if 0 <= fret <= config.max_fret and lo <= fret <= hi:
             out.append(Placement(string=s, fret=fret))
     return out

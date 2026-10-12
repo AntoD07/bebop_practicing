@@ -64,6 +64,10 @@ def parse_musicxml(data: bytes) -> dict:
     "chords": [{"start_beat","symbol"}], "beats_per_bar": int}``.
     Ties are merged; rests mark the next note as a phrase start; extra chord
     tones (<chord/> elements) and grace notes are skipped — melody line only.
+    Multi-staff (piano) parts: melody notes come from the FIRST staff and its
+    first voice only (the right hand); other staves/voices still advance the
+    time cursor (``<backup>`` rewinds it). Chord symbols are kept from every
+    staff.
     """
     root = ET.fromstring(_read_musicxml_bytes(data))
     part = root.find("part")
@@ -77,6 +81,8 @@ def parse_musicxml(data: bytes) -> dict:
     onset = 0.0          # absolute, in quarter-note beats
     after_rest = True    # line start counts as a phrase start
     tie_open = False
+    melody_staff: Optional[str] = None   # first staff seen = the top/right hand
+    melody_voice: Optional[str] = None   # first voice on that staff
 
     for m_i, measure in enumerate(part.findall("measure")):
         attrs = measure.find("attributes")
@@ -96,7 +102,8 @@ def parse_musicxml(data: bytes) -> dict:
                     sym = step + ({"1": "#", "-1": "b"}.get(alter, "") if alter else "")
                     kind_text = (kind_el.get("text") if kind_el is not None else None)
                     kind = (kind_el.text if kind_el is not None else "") or ""
-                    sym += kind_text if kind_text else _KIND_SUFFIX.get(kind, "")
+                    sym += (kind_text.strip() if kind_text
+                            else _KIND_SUFFIX.get(kind, ""))
                     chords.append({"start_beat": onset, "symbol": sym})
             elif el.tag in ("backup", "forward"):
                 dur = el.findtext("duration")
@@ -109,9 +116,23 @@ def parse_musicxml(data: bytes) -> dict:
                     continue  # keep the melody note only
                 dur_el = el.findtext("duration")
                 dur = (float(dur_el) / divisions) if dur_el else 0.0
+                staff = el.findtext("staff")
+                voice = el.findtext("voice")
+                if melody_staff is None:
+                    melody_staff = staff  # may be None (single-staff part)
+                is_melody = (staff == melody_staff)
                 if el.find("rest") is not None:
                     onset += dur
-                    after_rest = True
+                    if is_melody:
+                        after_rest = True
+                    continue
+                if not is_melody:
+                    onset += dur   # other staff: time passes, note dropped
+                    continue
+                if melody_voice is None:
+                    melody_voice = voice
+                if voice != melody_voice:
+                    onset += dur   # second voice on the staff: dropped too
                     continue
                 pitch_el = el.find("pitch")
                 if pitch_el is None:
@@ -139,8 +160,40 @@ def parse_musicxml(data: bytes) -> dict:
     return {"notes": notes, "chords": chords, "beats_per_bar": beats_per_bar}
 
 
+def _melody_part(score):
+    """The part carrying the melody: highest median pitch wins.
+
+    Piano scores arrive as two PartStaffs (right hand + left hand); the
+    guitar line is the RIGHT hand only — the top staff. A single-part lead
+    sheet passes through unchanged.
+    """
+    parts = list(score.parts)
+    if len(parts) <= 1:
+        return parts[0] if parts else score
+
+    def _median_midi(p):
+        ms = sorted(n.pitches[0].midi for n in p.flatten().notes if n.pitches)
+        return ms[len(ms) // 2] if ms else -1
+
+    return max(parts, key=_median_midi)
+
+
+def _figure_symbol(h) -> str:
+    """music21 ChordSymbol.figure with flats normalized: ``E-m7`` → ``Ebm7``."""
+    fig = h.figure or ""
+    root = h.root()
+    if root is not None and fig.startswith(root.name):
+        fig = root.name.replace("-", "b") + fig[len(root.name):]
+    return fig
+
+
 def parse_with_music21(data: bytes) -> dict:
-    """music21-backed parse (more tolerant); same output shape."""
+    """music21-backed parse (more tolerant); same output shape.
+
+    Multi-staff (piano) scores: melody notes come from the top staff only;
+    chord symbols are gathered from EVERY staff (they may be written on
+    either hand).
+    """
     import music21
     with tempfile.NamedTemporaryFile(suffix=".musicxml", delete=False) as f:
         f.write(_read_musicxml_bytes(data))
@@ -149,7 +202,7 @@ def parse_with_music21(data: bytes) -> dict:
         score = music21.converter.parse(path)
     finally:
         os.unlink(path)
-    part = score.parts[0] if score.parts else score
+    part = _melody_part(score)
     flat = part.flatten()
     ts = flat.getElementsByClass(music21.meter.TimeSignature)
     beats_per_bar = int(ts[0].numerator) if ts else 4
@@ -162,7 +215,7 @@ def parse_with_music21(data: bytes) -> dict:
         if isinstance(el, music21.note.Rest):
             prev_end = None
             continue
-        pitch = el.pitches[0] if el.pitches else None  # top of any chord
+        pitch = max(el.pitches, key=lambda p: p.midi) if el.pitches else None
         if pitch is None:
             continue
         notes.append({
@@ -172,8 +225,14 @@ def parse_with_music21(data: bytes) -> dict:
             "bar": int(el.measureNumber or 0),
         })
         prev_end = onset + float(el.quarterLength)
-    for h in flat.getElementsByClass(music21.harmony.ChordSymbol):
-        chords.append({"start_beat": float(h.offset), "symbol": h.figure})
+    seen_chords = set()
+    for h in score.flatten().getElementsByClass(music21.harmony.ChordSymbol):
+        key = (float(h.offset), _figure_symbol(h))
+        if key in seen_chords:
+            continue
+        seen_chords.add(key)
+        chords.append({"start_beat": key[0], "symbol": key[1]})
+    chords.sort(key=lambda c: c["start_beat"])
     if not notes:
         raise ValueError("no notes found in the score")
     return {"notes": notes, "chords": chords, "beats_per_bar": beats_per_bar}

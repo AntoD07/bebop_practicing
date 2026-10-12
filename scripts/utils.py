@@ -2,11 +2,13 @@ import os
 import pandas as pd
 import ast
 import streamlit as st
+import streamlit.components.v1 as components
 import json
 import datetime
 import random
 
 from scripts.paths import PRACTICE_DETAILS, MELODIC_LINES_LOG
+from scripts.fingering.positions import POSITIONS
 
 # Column order for the graded melodic-line log (data/logs/melodic_lines.csv).
 PRACTICE_LOG_COLUMNS = [
@@ -51,6 +53,10 @@ def cell_from_string(string):
     return "-".join(string.split(" "))
 
 
+# The 12 practice keys the daily rotation draws from (and the override list).
+PRACTICE_KEYS = ["C", "G", "D", "A", "E", "B", "F#", "F", "Bb", "Eb", "Ab", "Db"]
+
+
 def get_or_update_practice_details():
     """
     Fetches or updates the practice details (key and position) from/to a JSON file.
@@ -69,24 +75,10 @@ def get_or_update_practice_details():
 
     # If details for today are not present or the file doesn't exist, update them.
     if practice_details.get("date") != today:
-        keys = [
-            "C",
-            "G",
-            "D",
-            "A",
-            "E",
-            "B",
-            "F#",
-            "F",
-            "Bb",
-            "Eb",
-            "Ab",
-            "Db",
-        ]
         positions = list(range(1, 6))
         practice_details = {
             "date": today,
-            "key": random.choice(keys),
+            "key": random.choice(PRACTICE_KEYS),
             "position": random.choice(positions),
         }
 
@@ -95,6 +87,97 @@ def get_or_update_practice_details():
             json.dump(practice_details, file)
 
     return practice_details["key"], practice_details["position"]
+
+
+def _set_practice_detail(field, value):
+    """Override one of TODAY's practice details (persisted, so every page
+    agrees). Only that field changes — the normal random rotation still kicks
+    in tomorrow."""
+    get_or_update_practice_details()  # ensure the file exists for today
+    with open(PRACTICE_DETAILS, "r") as file:
+        details = json.load(file)
+    details[field] = value
+    with open(PRACTICE_DETAILS, "w") as file:
+        json.dump(details, file)
+
+
+def set_practice_key(key):
+    _set_practice_detail("key", key)
+
+
+def set_practice_position(position):
+    _set_practice_detail("position", int(position))
+
+
+def sidebar_practice_key():
+    """Sidebar 'Today's Key' + 'Today's Position' SELECTBOXES: each shows the
+    daily draw, and changing it overrides it for the whole app (persisted).
+
+    Returns ``(key, position)`` like get_or_update_practice_details();
+    ``position`` is 1-based into ``POSITIONS``.
+    """
+    key, position = get_or_update_practice_details()
+    sel = st.sidebar.selectbox(
+        "Today's Key",
+        PRACTICE_KEYS,
+        index=PRACTICE_KEYS.index(key) if key in PRACTICE_KEYS else 0,
+        key="today_key_selector",
+        help="Drawn at random once a day; pick another key to override it "
+             "everywhere (tomorrow's draw is unaffected).",
+    )
+    if sel != key:
+        set_practice_key(sel)
+        key = sel
+
+    pos_numbers = list(range(1, len(POSITIONS) + 1))
+    sel_pos = st.sidebar.selectbox(
+        "Today's Position (for guitar)",
+        pos_numbers,
+        index=pos_numbers.index(position) if position in pos_numbers else 0,
+        format_func=lambda i: f"{i} · {POSITIONS[i - 1]}",
+        key="today_position_selector",
+        help="Drawn at random once a day; pick another position to override it "
+             "everywhere (tomorrow's draw is unaffected).",
+    )
+    if sel_pos != position:
+        set_practice_position(sel_pos)
+        position = sel_pos
+    return key, position
+
+
+DEFAULT_TEMPO = 85
+
+
+def sidebar_metronome():
+    """Shared metronome at the top of the sidebar; returns the tempo (bpm).
+
+    Call it right after ``sidebar_practice_key()``, before anything that may
+    ``st.stop()``: a fixed slot keeps the iframe mounted (it keeps ticking
+    across reruns) and never vanishes on an early stop. The tempo lives in
+    ``st.session_state.tempo`` so it carries across pages and drives the tab
+    play-alongs too.
+    """
+    # Keyed widget (no ``value=``): passing back the value it just set would
+    # rebuild the widget on every rerun and swallow every second change. The
+    # re-assignment keeps the key alive across page switches.
+    st.session_state.tempo = int(st.session_state.get("tempo", DEFAULT_TEMPO))
+    st.sidebar.number_input(
+        "Metronome tempo (bpm)",
+        min_value=30,
+        max_value=300,
+        key="tempo",
+        help="Also the play-along tempo of the tabs. Set the metronome to 2 "
+             "beats, stressing the first beat.",
+    )
+    with st.sidebar.expander("🎵 Metronome"):
+        components.html(
+            f"""<iframe src="https://guitarapp.com/metronome.html?embed=true&tempo={int(st.session_state.tempo)}&timeSignature=2&pattern=0"
+                title="Online Metronome"
+                style="width:100%; height:520px; border:none; border-radius:4px;">
+            </iframe>""",
+            height=530,
+        )
+    return int(st.session_state.tempo)
 
 
 def save_practice_session(details, file_path=MELODIC_LINES_LOG):

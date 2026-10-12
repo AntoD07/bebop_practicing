@@ -38,10 +38,22 @@ _MIXO = {1: 0, 2: 2, 3: 4, 4: 5, 5: 7, 6: 9, 7: 10}      # maj3, b7
 _LOCRIAN = {1: 0, 2: 1, 3: 3, 4: 5, 5: 6, 6: 8, 7: 10}   # b2, b3, b5, b6, b7
 
 _MODE_DIATONIC = {
-    "Maj7": _MAJOR, "MajorResolutions": _MAJOR,
-    "Dorian": _DORIAN, "MinorResolutions": _DORIAN,   # minor tonic (b3, nat6)
+    "Maj7": _MAJOR,
+    # "Minor" is the ii-relative melodic-minor vocabulary (the pre-rename
+    # "Dorian" CSV, #7 kept); "Dorian" is its #7-free subset. Same diatonic
+    # base — #7/maj3 are absolute tokens.
+    "Minor": _DORIAN,
+    "Dorian": _DORIAN,
     "Myxolidian": _MIXO, "7sus4": _MIXO,
+    # Resolution cells are DOMINANT-based: their degrees are spelled from the
+    # V7 chord that resolves, NOT from the tonic they land on (e.g. in a D-major
+    # 2-5-1 the resolution cell reads from A7, resolving into D).
+    "MajorResolutions": _MIXO, "MinorResolutions": _MIXO,
     "Locrian": _LOCRIAN,
+    # Tonic readings for resolution cells whose degrees were TRANSLATED to the
+    # I-chord representation (the pages' "translate Dominant to Minor/Major-I"
+    # checkboxes rewrite the degrees; these virtual modes read that form).
+    "MajorTonic": _MAJOR, "MinorTonic": _DORIAN,
 }
 
 # Accidental-spelled / fixed tokens: absolute chromatic interval from the root,
@@ -62,20 +74,50 @@ _DEGREE_ROLE = {
 # Default mode->root offset from the key tonic, interpreting a line as a ii-V-i
 # (the common case in this app). Override per line-type when needed.
 DEFAULT_MODE_ROOT_OFFSET = {
-    "Maj7": 0, "MajorResolutions": 0, "Myxolidian": 7, "Dorian": 2,
-    "Locrian": 2, "MinorResolutions": 0, "7sus4": 7,
+    "Maj7": 0, "MajorResolutions": 7, "Myxolidian": 7, "Minor": 2, "Dorian": 2,
+    "Locrian": 2, "MinorResolutions": 7, "7sus4": 7,
+    "MajorTonic": 0, "MinorTonic": 0,
 }
 
-_PC_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+# Jazz chord-symbol spelling (Eb7, not D#7) — today's keys are named this way.
+_PC_NAMES = ["C", "Db", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"]
 _MODE_QUALITY = {
-    "Myxolidian": "7", "7sus4": "7sus4", "Locrian": "m7b5", "Dorian": "m7",
-    "Maj7": "maj7", "MajorResolutions": "maj7", "MinorResolutions": "m6",
+    "Myxolidian": "7", "7sus4": "7sus4", "Locrian": "m7b5",
+    "Minor": "m7", "Dorian": "m7",
+    "Maj7": "maj7", "MajorResolutions": "7", "MinorResolutions": "7",
+    "MajorTonic": "maj7", "MinorTonic": "m6",
 }
 
+# Vocabularies played over the SAME chord (Minor = Dorian + the #7 cells).
+_CHORD_FAMILY = {"Minor": "m7", "Dorian": "m7"}
+# Resolution cells always move V -> I, so they never form a single-chord line.
+_RESOLUTION_MODES = {"MajorResolutions", "MinorResolutions"}
 
-def chord_symbol_for_mode(key, mode: str) -> str:
-    """Chord symbol of a mode's ii-V-i root in a key (e.g. C+'Dorian' -> 'Dm7')."""
-    pc = (root_pc(key) + DEFAULT_MODE_ROOT_OFFSET.get(mode, 0)) % 12
+
+def is_single_chord(modes) -> bool:
+    """True when every cell is played over ONE chord (Dorian -> Dorian,
+    Minor -> Dorian, Myxolidian -> Myxolidian ...). Pass the ORIGINAL CSV mode
+    names, not translated reading modes."""
+    modes = list(modes)
+    if not modes or any(m in _RESOLUTION_MODES for m in modes):
+        return False
+    return len({_CHORD_FAMILY.get(m, m) for m in modes}) == 1
+
+
+def root_offset(mode: str, single_chord: bool = False) -> int:
+    """Semitones from today's key up to a cell's chord root.
+
+    Single chord: today's key IS that chord's root (Eb + Dorian -> Ebm7).
+    Otherwise the line is read as a ii-V-I and today's key is the I
+    (Eb + Dorian -> Myxolidian -> Fm7 -> Bb7).
+    """
+    return 0 if single_chord else DEFAULT_MODE_ROOT_OFFSET.get(mode, 0)
+
+
+def chord_symbol_for_mode(key, mode: str, single_chord: bool = False) -> str:
+    """Chord symbol of a mode's root in a key (see :func:`root_offset`):
+    C + 'Dorian' -> 'Dm7' in a ii-V-I, 'Cm7' when the line is single-chord."""
+    pc = (root_pc(key) + root_offset(mode, single_chord)) % 12
     return _PC_NAMES[pc] + _MODE_QUALITY.get(mode, "")
 
 
@@ -84,13 +126,37 @@ def chord_symbol_for_root_pc(pc: int, mode: str) -> str:
     return _PC_NAMES[pc % 12] + _MODE_QUALITY.get(mode, "")
 
 
+# Cell names may HINT the true sounding degree of their first note, e.g.
+# "Bill Evans enclosure (from #9)" whose Start Note is the nominal "3" (used
+# for pivot MATCHING) while the note actually played is the #9 — the pivot is
+# re-pitched a semitone. "(from ...)" and "(start ...)" both work; ordinal
+# suffixes and b13/13 spellings are normalised. Tokens with a chord prefix
+# (e.g. "(from V-7th)") are ignored — they name another chord's degree.
+_PIVOT_HINT_RE = re.compile(r"\((?:from|start)\s*([#b]?)\s*(\d{1,2}|maj7)"
+                            r"(?:st|nd|rd|th)?\s*\)", re.I)
+_HINT_NORMALISE = {"b13": "b6", "13": "6", "#12": "#11"}
+
+
+def _pivot_hint(name: Optional[str]) -> Optional[str]:
+    """The hinted first-note degree from a cell name, or None."""
+    m = _PIVOT_HINT_RE.search(name or "")
+    if not m:
+        return None
+    token = (m.group(1) or "") + m.group(2)
+    return _HINT_NORMALISE.get(token, token)
+
+
 def _append_cell_at_pivot(line: List[dict], cell: dict):
     """Extend ``line`` with ``cell``, sharing the pivot note (in place).
 
     The current last note of ``line`` IS the first note of ``cell`` — a single
     event. The cell's root is DERIVED from the pivot pitch (transposed so its
-    Start-Note degree lands exactly there); its remaining notes are voiced from
-    the pivot by the usual octave search (movement contour + markers).
+    NOMINAL Start-Note degree lands exactly there); its remaining notes are
+    voiced from the pivot by the usual octave search (movement contour +
+    markers). If the cell's name hints a different sounding degree for its
+    first note ("(from #9)"), the pivot is RE-PITCHED to that degree of the
+    same derived root — the previous cell's ending note changes pitch (e.g. a
+    3rd becomes the #9, a semitone lower) while pivot matching stays nominal.
 
     Returns ``(pivot_index, derived_root_pc)``.
     """
@@ -99,19 +165,34 @@ def _append_cell_at_pivot(line: List[dict], cell: dict):
 
     mode = cell.get("mode")
     degrees = cell["degrees"]
-    core0, _ = _split_marker(degrees[0])
+    core0, marker0 = _split_marker(degrees[0])
     root_pc_val = (pivot_midi - degree_to_semitone(core0, mode)) % 12
 
+    pivot_update = {"role": "pivot"}
+    hint = _pivot_hint(cell.get("name"))
+    if hint:
+        try:
+            delta = ((degree_to_semitone(hint, mode)
+                      - degree_to_semitone(core0, mode) + 6) % 12) - 6
+        except (KeyError, ValueError):
+            delta = 0  # unparseable hint token -> leave the pivot as written
+        if delta:
+            pivot_midi += delta
+            core0 = hint  # the cell's first pc IS the hinted degree
+            pivot_update.update(pitch=pivot_midi, degree=hint)
+
     pcs_markers, cleaned = [], []
-    for deg in degrees:
+    for k, deg in enumerate(degrees):
         core, marker = _split_marker(deg)
+        if k == 0:
+            core = core0
         pcs_markers.append(((root_pc_val + degree_to_semitone(core, mode)) % 12, marker))
         cleaned.append((core, marker))
     # First note pinned to the pivot pitch (same pc, nearest octave = exact).
     midis = _assign_cell_octaves(pcs_markers, pivot_midi, cell.get("movement"),
                                  free_first=False)
 
-    line[pivot_index] = dict(line[pivot_index], role="pivot")
+    line[pivot_index] = dict(line[pivot_index], **pivot_update)
     for k in range(1, len(degrees)):
         core, marker = cleaned[k]
         label = core + ("↑" if marker == "higher" else "↓" if marker == "lower" else "")
@@ -122,6 +203,30 @@ def _append_cell_at_pivot(line: List[dict], cell: dict):
             "cell": cell["name"],
         })
     return pivot_index, root_pc_val
+
+
+# Cell rhythm: cell notes are EIGHTH notes (the player's reading). A 5-note
+# cell is 4 eighths + the pivot, so pivot-chained cells stride 2 beats and
+# every pivot lands on a downbeat (beat 1 or 3) of a 4/4 bar.
+CELL_NOTE_BEATS = 0.5
+CELL_BEATS_PER_BAR = 4
+
+
+def cell_beat(index: int) -> float:
+    """Onset, in beats, of the ``index``-th note of a cell line."""
+    return index * CELL_NOTE_BEATS
+
+
+def timed_cell_line(line: List[dict]) -> List[dict]:
+    """Copy of a cell ``line`` with each note's eighth-note onset stamped."""
+    return [dict(n, start=cell_beat(i)) for i, n in enumerate(line)]
+
+
+def cell_context(context: dict) -> dict:
+    """Copy of ``context`` on the cell grid: 4/4 bars, eighth-note pacing
+    (drops priced at eighth tempo). Chord ``start_beat`` values are in beats —
+    compute them with :func:`cell_beat`."""
+    return dict(context, beats_per_bar=CELL_BEATS_PER_BAR, density="eighth")
 
 
 def build_connection_line(cell1: dict, cell2: dict, base_midi: int = 60):
@@ -444,7 +549,7 @@ def cell_movement(mode: str, name: str) -> Optional[str]:
 def enclosure_degree_sequences(modes: Optional[List[str]] = None) -> List[List[str]]:
     """Degree lists of cells that are enclosures, drawn from the cell DB."""
     modes = modes or ["Maj7", "Myxolidian", "Locrian", "MinorResolutions",
-                       "MajorResolutions", "Dorian"]
+                       "MajorResolutions", "Minor", "Dorian"]
     out: List[List[str]] = []
     for mode in modes:
         try:
@@ -462,15 +567,20 @@ def enclosure_degree_sequences(modes: Optional[List[str]] = None) -> List[List[s
 
 def line_from_engine(melodic_line: List[str], note_representations: List, mode_list: List[str],
                      key: str, mode_root_offset: Optional[dict] = None,
-                     base_midi: int = 57) -> List[dict]:
+                     base_midi: int = 57,
+                     movement_modes: Optional[List[str]] = None) -> List[dict]:
     """Best-effort adapter for the live engine output (approximate roots).
 
     ``melodic_line`` cell names, ``note_representations`` the parallel degree
     lists, ``mode_list`` the mode per cell, ``key`` the tonic. Roots are derived
-    from ``mode_root_offset`` (default ii-V-i interpretation). Documented as
-    approximate — pass explicit cells to :func:`build_pitch_line` for exactness.
+    from ``mode_root_offset`` (default ii-V-i interpretation). When degrees
+    were TRANSLATED to another representation, ``mode_list`` carries the
+    reading mode while ``movement_modes`` names the ORIGINAL sampling CSVs, so
+    the Movement lookup finds the right cell. Documented as approximate — pass
+    explicit cells to :func:`build_pitch_line` for exactness.
     """
     offsets = mode_root_offset or DEFAULT_MODE_ROOT_OFFSET
+    mv_modes = movement_modes or mode_list
     key_pc = root_pc(key)
     cells = []
     n = len(mode_list)
@@ -481,7 +591,7 @@ def line_from_engine(melodic_line: List[str], note_representations: List, mode_l
             "root": (key_pc + offsets.get(mode, 0)) % 12,
             "degrees": degs,
             "mode": mode,
-            "movement": cell_movement(mode, name),
+            "movement": cell_movement(mv_modes[i], name),
             "is_resolution": ("Resolution" in mode) and (i == n - 1),
         })
     return build_pitch_line(cells, base_midi=base_midi)

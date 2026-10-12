@@ -23,11 +23,11 @@ def create_cell_frames(
     df_cells["Start Note"] = df_cells["Start Note"].astype(str)
     df_cells["End Note"] = df_cells["End Note"].astype(str)
 
-    if mode_filter and (chord in ["Dorian", "Locrian", "Myxolidian"]):
+    if mode_filter and (chord in ["Minor", "Dorian", "Locrian", "Myxolidian"]):
         df_cells = df_cells[df_cells["Modes"].apply(lambda x: chord in x)]
 
     df_cells_tmp_for_pivot_note = df_cells.copy(deep=False)
-    if chord in ["Dorian", "Locrian"]:
+    if chord in ["Minor", "Dorian", "Locrian"]:
         if permute_notes:
             df_cells_tmp_for_pivot_note = translate_sus4_to_other_mode(
                 df_cells_tmp_for_pivot_note, chord

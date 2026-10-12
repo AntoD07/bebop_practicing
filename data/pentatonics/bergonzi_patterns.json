@@ -1,0 +1,13 @@
+{
+  "_readme": "Jerry Bergonzi's 8 pentatonic FORMULAS (Vol. 2/3 'Pentatonics', 'Creating Pentatonic Lines'). Each formula is a 4-note grouping: 'offsets' are pentatonic scale-INDEX positions of the 4 notes relative to the grouping's start (step = +/-1 to the adjacent pentatonic tone, skip = +/-2). Each formula has FOUR moves: three inside the grouping plus the CONNECTING move to the next grouping's start — the connect is encoded by 'stride' (next start = this start + stride). Formulas 1-4 DESCEND by a skip per grouping (stride -2; grouping starts C-G-Eb-Bb-F over C minor), formulas 5-8 ASCEND by a skip (stride +2; starts C-F-Bb-Eb-G). Five groupings complete a cycle over two octaves. Verified 1:1 against the book table. Edit freely.",
+  "patterns": [
+    {"name": "Formula 1 · ↓skip ↓step ↑skip · ↓step→ (desc)", "offsets": [0, -2, -3, -1], "stride": -2, "description": "A ↓skip B ↓step C ↑skip D ↓step (connect). Groupings descend by skip: C-G-Eb-Bb-F."},
+    {"name": "Formula 2 · ↓step ↑skip ↓step · ↓skip→ (desc)", "offsets": [0, -1, 1, 0], "stride": -2, "description": "B ↓step C ↑skip D ↓step A ↓skip (connect). Groupings descend by skip."},
+    {"name": "Formula 3 · ↑skip ↓step ↓skip · ↓step→ (desc)", "offsets": [0, 2, 1, -1], "stride": -2, "description": "C ↑skip D ↓step A ↓skip B ↓step (connect). Groupings descend by skip."},
+    {"name": "Formula 4 · ↓step ↓skip ↓step · ↑skip→ (desc)", "offsets": [0, -1, -3, -4], "stride": -2, "description": "D ↓step A ↓skip B ↓step C ↑skip (connect). Groupings descend by skip."},
+    {"name": "Formula 5 · ↑skip ↑step ↓skip · ↑step→ (asc)", "offsets": [0, 2, 3, 1], "stride": 2, "description": "A ↑skip B ↑step C ↓skip D ↑step (connect). Groupings ascend by skip: C-F-Bb-Eb-G (mirror of 1)."},
+    {"name": "Formula 6 · ↑step ↓skip ↑step · ↑skip→ (asc)", "offsets": [0, 1, -1, 0], "stride": 2, "description": "B ↑step C ↓skip D ↑step A ↑skip (connect). Groupings ascend by skip (mirror of 2)."},
+    {"name": "Formula 7 · ↓skip ↑step ↑skip · ↑step→ (asc)", "offsets": [0, -2, -1, 1], "stride": 2, "description": "C ↓skip D ↑step A ↑skip B ↑step (connect). Groupings ascend by skip (mirror of 3)."},
+    {"name": "Formula 8 · ↑step ↑skip ↑step · ↓skip→ (asc)", "offsets": [0, 1, 3, 4], "stride": 2, "description": "D ↑step A ↑skip B ↑step C ↓skip (connect). Groupings ascend by skip (mirror of 4)."}
+  ]
+}

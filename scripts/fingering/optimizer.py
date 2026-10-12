@@ -32,10 +32,11 @@ from scripts.fingering.pitch import (
 )
 from scripts.fingering.costs import (
     DOWN, UP, PlacedNote, classify_transition, edge_cost, initial_cost,
+    relabel_fingers,
 )
 from scripts.fingering.picking import (
     verify_conventions, entry_strokes, same_string_strokes,
-    find_invariant_violations,
+    phrase_start_strokes, find_invariant_violations,
 )
 
 # A DP state key. anchor may be None (open string carries the position).
@@ -89,8 +90,11 @@ class FingeringResult:
     config: FingeringConfig
     feasible: bool = True
     warnings: List[str] = field(default_factory=list)
-    # Phase-2 ornament suggestions (populated only when the engine is enabled).
+    # Phase-2 applied-ornament events (populated only when the engine is enabled).
     ornaments: List[dict] = field(default_factory=list)
+    # The slurred version of the line (an ornaments.OrnamentedVoicing), built
+    # from a COPY of ``best`` — phase 1 stays the all-picked technique version.
+    ornamented: Optional[object] = None
 
     @property
     def placed(self) -> List[PlacedNote]:
@@ -133,14 +137,15 @@ def _run_dp(notes: List[Note], config: FingeringConfig, density: str,
     layers: List[Dict[StateKey, List[Tuple[float, Back]]]] = [dict() for _ in range(n)]
     nodes: List[Dict[StateKey, PlacedNote]] = [dict() for _ in range(n)]
 
-    # --- init: note 0 starts a string => entry stroke D (also beat-1 safe).
+    # --- init: note 0 opens the phrase => D, or U on an off-beat pickup (H4).
     for p in placements[0]:
         for a in anchors_for(p.fret, config):
-            pn = _make_placed(notes[0], p.string, p.fret, a, DOWN, 1, config)
-            c0, _ = initial_cost(pn, config)
-            key: StateKey = (p.string, p.fret, a, DOWN, 1)
-            nodes[0][key] = pn
-            layers[0].setdefault(key, []).append((c0, None))
+            for stroke in phrase_start_strokes(notes[0]):
+                pn = _make_placed(notes[0], p.string, p.fret, a, stroke, 1, config)
+                c0, _ = initial_cost(pn, config)
+                key: StateKey = (p.string, p.fret, a, stroke, 1)
+                nodes[0][key] = pn
+                layers[0].setdefault(key, []).append((c0, None))
     _finalize(layers[0], k)
 
     # --- transitions
@@ -156,9 +161,10 @@ def _run_dp(notes: List[Note], config: FingeringConfig, density: str,
 
                 # Legal strokes for the arriving note. After a U, a same-string
                 # note goes back to D (alternation, never U-U); crossings always
-                # enter on D (H1); a phrase start (after a rest) re-enters on D.
+                # enter on D (H1); a phrase start (after a rest) re-enters on D,
+                # or on U when it is an off-beat pickup (H4).
                 if notes[nxt].phrase_start:
-                    strokes = [DOWN]
+                    strokes = phrase_start_strokes(notes[nxt])
                 elif rel_same:
                     if pn_prev.stroke == UP:
                         strokes = [DOWN]
@@ -255,7 +261,8 @@ def _analyze(placed: List[PlacedNote], config: FingeringConfig,
                 flags.append(
                     f"note {i+1} (beat {cur.beat}): descending crossing "
                     f"str{prev.string}->str{cur.string} is a MANAGED DROP (fix c) "
-                    f"— D->D, cost {config.drop_cost * config.density_scale(density):.2f}."
+                    f"— D->D, cost "
+                    f"{config.drop_cost * config.density_scale(density) * (config.drop_scale_for(cur.note.cell) if cur.note.cell is not None and (prev.note.cell == cur.note.cell or prev.note.role == 'pivot') else 1.0):.2f}."
                 )
                 drop_sites.append(DropSite(
                     target_index=i + 1, prev_index=i,
@@ -328,13 +335,16 @@ def _string_runs(placed: List[PlacedNote]):
 # Public entry point
 # --------------------------------------------------------------------------- #
 def optimize_fingering(line: List[dict], context: Optional[dict] = None,
-                       config: Optional[FingeringConfig] = None) -> FingeringResult:
+                       config: Optional[FingeringConfig] = None,
+                       pinned: Optional[Dict[int, Tuple[int, int]]] = None) -> FingeringResult:
     """Find the best Gypsy-jazz fingering + picking for a fixed melodic line.
 
     ``line``    : ordered list of ``{"pitch": <midi|scientific>, "role": <opt>,
                   "cell": <opt>, "degree": <opt>}``.
     ``context`` : ``{"key":..., "chords":[...], "beats_per_bar":4, "density":"quarter"}``.
     ``config``  : a :class:`FingeringConfig` (defaults if omitted).
+    ``pinned``  : optional ``{midi: (string, fret)}`` forcing chosen placements
+                  (e.g. a specific hand-fingering); picking/fingers are still derived.
 
     Returns a :class:`FingeringResult`. Phase-2 ornaments are attached only when
     ``config.ornament_engine_enabled`` is True.
@@ -352,7 +362,7 @@ def optimize_fingering(line: List[dict], context: Optional[dict] = None,
     density = context.get("density", "quarter")
     notes = build_notes(line, config, context)
 
-    layers, nodes = _run_dp(notes, config, density)
+    layers, nodes = _run_dp(notes, config, density, pinned=pinned)
     n = len(notes)
 
     # Terminal states: any stroke may end the line (a trailing U is legal
@@ -366,6 +376,9 @@ def optimize_fingering(line: List[dict], context: Optional[dict] = None,
     terminals.sort(key=lambda t: t[0])
 
     best_path = _backtrack(layers, nodes, terminals[0][1], terminals[0][2], n)
+    # Post-search: fingers re-derived from finger-pair physics (1-2-4 groups etc.)
+    # for the fixed placements, then the reported cost is computed from them.
+    relabel_fingers(best_path, config)
     best = _analyze(best_path, config, density)
 
     # --- Consistency pass: the SAME pitch should keep the SAME (string,fret).
@@ -394,6 +407,7 @@ def optimize_fingering(line: List[dict], context: Optional[dict] = None,
                 if not terms2:
                     continue
                 path2 = _backtrack(layers2, nodes2, terms2[0][1], terms2[0][2], n)
+                relabel_fingers(path2, config)
                 cand = _analyze(path2, config, density)
                 if cand.total_cost <= budget:
                     cand.flags.append(
@@ -411,6 +425,7 @@ def optimize_fingering(line: List[dict], context: Optional[dict] = None,
         path = _backtrack(layers, nodes, key, idx, n)
         if _signature(path) == best_sig:
             continue
+        relabel_fingers(path, config)
         cand = _analyze(path, config, density)
         if cand.total_cost <= margin:
             alternate = cand
@@ -440,9 +455,78 @@ def optimize_fingering(line: List[dict], context: Optional[dict] = None,
             f"Showing the least-bad option with its flags."
         )
 
-    # Phase 2 (built, disabled by default).
+    # Phase 2 (disabled by default): APPLY the enabled ornament families to a
+    # copy of the solution — the slurred version lives in result.ornamented,
+    # the all-picked phase-1 line above stays untouched.
     if config.ornament_engine_enabled:
-        from scripts.fingering.ornaments import propose_ornaments
-        result.ornaments = propose_ornaments(result, context, config)
+        from scripts.fingering.ornaments import apply_ornaments
+        result.ornamented = apply_ornaments(result, context, config)
+        result.ornaments = result.ornamented.events
 
     return result
+
+
+def enumerate_fingerings(line: List[dict], context: Optional[dict] = None,
+                         config: Optional[FingeringConfig] = None,
+                         hard_root_pin: bool = True,
+                         max_layouts: int = 20000) -> List[FingeringResult]:
+    """EVERY distinct string/fret layout of a fixed line, best-cost first.
+
+    Where :func:`optimize_fingering` returns the single optimum, this lists all
+    layouts the config admits (fret window, string set, open-string rule): for
+    each assignment of one (string, fret) per distinct pitch — repeated pitches
+    keep one placement, the consistency convention — the DP still derives the
+    optimal picking/anchors, so each layout is reported at its own best cost.
+
+    ``hard_root_pin``: a configured ``root_pin`` becomes a FILTER (root-pitch-
+    class notes only on the shape's root strings) instead of a soft charge, so
+    every listed layout really belongs to the position.
+
+    Raises ``ValueError`` when the layout space exceeds ``max_layouts`` (a
+    window too wide to enumerate — use :func:`optimize_fingering` there).
+    """
+    import itertools
+
+    config = config or default_config()
+    context = context or {}
+    verify_conventions(config)
+    if not line:
+        raise ValueError("empty line")
+    density = context.get("density", "quarter")
+    notes = build_notes(line, config, context)
+    n = len(notes)
+
+    pitches = sorted({nt.midi for nt in notes})
+    cands = []
+    for m in pitches:
+        pls = [(p.string, p.fret) for p in candidate_placements(m, config)]
+        if hard_root_pin and config.root_pin is not None:
+            pin_pc, pin_strings = config.root_pin
+            if m % 12 == pin_pc:
+                pls = [pl for pl in pls if pl[0] in pin_strings]
+        if not pls:
+            return []
+        cands.append(pls)
+    n_layouts = 1
+    for pls in cands:
+        n_layouts *= len(pls)
+    if n_layouts > max_layouts:
+        raise ValueError(f"{n_layouts} layouts — too many to enumerate")
+
+    out: List[FingeringResult] = []
+    for combo in itertools.product(*cands):
+        try:
+            layers, nodes = _run_dp(notes, config, density, pinned=dict(zip(pitches, combo)))
+        except ValueError:
+            continue
+        terms = [(cost, key, idx) for key, entries in layers[n - 1].items()
+                 for idx, (cost, _b) in enumerate(entries)]
+        if not terms:
+            continue
+        _c, key, idx = min(terms, key=lambda t: t[0])
+        path = _backtrack(layers, nodes, key, idx, n)
+        relabel_fingers(path, config)
+        out.append(FingeringResult(notes=notes, best=_analyze(path, config, density),
+                                   alternate=None, context=context, config=config))
+    out.sort(key=lambda r: r.best.total_cost)
+    return out

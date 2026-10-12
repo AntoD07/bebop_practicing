@@ -1,20 +1,16 @@
 Cell Name,Start Note,End Note,"Notes",Mode scores,Movement,Type
-Min Melodic Arpeggio ending on 3rd,1,3,"['1', '3', '5', '#7', '3']","{'Dorian': 1.1, 'Locrian': 0.8, 'Myxolidian': 0.4}",A,Essential
-Min Melodic Arpeggio ending on 9th,1,9,"['1', '3', '5', '#7', '9']","{'Dorian': 1.1, 'Locrian': 0.8, 'Myxolidian': 0.4}",A,Essential
 Ascending II Scale,1,5,"['1', '9', '3', '4', '5']","{'Dorian': 1.1, 'Locrian': 0.8, 'Myxolidian': 0.4}",A,Essential
 Ascending II-Minor 7th Arpeggio (ending on 6rd),1,6,"['1', '3', '5', '7', '6']","{'Locrian': 1.1, 'Dorian': 0.9, 'Myxolidian': 0.7}",A,Essential
 Ascending II-Minor 7th Arpeggio (ending on 9th),1,9,"['1', '3', '5', '7', '9']","{'Dorian': 0.9, 'Locrian': 0.5, 'Myxolidian': 0.3}",A,Essential
+Convert style,3,3,"['3', '7', '6', '5', '3']","{'Dorian': 0.9, 'Locrian': 0.5, 'Myxolidian': 0.3}",D,Essential
 Cannonball Adderley Approach,1,5,"['1', '7', '6', '7', '5']","{'Locrian': 1.1, 'Dorian': 0.9, 'Myxolidian': 0.7}",D,Essential
 Reverse coltrane from root,1,5,"['1','6','5','4','5']","{'Locrian': 1.1, 'Dorian': 0.9, 'Myxolidian': 0.7}",D,Essential
 Descending Dominant Scale from 5th,1,4,"['1', '7', '6', '5', '4']","{'Myxolidian': 1.2, 'Locrian': 0.9, 'Dorian': 0.6}",D,Bonus
 Diatonic Enclosure of 6th,1,6,"['1', '5', '7', '5', '6']","{'Locrian': 0.9, 'Myxolidian': 0.7, 'Dorian': 0.6}",N,Essential
-Coltrane Pattern from 7th (ending on #11),3,#7,"['3', '4', '5', '7', '#7']","{'Dorian': 0.6, 'Locrian': 0.4, 'Myxolidian': 0.1}",A,Essential
 Coltrane Pattern from 7th (ending on 3rd),3,6,"['3', '4', '5', '7', '6']","{'Locrian': 0.9, 'Dorian': 0.8, 'Myxolidian': 0.5}",A,Essential
 Ascending Scale from 3rd,3,7,"['3', '4', '5', '6', '7']","{'Dorian': 0.6, 'Locrian': 0.4, 'Myxolidian': 0.1}",A,Essential
-Descending Dominant Scale from 7th ending on #11,3,#7,"['3', '9', '1', '7', '#7']","{'Dorian': 0.9, 'Locrian': 0.7, 'Myxolidian': 0.4}",D,Essential
 Descending Dominant Scale from 7th ending on 3rd,3,6,"['3', '9', '1', '7', '6']","{'Locrian': 1.2, 'Dorian': 1.0, 'Myxolidian': 0.8}",D,Essential
 Hank Mobley from 3rd back to 3rd (Mccoy),3,3,"['3', '5', '9', '4', '3']","{'Myxolidian': 0.7, 'Dorian': 0.5, 'Locrian': 0.3}",N,Bonus
-Stan Getz enclosure of II Root starting from 7th,3,1,"['3', '7', '#7', '9', '1']","{'Dorian': 0.9, 'Locrian': 0.7, 'Myxolidian': 0.4}",N,Essential
 Hank Mobley from 3rd ending on 4th (Mccoy),3,4,"['3', '5', '9', '1', '4']","{'Myxolidian': 0.7, 'Dorian': 0.5, 'Locrian': 0.3}",N,Bonus
 Descending Scale from 4th,4,9,"['4', '3', '9', '1', '9']","{'Myxolidian': 1.1, 'Locrian': 0.8, 'Dorian': 0.9}",D,Essential
 Descending Bebop scale from 4th,4,1,"['4', 'maj3', '3', '9', '1']","{'Myxolidian': 0.9, 'Dorian': 0.9, 'Locrian': 0.7}",D,Essential
@@ -25,7 +21,6 @@ Minor Honeysuckle Rose,4,9,"['4', '3', '5(lower)', '7', '9']","{'Myxolidian': 0.
 Descending II Arpeggio from II-5th,5,6,"['5', '3', '1', '7', '6']","{'Locrian': 1.1, 'Dorian': 0.9, 'Myxolidian': 0.7}",D,Essential
 Lee Morgan Dominant (Mccoy),4,9,"['4', 'maj3', '3', '5', '9']","{'Myxolidian': 0.7, 'Dorian': 0.5, 'Locrian': 0.3}",D,Bonus
 Freddie Hubbard,5,4,"['5', '7', '6', '5', '4']","{'Myxolidian': 0.9, 'Locrian': 0.7, 'Dorian': 0.4}",N,Bonus
-Johnny Griffin Enclosure of 5th (Mccoy),5,1,"['5', '7', '#7', '9', '1']","{'Dorian': 0.8, 'Locrian': 0.5, 'Myxolidian': 0.3}",A,Essential
 Stan Getz enclosure of II 3rd,5,3,"['5', '#1', '9', '4', '3']","{'Dorian': 0.8, 'Locrian': 0.4, 'Myxolidian': 0.1}",N,Essential
 Ezthetic descending bebop,5,1,"['5', '6', '9', 'b9', '1']","{'Myxolidian': 0.9, 'Locrian': 0.7, 'Dorian': 0.9}",A,Essential
 Reverse Minor Coltrane,5,4,"['5', '3', '9', '1', '4']","{'Myxolidian': 0.5, 'Dorian': 0.4, 'Locrian': 0.1}",D,Bonus
@@ -34,13 +29,5 @@ Dominant arperggio to 13th (Mccoy),6,9,"['6', '1', '3', '4', '9']","{'Locrian': 
 Dominant Bebop Scale from 6th,6,3,"['6', '5', '4', 'maj3', '3']","{'Myxolidian': 1.1, 'Locrian': 0.8, 'Dorian': 0.5}",D,Essential
 Descending Dominant Scale from 3rd,6,9,"['6', '5', '4', '3', '9']","{'Myxolidian': 0.9, 'Locrian': 0.5, 'Dorian': 0.2}",D,Essential
 Reverse Coltrane Pattern,7,9,"['7', '5', '4', '3', '9']","{'Myxolidian': 0.5, 'Dorian': 0.1, 'Locrian': 0.0}",D,Essential
-Perfect Chromatic Enclosure of 5th,7,1,"['7', '#7', '9', 'b9', '1']","{'Dorian': 0.6, 'Locrian': 0.4, 'Myxolidian': 0.3}",N,Bonus
-Stan Getz enclosure of II Root starting from 6th (Mccoy),9,1,"['9', '#7', '1', '9', '1']","{'Dorian': 1.1, 'Locrian': 0.8, 'Myxolidian': 0.5}",N,Essential
-Ascending MelMinor scale to 3rd (Mccoy),9,3,"['9', '#7', '1', '9', '3']","{'Dorian': 1.1, 'Locrian': 0.8, 'Myxolidian': 0.5}",A,Essential
 Dominant #5 Scale from 6th (Mccoy),9,6,"['9', 'b9', '1', '7', '6']","{'Locrian': 0.9, 'Dorian': 0.8, 'Myxolidian': 0.7}",D,Essential
 Hidden Ideal maj7 Arpeggio to 13th (Mccoy),9,9,"['9', '3', '5', '7', '9']","{'Dorian': 0.5, 'Locrian': 0.1, 'Myxolidian': 0.0}",A,Essential
-Minor Melodic from 7th ending on root,#7,1,"['#7', '1', '9', '3', '1']","{'Myxolidian': 0.0, 'Dorian': 1.0, 'Locrian': 0.4}",A,Essential
-Minor Melodic from 7th ending on 5h,#7,5,"['#7', '1', '9', '3', '5']","{'Myxolidian': 0.0, 'Dorian': 1.0, 'Locrian': 0.4}",A,Essential
-Sonny Stitt Enclosure of II Root,#7,1,"['#7', '9', 'b9', '#7', '1']","{'Dorian': 0.5, 'Locrian': 0.4, 'Myxolidian': 0.3}",N,Essential
-Farao,#7,6,"['#7', '5', '7', '5', '6']","{'Locrian': 0.5, 'Myxolidian': 0.4, 'Dorian': 0.1}",D,Essential
-Circle of 5th Approach,#7,6,"['#7', '9', '1', '7', '6']","{'Locrian': 0.9, 'Myxolidian': 0.7, 'Dorian': 0.6}",N,Essential

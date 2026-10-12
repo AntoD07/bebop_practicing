@@ -16,7 +16,7 @@ def translate_note_cells(note_cells, mode):
     Returns:
     - List of translated notes.
     """
-    if mode == "Dorian":
+    if mode in ("Minor", "Dorian"):
         shift = 3
     elif mode == "Locrian":
         shift = 5
@@ -99,6 +99,28 @@ dom_to_min_mapping = {
     "b6": "3",
     "maj7": "#11",
     "#11": "b9",
+}
+
+# Dominant (Myxolidian) degrees re-spelled relative to the ii (Dorian) root,
+# a 4th below the V root (G7 degrees read from D). This is what lets Dorian and
+# Myxolidian cells pivot-connect: both End/Start notes end up in the SAME
+# ii-relative representation. Bare "7" is the mode's b7 on both sides; "#7" is
+# the Dorian spelling of the major 7th (the V root's #11), "maj3" the chromatic
+# major-3rd passing tone (the V's maj7).
+dom_to_dorian_mapping = {
+    "1": "4",
+    "2": "5",
+    "9": "5",
+    "3": "6",
+    "4": "7",
+    "5": "1",
+    "6": "9",
+    "7": "3",
+    "maj7": "maj3",
+    "#11": "#7",
+    "#5": "b9",
+    "#9": "b6",
+    "b9": "#11",
 }
 
 dom_to_maj_mapping = {
@@ -195,6 +217,47 @@ def translate_dom_to_minor(df_cells):
     return new_df
 
 
+_MARKER_RE = re.compile(r"^(.*?)(\((?:higher|lower)\))$")
+
+
+def _map_with_marker(note, mapping):
+    """Map one degree token, preserving an octave marker like ``9(lower)``."""
+    m = _MARKER_RE.match(note)
+    core, suffix = (m.group(1), m.group(2)) if m else (note, "")
+    return mapping[core] + suffix
+
+
+def map_dom_to_dorian(note_cells):
+    simple_string = False
+    if isinstance(note_cells, str):
+        note_cells = [note_cells]
+        simple_string = True
+    translated_cells = [
+        _map_with_marker(note, dom_to_dorian_mapping) for note in note_cells
+    ]
+    if simple_string:
+        translated_cells = translated_cells[0]
+    return translated_cells
+
+
+def translate_dom_to_dorian(df_cells):
+    """Re-spell Myxolidian (V-relative) cells in the ii-relative Dorian degrees."""
+    new_df = df_cells.copy()
+
+    def convert_string_to_list(string):
+        try:
+            return ast.literal_eval(string)
+        except ValueError:
+            return string
+
+    new_df["Notes"] = new_df["Notes"].apply(convert_string_to_list)
+    new_df["Notes"] = new_df["Notes"].apply(map_dom_to_dorian)
+    new_df["Start Note"] = new_df["Start Note"].astype(str).apply(map_dom_to_dorian)
+    new_df["End Note"] = new_df["End Note"].astype(str).apply(map_dom_to_dorian)
+
+    return new_df
+
+
 def map_dom_to_major(note_cells):
     simple_string = False
     if isinstance(note_cells, str):
@@ -233,9 +296,9 @@ def translate_dom_to_major(df_cells):
 
 
 def change_note_representation(
-    df_cells, mode, loc_to_dom, dom_to_minor, sus_to_loc_dorian
+    df_cells, mode, loc_to_dom, dom_to_minor, sus_to_loc_dorian, myxo_to_dorian=False
 ):
-    if (mode in ["Dorian", "Locrian"]) and sus_to_loc_dorian:
+    if (mode in ["Minor", "Dorian", "Locrian"]) and sus_to_loc_dorian:
         df_cells = translate_sus4_to_other_mode(df_cells, mode)
     if (mode in ["Locrian"]) and loc_to_dom:
         df_cells = translate_loc_to_dominant(df_cells)
@@ -243,4 +306,6 @@ def change_note_representation(
         df_cells = translate_dom_to_minor(df_cells)
     if (mode in ["MajorResolutions"]) and dom_to_minor:
         df_cells = translate_dom_to_major(df_cells)
+    if (mode == "Myxolidian") and myxo_to_dorian:
+        df_cells = translate_dom_to_dorian(df_cells)
     return df_cells

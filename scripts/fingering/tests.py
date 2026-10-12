@@ -95,11 +95,13 @@ def test_T2():
 
 
 def test_T3():
-    _banner("T3", "ii-V-i in A minor (Bm7b5-E7-Am6) from the cell DB")
+    _banner("T3", "ii-V-i in A minor (Bm7b5-E7 resolving to Am) from the cell DB")
     ii = cell_bridge.first_cell("Locrian")
     V = cell_bridge.first_cell("Myxolidian")
     i = cell_bridge.first_cell("MinorResolutions")
-    ii["root"], V["root"], i["root"] = "B", "E", "A"
+    # Resolution cells are DOMINANT-based: degrees spell from the resolving V7
+    # (E7 -> Am), so the resolution cell's root is E, not the tonic A.
+    ii["root"], V["root"], i["root"] = "B", "E", "E"
     i["is_resolution"] = True
     cells = [ii, V, i]
     line = cell_bridge.build_pitch_line(cells)
@@ -111,7 +113,7 @@ def test_T3():
         "chords": [
             {"start_beat": 0, "symbol": "Bm7b5"},
             {"start_beat": cell_len, "symbol": "E7"},
-            {"start_beat": 2 * cell_len, "symbol": "Am6"},
+            {"start_beat": 2 * cell_len, "symbol": "E7"},  # dominant-based resolution bar
         ],
     }
     cfg = FingeringConfig(beats_per_bar=cell_len)
@@ -142,27 +144,121 @@ def test_T5():
 
 
 def test_T4():
-    _banner("T4", "Phase-2 smoke test (engine forced ON): one ornament at a forced drop")
-    # A4 on beat 1 (forced D, so no parity-U is available) leaping down to D3.
-    # D3 (MIDI 50) is below the open pitch of every string A4 can sit on
-    # (strings 1-3), so it cannot share a string with A4 -> lateral routing is
-    # impossible and the descending crossing is a FORCED managed drop onto D3,
-    # the root of D7 (a chord tone).
+    _banner("T4", "Phase-2 APPLY: upper-neighbor turn (pick-hammer-pull, 8h10p8)")
+    # E4 is the final resolution (a chord tone): the turn fires there — the
+    # target keeps its pick, then upper neighbour hammered + pulled back,
+    # all inside the target's beat on ONE string (no crossing touched).
     line = [
-        {"pitch": "A4", "role": "9", "degree": "9", "cell": "wide leap"},
-        {"pitch": "D3", "role": "root", "degree": "1", "cell": "wide leap"},
+        {"pitch": "C5", "degree": "b3", "cell": "desc run"},
+        {"pitch": "B4", "degree": "9", "cell": "desc run"},
+        {"pitch": "A4", "degree": "1", "cell": "desc run"},
+        {"pitch": "E4", "degree": "5", "role": "resolution", "cell": "desc run"},
     ]
-    ctx = {"key": "G", "chords": [{"start_beat": 0, "symbol": "D7"}]}
+    ctx = {"key": "Am", "chords": [{"start_beat": 0, "symbol": "Am"}]}
+    pinned = {72: (1, 8), 71: (1, 7), 69: (1, 5), 64: (2, 5)}
     cfg = FingeringConfig(ornament_engine_enabled=True)
-    r = optimize_fingering(line, ctx, cfg)
+    r = optimize_fingering(line, ctx, cfg, pinned=pinned)
     print(format_report(r))
-    _check(len(r.best.drop_sites) >= 1, "T4 expected a forced managed drop")
-    _check(len(r.ornaments) == 1, f"T4 expected exactly one ornament, got {len(r.ornaments)}")
-    orn = r.ornaments[0]
-    _check("=>" in orn["parity_after"] or "->" in orn["parity_after"],
-           "T4 ornament must show parity math")
     _check(_invariant_ok(r) == [], "T4 invariant violated (phase-1 solution)")
-    print(f">>> T4 PASS (ornament: {orn['ornament']}; parity {orn['parity_before']} => {orn['parity_after']})")
+    o = r.ornamented
+    _check(o is not None, "T4 expected an ornamented voicing")
+    _check(len(o.events) == 1 and o.events[0]["family"] == "turn",
+           f"T4 expected one turn, got {[e['family'] for e in o.events]}")
+    _check(len(o.placed) == len(r.best.placed) + 2,
+           "T4 turn must insert exactly two grace notes")
+    tail = o.placed[-3:]
+    _check([p.stroke for p in tail][1:] == ["h", "po"],
+           f"T4 turn must be pick-hammer-pull, got {[p.stroke for p in tail]}")
+    _check(tail[0].stroke in ("D", "U"), "T4 target must keep its pick attack")
+    _check(tail[0].string == tail[1].string == tail[2].string,
+           "T4 turn must stay on one string")
+    _check(tail[1].fret == tail[0].fret + cfg.turn_fret_interval
+           and tail[2].fret == tail[0].fret,
+           f"T4 expected {tail[0].fret}h{tail[0].fret+2}p{tail[0].fret}, got "
+           f"{tail[0].fret}h{tail[1].fret}p{tail[2].fret}")
+    _check(tail[1].note.is_grace and tail[2].note.is_grace,
+           "T4 inserted notes must be graces")
+    _check(len(r.best.placed) == 4 and r.best.placed[-1].stroke == "D",
+           "T4 phase-1 (all-picked) must stay untouched")
+    _check(o.picks_after == o.picks_before,
+           "T4 the turn is mechanically idle — pick count unchanged")
+    _check(any("strip them above" in f for f in o.flags),
+           "T4 expected the tempo honesty flag")
+    _check(not [f for f in o.flags if f.startswith("MECHANICS")],
+           f"T4 ornament mechanics violated: {o.flags}")
+    print(">>> T4 PASS (turn applied on the resolution; phase-1 untouched)")
+
+
+def _strokes(r: FingeringResult) -> List[str]:
+    return [p.stroke for p in r.best.placed]
+
+
+def test_T6():
+    _banner("T6", "Off-beat pickup (&4) into beat 1 on the same string -> U-D")
+    # G4 on the "&" of 4, then A4 on beat 1, both on the B string.
+    pinned = {67: (2, 8), 69: (2, 10), 71: (1, 7), 72: (1, 8)}
+    pitches = [67, 69, 71, 72]
+    ctx = {"key": "G", "density": "eighth", "chords": []}
+    line = [{"pitch": m, "start": 3.5 + 0.5 * i} for i, m in enumerate(pitches)]
+    r = optimize_fingering(line, ctx, pinned=pinned)
+    print(format_report(r))
+    _check(_strokes(r)[:2] == ["U", "D"],
+           f"T6 off-beat pickup should be U into a D downbeat, got {_strokes(r)}")
+    _check(_invariant_ok(r) == [], "T6 invariant violated")
+    # The same line starting ON beat 4: an on-beat phrase start stays D.
+    line = [{"pitch": m, "start": 3.0 + 0.5 * i} for i, m in enumerate(pitches)]
+    r2 = optimize_fingering(line, ctx, pinned=pinned)
+    _check(_strokes(r2)[0] == "D", "T6 an on-beat phrase start must be D")
+    print(">>> T6 PASS (pickup U on the '&', downbeat D; on-beat start stays D)")
+
+
+def test_T7():
+    _banner("T7", "Downbeat D-D is priced above a plain D-D -> moved off the downbeat")
+    cfg = FingeringConfig()
+    ctx = {"key": "G", "density": "eighth", "chords": []}
+    # String change on "&4" then beat 1 on the same string: the only way to a
+    # D downbeat is D-D onto beat 1 — charged downbeat_dd, not same_str_dd.
+    pinned = {69: (2, 10), 71: (1, 7), 72: (1, 8), 74: (1, 10)}
+    line = [{"pitch": m, "start": 3.0 + 0.5 * i} for i, m in enumerate([69, 71, 72, 74])]
+    r = optimize_fingering(line, ctx, cfg, pinned=pinned)
+    print(format_report(r))
+    _check(r.best.placed[2].stroke == "D", "T7 beat 1 must be a downstroke")
+    tags = dict(r.best.contributions)
+    _check(tags.get("downbeat_dd") == cfg.downbeat_dd_penalty,
+           f"T7 expected one downbeat_dd charge, got {r.best.contributions}")
+    # Entering the e string on "&3" with three notes before beat 1: the repeated
+    # downstroke goes on beat 4 (plain D-D) so beat 1 arrives by alternation.
+    pinned = {67: (2, 8), 71: (1, 7), 72: (1, 8), 74: (1, 10), 76: (1, 12)}
+    line = [{"pitch": m, "start": 2.0 + 0.5 * i}
+            for i, m in enumerate([67, 71, 72, 74, 76])]
+    r2 = optimize_fingering(line, ctx, cfg, pinned=pinned)
+    print(format_report(r2))
+    _check(_strokes(r2) == ["D", "D", "D", "U", "D"],
+           f"T7 expected D D D U D (D-D on beat 4), got {_strokes(r2)}")
+    _check(_invariant_ok(r) == [] and _invariant_ok(r2) == [], "T7 invariant violated")
+    print(">>> T7 PASS (downbeat D-D charged; hiccup moved to the weak beat)")
+
+
+def test_T8():
+    _banner("T8", "Cell connection on the eighth-note grid -> pivot on beat 3, D")
+    c1 = {"name": "Desc bebop from root", "root": "G", "mode": "Myxolidian",
+          "degrees": ["1", "maj7", "7", "6", "5"], "movement": "D"}
+    c2 = {"name": "Asc II-m7 arp", "root": 0, "mode": "Myxolidian",
+          "degrees": ["5", "7", "9", "4", "3"], "movement": "A"}
+    line, pivot, _ = cell_bridge.build_connection_line(c1, c2)
+    ctx = cell_bridge.cell_context(
+        {"key": "G", "chords": [{"start_beat": 0, "symbol": "G7"},
+                                {"start_beat": cell_bridge.cell_beat(pivot),
+                                 "symbol": "G7"}]})
+    r = optimize_fingering(cell_bridge.timed_cell_line(line), ctx)
+    print(format_report(r))
+    pv = r.best.placed[pivot]
+    _check(pv.beat == 3, f"T8 pivot should land on beat 3, got beat {pv.beat}")
+    for p in r.best.placed:
+        if p.beat == 1:
+            _check(p.stroke == "D", f"T8 beat-1 note {p.note.index} not a downstroke")
+    _check(_invariant_ok(r) == [], "T8 invariant violated")
+    print(f">>> T8 PASS (pivot on beat 3, stroke {pv.stroke})")
 
 
 def main():
@@ -170,7 +266,7 @@ def main():
     verify_conventions()
     print("OK")
 
-    tests = [test_T1, test_T2, test_T3, test_T5, test_T4]
+    tests = [test_T1, test_T2, test_T3, test_T5, test_T4, test_T6, test_T7, test_T8]
     passed, failed = 0, 0
     results = []
     for t in tests:

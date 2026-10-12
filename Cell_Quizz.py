@@ -8,7 +8,8 @@ from scripts.utils import (
     validate_results,
     join_notes,
     cell_from_string,
-    get_or_update_practice_details,
+    sidebar_practice_key,
+    sidebar_metronome,
 )
 
 from scripts.modes.mode_transposition import translate_dom_to_minor
@@ -20,18 +21,15 @@ from scripts.fingering.render import render_html, format_note_table
 st.title("Bebop practice app")
 previous_chord = st.session_state.get("chord")
 
-# Today's rotating practice key + position (shared with the other pages).
+# Today's rotating practice key + position (shared with the other pages);
+# the key is a selectbox — changing it overrides the daily draw everywhere.
 st.session_state.practice_key, st.session_state.practice_position = (
-    get_or_update_practice_details()
+    sidebar_practice_key()
 )
-st.sidebar.subheader(f"Today's Key: :blue[{st.session_state.practice_key}]")
-st.sidebar.subheader(
-    f"Today's Position (for guitar): :blue[{st.session_state.practice_position}]"
-)
+tempo = sidebar_metronome()
 
-st.session_state.include_bonus = st.sidebar.checkbox(
-    "Whether to include bonus cells", value=st.session_state.get("include_bonus", False)
-)
+st.session_state.include_bonus = st.session_state.get("include_bonus", False)
+st.sidebar.checkbox("Whether to include bonus cells", key="include_bonus")
 _KEYS = ["C", "G", "D", "A", "E", "B", "F#", "Db", "Ab", "Eb", "Bb", "F"]
 _default_key_idx = (
     _KEYS.index(st.session_state.practice_key)
@@ -46,6 +44,7 @@ st.session_state.chord = st.selectbox(
     "Select chord to practice",
     [
         "Maj7",
+        "Minor",
         "Dorian",
         "Myxolidian",
         "Locrian",
@@ -182,7 +181,7 @@ try:
             chosen = octs[_opts.index(_sel)]
             if chosen["note"]:
                 st.info(chosen["note"])
-            components.html(render_html(chosen["result"], tempo=160), height=340,
+            components.html(render_html(chosen["result"], tempo=tempo), height=340,
                             scrolling=True)
             with st.expander("Per-note detail"):
                 st.code(format_note_table(chosen["result"].best.placed), language="text")

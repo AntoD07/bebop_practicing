@@ -7,9 +7,12 @@ Picking is DERIVED from the fingering, never chosen freely:
       beat 1 (beat 3 = soft penalty), U never *starts* a string, and after a U
       the next same-string note goes back to D (up-down alternation, never U-U).
   H3. Phase 1 is 100% picked — no legato, no inserted/deleted/tied pitches.
+  H4. A phrase opens on D — except an OFF-BEAT pickup (e.g. the "&" of 4),
+      which may be a U so the alternation lands the next downbeat on D.
 
 INVARIANT (v2 — same-string up-down alternation is idiomatic, per the player):
-  * a U never arrives on a string change (H1),
+  * a U never arrives on a string change (H1) — an off-beat pickup opening a
+    phrase is not a string change (H4),
   * a U never lands on beat 1,
   * two Us never follow each other on the same string.
 A U therefore serves one of two purposes: the parity fix before a descending
@@ -63,6 +66,7 @@ def verify_conventions(config: Optional[FingeringConfig] = None) -> None:
     "sweep must be free" probe.
     """
     cfg = (config or default_config()).with_overrides(fret_window=None,
+                                                      string_fret_windows=None,
                                                       root_pin=None)
 
     # 1) ascending sweep: str3 -> str2 -> str1, all downstrokes.
@@ -115,6 +119,17 @@ def entry_strokes(descending: bool, config: FingeringConfig) -> List[str]:
     return [DOWN]
 
 
+def phrase_start_strokes(note: Note) -> List[str]:
+    """Legal strokes for the first note of a phrase (line start / after a rest).
+
+    H4: D, plus U when the note is an off-beat pickup — playing the "&" up lets
+    the alternation bring the downbeat that follows back to D.
+    """
+    if note.onset % 1 != 0:
+        return [DOWN, UP]
+    return [DOWN]
+
+
 def same_string_strokes(beat: int) -> List[str]:
     """Legal strokes for a same-string continuation note.
 
@@ -130,18 +145,23 @@ def same_string_strokes(beat: int) -> List[str]:
 def find_invariant_violations(placed: List[PlacedNote]) -> List[int]:
     """Return indices of upstrokes violating INVARIANT v2.
 
-    Violations: a U arriving on a string change, a U on beat 1, or a U
-    immediately followed by another U on the same string. An empty list means
-    the invariant holds (a U is either a parity fix or in-string alternation).
+    Violations: a U arriving on a string change, a U on beat 1, a U opening a
+    phrase on the beat, or a U immediately followed by another U on the same
+    string. An empty list means the invariant holds (a U is a parity fix,
+    in-string alternation, or an off-beat pickup).
     """
     bad: List[int] = []
     for i, pn in enumerate(placed):
         if pn.stroke != UP:
             continue
-        if i == 0 or pn.beat == 1:
+        if pn.beat == 1:
             bad.append(i)
             continue
-        if placed[i - 1].string != pn.string:  # U on a string entry
+        if i == 0 or pn.note.phrase_start:
+            if UP not in phrase_start_strokes(pn.note):  # on-beat phrase start
+                bad.append(i)
+                continue
+        elif placed[i - 1].string != pn.string:  # U on a string entry
             bad.append(i)
             continue
         if (i + 1 < len(placed) and placed[i + 1].string == pn.string
