@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import { Settings2, Play, Square, Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NumberStepper, Select, Switch, Field, Slider } from "@/components/ui/field";
@@ -25,6 +25,17 @@ function useEngineBindings() {
   useEffect(() => audioEngine.setClickOn(clickOn && metronome === "native"), [clickOn, metronome]);
   useEffect(() => audioEngine.setVolumes(volumes), [volumes]);
   useEffect(() => startSettingsSync(useSession, "session", pickSessionSettings), []);
+}
+
+const narrowQuery = "(max-width: 639px)";
+function subscribeNarrow(cb: () => void) {
+  const mq = window.matchMedia(narrowQuery);
+  mq.addEventListener("change", cb);
+  return () => mq.removeEventListener("change", cb);
+}
+/** Phone-width flag that hydrates safely (server + first client render = false). */
+function useNarrow() {
+  return useSyncExternalStore(subscribeNarrow, () => window.matchMedia(narrowQuery).matches, () => false);
 }
 
 function BeatDots() {
@@ -66,6 +77,7 @@ export function PracticeHeader() {
   const setTheme = useSession((s) => s.setTheme);
   const { running } = useEngineState();
   const page = usePageSettingsContext();
+  const narrow = useNarrow();
 
   useEffect(() => {
     const root = document.documentElement;
@@ -87,7 +99,7 @@ export function PracticeHeader() {
           <Select aria-label="Today's position" value={position} onChange={(e) => setPosition(Number(e.target.value))} className="h-9 w-[7.2rem] sm:w-[14rem]">
             {POSITIONS.map((p, i) => (
               <option key={p} value={i + 1}>
-                {i + 1} · {typeof window !== "undefined" && window.innerWidth < 640 ? POSITION_SHORT[p] : p}
+                {i + 1} · {narrow ? POSITION_SHORT[p] : p}
               </option>
             ))}
           </Select>
@@ -96,7 +108,7 @@ export function PracticeHeader() {
           <NumberStepper ariaLabel="Tempo" value={tempo} onChange={setTempo} min={30} max={300} className="h-9 hidden sm:inline-flex" />
           <button
             type="button"
-            className="inline-flex h-9 items-center rounded-md border bg-bg-elev px-2 text-sm tabular-nums sm:hidden"
+            className="inline-flex h-9 items-center whitespace-nowrap rounded-md border bg-bg-elev px-2 text-xs tabular-nums sm:hidden"
             onClick={() => page.setOpen(true)}
             aria-label="Tempo (open settings)"
           >

@@ -14,7 +14,8 @@
     "e2e": "playwright test",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "migrate:logs": "tsx scripts/migrate_logs.ts"
+    "migrate:logs": "tsx scripts/migrate_logs.ts",
+    "postinstall": "node scripts/copy-pdf-worker.mjs"
   },
   "dependencies": {
     "@libsql/client": "^0.18.0",

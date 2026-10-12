@@ -9,6 +9,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { usePageSettings } from "@/components/layout/PageSettings";
 import { connectionRequest, useConnectionRows, useCuration, usePairs, usePairsRequest, usePickKey, type PairRow } from "@/lib/connections/useConnections";
 import { buildItems, secondsPerItem } from "@/lib/drill/buildItems";
+import { registerFingerings, useDrill } from "@/lib/drill/store";
+import { DrillPanel } from "@/components/drill/DrillPanel";
+import { toast } from "@/components/ui/misc";
 import { enginePost } from "@/lib/engine/client";
 import type { ConnectionJSON } from "@/lib/engine/types";
 import { FREE_POSITION, POSITIONS } from "@/lib/music/constants";
@@ -105,6 +108,58 @@ export function ConnectionsPage() {
   const items = buildItems(visible.map((r) => ({ pairKey: r.pairKey, end: r.end, start: r.start, candidates: r.candidates })), { kept: cur.isKept, deleted: cur.deleted, allFingerings: s.allFingerings });
   const nPairs = new Set(items.map((i) => i.pairKey)).size;
   const perItem = secondsPerItem(s.totalMinutes, items.length);
+  const drill = useDrill();
+  const fingeringByItem = (itemId: string) => {
+    const [pk, sig] = itemId.split("#");
+    return visible.find((r) => r.pairKey === pk)?.inBox.find((f) => f.layout === sig);
+  };
+
+  // keep the drill's fingerings (and item list) in sync with what is loaded;
+  // the drill was started from THIS setup when its request matches
+  const itemsSig = items.map((i) => i.id).join("|");
+  const drillRequestSig = drill.config ? JSON.stringify(drill.config.request) : null;
+  const currentRequestSig = JSON.stringify({ key: session.key, pairs: req, position, anchor: pairs?.single_chord ? "key" : s.anchor, flags: { bonus: s.bonus, domToMinor1: s.domToMinor1, domToMinor2: s.domToMinor2 } });
+  React.useEffect(() => {
+    registerFingerings(items.map((it) => [it.id, fingeringByItem(it.id)!]).filter((e) => e[1]) as [string, NonNullable<ReturnType<typeof fingeringByItem>>][]);
+    if (drill.status !== "idle" && drillRequestSig === currentRequestSig && pending.length === 0) {
+      const d = useDrill.getState();
+      const cur = d.items[d.currentIndex];
+      const same = d.items.map((i) => i.id).join("|") === itemsSig;
+      if (!same) {
+        d.setItems(items);
+        if (cur && !items.some((i) => i.id === cur.id)) toast("The current item is no longer in the kept set", "danger");
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [itemsSig, pending.length, drillRequestSig, currentRequestSig]);
+
+  function startDrill(from = 0) {
+    if (!items.length) {
+      toast("No playable combinations for this pivot/position", "danger");
+      return;
+    }
+    registerFingerings(items.map((it) => [it.id, fingeringByItem(it.id)!]).filter((e) => e[1]) as [string, NonNullable<ReturnType<typeof fingeringByItem>>][]);
+    drill.start(
+      items,
+      {
+        pickKey,
+        request: { key: session.key, pairs: req, position, anchor: pairs?.single_chord ? "key" : s.anchor, flags: { bonus: s.bonus, domToMinor1: s.domToMinor1, domToMinor2: s.domToMinor2 } },
+        totalMinutes: s.totalMinutes,
+        secondsPerItem: perItem,
+        allFingerings: s.allFingerings,
+        showTab: s.showTab,
+        switchMode: "reset",
+        cue: true,
+        loopSession: drill.config?.loopSession ?? false,
+      },
+      from,
+    );
+  }
+
+  function practiceFrom(pk: string) {
+    const idx = items.findIndex((i) => i.pairKey === pk);
+    startDrill(Math.max(0, idx));
+  }
 
   async function loadAll(row: PairRow) {
     if (!pairs) return;
@@ -181,9 +236,17 @@ export function ConnectionsPage() {
           <strong>{items.length}</strong> fingerings across <strong>{nPairs}</strong> combinations · {perItem}s each over {s.totalMinutes} min
         </span>
       </div>
-      <ConnectionsTable rows={visible} pending={pending} selected={selected?.pairKey ?? null} onSelect={(pk) => { s.set({ selectedPair: pk }); setSelectedSig(null); }} onKept={cur.setKept} />
+      <ConnectionsTable rows={visible} pending={pending} selected={selected?.pairKey ?? null} onSelect={(pk) => { s.set({ selectedPair: pk }); setSelectedSig(null); }} onKept={cur.setKept} onPractice={practiceFrom} />
     </div>
   );
+
+  const drillSummary = (
+    <>
+      <strong>{items.length}</strong> fingerings across <strong>{nPairs}</strong> combinations, easiest → hardest; each shown for <strong>{perItem}s</strong> ({s.totalMinutes} min).
+      {pending.length > 0 && <> {pending.length} still loading — you can start now.</>}
+    </>
+  );
+  const drillPanel = <DrillPanel onStart={() => startDrill(0)} summary={drillSummary} />;
 
   return (
     <div className="space-y-4">
@@ -196,6 +259,7 @@ export function ConnectionsPage() {
             <TabsTrigger value="setup">Setup</TabsTrigger>
             <TabsTrigger value="table">Table</TabsTrigger>
             <TabsTrigger value="pair">Pair</TabsTrigger>
+            <TabsTrigger value="drill">Drill</TabsTrigger>
           </TabsList>
           <TabsContent value="setup" className="mt-3">
             <Card>
@@ -208,7 +272,18 @@ export function ConnectionsPage() {
           <TabsContent value="pair" className="mt-3">
             {listPane}
           </TabsContent>
+          <TabsContent value="drill" className="mt-3">
+            <Card>
+              <p className="mb-3 text-sm text-fg-muted">{drillSummary}</p>
+              <Button size="lg" className="w-full" onClick={() => startDrill(0)} disabled={!items.length}>
+                {drill.status === "idle" ? "Start exercise" : "Restart from the first item"}
+              </Button>
+              <p className="mt-3 text-xs text-fg-muted">The running exercise lives in the bar at the bottom of the screen: tap it to expand the tab, the countdown and the item strip.</p>
+            </Card>
+          </TabsContent>
         </Tabs>
+        {drillPanel}
+        {drill.status !== "idle" && <div className="h-[80px]" />}
       </div>
       <div className="hidden gap-4 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
         <div className="space-y-4">
@@ -220,7 +295,8 @@ export function ConnectionsPage() {
           </details>
           {pairsQ.isLoading ? <Spinner /> : tablePane}
         </div>
-        <div className="lg:sticky lg:top-[calc(var(--header-h)+8px)] lg:max-h-[calc(100dvh-var(--header-h)-16px)] lg:overflow-y-auto">
+        <div className="space-y-4 lg:sticky lg:top-[calc(var(--header-h)+8px)] lg:max-h-[calc(100dvh-var(--header-h)-16px)] lg:overflow-y-auto">
+          <Card>{drillPanel}</Card>
           <Card>{listPane}</Card>
         </div>
       </div>

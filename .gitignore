@@ -43,3 +43,4 @@ legacy/.streamlit/secrets.toml
 data/logs/*.csv
 data/logs/*.json
 data/logs/tabs/
+public/pdf.worker.min.mjs
