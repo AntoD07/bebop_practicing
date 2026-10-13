@@ -1,0 +1,8 @@
+# Vercel Python function fallback install list — keep in sync with the main
+# dependencies in pyproject.toml (uv.lock is the primary manifest; this file only
+# matters if the builder picks pip instead of uv).
+fastapi>=0.115
+pydantic>=2.9
+anthropic>=0.115
+pillow>=10
+numpy>=2
