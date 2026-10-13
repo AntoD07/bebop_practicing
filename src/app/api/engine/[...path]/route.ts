@@ -24,6 +24,11 @@ function apiHeaders(): Record<string, string> {
   const h: Record<string, string> = { accept: "application/json" };
   const k = process.env.ENGINE_API_KEY;
   if (k) h["X-API-Key"] = k;
+  // On a Vercel PREVIEW deployment with Deployment Protection on, the call to
+  // our own origin would hit the SSO wall; the automation bypass secret (set by
+  // Vercel when "Protection Bypass for Automation" is enabled) lets it through.
+  const bypass = process.env.VERCEL_AUTOMATION_BYPASS_SECRET;
+  if (bypass) h["x-vercel-protection-bypass"] = bypass;
   return h;
 }
 
