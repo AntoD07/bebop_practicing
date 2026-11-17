@@ -29,3 +29,7 @@ SCORES_DIR = DATA_DIR / "scores"
 SCORES_INDEX = str(SCORES_DIR / "index.csv")
 SCORE_FILES_DIR = str(SCORES_DIR / "files")
 SCORE_TABS_DIR = str(SCORES_DIR / "tabs")
+
+# Favourite fingerings (page 6 "⭐ Save as favourite"): chosen layouts kept for
+# later study and mimicked in other keys. Runtime data, git-ignored like the logs.
+FINGERING_FAVORITES = str(LOGS_DIR / "fingering_favorites.json")

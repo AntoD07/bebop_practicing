@@ -235,9 +235,10 @@ def root_midi(root: str, octave: int = 3) -> int:
     return (octave + 1) * 12 + root_pc(root)
 
 
-def _hex_note(pair: TriadPair, base: int, idx: int) -> Tuple[int, dict]:
-    """Scale index (0.. ; ``n`` = the first root an octave up) -> (midi, tone)."""
-    tones = pair.hexatonic
+def _hex_note(tones: List[dict], base: int, idx: int) -> Tuple[int, dict]:
+    """Scale index (0.. ; ``n`` = the first root an octave up) -> (midi, tone).
+    ``tones`` is ``pair.hexatonic``, computed ONCE by the caller (it is a
+    property that rebuilds the list on every access)."""
     n = len(tones)
     octave, deg = divmod(idx, n)
     t = tones[deg]
@@ -263,10 +264,11 @@ def hexatonic_scale_run(pair: TriadPair, low_octave: int = 2, n_octaves: int = 2
                         direction: str = "ascending", start_deg: int = 0) -> List[dict]:
     """The hexatonic scale over ``n_octaves``, beginning on scale index ``start_deg``."""
     base = root_midi(pair.first.root, low_octave)
-    n = len(pair.hexatonic)
+    tones = pair.hexatonic
+    n = len(tones)
     line = []
     for j in range(n * n_octaves + 1):  # +1 completes the top octave on the start note
-        m, t = _hex_note(pair, base, start_deg + j)
+        m, t = _hex_note(tones, base, start_deg + j)
         line.append(_note(m, t["label"]))
     return _apply_direction(line, direction)
 
@@ -282,7 +284,8 @@ def hexatonic_pattern_run(pair: TriadPair, low_octave: int = 2, n_octaves: int =
     ``G1, G2…`` so the tab brackets them (pass ``group=x`` to the ranker).
     """
     base = root_midi(pair.first.root, low_octave)
-    n = len(pair.hexatonic)
+    tones = pair.hexatonic
+    n = len(tones)
     lo, top = start_deg, start_deg + n * n_octaves
     asc = [[s + k for k in range(x)] for s in range(lo, top - x + 2)]
     desc = [[t - k for k in range(x)] for t in range(top, lo + x - 2, -1)]
@@ -290,7 +293,7 @@ def hexatonic_pattern_run(pair: TriadPair, low_octave: int = 2, n_octaves: int =
     line = []
     for j, g in enumerate(groups):
         for idx in g:
-            m, t = _hex_note(pair, base, idx)
+            m, t = _hex_note(tones, base, idx)
             line.append(_note(m, t["label"], f"G{j + 1}"))
     return line
 
@@ -319,7 +322,7 @@ def alternating_triads_run(pair: TriadPair, low_octave: int = 2, n_octaves: int 
     the tab brackets; pass ``group=x`` to the ranker.
     """
     base = root_midi(pair.first.root, low_octave)
-    start, tone = _hex_note(pair, base, start_deg)
+    start, tone = _hex_note(pair.hexatonic, base, start_deg)
     lo, hi = start, start + 12 * n_octaves
     tri = pair.triads
     k = pair.owner(tone["pc"])
@@ -342,6 +345,7 @@ def alternating_triads_run(pair: TriadPair, low_octave: int = 2, n_octaves: int 
         s, d = (lo, +1) if climb else (hi, -1)
         while (s <= hi) if climb else (s >= lo):
             # The leading group (up when climbing, down when falling) …
+            lead = s
             groups.append((k, s, d))
             last = tri[k].arpeggio(s, x, d)[-1]
             # … and its partner on the other triad, in the other direction,
@@ -352,6 +356,14 @@ def alternating_triads_run(pair: TriadPair, low_octave: int = 2, n_octaves: int 
             last = tri[k].arpeggio(s, x, -d)[-1]
             k ^= 1
             s = tri[k].next_above(last) if climb else tri[k].next_below(last)
+            # Progress guard: with uneven triads (an augmented + a diminished,
+            # small x) the partner's descent can outrun the leading ascent and
+            # land the next lead on or below the previous one — a cycle. The
+            # lead must always move on by at least one tone of its triad.
+            if climb and s <= lead:
+                s = tri[k].next_above(lead)
+            elif not climb and s >= lead:
+                s = tri[k].next_below(lead)
     else:
         raise ValueError(f"unknown direction {direction!r}")
 

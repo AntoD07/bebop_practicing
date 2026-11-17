@@ -30,6 +30,10 @@ from scripts.triad_pairs.triads import (
     hexatonic_scale_run, hexatonic_pattern_run, alternating_triads_run,
 )
 from scripts.triad_pairs.neck_map import render_neck_svg, position_map_boxes
+from scripts.triad_pairs.favorites import (
+    PAGE_TRIAD_PAIRS, load_favorites, add_favorite, remove_favorite, make_favorite,
+    favorite_line, transpose_favorite, render_favorite, layout_signature,
+)
 
 st.set_page_config(layout="wide")
 st.title("Triad Pairs & Hexatonics")
@@ -91,14 +95,21 @@ st.sidebar.slider(
 )
 
 with st.sidebar.expander("Fingering cost weights"):
+    # Runs are played IN a position: a hand shift costs the engine's full
+    # default (1.0/fret — the Pentatonics page halves it), so a 2-fret move
+    # mid-run loses to a 1-fret adjustment at the end. The downbeat D-D
+    # surcharge is a cell (eighth-note) rule: at run pacing every note is a
+    # beat, and the surcharge only punished 3-notes-per-string shapes whose
+    # string entries fall off the downbeats — it is neutralised here.
     base_cfg = FingeringConfig(
         max_stretch=st.slider("max_stretch", 3, 6, 4),
         u_cost=st.slider("u_cost (upstroke)", 0.0, 5.0, 1.0, 0.25),
         drop_cost=st.slider("drop_cost", 0.0, 30.0, 10.0, 1.0),
-        shift_cost=st.slider("shift_cost /fret", 0.0, 3.0, 0.5, 0.25),
+        shift_cost=st.slider("shift_cost /fret", 0.0, 3.0, 1.0, 0.25),
         break_cost=st.slider("break_cost (2npS)", 0.0, 10.0, 3.0, 0.5),
         sweep_bonus=st.slider("sweep_bonus", 0.0, 3.0, 0.5, 0.25),
     )
+    base_cfg = base_cfg.with_overrides(downbeat_dd_penalty=base_cfg.same_string_dd_penalty)
 
 # --------------------------------------------------------------------------- #
 # The pair and its hexatonic.
@@ -180,11 +191,12 @@ else:
 _starts_note = "" if start_sel else " · all starts"
 
 
-def _generate(title, lines_by_start, group=None):
+def _generate(title, lines_by_start, group=None, exercise="", params=None):
     """Rank every (starting note × fingering) and stash the rows for rendering.
 
     ``group`` = grouping size: partial slices align to grouping boundaries so a
     truncated pattern keeps its identity (and its triad alternation).
+    ``exercise``/``params`` are recorded with a saved favourite.
     """
     lines_by_start = {k: v for k, v in lines_by_start.items() if v}
     if not lines_by_start:
@@ -202,7 +214,10 @@ def _generate(title, lines_by_start, group=None):
     ver = st.session_state.get("tp", {}).get("ver", 0) + 1
     st.session_state.tp = {"title": title, "rows": rows,
                            "multi": len(lines_by_start) > 1, "ver": ver,
-                           "enforced": enforced_position}
+                           "enforced": enforced_position, "exercise": exercise,
+                           "params": dict(params or {}, octaves=n_octaves,
+                                          low_octave=low_octave),
+                           "key": key, "pair": pair}
 
 
 exercise = st.radio(
@@ -218,7 +233,8 @@ if exercise == "Hexatonic scale run":
     if st.button("Generate scale run", type="primary", key="tp_gen_scale"):
         lbs = {lbl: hexatonic_scale_run(pair, low_octave, n_octaves, direction, start_deg=sd)
                for lbl, sd in start_degs}
-        _generate(f"{pair.title} hexatonic — {direction} ({n_octaves} oct){_starts_note}", lbs)
+        _generate(f"{pair.title} hexatonic — {direction} ({n_octaves} oct){_starts_note}", lbs,
+                  exercise=exercise, params={"direction": direction})
 
 elif exercise == "x-notes grouping (hexatonic)":
     x1, x2 = st.columns((0.4, 0.6))
@@ -232,7 +248,8 @@ elif exercise == "x-notes grouping (hexatonic)":
                                           start_deg=sd)
                for lbl, sd in start_degs}
         _generate(f"{pair.title} — {x_notes}-notes grouping, {direction} ({n_octaves} oct)"
-                  f"{_starts_note}", lbs, group=x_notes)
+                  f"{_starts_note}", lbs, group=x_notes,
+                  exercise=exercise, params={"x": x_notes, "direction": direction})
 
 elif exercise == "Alternating triads (x-notes grouping)":
     a1, a2 = st.columns((0.4, 0.6))
@@ -253,7 +270,8 @@ elif exercise == "Alternating triads (x-notes grouping)":
                                            start_deg=sd)
                for lbl, sd in start_degs}
         _generate(f"{pair.title} — alternating triads, {x_notes} notes, {direction} "
-                  f"({n_octaves} oct){_starts_note}", lbs, group=x_notes)
+                  f"({n_octaves} oct){_starts_note}", lbs, group=x_notes,
+                  exercise=exercise, params={"x": x_notes, "direction": direction})
 
 # --------------------------------------------------------------------------- #
 # Render: show the ranked fingerings and draw the selected tab.
@@ -318,7 +336,93 @@ if st.session_state.get("tp"):
         components.html(render_html(row["result"], tempo=int(tempo)), height=380, scrolling=True)
         with st.expander("Full report (per-note table, flags, cost)"):
             st.code(format_report(row["result"]), language="text")
-        st.download_button(
+        _d1, _d2 = st.columns((0.5, 0.5))
+        _d1.download_button(
             "Download tab as SVG", render_svg(row["result"], int(tempo)),
             file_name="triad_pair_tab.svg", mime="image/svg+xml",
         )
+        if _d2.button("⭐ Save this fingering as favourite", key="tp_fav_save",
+                      help="Keeps this exact layout for later study; the favourites "
+                           "section below replays it in any key, in the same position."):
+            _pos = tp.get("enforced") or (row["position"] if row["position"] in POSITIONS else None)
+            _fav = make_favorite(
+                row["result"], tp.get("pair", pair), tp.get("key", key), _pos,
+                tp.get("exercise", ""), tp.get("params", {}), row.get("start", ""),
+                tp["title"], row.get("cost"),
+            )
+            _favs, _added = add_favorite(_fav)
+            st.session_state.tp_fav_ver = st.session_state.get("tp_fav_ver", 0) + 1
+            if _added:
+                st.success("Saved to your favourite fingerings (see below).")
+            else:
+                st.info("This fingering is already in your favourites.")
+
+# --------------------------------------------------------------------------- #
+# Favourite fingerings: saved layouts, replayed in any key in the same position.
+# --------------------------------------------------------------------------- #
+st.subheader("⭐ Favourite fingerings")
+_favs = [f for f in load_favorites() if f.get("page") == PAGE_TRIAD_PAIRS]
+if not _favs:
+    st.caption("None yet — generate an exercise, pick a fingering and press "
+               "'Save this fingering as favourite'.")
+else:
+    st.caption("Select a favourite to replay it. Choose another key to see the SAME "
+               "fingering mimicked there — the layout slides to that key's root fret, "
+               "the triads move with the key, the engine re-derives the picking.")
+    _fav_tbl = f"tp_fav_table_{st.session_state.get('tp_fav_ver', 0)}"
+    st.dataframe(
+        pd.DataFrame([{
+            "Saved": f.get("created", "")[:10],
+            "Exercise": f.get("exercise", ""),
+            "Pair": f"{f['pair']['roots'][0]}{'' if f['pair']['qualities'][0] == 'major' else ' ' + f['pair']['qualities'][0]}"
+                    f" + {f['pair']['roots'][1]}{'' if f['pair']['qualities'][1] == 'major' else ' ' + f['pair']['qualities'][1]}",
+            "Key": f.get("key", ""),
+            "Position": f.get("position") or "Free",
+            "Start": f.get("start", ""),
+            "Params": ", ".join(f"{k}={v}" for k, v in (f.get("params") or {}).items()),
+            "Cost": f.get("cost"),
+            "Layout": layout_signature([tuple(x) for x in f["layout"]]),
+        } for f in _favs]),
+        use_container_width=True, hide_index=True,
+        selection_mode="single-row", on_select="rerun", key=_fav_tbl,
+    )
+    _fsel = st.session_state[_fav_tbl].selection["rows"]
+    if _fsel and _fsel[0] < len(_favs):
+        _fav = _favs[_fsel[0]]
+        _fk1, _fk2 = st.columns((0.5, 0.5))
+        _show_key = _fk1.selectbox(
+            "Show in key", PRACTICE_KEYS,
+            index=PRACTICE_KEYS.index(key) if key in PRACTICE_KEYS else 0,
+            key="tp_fav_key",
+            help="Defaults to the page's Key. The favourite's own key shows it as saved; "
+                 "any other key shows the mimicked fingering.",
+        )
+        if _show_key == _fav["key"]:
+            _fpair, _fline, _fpins = favorite_line(_fav)
+            _fres = render_favorite(_fline, _fpins, _show_key, base_cfg)
+            _fcap = (f"**{_fpair.title}** in {_fav['key']} — as saved "
+                     f"({_fav.get('position') or 'Free'}, start on {_fav.get('start', '')})")
+        else:
+            _t = transpose_favorite(_fav, _show_key, base_cfg.max_fret,
+                                    PENTA_POSITION_SLACK, base_cfg)
+            if _t is None:
+                _fres, _fcap = None, None
+                st.warning(f"No octave of this layout stays on the neck in {_show_key}.")
+            else:
+                _fres = render_favorite(_t["line"], _t["pins"], _show_key, base_cfg)
+                _fcap = (f"**{_t['pair'].title}** in {_show_key} — mimicked from "
+                         f"{_fav['key']} ({_fav['pair']['roots'][0]} + {_fav['pair']['roots'][1]}): "
+                         f"layout slid {_t['fret_delta']:+d} frets"
+                         + (f", inside the {_fav['position']} box"
+                            if _t["in_box"] else
+                            (f", OUTSIDE the {_fav['position']} box for {_show_key}"
+                             if _fav.get("position") else "")))
+        if _fres is None and _fcap is not None:
+            st.warning("The engine could not re-finger this layout here.")
+        elif _fres is not None:
+            st.caption(_fcap + f" · cost {_fres.best.total_cost:g}")
+            components.html(render_html(_fres, tempo=int(tempo)), height=380, scrolling=True)
+        if _fk2.button("Delete this favourite", key="tp_fav_delete"):
+            remove_favorite(_fav["id"])
+            st.session_state.tp_fav_ver = st.session_state.get("tp_fav_ver", 0) + 1
+            st.rerun()

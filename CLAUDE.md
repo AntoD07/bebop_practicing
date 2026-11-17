@@ -266,13 +266,33 @@ sanity check runs before every search and raises `ConventionError` on model inve
   up, closing on the top-octave start tone), `descending` (mirror from the top),
   `alternating ↑↓ (climbing)` (one triad up, the other DOWN from the next tone above the
   previous group's last note — C E G · A F# D · E G C · D A F# …) and `alternating ↓↑
-  (falling)`. The first group's triad is the one owning the starting tone.
+  (falling)`. The first group's triad is the one owning the starting tone. The zig-zag
+  loop has a PROGRESS GUARD (uneven pairs such as F#+ + G° with x=2 otherwise cycle
+  forever: the partner's descent outruns the leading ascent). With x=2 consecutive
+  groups overlap by one note on purpose (C D · D E · E F# …) — same as the pentatonic
+  x-notes pattern.
 - `neck_map.py` — pure-SVG fretboard map (frets 0–`max_fret`, high e on top like the tab):
   every tone of the pair coloured by triad (`TRIAD_COLOURS`), shared tones two-colour, roots
   ringed, open strings hollow (shown, never fingered). `position_map_boxes(position, key)`
   → the shape's hand box(es) from `positions.position_boxes` (both octaves), drawn solid
   with the ±`PENTA_POSITION_SLACK` band dashed and out-of-box tones faded; the page embeds
   the SVG with `st.markdown(unsafe_allow_html=True)` (responsive, no iframe).
+- `favorites.py` — **favourite fingerings** (page 6 "⭐ Save this fingering as favourite"):
+  `data/logs/fingering_favorites.json` (runtime, git-ignored) keeps the exact layout + its
+  context (pair, key, position, exercise, params, start; per note: pitch, owning triad
+  index, degree, grouping tag). `transpose_favorite(fav, new_key)` MIMICS it in another
+  key: the layout slides by the keys' root-fret difference (±12 when that keeps it on the
+  neck, preferring the octave inside the position's box for the new key, ±1 fret), the
+  pair's triads move with the key, labels/brackets are rebuilt, and `render_favorite`
+  re-derives picking/fingers from the pinned layout (engine `pinned=`, a free config so the
+  pins are always admissible). The page's favourites section replays a favourite in any key.
+- **Run-oriented weights (page 6 only):** the sidebar's `shift_cost` defaults to the engine's
+  1.0/fret (page 5 halves it) and `downbeat_dd_penalty` is set equal to
+  `same_string_dd_penalty` — the downbeat D-D surcharge is a cell (eighth-note) rule that, at
+  run pacing (every note a beat), only punished 3-notes-per-string shapes. User-validated on
+  Eb+F / CAGED A (2026-10-12): the shape with one 1-fret adjustment at the end must outrank
+  the 2-per-string shape whose hand drops 2 frets mid-run; the zero-shift box fingering
+  comes second. Shift costs above ~1.5/fret put the zero-shift box fingering first.
 - Ranking reuses the pentatonic module: `fingering_rank.rank_line_fingerings` /
   `rank_line_across_starts` are the GENERIC Free + 5-positions rankers (fretted-only — no
   3+2/open-string systems, no open strings; position rows covering under a third of the run
