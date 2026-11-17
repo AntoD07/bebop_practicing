@@ -199,6 +199,7 @@ class RankRequest(BaseModel):
     penta: str = "minor"
     group: Optional[int] = Field(None, ge=1)
     generic: bool = False                     # triads/hexatonics: no 3+2 / open systems
+    run_weights: bool = False                 # triads: downbeat D-D = same-string D-D (run pacing)
     start_label: Optional[str] = None
     config: Optional[ConfigOverrides] = None
     max_layouts: Optional[int] = Field(None, ge=1)
@@ -216,3 +217,61 @@ class TriadGenerateRequest(BaseModel):
     low_octave: int = Field(2, ge=1, le=4)
     x: int = Field(4, ge=2, le=8)
     start_degs: Optional[List[int]] = None
+
+
+class TriadPairIn(BaseModel):
+    roots: List[str] = Field(..., min_length=2, max_length=2)
+    qualities: List[str] = Field(..., min_length=2, max_length=2)
+
+
+class FavoritePlacedIn(BaseModel):
+    midi: int
+    string: int = Field(..., ge=1, le=6)
+    fret: int = Field(..., ge=0, le=24)
+    degree: Optional[str] = None
+    cell: Optional[str] = None
+
+
+class FavoriteMakeRequest(BaseModel):
+    """A ranked fingering -> the favourite record (the app stores it)."""
+    pair: TriadPairIn
+    key: str
+    position: Optional[str] = None
+    exercise: str = ""
+    params: Dict[str, Union[int, float, str, bool, None]] = Field(default_factory=dict)
+    start: str = ""
+    title: str = ""
+    cost: Optional[float] = None
+    placed: List[FavoritePlacedIn] = Field(..., min_length=2, max_length=200)
+
+
+class FavoriteNoteIn(BaseModel):
+    pitch: int
+    k: Optional[int] = Field(None, ge=0, le=1)
+    deg: str = ""
+    cell: Optional[str] = None
+    arrow: Optional[str] = None
+
+
+class FavoriteIn(BaseModel):
+    key: str
+    position: Optional[str] = None
+    pair: TriadPairIn
+    layout: List[List[int]] = Field(..., min_length=2, max_length=200)
+    line: List[FavoriteNoteIn] = Field(..., min_length=2, max_length=200)
+
+    @model_validator(mode="after")
+    def _shape(self):
+        if len(self.layout) != len(self.line):
+            raise ValueError("layout and line must have the same length")
+        if any(len(x) != 2 for x in self.layout):
+            raise ValueError("layout entries are [string, fret]")
+        return self
+
+
+class FavoriteRenderRequest(BaseModel):
+    """Replay a favourite in ``key`` (its own key = as saved, else mimicked)."""
+    favorite: FavoriteIn
+    key: str
+    config: Optional[ConfigOverrides] = None
+    with_reports: bool = True

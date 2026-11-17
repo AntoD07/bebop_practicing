@@ -8,7 +8,7 @@ import type { RankRow } from "@/lib/engine/types";
 import { fmtCost } from "@/lib/utils";
 
 /** The ranked-fingerings table shared by the Pentatonics and Triads pages. */
-export function RankTable({ title, rows, done, total, enforced, maxCost, multi, slack, keyName, styleFilter, onStyleFilter, filename }: { title: string; rows: RankRow[]; done: number; total: number; enforced: string | null; maxCost: number; multi: boolean; slack: number; keyName: string; styleFilter: string[]; onStyleFilter: (s: string[]) => void; filename: string }) {
+export function RankTable({ title, rows, done, total, enforced, maxCost, multi, slack, keyName, styleFilter, onStyleFilter, filename, actions }: { title: string; rows: RankRow[]; done: number; total: number; enforced: string | null; maxCost: number; multi: boolean; slack: number; keyName: string; styleFilter: string[]; onStyleFilter: (s: string[]) => void; filename: string; actions?: (row: RankRow) => React.ReactNode }) {
   const [selKey, setSelKey] = React.useState<string | null>(null);
   const underMax = rows.filter((r) => r.cost === null || r.cost <= maxCost);
   const styles = Array.from(new Set(underMax.map((r) => r.position)));
@@ -90,7 +90,9 @@ export function RankTable({ title, rows, done, total, enforced, maxCost, multi, 
             Showing: {multi && sel.start ? `start on ${sel.start} · ` : ""}
             <strong>{sel.position}</strong> · {sel.where} {sel.fingering.mode === "optimum" && <Badge tone="warn">single optimum</Badge>}
           </p>
-          <FingeringCard fingering={sel.fingering} filename={filename} options={{ showChords: false }} />
+          <FingeringCard fingering={sel.fingering} filename={filename} options={{ showChords: false }}>
+            {actions?.(sel)}
+          </FingeringCard>
         </>
       )}
     </section>

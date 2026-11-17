@@ -1,22 +1,30 @@
 "use client";
 
 import * as React from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Field, NumberStepper, Select, Slider, Switch } from "@/components/ui/field";
 import { Card, Info, Spinner, toast } from "@/components/ui/misc";
 import { Table, Td, Th } from "@/components/ui/table";
 import { usePageSettings } from "@/components/layout/PageSettings";
 import { engineGet, enginePost } from "@/lib/engine/client";
-import type { GenerateJSON, TriadPairJSON } from "@/lib/engine/types";
+import type { Favorite, FavoriteMakeJSON, GenerateJSON, RankRow, TriadPairJSON } from "@/lib/engine/types";
 import { POSITIONS, PRACTICE_KEYS } from "@/lib/music/constants";
 import { useRankAcrossStarts } from "@/lib/pentatonics/useRank";
-import { DEFAULT_WEIGHTS } from "@/lib/store/pentatonics";
 import { useSession } from "@/lib/store/session";
 import { startSettingsSync } from "@/lib/store/sync";
-import { pickTriadsSettings, useTriads } from "@/lib/store/triads";
+import { pickTriadsSettings, TRIAD_WEIGHTS, useTriads } from "@/lib/store/triads";
 import { RankTable, WeightsEditor } from "@/components/pentatonics/RankTable";
+import { Favorites, favoritesQueryKey } from "./Favorites";
 import { NeckMap } from "./NeckMap";
+
+const EXERCISES: [string, string][] = [
+  ["scale", "Hexatonic scale run"],
+  ["pattern", "x-notes grouping (hexatonic)"],
+  ["alternating", "Alternating triads (x-notes grouping)"],
+];
+// What produced the ranked rows — recorded with a saved favourite.
+type GenContext = { pair: Favorite["pair"]; exercise: string; params: Favorite["params"] };
 
 const ROOTS = ["C", "Db", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"];
 const KEY_PC: Record<string, number> = { C: 0, Db: 1, D: 2, Eb: 3, E: 4, F: 5, "F#": 6, G: 7, Ab: 8, A: 9, Bb: 10, B: 11 };
@@ -66,7 +74,7 @@ function PageOptions({ pair }: { pair: TriadPairJSON | undefined }) {
         <summary className="cursor-pointer text-sm">Fingering cost weights</summary>
         <div className="mt-2">
           <WeightsEditor weights={s.weights} onChange={(w) => s.set({ weights: w })} />
-          <Button size="sm" variant="ghost" className="mt-1" onClick={() => s.set({ weights: DEFAULT_WEIGHTS })}>
+          <Button size="sm" variant="ghost" className="mt-1" onClick={() => s.set({ weights: TRIAD_WEIGHTS })}>
             reset
           </Button>
         </div>
@@ -86,7 +94,11 @@ export function TriadsPage() {
   const mapName = POSITIONS[(s.mapPosition ?? position) - 1];
   const pairQ = useQuery({ queryKey: ["engine", "triads/pair", root1, s.quality1, root2, s.quality2, key], queryFn: () => engineGet<TriadPairJSON>("triads/pair", { root1, quality1: s.quality1, root2, quality2: s.quality2, key, max_fret: 15 }), staleTime: Infinity });
   const pair = pairQ.data;
-  React.useEffect(() => startSettingsSync(useTriads, "triads", pickTriadsSettings), []);
+  // "triads.v2": the v1 rows carry the old (pentatonic) shift-cost default
+  React.useEffect(() => startSettingsSync(useTriads, "triads.v2", pickTriadsSettings), []);
+  const qc = useQueryClient();
+  const [genCtx, setGenCtx] = React.useState<GenContext | null>(null);
+  const [saving, setSaving] = React.useState(false);
   usePageSettings(<PageOptions pair={pair} />, [pair]);
   const [result, setResult] = React.useState<GenerateJSON | null>(null);
   const [busy, setBusy] = React.useState(false);
@@ -95,9 +107,16 @@ export function TriadsPage() {
   async function generate() {
     setBusy(true);
     try {
-      const out = await enginePost<GenerateJSON>("triads/generate", { root1, quality1: s.quality1, root2, quality2: s.quality2, exercise: s.exercise, direction: s.exercise === "alternating" ? s.altDirection : s.scaleDirection, n_octaves: s.nOctaves, low_octave: s.lowOctave, x: s.exercise === "alternating" ? s.xAlt : s.x, start_degs: s.startDegs.length ? s.startDegs : null });
+      const direction = s.exercise === "alternating" ? s.altDirection : s.scaleDirection;
+      const x = s.exercise === "alternating" ? s.xAlt : s.x;
+      const out = await enginePost<GenerateJSON>("triads/generate", { root1, quality1: s.quality1, root2, quality2: s.quality2, exercise: s.exercise, direction, n_octaves: s.nOctaves, low_octave: s.lowOctave, x, start_degs: s.startDegs.length ? s.startDegs : null });
       if (out.message) toast(out.message, "danger");
       setResult(out);
+      setGenCtx({
+        pair: { roots: [root1, root2], qualities: [s.quality1, s.quality2] },
+        exercise: EXERCISES.find(([id]) => id === s.exercise)?.[1] ?? s.exercise,
+        params: { ...(s.exercise === "scale" ? {} : { x }), direction, octaves: s.nOctaves, low_octave: s.lowOctave },
+      });
     } catch (e) {
       toast((e as Error).message, "danger");
     } finally {
@@ -105,7 +124,27 @@ export function TriadsPage() {
     }
   }
 
-  const rank = useRankAcrossStarts(result ? { key, lines_by_start: result.lines_by_start, position: enforced, group: result.group, weights: s.weights, generic: true } : null);
+  // Keeps this exact layout; the favourites section replays it in any key.
+  async function saveFavorite(row: RankRow) {
+    if (!row.fingering || !genCtx || !result) return;
+    setSaving(true);
+    try {
+      const pos = enforced ?? ((POSITIONS as readonly string[]).includes(row.position) ? row.position : null);
+      const placed = row.fingering.placed.map((p) => ({ midi: p.midi, string: p.string, fret: p.fret, degree: p.degree, cell: p.cell }));
+      const made = await enginePost<FavoriteMakeJSON>("triads/favorites/make", { pair: genCtx.pair, key, position: pos, exercise: genCtx.exercise, params: genCtx.params, start: row.start ?? "", title: result.title, cost: row.cost, placed });
+      const res = await fetch("/api/favorites", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(made.favorite) });
+      if (!res.ok) throw new Error(`Could not save the favourite (HTTP ${res.status})`);
+      const { added } = (await res.json()) as { added: boolean };
+      toast(added ? "Saved to your favourite fingerings (see below)." : "This fingering is already in your favourites.", added ? "ok" : "default");
+      qc.invalidateQueries({ queryKey: favoritesQueryKey });
+    } catch (e) {
+      toast((e as Error).message, "danger");
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  const rank = useRankAcrossStarts(result ? { key, lines_by_start: result.lines_by_start, position: enforced, group: result.group, weights: s.weights, generic: true, runWeights: true } : null);
   const qualities = pair?.constants.qualities ?? ["major", "minor", "diminished", "augmented", "sus4", "sus2"];
 
   return (
@@ -220,11 +259,7 @@ export function TriadsPage() {
         <Card className="space-y-3">
           <h2 className="text-base font-semibold">Exercises</h2>
           <div className="flex flex-wrap gap-1.5">
-            {[
-              ["scale", "Hexatonic scale run"],
-              ["pattern", "x-notes grouping (hexatonic)"],
-              ["alternating", "Alternating triads (x-notes grouping)"],
-            ].map(([id, label]) => (
+            {EXERCISES.map(([id, label]) => (
               <button key={id} type="button" onClick={() => s.set({ exercise: id as typeof s.exercise })} className={`rounded-full border px-3 py-1.5 text-sm ${s.exercise === id ? "border-accent bg-accent-soft text-accent" : "bg-bg-elev"}`}>
                 {label}
               </button>
@@ -274,8 +309,13 @@ export function TriadsPage() {
         </Card>
       )}
 
-      {result && <RankTable title={result.title} rows={rank.rows} done={rank.done} total={rank.total} enforced={enforced} maxCost={s.maxCost} multi={rank.multi} slack={pair?.slack ?? 1} keyName={key} styleFilter={s.styleFilter} onStyleFilter={(f) => s.set({ styleFilter: f })} filename="triad_pair_tab.svg" />}
+      {result && <RankTable title={result.title} rows={rank.rows} done={rank.done} total={rank.total} enforced={enforced} maxCost={s.maxCost} multi={rank.multi} slack={pair?.slack ?? 1} keyName={key} styleFilter={s.styleFilter} onStyleFilter={(f) => s.set({ styleFilter: f })} filename="triad_pair_tab.svg" actions={(row) => (
+        <Button size="sm" variant="ghost" disabled={saving} onClick={() => saveFavorite(row)} title="Keeps this exact layout for later study; the favourites section below replays it in any key, in the same position.">
+          ⭐ Save as favourite
+        </Button>
+      )} />}
       {rank.errors.length > 0 && <Info tone="danger">{rank.errors[0]}</Info>}
+      <Favorites pageKey={key} weights={s.weights} />
     </div>
   );
 }

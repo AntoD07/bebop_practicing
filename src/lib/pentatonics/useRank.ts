@@ -6,7 +6,7 @@ import { queued } from "@/lib/engine/queue";
 import type { LineNote, RankJSON, RankRow } from "@/lib/engine/types";
 import type { Weights } from "@/lib/store/pentatonics";
 
-export type RankInput = { key: string; lines_by_start: Record<string, LineNote[]>; position: string | null; penta?: string; root?: string; group: number | null; weights: Weights; generic?: boolean };
+export type RankInput = { key: string; lines_by_start: Record<string, LineNote[]>; position: string | null; penta?: string; root?: string; group: number | null; weights: Weights; generic?: boolean; runWeights?: boolean };
 
 /** One /pentatonics/rank per starting note, through the queue; rows combined
  * cheapest-per-note first (coverage breaking ties) like rank_across_starts. */
@@ -14,7 +14,7 @@ export function useRankAcrossStarts(input: RankInput | null) {
   const entries = input ? Object.entries(input.lines_by_start) : [];
   const queries = useQueries({
     queries: entries.map(([label, line], i) => {
-      const body = { key: input!.key, line, position: input!.position, penta: input!.penta ?? "minor", root: input!.root ?? input!.key, group: input!.group, config: input!.weights, generic: !!input!.generic, start_label: label };
+      const body = { key: input!.key, line, position: input!.position, penta: input!.penta ?? "minor", root: input!.root ?? input!.key, group: input!.group, config: input!.weights, generic: !!input!.generic, ...(input!.runWeights ? { run_weights: true } : {}), start_label: label };
       return {
         queryKey: ["engine", "pentatonics/rank", body],
         staleTime: Infinity,

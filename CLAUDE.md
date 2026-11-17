@@ -28,7 +28,7 @@ No `TURSO_DATABASE_URL` → local libSQL file `data/logs/bebop.db` (tables creat
 `src/lib/db/client.ts`). `BEBOP_DEV=1` lets the API accept localhost without a key.
 
 **Tests** — `python -m scripts.fingering.tests` (engine T1–T9; run after touching
-costs/optimizer/picking), `BEBOP_DEV=1 uv run pytest tests/api -q` (78 tests incl. the
+costs/optimizer/picking), `BEBOP_DEV=1 uv run pytest tests/api -q` (83 tests incl. the
 no-pandas/no-streamlit import guard, auth, domain parity, pick-key parity, golden fixtures),
 `uv run python -m scripts.golden.dump --update` (refresh `tests/golden/responses/` after an
 INTENDED engine change — the golden test diffs every response to 1e-6),
@@ -103,8 +103,9 @@ Routers: `health`, `cells` (+ `/translate`, `/positions` with the shared constan
 `connections` (`/connections/pairs`, `/fingering/connection` with `box` split + `max_layouts`),
 `lines` (`/lines/sample` seedable, `/lines/pairs`, `/fingering/line`), `fingering`
 (`/fingering/positions` home, `/fingering/rank-absolute` ≤ 64 notes), `pentatonics`
-(`/patterns`, `/generate`, `/rank` — also the triads ranker with `generic: true`), `triads`
-(`/pair` with neck markers + boxes, `/generate`), `score` (`/parse-musicxml` stdlib,
+(`/patterns`, `/generate`, `/rank` — also the triads ranker with `generic: true`; the triads
+page adds `run_weights: true`), `triads` (`/pair` with neck markers + boxes, `/generate`,
+`/favorites/make` + `/favorites/render` — stateless, see below), `score` (`/parse-musicxml` stdlib,
 `/read-vision` Claude; anthropic/PIL imported lazily). "Sample N & rank", "Enumerate ALL pairs",
 "Rank ALL formulas" are NOT endpoints — the frontend fans out per item.
 Performance: default `BEBOP_MAX_LAYOUTS=2000` (≈3 s worst case; container sets 10000),
@@ -147,7 +148,23 @@ Performance: default `BEBOP_MAX_LAYOUTS=2000` (≈3 s worst case; container sets
 (`rank_pentatonic_fingerings` incl. the 3+2 / open-string-pivot / sliding systems,
 `rank_line_fingerings` generic, `enumerate_position_fingerings` for "Enforce the position",
 `Triad`/`TriadPair`/`alternating_triads_run`, `neck_markers`/`position_map_boxes` — the SVG
-neck map itself is drawn in TS, `src/components/triads/NeckMap.tsx`).
+neck map itself is drawn in TS, `src/components/triads/NeckMap.tsx`). Ported from `main`
+2026-11: the zig-zag loop of `alternating_triads_run` has a PROGRESS GUARD (uneven pairs such
+as F#+ + G° with x=2 otherwise cycle forever); with x=2 consecutive groups overlap by one note
+on purpose.
+- `triad_pairs/favorites.py` — **favourite fingerings**, PURE (no file I/O; rows live in the
+  `fingering_favorites` table). `make_favorite(placed, pair, …)` builds the record (per note:
+  pitch, owning triad index, degree, grouping tag); `transpose_favorite(fav, new_key)` MIMICS it
+  in another key (the layout slides by the keys' root-fret difference, ±12 when that keeps it on
+  the neck, preferring the octave inside the position's box ±1 fret; the pair's triads move with
+  the key); `render_favorite` re-derives picking/fingers from the pinned layout (free config, so
+  the pins are always admissible).
+- **Run-oriented weights (triads page only):** `favorites.run_config()` sets
+  `downbeat_dd_penalty = same_string_dd_penalty` (the downbeat D-D surcharge is a cell/eighth-note
+  rule; at run pacing it only punished 3-notes-per-string shapes) and the page's `shift_cost`
+  defaults to the engine's 1.0/fret (`TRIAD_WEIGHTS`; Pentatonics halves it). User-validated on
+  Eb+F / CAGED A (2026-10-12): the shape with one 1-fret adjustment at the end must outrank the
+  2-per-string shape whose hand drops 2 frets mid-run.
 
 ### `src/` (Next.js 16 App Router, TS strict, Tailwind v4, TanStack Query, Zustand)
 - `src/proxy.ts` — Next 16's middleware (file renamed `proxy.ts`): every route but `/login`,
@@ -159,9 +176,10 @@ neck map itself is drawn in TS, `src/components/triads/NeckMap.tsx`).
 - `src/app/api/` — route handlers (Node runtime): `engine/[...path]` (adds the API key, checks
   the Turso `engine_cache` keyed by sha256(engine version + request), `maxDuration = 300`),
   `practice-day` (the SERVER draws today's key/position on the first request of the local date),
-  `settings/[key]`, `picks/[pickKey]`, `lines`, `scores`, `drill/[id]`, `auth/*`.
+  `settings/[key]`, `picks/[pickKey]`, `lines`, `scores`, `favorites` (+ `[id]`; POST dedupes
+  on page/key/pair/exercise/layout), `drill/[id]`, `auth/*`.
 - `src/lib/db/` — Drizzle schema (`practice_days`, `connection_picks`, `melodic_line_logs`,
-  `scores`, `drill_sessions`, `settings`, `engine_cache`) + client with lazy `CREATE TABLE IF NOT
+  `scores`, `drill_sessions`, `settings`, `fingering_favorites`, `engine_cache`) + client with lazy `CREATE TABLE IF NOT
   EXISTS` (so dev needs no `db:push`). `scripts/migrate_logs.ts` imports the legacy logs.
 - `src/lib/engine/` — `types.ts` (wire types), `client.ts` (`/api/engine/*` + IndexedDB cache
   keyed by engine version + canonical request), `queue.ts` (4-wide priority queue; selected row
@@ -195,8 +213,9 @@ neck map itself is drawn in TS, `src/components/triads/NeckMap.tsx`).
   Keep-only/Show-deleted and "load every layout" per box, `ConnectionsPage` orchestrates picks
   autosave + the drill), `drill/*` (DrillPanel = desktop right column / phone bottom sheet with a
   72 px mini bar, DrillStrip, DrillController), `lines/LinesPage`, `score/ScorePage` (pdf.js in
-  the browser → `/score/read-vision`), `pentatonics/*` (+ `RankTable` shared with triads),
-  `triads/*`.
+  the browser → `/score/read-vision`), `pentatonics/*` (+ `RankTable` shared with triads; its `actions` slot
+  carries the triads "⭐ Save as favourite" button), `triads/*` (`Favorites` = the saved layouts,
+  replayed as saved or in any key; settings sync key is `triads.v2`).
 - Keyboard: Space play/pause, ←/→ prev/next, R restart item, L loop session, M mute click,
   T show tab (ignored in inputs).
 

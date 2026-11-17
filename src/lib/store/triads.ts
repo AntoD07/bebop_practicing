@@ -3,6 +3,11 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { DEFAULT_WEIGHTS, type Weights } from "./pentatonics";
+
+// Runs are played IN a position: a hand shift costs the engine's full default
+// (1.0/fret — the Pentatonics page halves it), so a 2-fret move mid-run loses
+// to a 1-fret adjustment at the end (user-validated on Eb+F / CAGED A).
+export const TRIAD_WEIGHTS: Weights = { ...DEFAULT_WEIGHTS, shift_cost: 1.0 };
 import { nowIso, type Synced } from "./sync";
 
 export type TriadsState = Synced & {
@@ -42,7 +47,7 @@ export const useTriads = create<TriadsState>()(
       lowOctave: 2,
       enforce: true,
       maxCost: 30,
-      weights: DEFAULT_WEIGHTS,
+      weights: TRIAD_WEIGHTS,
       exercise: "scale",
       scaleDirection: "ascending",
       altDirection: "ascending",
@@ -53,7 +58,17 @@ export const useTriads = create<TriadsState>()(
       styleFilter: [],
       set: (p) => set({ ...p, updatedAt: nowIso() }),
     }),
-    { name: "bebop.triads", version: 1, skipHydration: true },
+    {
+      name: "bebop.triads",
+      version: 2,
+      skipHydration: true,
+      // v1 -> v2: the old default shift cost (0.5) becomes the run-oriented 1.0
+      migrate: (persisted, version) => {
+        const p = persisted as Partial<TriadsState>;
+        if (version < 2 && p.weights && p.weights.shift_cost === DEFAULT_WEIGHTS.shift_cost) return { ...p, weights: { ...p.weights, shift_cost: TRIAD_WEIGHTS.shift_cost }, updatedAt: nowIso() };
+        return p;
+      },
+    },
   ),
 );
 

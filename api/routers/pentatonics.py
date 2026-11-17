@@ -20,6 +20,7 @@ from scripts.pentatonics.fingering_rank import (
     PENTA_POSITION_SLACK, enumerate_position_fingerings, rank_line_fingerings,
     rank_pentatonic_fingerings,
 )
+from scripts.triad_pairs.favorites import run_config
 from scripts.pentatonics.pentatonics import (
     DIRECTIONS, PENTATONIC_NAMES, PENTATONICS, SHIFT_CHOICES, chromatic_run,
     notes_pattern_run, scale_run, shift_offsets, shift_run,
@@ -140,6 +141,8 @@ def rank(request: Request, body: RankRequest):
     def compute():
         line = _line(body)
         cfg = body.config.apply() if body.config else FingeringConfig()
+        if body.run_weights:
+            cfg = run_config(cfg)
         budget = make_budget(body.max_layouts)
         if body.position:
             rows = enumerate_position_fingerings(line, body.key, body.position, cfg,

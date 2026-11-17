@@ -1,16 +1,25 @@
 """Triad pairs & hexatonics (page 6): the pair, its neck markers, position
 boxes and the exercise generators. Ranking goes through
-``POST /pentatonics/rank`` with ``generic: true``."""
+``POST /pentatonics/rank`` with ``generic: true`` (+ ``run_weights: true``).
+
+Favourite fingerings are stateless here: ``/triads/favorites/make`` turns a
+ranked fingering into the record the app stores, ``/triads/favorites/render``
+replays a stored record as saved or mimicked in another key."""
 
 from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException, Request
 
 from api.cache import respond
-from api.schemas import TriadGenerateRequest
+from api.schemas import FavoriteMakeRequest, FavoriteRenderRequest, TriadGenerateRequest, TriadPairIn
+from api.serialize import fingering_json
 from scripts.fingering.config import FingeringConfig
 from scripts.fingering.positions import POSITIONS
+from scripts.fingering.cell_bridge import root_pc
 from scripts.pentatonics.fingering_rank import PENTA_POSITION_SLACK
+from scripts.triad_pairs.favorites import (
+    favorite_line, make_favorite, render_favorite, run_config, transpose_favorite,
+)
 from scripts.triad_pairs.neck_map import TRIAD_COLOURS, neck_markers, position_map_boxes
 from scripts.triad_pairs.triads import (
     ALTERNATING_DIRECTIONS, DEFAULT_PAIR_INTERVAL, QUALITY_NAMES, ROOTS, SCALE_DIRECTIONS,
@@ -100,3 +109,70 @@ def generate(request: Request, body: TriadGenerateRequest):
                 "message": None if lbs else "Nothing to play — the grouping is longer than the run."}
 
     return respond(request, "triads/generate", payload, compute)
+
+
+def _pair_in(p: TriadPairIn) -> TriadPair:
+    return _pair(p.roots[0], p.qualities[0], p.roots[1], p.qualities[1])
+
+
+def _check_key(key: str) -> None:
+    try:
+        root_pc(key)
+    except (KeyError, ValueError, IndexError):
+        raise HTTPException(422, f"unknown key {key!r}")
+
+
+def _check_position(position) -> None:
+    if position is not None and position not in POSITIONS:
+        raise HTTPException(422, f"unknown position {position!r}")
+
+
+@router.post("/triads/favorites/make")
+def favorite_make(request: Request, body: FavoriteMakeRequest):
+    payload = body.model_dump(mode="json")
+
+    def compute():
+        _check_key(body.key)
+        _check_position(body.position)
+        fav = make_favorite([p.model_dump() for p in body.placed], _pair_in(body.pair), body.key,
+                            body.position, body.exercise, body.params, body.start, body.title,
+                            body.cost)
+        return {"favorite": fav}
+
+    return respond(request, "triads/favorites/make", payload, compute)
+
+
+@router.post("/triads/favorites/render")
+def favorite_render(request: Request, body: FavoriteRenderRequest):
+    payload = body.model_dump(mode="json")
+
+    def compute():
+        fav = body.favorite.model_dump()
+        _check_key(body.key)
+        _check_key(fav["key"])
+        _check_position(fav["position"])
+        _pair_in(body.favorite.pair)
+        cfg = run_config(body.config.apply() if body.config else FingeringConfig())
+        as_saved = body.key == fav["key"]
+        out = {"key": body.key, "as_saved": as_saved, "position": fav["position"],
+               "fret_delta": 0, "in_box": None, "fingering": None, "message": None}
+        if as_saved:
+            p, line, pins = favorite_line(fav)
+        else:
+            t = transpose_favorite(fav, body.key, cfg.max_fret, PENTA_POSITION_SLACK, cfg)
+            if t is None:
+                out["pair_title"] = None
+                out["message"] = f"No octave of this layout stays on the neck in {body.key}."
+                return out
+            p, line, pins = t["pair"], t["line"], t["pins"]
+            out["fret_delta"] = t["fret_delta"]
+            out["in_box"] = t["in_box"] if fav["position"] else None
+        out["pair_title"] = p.title
+        res = render_favorite(line, pins, body.key, cfg)
+        if res is None:
+            out["message"] = "The engine could not re-finger this layout here."
+        else:
+            out["fingering"] = fingering_json(res, body.key, "favorite", body.with_reports)
+        return out
+
+    return respond(request, "triads/favorites/render", payload, compute)

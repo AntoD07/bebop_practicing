@@ -63,7 +63,7 @@ export type VoicingJSON = {
 };
 
 export type FingeringJSON = VoicingJSON & {
-  mode: "enumerated" | "optimum" | "free" | "ranked";
+  mode: "enumerated" | "optimum" | "free" | "ranked" | "favorite";
   warnings: string[];
   beats_per_bar: number;
   density: "quarter" | "eighth";
@@ -318,3 +318,10 @@ export type TriadPairJSON = {
   constants: { roots: string[]; qualities: string[]; default_interval: number; scale_directions: string[]; alternating_directions: string[] };
   meta: Meta;
 };
+
+// Favourite fingerings (scripts/triad_pairs/favorites.py; stored in `fingering_favorites`).
+export type FavoriteNote = { pitch: number; k: number | null; deg: string; cell: string | null; arrow: string | null };
+export type FavoriteRecord = { page: string; title: string; exercise: string; params: Record<string, string | number | boolean | null>; key: string; position: string | null; pair: { roots: string[]; qualities: string[] }; start: string; layout: number[][]; line: FavoriteNote[]; cost: number | null };
+export type Favorite = FavoriteRecord & { id: string; createdAt: string };
+export type FavoriteMakeJSON = { favorite: FavoriteRecord; meta: Meta };
+export type FavoriteRenderJSON = { key: string; as_saved: boolean; position: string | null; fret_delta: number; in_box: boolean | null; pair_title: string | null; fingering: FingeringJSON | null; message: string | null; meta: Meta };

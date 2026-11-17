@@ -1,4 +1,4 @@
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 // One row per calendar day: the server draws the random key/position on the
 // first request of the day so phone and laptop can never disagree.
@@ -55,6 +55,26 @@ export const settings = sqliteTable("settings", {
   key: text("key").primaryKey(),
   value: text("value", { mode: "json" }).$type<unknown>().notNull(),
   updatedAt: text("updated_at").notNull(),
+});
+
+// Favourite fingerings: a ranked layout kept for later study and replayed in
+// any key (the record is built and replayed by scripts/triad_pairs/favorites.py).
+export type FavoritePair = { roots: string[]; qualities: string[] };
+export type FavoriteNote = { pitch: number; k: number | null; deg: string; cell: string | null; arrow: string | null };
+export const fingeringFavorites = sqliteTable("fingering_favorites", {
+  id: text("id").primaryKey(),
+  page: text("page").notNull(),
+  title: text("title").notNull(),
+  exercise: text("exercise").notNull(),
+  params: text("params", { mode: "json" }).$type<Record<string, unknown>>().notNull(),
+  key: text("key").notNull(),
+  position: text("position"),
+  pair: text("pair", { mode: "json" }).$type<FavoritePair>().notNull(),
+  start: text("start").notNull(),
+  layout: text("layout", { mode: "json" }).$type<number[][]>().notNull(),
+  line: text("line", { mode: "json" }).$type<FavoriteNote[]>().notNull(),
+  cost: real("cost"),
+  createdAt: text("created_at").notNull(),
 });
 
 // Shared compute cache in front of the Python function (any device).

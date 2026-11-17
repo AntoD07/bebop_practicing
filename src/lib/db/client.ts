@@ -28,6 +28,7 @@ const DDL = [
   `CREATE TABLE IF NOT EXISTS scores (name TEXT PRIMARY KEY, saved_at TEXT NOT NULL, filename TEXT NOT NULL, musicxml TEXT NOT NULL, best_fingering TEXT)`,
   `CREATE TABLE IF NOT EXISTS drill_sessions (id TEXT PRIMARY KEY, config TEXT NOT NULL, items TEXT NOT NULL, current_index INTEGER NOT NULL, remaining_seconds INTEGER NOT NULL, state TEXT NOT NULL, updated_at TEXT NOT NULL, device_id TEXT)`,
   `CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL, updated_at TEXT NOT NULL)`,
+  `CREATE TABLE IF NOT EXISTS fingering_favorites (id TEXT PRIMARY KEY, page TEXT NOT NULL, title TEXT NOT NULL, exercise TEXT NOT NULL, params TEXT NOT NULL, key TEXT NOT NULL, position TEXT, pair TEXT NOT NULL, start TEXT NOT NULL, layout TEXT NOT NULL, line TEXT NOT NULL, cost REAL, created_at TEXT NOT NULL)`,
   `CREATE TABLE IF NOT EXISTS engine_cache (hash TEXT PRIMARY KEY, engine_version TEXT NOT NULL, body TEXT NOT NULL, created_at TEXT NOT NULL)`,
 ];
 
